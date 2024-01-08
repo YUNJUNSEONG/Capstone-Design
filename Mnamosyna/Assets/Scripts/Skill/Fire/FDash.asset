@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 134e76c84ceed754fb281d10bb001351, type: 3}
+  m_Name: FDash
+  m_EditorClassIdentifier: 
+  skillId: 1
+  skillName: "\uB3CC\uC9C4"
+  skillImage: {fileID: 21300000, guid: 4b8ce65138a8a6f4b8548fdc65c3705d, type: 3}
+  skillDescription: "\uBE60\uB974\uAC8C \uB3CC\uC9C4\uD558\uC5EC \uACBD\uB85C\uC0C1\uC758
+    \uC801\uC5D0\uAC8C 60\uC758 \uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4."
+  skillCommand: s
+  isUnlock: 1
+  skillAnimationTrigger: IsSkillSL
+  skillAnimationTime: 1.2665
+  childSkill:
+  - {fileID: 11400000, guid: b7709c284b7a97544a63d5f2e7f3f1a7, type: 2}
+  - {fileID: 11400000, guid: 0d98e484fb0c1cd45993a5d3a84266de, type: 2}
+  skillLevel: 0
+  maxLevel: 3
+  baseDamage: 50
+  ad: 10
