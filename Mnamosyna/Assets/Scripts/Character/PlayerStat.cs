@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStat : MonoBehaviour
+
+public class PlayerStat
 {
     // 眉仿 包访 加己
     public int Max_HP = 150;
@@ -16,8 +17,8 @@ public class PlayerStat : MonoBehaviour
     public float Stamina_RecoverRate = 3;
 
     // 傍拜 包访 加己
-    public int MIN_ATK = 18;
-    public int MAX_ATK = 22;
+    public int MIN_ATK = 15;
+    public int MAX_ATK = 20;
     public float DEF = 0;
     public float Crit_Chance = 0;
     public float Critical = 1.5f;

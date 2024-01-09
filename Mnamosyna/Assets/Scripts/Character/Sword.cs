@@ -1,40 +1,33 @@
-//using Base.Mobs.Entity;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
     public BoxCollider attackArea;
+    public TrailRenderer trailEffect;
 
-    [SerializeField]
-    private float _atk;
-    public float Atk
+    Coroutine attackCoroutine;
+
+    public void Use()
     {
-        get { return _atk; }
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+        }
+
+        attackCoroutine = StartCoroutine(Attack());
     }
 
-    public void Use(float attackTime, float Atk)
+    IEnumerator Attack()
     {
-        _atk = Atk;
-        //StartCoroutine(Attack(attackTime, Atk));
-    }
-
-    IEnumerator Attack(float attackTime, float Atk)
-    {
-        _atk = Atk;
         yield return new WaitForSeconds(0.5f);
         attackArea.enabled = true;
-        yield return new WaitForSeconds(attackTime - 0.5f);
-        attackArea.enabled = false;
-    }
+        trailEffect.enabled = true;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == 8)
-        {
-            Debug.Log("Attack");
-           // other.gameObject.GetComponent<IDamagable>().DamagedEntity(_atk);
-        }
+        yield return new WaitForSeconds(0.8f);
+        attackArea.enabled = false;
+
+        yield return new WaitForSeconds(0.8f);
+        trailEffect.enabled = false;
     }
 }

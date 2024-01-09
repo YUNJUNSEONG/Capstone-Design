@@ -2,7 +2,7 @@ using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
-
+/*
 public class PlayerInputData : MonoBehaviour
 {
     [Header("Character Input Values")]
@@ -21,7 +21,6 @@ public class PlayerInputData : MonoBehaviour
     public bool cursorLocked = true;
     public bool cursorInputForLook = true;
 
-    /* public method*/
     #region public method
     public void MoveInput(Vector2 newMoveDirection)
     {
@@ -95,7 +94,7 @@ public class PlayerInputData : MonoBehaviour
 #endif
     #endregion
 
-    /* private method */
+  
     #region private method
     private void OnApplicationFocus(bool hasFocus)
     {
@@ -108,4 +107,4 @@ public class PlayerInputData : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
     #endregion
-}
+} */

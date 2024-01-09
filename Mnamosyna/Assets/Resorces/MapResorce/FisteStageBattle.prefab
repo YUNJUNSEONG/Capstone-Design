@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7616383580449975480}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FisteStageBattle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,6 +91,10 @@ PrefabInstance:
     - target: {fileID: 6661573193861641453, guid: a8889c8253dbea142a2e7eaab46eb5be, type: 3}
       propertyPath: m_Name
       value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 6661573193861641453, guid: a8889c8253dbea142a2e7eaab46eb5be, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

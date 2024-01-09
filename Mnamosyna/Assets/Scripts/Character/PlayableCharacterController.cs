@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SocialPlatforms.Impl;
 using static Cinemachine.DocumentationSortingAttribute;
 #endif
-
+/*
 [RequireComponent(typeof(CharacterController))]
 public class PlayableCharacterController : MonoBehaviour
 {
@@ -472,4 +472,4 @@ public class PlayableCharacterController : MonoBehaviour
         yield return new WaitForSeconds(_DashTime);
         canDash = true;
     }
-}
+} */

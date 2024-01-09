@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+/*
 
 public class SkillManager : MonoBehaviour
 {
@@ -161,3 +162,4 @@ public class SkillManager : MonoBehaviour
         DashUI.GetComponent<Image>().enabled = false;
     }
 }
+*/
