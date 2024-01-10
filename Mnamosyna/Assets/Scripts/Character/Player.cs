@@ -7,6 +7,27 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance;
+    // 체력 관련 속성
+    public int Max_HP = 150;
+    public int Cur_HP;
+    public float HP_RecoverRate = 0; // 1초 당 n 회복
+
+    // 스테미나 관련 속성
+    public int Max_Stamina = 200;
+    public int Cur_Stamina;
+    public int StaminaCostPerSkill = 20;
+    public float Stamina_RecoverRate = 3;
+
+    // 공격 관련 속성
+    public int MIN_DMG = 15;
+    public int MAX_DMG = 20;
+    public float DEF = 0;
+    public float Crit_Chance = 0;
+    public float Critical = 1.5f;
+    public float ATK_Speed = 1.0f;
+    public float Move_Speed = 10.0f;
+
     float hAxis;
     float vAxis;
     bool leftDown;
@@ -25,8 +46,8 @@ public class Player : MonoBehaviour
     float attackDelay;
     void Start()
     {
-        stat.Cur_HP = stat.Max_HP;
-        stat.Cur_Stamina = stat.Max_Stamina;
+        Cur_HP = Max_HP;
+        Cur_Stamina = Max_Stamina;
     }
 
     void Awake()
@@ -34,6 +55,7 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         sword = GetComponentInChildren<Sword>();
+        instance = this;
     }
 
     // Update is called once per frame
@@ -64,7 +86,7 @@ public class Player : MonoBehaviour
 
         if (!isBorder)
         {
-            transform.position += moveVec * stat.Move_Speed *  Time.deltaTime;
+            transform.position += moveVec * Move_Speed *  Time.deltaTime;
         }
 
         anim.SetBool("isRun", moveVec != Vector3.zero);
@@ -101,7 +123,7 @@ public class Player : MonoBehaviour
     {
 
         attackDelay += Time.deltaTime;
-        isAttackReady = stat.ATK_Speed < attackDelay;
+        isAttackReady = ATK_Speed < attackDelay;
 
         if (leftDown && isAttackReady)
         {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Monster : MonoBehaviour
 {
@@ -16,43 +17,82 @@ public class Monster : MonoBehaviour
     public float Skill_Speed;
     public float Move_Speed;
 
+    public bool isChase;
+
+    public Transform target;
     Rigidbody rigid;
     BoxCollider boxCollider;
-    Material mat;
-    PlayerStat stat;
+    NavMeshAgent nav;
+    Animator anim;
 
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
-        mat = GetComponent<MeshRenderer>().material;
-    }
+        nav = GetComponent<NavMeshAgent>();
+        anim = GetComponentInChildren<Animator>();
 
+        Invoke("ChaseStart",4);
+    }
+    private void Update()
+    {
+        if (isChase)
+        {
+            nav.SetDestination(target.position);
+        }
+    }
+    void ChaseStart()
+    {
+        isChase = true;
+        anim.SetBool("isRun", true);
+    }
     void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Sword")
         {
-            stat = GetComponent<PlayerStat>();
-            Cur_HP -= stat.MIN_ATK; 
+            if (Player.instance != null)
+            {
+                int playerMinDmg = Player.instance.MIN_DMG;
+                Cur_HP -= Player.instance.MIN_DMG;
+            }
 
-            Debug.Log("sword : " + Cur_HP);
+            Vector3 reactVec = transform.position - other.transform.position;
+            StartCoroutine(OnDamage(reactVec));
+        }
+    }
+    void FixedUpdate()
+    {
+        FreezeVelocity();
+    }
+    void FreezeVelocity()
+    {
+        if (isChase)
+        {
+            rigid.velocity = Vector3.zero;
+            rigid.angularVelocity = Vector3.zero;
         }
     }
 
-    IEnumerator OnDamage()
+    IEnumerator OnDamage(Vector3 reactVec)
     {
-        mat.color = Color.red;
         yield return new WaitForSeconds(0.3f);
 
         if(Cur_HP > 0)
         {
-            mat.color = Color.white;
         }
         else
         {
-            mat.color= Color.black;
-            Destroy(gameObject,3);
+            gameObject.layer = 11;
+            isChase = false;
+            nav.enabled = false;
+            anim.SetTrigger("Die");
+
+            reactVec = reactVec.normalized;
+            reactVec += Vector3.up;
+            rigid.AddForce(reactVec * 10, ForceMode.Impulse);
+
+            Destroy(gameObject,4);
         }
     }
 }
