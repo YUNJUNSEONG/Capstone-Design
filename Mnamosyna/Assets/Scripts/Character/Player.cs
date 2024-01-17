@@ -116,8 +116,8 @@ public class Player : MonoBehaviour
     }
     void stopToWall()
     {
-        Debug.DrawRay(transform.position, transform.forward * 5, Color.white);
-        isBorder = Physics.Raycast(transform.position, transform.forward, 5, LayerMask.GetMask("Wall"));
+        Debug.DrawRay(transform.position, transform.forward * 3, Color.white);
+        isBorder = Physics.Raycast(transform.position, transform.forward, 3, LayerMask.GetMask("Wall"));
     }
     void LeftAttack()
     {
