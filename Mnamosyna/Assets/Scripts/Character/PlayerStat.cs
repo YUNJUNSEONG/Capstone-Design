@@ -3,33 +3,62 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerStat
+public class PlayerStat : MonoBehaviour
 {
-    // 체력 관련 속성
-    public int Max_HP = 150;
-    public int Cur_HP;
-    public float HP_RecoverRate = 0; // 1초 당 n 회복
+    [Header("체력 관련")]
+    [SerializeField]
+    protected int Max_HP = 150; // 최대 체력
+    [SerializeField]
+    protected int Cur_HP = 150; // 현재 체력
+    [SerializeField]
+    protected int HP_Recover = 0; // 1초 당 n 회복
 
+    [Header("스태미나 관련")]
     // 스테미나 관련 속성
+    [SerializeField]
     public int Max_Stamina = 200;
-    public int Cur_Stamina;
-    public int StaminaCostPerSkill = 20;
-    public float Stamina_RecoverRate = 3;
+    [SerializeField]
+    public int Cur_Stamina = 200;
+    [SerializeField]
+    public float Stamina_Recover = 3;
 
+    [Header("공격 관련")]
     // 공격 관련 속성
+    [SerializeField]
     public int MIN_ATK = 15;
+    [SerializeField]
     public int MAX_ATK = 20;
-    public float DEF = 0;
+    [SerializeField]
     public float Crit_Chance = 0;
+    [SerializeField]
     public float Critical = 1.5f;
-    public float ATK_Speed = 1.0f;
-    public float Move_Speed = 1.0f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Cur_HP = Max_HP;
-        Cur_Stamina = Max_Stamina;
-    }
+
+    [Header("방어력")]
+    [SerializeField]
+    protected float Defense = 0.0f; //  방어력 n%
+
+    [Header("속도 관련")]
+    [SerializeField]
+    protected float ATK_Speed = 1.0f; // 공격 속도
+    [SerializeField]
+    protected float Move_Speed = 10.0f; // 이동 속도
+
+    public int max_hp { get { return Max_HP; } set { Max_HP = value; } }
+    public int cur_hp { get { return Cur_HP; } set { Cur_HP = value; } }
+    public int hp_recover { get { return HP_Recover; } set { HP_Recover = value; } }
+
+    public int max_stamina { get { return Max_Stamina; } set { Max_Stamina= value; } }
+    public int cur_stamina { get { return Cur_Stamina; } set { Cur_Stamina = value; } }
+    public float stmina_recover { get { return Stamina_Recover; } set { Stamina_Recover = value; } }
+
+    public int min_atk { get { return MIN_ATK; } set { MIN_ATK = value; } }
+    public int max_atk { get { return MAX_ATK; } set { MAX_ATK = value; } }
+    public float crit_chance { get { return Crit_Chance; } set { Crit_Chance = value; } }
+    public float critical { get { return Critical; } set { Critical = value; } }    
+
+    public float defense { get { return Defense; } set { Defense = value; } }
+    public float atk_speed { get { return ATK_Speed; } set { ATK_Speed = value; } }
+    public float move_speed { get { return Move_Speed; } set { Move_Speed = value; } }
 
     // Update is called once per frame
     void Update()
@@ -37,7 +66,7 @@ public class PlayerStat
         // 체력 자동 회복
         if (Cur_HP > 0 && Cur_HP < Max_HP)
         {
-            Cur_HP += Mathf.RoundToInt(HP_RecoverRate * Time.deltaTime);
+            Cur_HP += Mathf.RoundToInt(HP_Recover * Time.deltaTime);
             Cur_HP = Mathf.Clamp(Cur_HP, 0, Max_HP);
 
             if (Cur_HP == 0)
@@ -50,7 +79,7 @@ public class PlayerStat
         // 스테미나 자동 회복
         if (Cur_Stamina < Max_Stamina)
         {
-            Cur_Stamina += Mathf.RoundToInt(Stamina_RecoverRate * Time.deltaTime);
+            Cur_Stamina += Mathf.RoundToInt(Stamina_Recover * Time.deltaTime);
             Cur_Stamina = Mathf.Clamp(Cur_Stamina, 0, Max_Stamina);
         }
     }
@@ -64,7 +93,7 @@ public class PlayerStat
     public void TakeDamage(int damage)
     {
         // 피해 처리
-        int finalDamage = Mathf.RoundToInt(damage * (1 - DEF)); // 피해 감소 적용
+        int finalDamage = Mathf.RoundToInt(damage * (1 - defense)); // 피해 감소 적용
         Cur_HP = Mathf.Max(0, Cur_HP - finalDamage);
 
         if (Cur_HP == 0)
@@ -73,20 +102,5 @@ public class PlayerStat
         }
     }
 
-    public void UseSkill()
-    {
-        // 스킬 사용 처리
-        if (Cur_Stamina >= StaminaCostPerSkill)
-        {
-            Cur_Stamina -= StaminaCostPerSkill;
-
-            // 스킬 실행 코드 추가
-        }
-        else
-        {
-            // 스테미나 부족 처리
-            Debug.Log("Not enough stamina to use the skill!");
-        }
-    }
 }
 
