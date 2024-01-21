@@ -8,42 +8,55 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player instance;
+    // 체력 관련 속성
+    public int Max_HP = 150;
+    public int Cur_HP;
+    public float HP_RecoverRate = 0; // 1초 당 n 회복
+
+    // 스테미나 관련 속성
+    public int Max_Stamina = 200;
+    public int Cur_Stamina;
+    public int StaminaCostPerSkill = 20;
+    public float Stamina_RecoverRate = 3;
+
+    // 공격 관련 속성
+    public int MIN_DMG = 15;
+    public int MAX_DMG = 20;
+    public float DEF = 0;
+    public float Crit_Chance = 0;
+    public float Critical = 1.5f;
+    public float ATK_Speed = 1.0f;
+    public float Move_Speed = 10.0f;
 
     float hAxis;
     float vAxis;
     bool leftDown;
     bool rightDown;
     bool isBorder;
-    bool isDamage;
 
     public Camera followCamera;
     bool isAttackReady;
 
     Vector3 moveVec;
     Animator anim;
-    MeshRenderer[] meshs;
     Rigidbody rigid;
+    PlayerStat stat;
     Sword sword;
 
-    public PlayerStat stat;
-
     float attackDelay;
+    void Start()
+    {
+        Cur_HP = Max_HP;
+        Cur_Stamina = Max_Stamina;
+    }
 
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         sword = GetComponentInChildren<Sword>();
-        meshs = GetComponentsInChildren<MeshRenderer>();
-        stat = new PlayerStat();
         instance = this;
     }
-    void Start()
-    {
-        stat.cur_hp = stat.max_hp;
-        stat.Cur_Stamina = stat.Max_Stamina;
-    }
-
 
     // Update is called once per frame
     void Update()
@@ -51,7 +64,7 @@ public class Player : MonoBehaviour
         GetInput();
         Move();
         LeftAttack();
-        RightAttack();
+        //RightAttack();
     }
 
     void GetInput()
@@ -59,7 +72,7 @@ public class Player : MonoBehaviour
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
         leftDown = Input.GetButtonDown("Fire1");
-        rightDown = Input.GetButtonDown("Fire3");
+        //rightDown = Input.GetButtonDown("Fire3");
     }
 
     void Move()
@@ -73,7 +86,7 @@ public class Player : MonoBehaviour
 
         if (!isBorder)
         {
-            transform.position += moveVec * stat.move_speed *  Time.deltaTime;
+            transform.position += moveVec * Move_Speed *  Time.deltaTime;
         }
 
         anim.SetBool("isRun", moveVec != Vector3.zero);
@@ -110,7 +123,7 @@ public class Player : MonoBehaviour
     {
 
         attackDelay += Time.deltaTime;
-        isAttackReady = stat.atk_speed < attackDelay;
+        isAttackReady = ATK_Speed < attackDelay;
 
         if (leftDown && isAttackReady)
         {
@@ -120,10 +133,10 @@ public class Player : MonoBehaviour
         }
     }
 
-   void RightAttack()
+    /*void RightAttack()
     {
         attackDelay += Time.deltaTime;
-        isAttackReady = stat.atk_speed < attackDelay;
+        isAttackReady = ATK_Speed < attackDelay;
 
         if(rightDown && isAttackReady)
         {
@@ -131,49 +144,5 @@ public class Player : MonoBehaviour
             anim.SetTrigger("RightAttack");
             attackDelay = 0;
         }
-    }
-    public int Damage()
-    {
-        int damage = Random.Range(stat.min_atk, stat.max_atk+1);
-        
-        return damage;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "monster")
-        {
-            Monster monster = other.GetComponent<Monster>();
-
-            stat.cur_hp -= monster.Damage();
-
-            StartCoroutine(OnDamage());
-        }
-    }
-
-    IEnumerator OnDamage()
-    {
-        isDamage = true;
-        foreach(MeshRenderer mesh in meshs)
-        {
-            mesh.material.color = Color.black;
-        }
-        yield return new WaitForSeconds(1f);
-        isDamage = false;
-        foreach (MeshRenderer mesh in meshs)
-        {
-            mesh.material.color = Color.white;
-        }
-    }
-    public void TakeDamage(int damage)
-    {
-        // 피해 처리
-        int finalDamage = Mathf.RoundToInt(damage * (1 - stat.defense)); // 피해 감소 적용
-        stat.cur_hp = Mathf.Max(0, stat.cur_hp - finalDamage);
-
-        if (stat.cur_hp == 0)
-        {
-            //Die();
-        }
-    }
+    }*/
 }
