@@ -1428,6 +1428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stat: {fileID: 493830074}
   followCamera: {fileID: 963194227}
+  isAttackReady: 0
 --- !u!95 &493830072
 Animator:
   serializedVersion: 5
@@ -3743,7 +3744,7 @@ PrefabInstance:
     - target: {fileID: 5637899122700968286, guid: 67bf3f039d65f86419fb3b7363a03b1b, type: 3}
       propertyPath: mobStat
       value: 
-      objectReference: {fileID: 1317789848}
+      objectReference: {fileID: 1317789857}
     - target: {fileID: 6134854047996103714, guid: 67bf3f039d65f86419fb3b7363a03b1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.23
@@ -3793,7 +3794,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67bf3f039d65f86419fb3b7363a03b1b, type: 3}
---- !u!114 &1317789848 stripped
+--- !u!114 &1317789857 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4903698435505413001, guid: 67bf3f039d65f86419fb3b7363a03b1b, type: 3}
   m_PrefabInstance: {fileID: 1317789847}
