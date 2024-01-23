@@ -8,6 +8,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player instance;
+    public PlayerStat stat;
 
     float hAxis;
     float vAxis;
@@ -17,15 +18,13 @@ public class Player : MonoBehaviour
     bool isDamage;
 
     public Camera followCamera;
-    bool isAttackReady;
+    public bool isAttackReady;
 
     Vector3 moveVec;
     Animator anim;
     MeshRenderer[] meshs;
     Rigidbody rigid;
     Sword sword;
-
-    public PlayerStat stat;
 
     float attackDelay;
 
@@ -35,13 +34,13 @@ public class Player : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         sword = GetComponentInChildren<Sword>();
         meshs = GetComponentsInChildren<MeshRenderer>();
-        stat = new PlayerStat();
+        stat = GetComponent<PlayerStat>();  
         instance = this;
     }
     void Start()
     {
-        stat.cur_hp = stat.max_hp;
-        stat.Cur_Stamina = stat.Max_Stamina;
+        //stat.cur_hp = stat.max_hp;
+        //stat.Cur_Stamina = stat.Max_Stamina;
     }
 
 
@@ -52,6 +51,7 @@ public class Player : MonoBehaviour
         Move();
         LeftAttack();
         RightAttack();
+        Recover();
     }
 
     void GetInput()
@@ -132,20 +132,39 @@ public class Player : MonoBehaviour
             attackDelay = 0;
         }
     }
+    // 데미지 설정
     public int Damage()
     {
-        int damage = Random.Range(stat.min_atk, stat.max_atk+1);
-        
-        return damage;
+        int baseDamage = Random.Range(stat.min_atk, stat.max_atk+1);
+
+        bool isCritical = Random.value < stat.crit_chance;
+
+        //크리티컬 확률로 크리티컬 확인 후 데미지 적용
+        if (isCritical)
+        {
+            int criticalDamage = Mathf.RoundToInt(baseDamage * stat.critical);
+
+            return criticalDamage;
+        }
+        else
+        {
+            return baseDamage;
+        }
     }
 
+
+    // 피격
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "monster")
         {
             Monster monster = other.GetComponent<Monster>();
 
-            stat.cur_hp -= monster.Damage();
+            int damage = monster.Damage();
+
+            // 피해 처리
+            int finalDamage = Mathf.RoundToInt(damage * (1 - stat.defense)); // 피해 감소 적용
+            stat.cur_hp = Mathf.Max(0, stat.cur_hp - finalDamage);
 
             StartCoroutine(OnDamage());
         }
@@ -165,15 +184,29 @@ public class Player : MonoBehaviour
             mesh.material.color = Color.white;
         }
     }
-    public void TakeDamage(int damage)
-    {
-        // 피해 처리
-        int finalDamage = Mathf.RoundToInt(damage * (1 - stat.defense)); // 피해 감소 적용
-        stat.cur_hp = Mathf.Max(0, stat.cur_hp - finalDamage);
 
-        if (stat.cur_hp == 0)
+    // 자동 회복 시스템
+    void Recover()
+    {
+        // 체력 자동 회복
+        if (stat.cur_hp > 0 && stat.cur_hp < stat.max_hp)
         {
-            //Die();
+            stat.cur_hp += Mathf.RoundToInt(stat.hp_recover * Time.deltaTime);
+            stat.cur_hp = Mathf.Clamp(stat.cur_hp, 0, stat.max_hp);
+
+            /*if (stat.cur_hp == 0)
+            {
+                // 사망 모션 출력
+                Die();
+            }*/
+        }
+
+        // 스테미나 자동 회복
+        if (stat.cur_stamina < stat.max_stamina)
+        {
+            stat.cur_stamina += Mathf.RoundToInt(stat.stmina_recover * Time.deltaTime);
+            stat.cur_stamina = Mathf.Clamp(stat.cur_stamina, 0, stat.max_stamina);
         }
     }
+
 }
