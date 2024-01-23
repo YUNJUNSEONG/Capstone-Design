@@ -106,7 +106,6 @@ GameObject:
   - component: {fileID: 1017020780233441087}
   - component: {fileID: 4228620143002884203}
   - component: {fileID: 5637899122700968286}
-  - component: {fileID: 4903698435505413001}
   - component: {fileID: 6548860829197635021}
   m_Layer: 8
   m_Name: Slime
@@ -213,30 +212,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a34d7dfc1db403e4db3299d15ace3c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobStat: {fileID: 4903698435505413001}
-  isChase: 0
-  target: {fileID: 0}
---- !u!114 &4903698435505413001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2796891636347947207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27f73b28429daec40b2aa65086bfe33e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MonsterName: silme
   Max_HP: 30
   Cur_HP: 30
-  Defense: 0
-  Attack: 5
-  Skill_Attack: 5
-  Skill_Cooltime: 5
-  ATK_Speed: 1
-  Move_Speed: 1
+  ATK: 0
+  Skill_ATK: 0
+  DEF: 0
+  Skill_CoolDown: 0
+  ATK_Speed: 0
+  Skill_Speed: 0
+  Move_Speed: 0
+  isChase: 0
+  target: {fileID: 0}
 --- !u!195 &6548860829197635021
 NavMeshAgent:
   m_ObjectHideFlags: 0
