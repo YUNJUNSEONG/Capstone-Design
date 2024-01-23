@@ -93,6 +93,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4046515699977227853}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1268275430462433688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 392566508224262476}
+  - component: {fileID: 2460005207740387278}
+  m_Layer: 12
+  m_Name: SkillArea
+  m_TagString: monsterAttack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &392566508224262476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268275430462433688}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6134854047996103714}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2460005207740387278
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268275430462433688}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.52, z: 1}
 --- !u!1 &2796891636347947207
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,8 +158,9 @@ GameObject:
   - component: {fileID: 1562200134165102396}
   - component: {fileID: 1017020780233441087}
   - component: {fileID: 4228620143002884203}
-  - component: {fileID: 5637899122700968286}
   - component: {fileID: 6548860829197635021}
+  - component: {fileID: 3722551603204707504}
+  - component: {fileID: 4790889268721143981}
   m_Layer: 8
   m_Name: Slime
   m_TagString: Monster
@@ -123,12 +177,14 @@ Transform:
   m_GameObject: {fileID: 2796891636347947207}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30, y: 0, z: 50}
+  m_LocalPosition: {x: 10.23, y: 0, z: 50}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7172832289087117487}
   - {fileID: 8082336013018665623}
+  - {fileID: 5590849459888021396}
+  - {fileID: 392566508224262476}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1562200134165102396
@@ -199,30 +255,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.52, z: 0}
---- !u!114 &5637899122700968286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2796891636347947207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a34d7dfc1db403e4db3299d15ace3c1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Max_HP: 30
-  Cur_HP: 30
-  ATK: 0
-  Skill_ATK: 0
-  DEF: 0
-  Skill_CoolDown: 0
-  ATK_Speed: 0
-  Skill_Speed: 0
-  Move_Speed: 0
-  isChase: 0
-  target: {fileID: 0}
+  m_Center: {x: 0, y: 0.52, z: 0.09}
 --- !u!195 &6548860829197635021
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -233,7 +266,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -245,6 +278,47 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3722551603204707504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2796891636347947207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f73b28429daec40b2aa65086bfe33e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: slime
+  Max_HP: 30
+  Cur_HP: 30
+  ATK: 5
+  Skill_ATK: 10
+  Skill_CoolTime: 5
+  Defense: 0
+  ATK_Speed: 3
+  Move_Speed: 5
+--- !u!114 &4790889268721143981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2796891636347947207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34d7dfc1db403e4db3299d15ace3c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mobStat: {fileID: 3722551603204707504}
+  player: {fileID: 0}
+  isChase: 0
+  isAttack: 1
+  isSkill: 0
+  target: {fileID: 0}
+  attackArea: {fileID: 7547642388814208423}
+  skillArea: {fileID: 2460005207740387278}
 --- !u!1 &3453651280779790392
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,6 +541,59 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.3588662, y: 0.1749603, z: 0.000000059604645}
     m_Extent: {x: 0.62954795, y: 0.6683546, z: 0.4895594}
   m_DirtyAABB: 0
+--- !u!1 &5115485993862506788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5590849459888021396}
+  - component: {fileID: 7547642388814208423}
+  m_Layer: 12
+  m_Name: AttackArea
+  m_TagString: monsterAttack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5590849459888021396
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5115485993862506788}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6134854047996103714}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7547642388814208423
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5115485993862506788}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.52, z: 1}
 --- !u!1 &7461277255172236287
 GameObject:
   m_ObjectHideFlags: 0

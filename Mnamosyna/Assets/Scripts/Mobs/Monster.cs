@@ -6,12 +6,15 @@ using UnityEngine.AI;
 public class Monster : MonoBehaviour
 {
     public MobStat mobStat;
+    public Transform player;
+    public static Monster instance;
 
     public bool isChase;
     public bool isAttack;
     public bool isSkill;
-    bool isSkillCool = false;
-    bool isSkillCoolInProgress = false;
+    bool isSkillCool;
+    bool isSkillCoolInProgress;
+    bool isDamage;
 
     public Transform target;
     public BoxCollider attackArea;
@@ -32,6 +35,8 @@ public class Monster : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         mobStat = GetComponent<MobStat>();
+        instance = this;
+        player = GameObject.FindWithTag("Player").transform;
 
         Invoke("ChaseStart",4);
     }
@@ -40,16 +45,28 @@ public class Monster : MonoBehaviour
     {
         if (nav.enabled)
         {
-            nav.SetDestination(target.position);
+            nav.SetDestination(player.position);
             nav.isStopped = !isChase;
         }
+        
     }
+
 
     //플레이어 추적 시작
     void ChaseStart()
     {
+        SetNavSpeed(mobStat.move_speed);
         isChase = true;
         anim.SetBool("isRun", true);
+    }
+
+    void SetNavSpeed(float speed)
+    {
+        if (nav != null)
+        {
+            // NavMeshAgent의 속도를 몬스터의 이동 속도로 설정합니다.
+            nav.speed = speed;
+        }
     }
 
     //몬스터 피격 확인 및 데미지 부여
@@ -57,20 +74,23 @@ public class Monster : MonoBehaviour
     {
         if(other.tag == "Sword")
         {
-            if (Player.instance != null)
+            if(!isDamage)
             {
-                int damage = Player.instance.Damage();
+                if (Player.instance != null)
+                {
+                    int damage = Player.instance.Damage();
 
-                int finalDamage = Mathf.RoundToInt(damage * (1 - mobStat.defense));
-                mobStat.cur_hp = Mathf.Max(0, mobStat.cur_hp - finalDamage);
+                    int finalDamage = Mathf.RoundToInt(damage * (1 - mobStat.defense));
+                    mobStat.cur_hp = Mathf.Max(0, mobStat.cur_hp - finalDamage);
 
-                Debug.Log("몬스터가 받은 피해 :" + finalDamage);
+                    Debug.Log("몬스터가 받은 피해 :" + finalDamage);
 
+                }
+
+                Vector3 reactVec = transform.position - other.transform.position;
+
+                StartCoroutine(OnDamage(reactVec));
             }
-
-            Vector3 reactVec = transform.position - other.transform.position;
-
-            StartCoroutine(OnDamage(reactVec));
         }
     }
 
@@ -98,10 +118,10 @@ public class Monster : MonoBehaviour
         
         if(rayHits.Length > 0 && !isAttack)
         {
+            StartCoroutine(Attack());
+
             //몬스터가 플레이어를 마주친 이후 부터 스킬 쿨타임 활성화
             StartCoroutine(SkillCool());
-
-            StartCoroutine(Attack());
         }
     }
 
@@ -109,7 +129,7 @@ public class Monster : MonoBehaviour
     {
 
         //스킬이 쿨타임일 경우
-        if (!isSkillCool)
+        if (isSkillCool)
         {
             isChase = false;
             isAttack = true;
@@ -118,10 +138,11 @@ public class Monster : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             attackArea.enabled = true;
 
-            //atk_speed가 클수록 공격 속도가 느려짐
-            yield return new WaitForSeconds(mobStat.atk_speed);
+
+            yield return new WaitForSeconds(0.3f);
             attackArea.enabled = false;
-            
+
+            yield return new WaitForSeconds(mobStat.atk_speed);
             isChase = true;
             isAttack = false;
             anim.SetBool("isAttack", false);
@@ -141,29 +162,32 @@ public class Monster : MonoBehaviour
     {
         isChase = false;
         isAttack = true;
+        isSkill = true;
         anim.SetBool("isSkill", true);
 
         yield return new WaitForSeconds(0.2f);
         skillArea.enabled = true;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         skillArea.enabled = false;
 
+        yield return new WaitForSeconds(mobStat.atk_speed);
         isChase = true;
         isAttack = false;
+        isSkill = false;
         anim.SetBool("isSkill", false);
     }
 
     IEnumerator SkillCool() 
     {
-        // 스킬 쿨타임이 초기화되지않도록 조정
-        if (!isSkillCoolInProgress) 
+        // 스킬 쿨타임이 초기화되지 않도록 조정
+        if (!isSkillCoolInProgress)
         {
             isSkillCoolInProgress = true;
             isSkillCool = true;
             yield return new WaitForSeconds(mobStat.skill_colltime);
             isSkillCool = false;
-            isSkillCoolInProgress = false;
+            isSkillCoolInProgress = false;  // 추가: Coroutine이 끝날 때 변수 초기화
         }
     }
 
@@ -184,21 +208,24 @@ public class Monster : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactVec)
     {
-        mat.color = Color.black;
-        yield return new WaitForSeconds(0.3f);
+        isDamage = true; //몬스터 무적시간
+        // 피해를 받았을 때 잠시 색상을 반투명하게 변경
+        ChangeMaterialTransparency(0.5f);
+
+        yield return new WaitForSeconds(1f); // 무적시간 1초
 
         if (mobStat.cur_hp > 0)
         {
-            mat.color = Color.white;
+            ChangeMaterialTransparency(1.0f);
+            anim.SetTrigger("getHit");
 
             reactVec = reactVec.normalized;
             reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 3, ForceMode.Impulse);
-
-            anim.SetBool("getHit", true);
+            rigid.AddForce(reactVec * 1.5f, ForceMode.Impulse);
         }
         else
         {
+            ChangeMaterialTransparency(1.0f);
             gameObject.layer = 11;
             isChase = false;
             nav.enabled = false;
@@ -206,10 +233,27 @@ public class Monster : MonoBehaviour
 
             reactVec = reactVec.normalized;
             reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 10, ForceMode.Impulse);
+            rigid.AddForce(reactVec * 5, ForceMode.Impulse);
 
-            Destroy(gameObject,4);
+            Destroy(gameObject,3);
         }
+
+        isDamage = false;
+    }
+
+    void ChangeMaterialTransparency(float alphaValue)
+    {
+        // 머티리얼이 지정되어 있지 않으면 종료
+        if (mat == null)
+        {
+            Debug.LogError("Material is not assigned.");
+            return;
+        }
+
+        // 머티리얼의 색상을 가져오고 알파 값을 설정
+        Color color = mat.color;
+        color.a = alphaValue;
+        mat.color = color;
     }
 
 }

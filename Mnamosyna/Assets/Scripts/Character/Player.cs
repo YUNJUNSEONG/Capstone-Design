@@ -18,11 +18,11 @@ public class Player : MonoBehaviour
     bool isDamage;
 
     public Camera followCamera;
-    public bool isAttackReady;
+    public bool isAttackReady = true;
 
     Vector3 moveVec;
     Animator anim;
-    MeshRenderer[] meshs;
+    SkinnedMeshRenderer[] meshs;
     Rigidbody rigid;
     Sword sword;
 
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         sword = GetComponentInChildren<Sword>();
-        meshs = GetComponentsInChildren<MeshRenderer>();
+        meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
         stat = GetComponent<PlayerStat>();  
         instance = this;
     }
@@ -59,14 +59,14 @@ public class Player : MonoBehaviour
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
         leftDown = Input.GetButtonDown("Fire1");
-        rightDown = Input.GetButtonDown("Fire3");
+        rightDown = Input.GetButtonDown("Fire2");
     }
 
     void Move()
     {
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
-        if (leftDown || rightDown)
+        if (!isAttackReady)
         {
             moveVec = Vector3.zero;
         }
@@ -154,32 +154,38 @@ public class Player : MonoBehaviour
 
 
     // 피격
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "monster")
+        if(other.tag == "monsterAttack")
         {
-            Monster monster = other.GetComponent<Monster>();
+            if (!isDamage)
+            {
+                if(Monster.instance != null)
+                {
+                    int damage = Monster.instance.Damage();
 
-            int damage = monster.Damage();
+                    // 피해 처리
+                    int finalDamage = Mathf.RoundToInt(damage * (1 - stat.defense)); // 피해 감소 적용
+                    stat.cur_hp = Mathf.Max(0, stat.cur_hp - finalDamage);
 
-            // 피해 처리
-            int finalDamage = Mathf.RoundToInt(damage * (1 - stat.defense)); // 피해 감소 적용
-            stat.cur_hp = Mathf.Max(0, stat.cur_hp - finalDamage);
-
-            StartCoroutine(OnDamage());
+                    StartCoroutine(OnDamage());
+                }
+            }
         }
     }
 
     IEnumerator OnDamage()
     {
         isDamage = true;
-        foreach(MeshRenderer mesh in meshs)
+        foreach(SkinnedMeshRenderer mesh in meshs)
         {
-            mesh.material.color = Color.black;
+            mesh.material.color = Color.red;
         }
+
         yield return new WaitForSeconds(1f);
         isDamage = false;
-        foreach (MeshRenderer mesh in meshs)
+
+        foreach (SkinnedMeshRenderer mesh in meshs)
         {
             mesh.material.color = Color.white;
         }

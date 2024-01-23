@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
+    public PlayerStat stat;
     public BoxCollider attackArea;
     public TrailRenderer trailEffect;
 
@@ -20,14 +21,12 @@ public class Sword : MonoBehaviour
 
     IEnumerator Attack()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         attackArea.enabled = true;
         trailEffect.enabled = true;
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1f);
         attackArea.enabled = false;
-
-        yield return new WaitForSeconds(0.8f);
         trailEffect.enabled = false;
     }
 }

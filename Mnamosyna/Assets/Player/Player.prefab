@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5212090135029601079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3304612434303751607}
+  - component: {fileID: 8050372914677573910}
+  m_Layer: 0
+  m_Name: swordCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3304612434303751607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5212090135029601079}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 596906378699052259}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8050372914677573910
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5212090135029601079}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2818015653496276410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -421,6 +474,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseMesh
       objectReference: {fileID: 0}
+    - target: {fileID: 1903630540675693665, guid: 79c3c97fcfd3f43449092387f58643b8, type: 3}
+      propertyPath: m_TagString
+      value: Sword
+      objectReference: {fileID: 0}
     - target: {fileID: 1934040232748288351, guid: 79c3c97fcfd3f43449092387f58643b8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -457,12 +514,20 @@ PrefabInstance:
     - {fileID: 5866666021909216657, guid: 79c3c97fcfd3f43449092387f58643b8, type: 3}
     m_RemovedGameObjects:
     - {fileID: 390661457030483162, guid: 79c3c97fcfd3f43449092387f58643b8, type: 3}
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7746604541081811197, guid: 79c3c97fcfd3f43449092387f58643b8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3304612434303751607}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5332809968238436118, guid: 79c3c97fcfd3f43449092387f58643b8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4230645733672777053}
   m_SourcePrefab: {fileID: 100100000, guid: 79c3c97fcfd3f43449092387f58643b8, type: 3}
+--- !u!4 &596906378699052259 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7746604541081811197, guid: 79c3c97fcfd3f43449092387f58643b8, type: 3}
+  m_PrefabInstance: {fileID: 7190512446860061726}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2753029437320880308 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4180064659377091414, guid: 79c3c97fcfd3f43449092387f58643b8, type: 3}
