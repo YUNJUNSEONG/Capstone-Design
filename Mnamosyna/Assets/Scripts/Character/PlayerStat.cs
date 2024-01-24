@@ -16,22 +16,22 @@ public class PlayerStat : MonoBehaviour
     [Header("스태미나 관련")]
     // 스테미나 관련 속성
     [SerializeField]
-    public int Max_Stamina = 200;
+    protected int Max_Stamina = 200;
     [SerializeField]
-    public int Cur_Stamina = 200;
+    protected int Cur_Stamina = 200;
     [SerializeField]
-    public float Stamina_Recover = 3;
+    protected float Stamina_Recover = 3;
 
     [Header("공격 관련")]
     // 공격 관련 속성
     [SerializeField]
-    public int MIN_ATK = 15;
+    protected int MIN_ATK = 15;
     [SerializeField]
-    public int MAX_ATK = 20;
+    protected int MAX_ATK = 20;
     [SerializeField]
-    public float Crit_Chance = 0;
+    protected float Crit_Chance = 0;
     [SerializeField]
-    public float Critical = 1.5f;
+    protected float Critical = 1.5f;
 
     [Header("방어력")]
     [SerializeField]
@@ -49,7 +49,7 @@ public class PlayerStat : MonoBehaviour
 
     public int max_stamina { get { return Max_Stamina; } set { Max_Stamina= value; } }
     public int cur_stamina { get { return Cur_Stamina; } set { Cur_Stamina = value; } }
-    public float stmina_recover { get { return Stamina_Recover; } set { Stamina_Recover = value; } }
+    public float stamina_recover { get { return Stamina_Recover; } set { Stamina_Recover = value; } }
 
     public int min_atk { get { return MIN_ATK; } set { MIN_ATK = value; } }
     public int max_atk { get { return MAX_ATK; } set { MAX_ATK = value; } }

@@ -38,7 +38,7 @@ public class Monster : MonoBehaviour
         instance = this;
         player = GameObject.FindWithTag("Player").transform;
 
-        Invoke("ChaseStart",4);
+        Invoke("ChaseStart",1.5f);
     }
 
     void Update()
@@ -116,7 +116,7 @@ public class Monster : MonoBehaviour
 
         RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange,LayerMask.GetMask("Player"));
         
-        if(rayHits.Length > 0 && !isAttack)
+        if(rayHits.Length > 0 && !isAttack && !isSkill)
         {
             StartCoroutine(Attack());
 
@@ -129,7 +129,7 @@ public class Monster : MonoBehaviour
     {
 
         //스킬이 쿨타임일 경우
-        if (isSkillCool)
+        if (!isSkillCool)
         {
             isChase = false;
             isAttack = true;
@@ -209,14 +209,14 @@ public class Monster : MonoBehaviour
     IEnumerator OnDamage(Vector3 reactVec)
     {
         isDamage = true; //몬스터 무적시간
-        // 피해를 받았을 때 잠시 색상을 반투명하게 변경
-        ChangeMaterialTransparency(0.5f);
+        // 피해를 받았을 때 잠시 색상을 반투명하게 변경하도록 스크립트 수정
+        mat.color = Color.black;
 
-        yield return new WaitForSeconds(1f); // 무적시간 1초
+        yield return new WaitForSeconds(0.1f);
 
         if (mobStat.cur_hp > 0)
         {
-            ChangeMaterialTransparency(1.0f);
+            mat.color = Color.white;
             anim.SetTrigger("getHit");
 
             reactVec = reactVec.normalized;
@@ -225,7 +225,7 @@ public class Monster : MonoBehaviour
         }
         else
         {
-            ChangeMaterialTransparency(1.0f);
+            mat.color = Color.white;
             gameObject.layer = 11;
             isChase = false;
             nav.enabled = false;
@@ -241,7 +241,7 @@ public class Monster : MonoBehaviour
         isDamage = false;
     }
 
-    void ChangeMaterialTransparency(float alphaValue)
+    /*void ChangeMaterialTransparency(float alphaValue)
     {
         // 머티리얼이 지정되어 있지 않으면 종료
         if (mat == null)
@@ -254,6 +254,6 @@ public class Monster : MonoBehaviour
         Color color = mat.color;
         color.a = alphaValue;
         mat.color = color;
-    }
+    }*/
 
 }

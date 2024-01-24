@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class Player : MonoBehaviour
 {
@@ -52,6 +53,10 @@ public class Player : MonoBehaviour
         LeftAttack();
         RightAttack();
         Recover();
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            TryEnterPortal();
+        }
     }
 
     void GetInput()
@@ -169,6 +174,7 @@ public class Player : MonoBehaviour
                     stat.cur_hp = Mathf.Max(0, stat.cur_hp - finalDamage);
 
                     StartCoroutine(OnDamage());
+                    Debug.Log("플레이어가 받은 피해 :" + finalDamage);
                 }
             }
         }
@@ -200,19 +206,34 @@ public class Player : MonoBehaviour
             stat.cur_hp += Mathf.RoundToInt(stat.hp_recover * Time.deltaTime);
             stat.cur_hp = Mathf.Clamp(stat.cur_hp, 0, stat.max_hp);
 
-            /*if (stat.cur_hp == 0)
-            {
-                // 사망 모션 출력
-                Die();
-            }*/
+            /* float deltaTimeValue = Time.deltaTime;
+            Debug.Log("DeltaTime Value: " + deltaTimeValue);
+            float recoveredAmount = Mathf.RoundToInt(stat.hp_recover * Time.deltaTime);
+            Debug.Log("Recovered Amount: " + recoveredAmount); */
         }
 
         // 스테미나 자동 회복
         if (stat.cur_stamina < stat.max_stamina)
         {
-            stat.cur_stamina += Mathf.RoundToInt(stat.stmina_recover * Time.deltaTime);
+            stat.cur_stamina += Mathf.RoundToInt(stat.stamina_recover * Time.deltaTime);
             stat.cur_stamina = Mathf.Clamp(stat.cur_stamina, 0, stat.max_stamina);
+
         }
     }
+    void TryEnterPortal()
+    {
+        // 플레이어와 상호작용할 수 있는 모든 Collider를 가져옴
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
 
+        // 가져온 Collider들 중 Potal 스크립트가 있는지 확인하고 있으면 텔레포트
+        foreach (var collider in colliders)
+        {
+            Portal portal = collider.GetComponent<Portal>();
+            if (portal != null)
+            {
+                portal.TeleportPlayer(transform);
+                break; // 여러 포탈이 있을 경우 첫 번째 포탈만 사용
+            }
+        }
+    }
 }

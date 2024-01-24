@@ -11,7 +11,7 @@ public class MobGenerator : MonoBehaviour
     public int curMobSpawn = 0; // 현재까지 생성한 몬스터 수
 
     public float spawnInterval; // 몬스터 생성 간격(시간)
-    public int spawnMonsterCount; //한번에 생성하는 몬스터 수
+    public int spawnMonsterCount; //한번에 생성하는 몬스터 
 
 
     void Awake()
@@ -30,8 +30,8 @@ public class MobGenerator : MonoBehaviour
             for (int i = 0; i < spawnMonsterCount; i++)
             {
                 SpawnMonster();
-                yield return new WaitForSeconds(spawnInterval);
             }
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
     void SpawnMonster()

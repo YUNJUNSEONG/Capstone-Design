@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Potal : MonoBehaviour
+public class Portal : MonoBehaviour
 {
     public Transform destinationTransform;
 
@@ -15,7 +15,7 @@ public class Potal : MonoBehaviour
         }
     }
 
-    private void TeleportPlayer(Transform playerTransform)
+    public void TeleportPlayer(Transform playerTransform)
     {
         if (destinationTransform != null)
         {
