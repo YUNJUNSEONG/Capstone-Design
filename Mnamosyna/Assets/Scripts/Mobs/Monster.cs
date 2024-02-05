@@ -133,18 +133,19 @@ public class Monster : MonoBehaviour
         {
             isChase = false;
             isAttack = true;
-            anim.SetTrigger("Attack");
+            anim.SetBool("isAttack", true);
 
             yield return new WaitForSeconds(0.2f);
             attackArea.enabled = true;
 
 
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.3f);
             attackArea.enabled = false;
 
             yield return new WaitForSeconds(mobStat.atk_speed);
             isChase = true;
             isAttack = false;
+            anim.SetBool("isAttack", false);
         }
         //스킬이 쿨타임이 아닐 경우
         else
@@ -162,19 +163,19 @@ public class Monster : MonoBehaviour
         isChase = false;
         isAttack = true;
         isSkill = true;
-        anim.SetTrigger("Skill");
+        anim.SetBool("isSkill", true);
 
         yield return new WaitForSeconds(0.2f);
         skillArea.enabled = true;
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         skillArea.enabled = false;
 
         yield return new WaitForSeconds(mobStat.atk_speed);
         isChase = true;
         isAttack = false;
         isSkill = false;
-       
+        anim.SetBool("isSkill", false);
     }
 
     IEnumerator SkillCool() 
@@ -211,7 +212,6 @@ public class Monster : MonoBehaviour
         // 피해를 받았을 때 잠시 색상을 반투명하게 변경하도록 스크립트 수정
         mat.color = Color.black;
 
-        rigid.isKinematic = false;
         yield return new WaitForSeconds(0.1f);
 
         if (mobStat.cur_hp > 0)
