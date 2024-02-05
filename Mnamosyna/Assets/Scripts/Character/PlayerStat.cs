@@ -39,10 +39,13 @@ public class PlayerStat : MonoBehaviour
 
     [Header("속도 관련")]
     [SerializeField]
-    protected float ATK_Speed = 2.0f; // 공격 속도
+    protected float ATK_Speed = 2.0f; // 공격 딜레이 속도
     [SerializeField]
     protected float Move_Speed = 1.0f; // 이동 속도
 
+    [Header("공격 애니메이션")]
+    protected float Left_ATK_Speed;
+    protected float Right_ATK_Speed;
     public int max_hp { get { return Max_HP; } set { Max_HP = value; } }
     public int cur_hp { get { return Cur_HP; } set { Cur_HP = value; } }
     public int hp_recover { get { return HP_Recover; } set { HP_Recover = value; } }
@@ -60,10 +63,15 @@ public class PlayerStat : MonoBehaviour
     public float atk_speed { get { return ATK_Speed; } set { ATK_Speed = value; } }
     public float move_speed { get { return Move_Speed; } set { Move_Speed = value; } }
 
-    // Update is called once per frame
-    void Update()
-    {
+    public float left_atk_speed{ get { return Left_ATK_Speed; } set { Left_ATK_Speed = value; } }
+    public float right_atk_speed { get { return Right_ATK_Speed; } set { Right_ATK_Speed = value; } }
 
+    public void ApplySkill(SkillData Skill)
+    {
+        // 패시브 스킬의 영향을 플레이어 스탯에 적용
+        // 예: passiveSkill에서 가져온 정보로 플레이어 스탯 조정
+        // 예: Max_HP += passiveSkill.MaxHPBonus;
+        // 예: ATK_Speed *= passiveSkill.AttackSpeedMultiplier;
     }
 
 

@@ -239,6 +239,7 @@ public class Monster : MonoBehaviour
         }
 
         isDamage = false;
+        rigid.isKinematic = true;
     }
 
     /*void ChangeMaterialTransparency(float alphaValue)

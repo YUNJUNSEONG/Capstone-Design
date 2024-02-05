@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     bool rightDown;
     bool isBorder;
     bool isDamage;
+    public static bool isAttack;
+    public static bool isDash;
 
     public Camera followCamera;
     public bool isAttackReady = true;
@@ -26,6 +28,25 @@ public class Player : MonoBehaviour
     SkinnedMeshRenderer[] meshs;
     Rigidbody rigid;
     Sword sword;
+
+    // 스킬 관련 코드
+    private List<SkillData> skills = new List<SkillData>();
+    private List<SkillData> unlockSkills = new List<SkillData>();
+    public List<SkillData> UnlockSkills
+    {
+        get { return unlockSkills; }
+        set { unlockSkills = value; }
+    }
+
+    Coroutine CommandCoroutine = null;
+
+    private string skillCammand;
+    public string SkillCammand
+    {
+        get { return skillCammand; }
+        set { skillCammand = value; }
+    }
+    //
 
     float attackDelay;
 
@@ -40,8 +61,8 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
-        //stat.cur_hp = stat.max_hp;
-        //stat.Cur_Stamina = stat.Max_Stamina;
+        stat.cur_hp = stat.max_hp;
+        stat.cur_stamina = stat.max_stamina;
     }
 
 
@@ -117,11 +138,21 @@ public class Player : MonoBehaviour
         attackDelay += Time.deltaTime;
         isAttackReady = stat.atk_speed < attackDelay;
 
-        if (leftDown && isAttackReady)
+        if (leftDown && isAttackReady && !isAttack && !isDash)
         {
-            sword.Use();
-            anim.SetTrigger("LeftAttack");
-            attackDelay = 0;
+            if (CommandCoroutine != null)
+                StopCoroutine(CommandCoroutine);
+            skillCammand += 'L';
+            CommandCoroutine = StartCoroutine(ClearCommand());
+            UseSkill();
+
+            if (!isAttack)
+            {
+                sword.Use(stat.left_atk_speed, Damage());
+                anim.SetTrigger("LeftAttack");
+                attackDelay = 0;
+            }
+
         }
     }
 
@@ -130,12 +161,35 @@ public class Player : MonoBehaviour
         attackDelay += Time.deltaTime;
         isAttackReady = stat.atk_speed < attackDelay;
 
-        if(rightDown && isAttackReady)
+        if(rightDown && isAttackReady && !isAttack && !isDash)
         {
-            sword.Use();
-            anim.SetTrigger("RightAttack");
-            attackDelay = 0;
+            if (CommandCoroutine != null)
+                StopCoroutine(CommandCoroutine);
+            skillCammand += 'R';
+            CommandCoroutine = StartCoroutine(ClearCommand());
+            UseSkill();
+            if (!isAttack)
+            {
+                sword.Use(stat.right_atk_speed, Damage());
+                anim.SetTrigger("RightAttack");
+                attackDelay = 0;
+            }
         }
+    }
+
+    IEnumerator AttackEnd(float attackTime, string animationBool)
+    {
+        anim.SetBool("IsAttack", true);
+        anim.SetBool(animationBool, true);
+        yield return new WaitForSeconds(attackTime);
+        isAttack = false;
+        anim.SetBool(animationBool, false);
+        anim.SetBool("IsAttack", false);
+    }
+    IEnumerator ClearCommand()
+    {
+        yield return new WaitForSeconds(7);
+        skillCammand = "";
     }
     // 데미지 설정
     public int Damage()
@@ -218,6 +272,32 @@ public class Player : MonoBehaviour
             stat.cur_stamina += Mathf.RoundToInt(stat.stamina_recover * Time.deltaTime);
             stat.cur_stamina = Mathf.Clamp(stat.cur_stamina, 0, stat.max_stamina);
 
+        }
+    }
+
+    private void UseSkill()
+    {
+        for (int i = unlockSkills.Count - 1; i >= 0; i--)
+        {
+            if (skillCammand.EndsWith(unlockSkills[i].Command))
+            {
+                if (unlockSkills[i].Level > 0)
+                {
+                    print(unlockSkills[i].AnimationTrigger);
+                    if (CommandCoroutine != null)
+                        StopCoroutine(CommandCoroutine);
+                    isAttack = true;
+                    float floatSkillDamage = skills[i].damagePercent * Damage();
+                    int intSkillDamage = Mathf.RoundToInt(floatSkillDamage);
+                    float floatLevelDamage = skills[i].Level * skills[i].addDmg;
+                    int intLevelDamage = Mathf.RoundToInt(floatLevelDamage);
+                    int skilldamage = intSkillDamage + intLevelDamage;
+                    sword.Use(skills[i].AnimationTime, skilldamage);
+                    StartCoroutine(AttackEnd(skills[i].AnimationTime, skills[i].AnimationTrigger));
+                    skillCammand = "";
+                    break;
+                }
+            }
         }
     }
     void TryEnterPortal()

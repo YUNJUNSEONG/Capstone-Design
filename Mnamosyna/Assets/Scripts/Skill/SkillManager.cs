@@ -5,18 +5,18 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-/*
+
 
 public class SkillManager : MonoBehaviour
 {
     public static SkillManager instance;
     public GameObject player;
-    private PlayableCharacterController playableCharacterController;
+    private Player playableCharacterController;
+    private PlayerStat stat;
     public GameObject[] choices = new GameObject[3];
     public List<int> LevelUpSkill;
     public GameObject LevelBase;
     public Text CommandText;
-    public Text killText;
     public Slider HpBar;
     public Image[] UnlockSkill = new Image[9];
     public List<SkillData> skillUI;
@@ -32,7 +32,7 @@ public class SkillManager : MonoBehaviour
 
     private void Start()
     {
-        playableCharacterController = player.GetComponent<PlayableCharacterController>();
+        playableCharacterController = player.GetComponent<Player>();
     }
 
     private void Update()
@@ -41,13 +41,13 @@ public class SkillManager : MonoBehaviour
         // killText.text = GameManager.instance.kill + " / " + GameManager.instance.needKill;
         CommandText.text = "Command: ";
         CommandText.text += playableCharacterController.SkillCammand.Length > 5 ? playableCharacterController.SkillCammand.Substring(playableCharacterController.SkillCammand.Length - 5, 5) : playableCharacterController.SkillCammand;
-        HpBar.value = playableCharacterController.Life / 200;
+        HpBar.value = stat.max_hp / 150;
     }
 
     public void LevelUp()
     {
         Time.timeScale = 0;
-        PlayableCharacterController.isAttack = true;
+        Player.isAttack = true;
         playableCharacterController.SkillCammand = "";
         int choice = 0;
         LevelUpSkill = new List<int>();
@@ -72,19 +72,19 @@ public class SkillManager : MonoBehaviour
     {
         for(int i = 0; i < choices.Length; i++)
         {
-            choices[i].transform.GetChild(0).GetComponent<Image>().sprite = playableCharacterController.UnlockSkills[LevelUpSkill[i]].skillImage;
+            choices[i].transform.GetChild(0).GetComponent<Image>().sprite = playableCharacterController.UnlockSkills[LevelUpSkill[i]].Image;
 
             choices[i].transform.GetChild(1).GetComponent<Text>().text =
-                playableCharacterController.UnlockSkills[LevelUpSkill[i]].skillName.ToString() + '(' + playableCharacterController.UnlockSkills[LevelUpSkill[i]].skillCommand.ToString() + ')' + " Lv." + playableCharacterController.UnlockSkills[LevelUpSkill[i]].skillLevel;
+                playableCharacterController.UnlockSkills[LevelUpSkill[i]].Name.ToString() + '(' + playableCharacterController.UnlockSkills[LevelUpSkill[i]].Command.ToString() + ')' + " Lv." + playableCharacterController.UnlockSkills[LevelUpSkill[i]].Level;
 
-            if (playableCharacterController.UnlockSkills[LevelUpSkill[i]].skillLevel == 0)
-                choices[i].transform.GetChild(2).GetComponent<Text>().text = playableCharacterController.UnlockSkills[LevelUpSkill[i]].skillDescription.ToString();
-            else if (playableCharacterController.UnlockSkills[LevelUpSkill[i]].skillLevel < playableCharacterController.UnlockSkills[LevelUpSkill[i]].maxLevel)
-                choices[i].transform.GetChild(2).GetComponent<Text>().text = "데미지가 " + (playableCharacterController.UnlockSkills[LevelUpSkill[i]].baseDamage + playableCharacterController.UnlockSkills[LevelUpSkill[i]].ad * playableCharacterController.UnlockSkills[LevelUpSkill[i]].skillLevel) + "에서 " + (playableCharacterController.UnlockSkills[LevelUpSkill[i]].baseDamage + playableCharacterController.UnlockSkills[LevelUpSkill[i]].ad * (playableCharacterController.UnlockSkills[LevelUpSkill[i]].skillLevel + 1)) + "로 증가합니다.";
+            if (playableCharacterController.UnlockSkills[LevelUpSkill[i]].Level == 0)
+                choices[i].transform.GetChild(2).GetComponent<Text>().text = playableCharacterController.UnlockSkills[LevelUpSkill[i]].Description.ToString();
+            else if (playableCharacterController.UnlockSkills[LevelUpSkill[i]].Level < playableCharacterController.UnlockSkills[LevelUpSkill[i]].maxLevel)
+                choices[i].transform.GetChild(2).GetComponent<Text>().text = "데미지가 " + (playableCharacterController.UnlockSkills[LevelUpSkill[i]].damagePercent + (playableCharacterController.UnlockSkills[LevelUpSkill[i]].addDmg * playableCharacterController.UnlockSkills[LevelUpSkill[i]].Level)) + "에서 " + (playableCharacterController.UnlockSkills[LevelUpSkill[i]].damagePercent + (playableCharacterController.UnlockSkills[LevelUpSkill[i]].addDmg * (playableCharacterController.UnlockSkills[LevelUpSkill[i]].Level + 1))) + "로 증가합니다.";
             else
                 choices[i].transform.GetChild(2).GetComponent<Text>().text = "이 스킬은 마스터하셨습니다.";
 
-            if (playableCharacterController.UnlockSkills[LevelUpSkill[i]].skillLevel < playableCharacterController.UnlockSkills[LevelUpSkill[i]].maxLevel)
+            if (playableCharacterController.UnlockSkills[LevelUpSkill[i]].Level < playableCharacterController.UnlockSkills[LevelUpSkill[i]].maxLevel)
             {
                 choices[i].transform.GetChild(3).GetComponentInChildren<Text>().text = "Level Up";
             }
@@ -99,8 +99,8 @@ public class SkillManager : MonoBehaviour
 
     public void choiceLevelUpSkill(int num)
     {
-        if(playableCharacterController.UnlockSkills[LevelUpSkill[num]].skillLevel < playableCharacterController.UnlockSkills[LevelUpSkill[num]].maxLevel)
-            playableCharacterController.UnlockSkills[LevelUpSkill[num]].skillLevel++;
+        if(playableCharacterController.UnlockSkills[LevelUpSkill[num]].Level < playableCharacterController.UnlockSkills[LevelUpSkill[num]].maxLevel)
+            playableCharacterController.UnlockSkills[LevelUpSkill[num]].Level++;
 
         for(int i = 0; i < playableCharacterController.UnlockSkills[LevelUpSkill[num]].childSkill.Length; i++)
         {
@@ -115,14 +115,14 @@ public class SkillManager : MonoBehaviour
             skillUI.Add(playableCharacterController.UnlockSkills[LevelUpSkill[num]]);
 
         LevelBase.SetActive(false);
-        PlayableCharacterController.isAttack = false;
+        Player.isAttack = false;
         skillUI.Sort(compareUISkills);
         playableCharacterController.UnlockSkills.Sort(comparePlayerSkills);
 
         for (int i = 0; i < skillUI.Count; i++)
         {
             UnlockSkill[i].GetComponent<Image>().enabled = true;
-            UnlockSkill[i].sprite = skillUI[i].skillImage;
+            UnlockSkill[i].sprite = skillUI[i].Image;
         }
 
         Time.timeScale = 1;
@@ -130,13 +130,13 @@ public class SkillManager : MonoBehaviour
 
     int compareUISkills(SkillData a, SkillData b)
     {
-        return a.skillId < b.skillId ? -1 : 1;
+        return a.Id < b.Id ? -1 : 1;
     }
 
     int comparePlayerSkills(SkillData a, SkillData b)
     {
         if ((a.isUnlock && b.isUnlock) || (!a.isUnlock && !b.isUnlock))
-            return a.skillId < b.skillId ? -1 : 1;
+            return a.Id < b.Id ? -1 : 1;
         else if (a.isUnlock)
             return -1;
         else
@@ -147,10 +147,9 @@ public class SkillManager : MonoBehaviour
     {
         DashUI.GetComponent<Image>().enabled = true;
         DashUI.fillAmount = 0;
-        StartCoroutine(DashCoolTime());
     }
 
-    IEnumerator DashCoolTime()
+    /*IEnumerator DashCoolTime()
     {
         float coolTime = playableCharacterController.DashTime;
         while(coolTime > 0.0f)
@@ -160,6 +159,6 @@ public class SkillManager : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         DashUI.GetComponent<Image>().enabled = false;
-    }
+    }*/
 }
-*/
+
