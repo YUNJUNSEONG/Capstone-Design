@@ -216,15 +216,19 @@ public class Monster : MonoBehaviour
 
         if (mobStat.cur_hp > 0)
         {
+            rigid.isKinematic = false;
             mat.color = Color.white;
             anim.SetTrigger("getHit");
 
             reactVec = reactVec.normalized;
             reactVec += Vector3.up;
             rigid.AddForce(reactVec * 1.5f, ForceMode.Impulse);
+
+            rigid.isKinematic = true;
         }
         else
         {
+            rigid.isKinematic = false;
             mat.color = Color.white;
             gameObject.layer = 11;
             isChase = false;
@@ -236,10 +240,11 @@ public class Monster : MonoBehaviour
             rigid.AddForce(reactVec * 5, ForceMode.Impulse);
 
             Destroy(gameObject,3);
+
+            rigid.isKinematic = true;
         }
 
         isDamage = false;
-        rigid.isKinematic = true;
     }
 
     /*void ChangeMaterialTransparency(float alphaValue)

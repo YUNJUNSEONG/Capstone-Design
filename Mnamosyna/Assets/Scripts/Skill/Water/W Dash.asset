@@ -10,27 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 134e76c84ceed754fb281d10bb001351, type: 3}
-  m_Name: FCombo1
+  m_Name: W Dash
   m_EditorClassIdentifier: 
   skillType: 0
-  element: 0
+  element: 2
   linkElement: 0
-  Id: 4
-  Name: F COMBO1
+  Id: 2
+  Name: w dash
   Image: {fileID: 0}
   Description: 
   isUnlock: 1
-  childSkill:
-  - {fileID: 11400000, guid: d8bebcb61e5a94747b0ccf9e8817c60d, type: 2}
-  - {fileID: 11400000, guid: 6b8c25c313d15ec47985d37522fa1f4e, type: 2}
-  Level: 1
+  childSkill: []
+  Level: 0
   maxLevel: 3
-  Command: LRL
-  AnimationTrigger: IsSkillLRL
-  AnimationTime: 2.8333333
-  damagePercent: 1
-  addDmg: 10
-  useStamina: 10
+  Command: s
+  AnimationTrigger: isdash
+  AnimationTime: 0
+  damagePercent: 0
+  addDmg: 0
+  useStamina: 0
   MaxHPBonus: 0
   HealthRecoverBonus: 0
   StaminaRecoverBonus: 0

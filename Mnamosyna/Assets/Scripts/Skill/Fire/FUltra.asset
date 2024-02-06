@@ -12,16 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134e76c84ceed754fb281d10bb001351, type: 3}
   m_Name: FUltra
   m_EditorClassIdentifier: 
-  skillId: 10
-  skillName: "\uBD88\uC18D\uC131 \uAD81\uADF9\uAE30"
-  skillImage: {fileID: 0}
-  skillDescription: 
-  skillCommand: 
+  skillType: 0
+  element: 0
+  linkElement: 0
+  Id: 12
+  Name: 
+  Image: {fileID: 0}
+  Description: 
   isUnlock: 0
-  skillAnimationTrigger: 
-  skillAnimationTime: 0
   childSkill: []
-  skillLevel: 0
+  Level: 0
   maxLevel: 0
-  baseDamage: 0
-  ad: 0
+  Command: 
+  AnimationTrigger: 
+  AnimationTime: 0
+  damagePercent: 0
+  addDmg: 0
+  useStamina: 0
+  MaxHPBonus: 0
+  HealthRecoverBonus: 0
+  StaminaRecoverBonus: 0
+  ATKBonus: 0
+  CritChanceBonus: 0
+  CriticalBonus: 0
+  DefenseBonus: 0
+  AttackSpeedMultiplier: 0
+  MoveSpeedMultiplier: 0
+  LinkMaxHPBonus: 0
+  LinkHealthRecoverBonus: 0
+  LinkStaminaRecoverBonus: 0
+  LinkATKBonus: 0
+  LinkCritChanceBonus: 0
+  LinkCriticalBonus: 0
+  LinkDefenseBonus: 0
+  LinkAttackSpeedMultiplier: 0
+  LinkMoveSpeedMultiplier: 0

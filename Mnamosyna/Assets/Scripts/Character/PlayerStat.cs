@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerStat : MonoBehaviour
 {
+    public static PlayerStat instance;
+
     [Header("체력 관련")]
     [SerializeField]
     protected int Max_HP = 150; // 최대 체력
@@ -44,8 +46,11 @@ public class PlayerStat : MonoBehaviour
     protected float Move_Speed = 1.0f; // 이동 속도
 
     [Header("공격 애니메이션")]
+    [SerializeField]
     protected float Left_ATK_Speed;
+    [SerializeField]
     protected float Right_ATK_Speed;
+
     public int max_hp { get { return Max_HP; } set { Max_HP = value; } }
     public int cur_hp { get { return Cur_HP; } set { Cur_HP = value; } }
     public int hp_recover { get { return HP_Recover; } set { HP_Recover = value; } }
@@ -74,6 +79,10 @@ public class PlayerStat : MonoBehaviour
         // 예: ATK_Speed *= passiveSkill.AttackSpeedMultiplier;
     }
 
+    public void Awake()
+    {
+        instance = this;
+    }
 
 }
 

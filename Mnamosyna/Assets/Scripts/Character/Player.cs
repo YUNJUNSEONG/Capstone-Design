@@ -6,10 +6,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
+
 public class Player : MonoBehaviour
 {
     public static Player instance;
     public PlayerStat stat;
+
 
     float hAxis;
     float vAxis;
@@ -30,7 +32,9 @@ public class Player : MonoBehaviour
     Sword sword;
 
     // 스킬 관련 코드
+    [SerializeField]
     private List<SkillData> skills = new List<SkillData>();
+    [SerializeField]
     private List<SkillData> unlockSkills = new List<SkillData>();
     public List<SkillData> UnlockSkills
     {
@@ -40,6 +44,7 @@ public class Player : MonoBehaviour
 
     Coroutine CommandCoroutine = null;
 
+    [SerializeField]
     private string skillCammand;
     public string SkillCammand
     {
@@ -61,8 +66,8 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
-        stat.cur_hp = stat.max_hp;
-        stat.cur_stamina = stat.max_stamina;
+        stat.cur_hp = PlayerStat.instance.max_hp;
+        stat.cur_stamina = PlayerStat.instance.max_stamina;
     }
 
 
@@ -179,12 +184,10 @@ public class Player : MonoBehaviour
 
     IEnumerator AttackEnd(float attackTime, string animationBool)
     {
-        anim.SetBool("IsAttack", true);
-        anim.SetBool(animationBool, true);
+        anim.SetTrigger(animationBool);
         yield return new WaitForSeconds(attackTime);
         isAttack = false;
-        anim.SetBool(animationBool, false);
-        anim.SetBool("IsAttack", false);
+        anim.SetTrigger(animationBool);
     }
     IEnumerator ClearCommand()
     {
@@ -229,6 +232,7 @@ public class Player : MonoBehaviour
 
                     StartCoroutine(OnDamage());
                     Debug.Log("플레이어가 받은 피해 :" + finalDamage);
+
                 }
             }
         }
@@ -249,6 +253,7 @@ public class Player : MonoBehaviour
         {
             mesh.material.color = Color.white;
         }
+
     }
 
     // 자동 회복 시스템
@@ -316,4 +321,5 @@ public class Player : MonoBehaviour
             }
         }
     }
+
 }

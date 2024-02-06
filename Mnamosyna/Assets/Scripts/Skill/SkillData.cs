@@ -10,7 +10,7 @@ using UnityEngine.Rendering.Universal.Internal;
 public class SkillData : ScriptableObject
 {
     public enum SkillType { Combo, Passive, Link }
-    public enum Element { Fire, Earth, Water, Wind }
+    public enum Element { Fire, Earth, Water, Air }
 
     [Header("# Skill Type")]
     public SkillType skillType;

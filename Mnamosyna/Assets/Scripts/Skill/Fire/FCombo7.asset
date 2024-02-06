@@ -12,17 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134e76c84ceed754fb281d10bb001351, type: 3}
   m_Name: FCombo7
   m_EditorClassIdentifier: 
-  skillId: 8
-  skillName: "\uAC70\uD569 \uBCA0\uAE30"
-  skillImage: {fileID: 21300000, guid: 3c58ae5539306214ab6cc7f622faa954, type: 3}
-  skillDescription: "\uCE7C\uC744 \uD06C\uAC8C \uB450 \uBC88 \uD718\uB458\uB7EC\uC11C
-    \uC8FC\uC704\uC758 \uC801\uC5D0\uAC8C 100\uC758 \uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4."
-  skillCommand: LSRSL
+  skillType: 0
+  element: 0
+  linkElement: 0
+  Id: 10
+  Name: F COMBO7
+  Image: {fileID: 0}
+  Description: 
   isUnlock: 0
-  skillAnimationTrigger: IsSkillLSRSL
-  skillAnimationTime: 1.3335
   childSkill: []
-  skillLevel: 0
+  Level: 1
   maxLevel: 3
-  baseDamage: 80
-  ad: 20
+  Command: LSRSL
+  AnimationTrigger: IsSkillLSRSL
+  AnimationTime: 4.1666665
+  damagePercent: 1
+  addDmg: 10
+  useStamina: 10
+  MaxHPBonus: 0
+  HealthRecoverBonus: 0
+  StaminaRecoverBonus: 0
+  ATKBonus: 0
+  CritChanceBonus: 0
+  CriticalBonus: 0
+  DefenseBonus: 0
+  AttackSpeedMultiplier: 0
+  MoveSpeedMultiplier: 0
+  LinkMaxHPBonus: 0
+  LinkHealthRecoverBonus: 0
+  LinkStaminaRecoverBonus: 0
+  LinkATKBonus: 0
+  LinkCritChanceBonus: 0
+  LinkCriticalBonus: 0
+  LinkDefenseBonus: 0
+  LinkAttackSpeedMultiplier: 0
+  LinkMoveSpeedMultiplier: 0

@@ -12,15 +12,13 @@ public class SkillManager : MonoBehaviour
     public static SkillManager instance;
     public GameObject player;
     private Player playableCharacterController;
-    private PlayerStat stat;
     public GameObject[] choices = new GameObject[3];
     public List<int> LevelUpSkill;
     public GameObject LevelBase;
     public Text CommandText;
-    public Slider HpBar;
     public Image[] UnlockSkill = new Image[9];
     public List<SkillData> skillUI;
-    public Image DashUI;
+    //public Image DashUI;
 
     private void Awake()
     {
@@ -37,11 +35,9 @@ public class SkillManager : MonoBehaviour
 
     private void Update()
     {
-
         // killText.text = GameManager.instance.kill + " / " + GameManager.instance.needKill;
         CommandText.text = "Command: ";
         CommandText.text += playableCharacterController.SkillCammand.Length > 5 ? playableCharacterController.SkillCammand.Substring(playableCharacterController.SkillCammand.Length - 5, 5) : playableCharacterController.SkillCammand;
-        HpBar.value = stat.max_hp / 150;
     }
 
     public void LevelUp()
@@ -143,11 +139,11 @@ public class SkillManager : MonoBehaviour
             return 1;
     }
 
-    public void Dash()
+    /*public void Dash()
     {
         DashUI.GetComponent<Image>().enabled = true;
         DashUI.fillAmount = 0;
-    }
+    }*/
 
     /*IEnumerator DashCoolTime()
     {
