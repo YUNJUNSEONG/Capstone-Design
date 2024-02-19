@@ -1608,7 +1608,7 @@ MonoBehaviour:
   - {fileID: -4018849503973410702}
   TransitionsIn:
   - {fileID: -6954497063159898024}
-  FuncIndex: 19
+  FuncIndex: 21
   FuncNames:
   - EnemyIsAimingAtMe
   - EnemyIsFleeing
@@ -1616,6 +1616,7 @@ MonoBehaviour:
   - FriendNotFullyHealthy
   - HeardSomething
   - InWayPointRange
+  - IsBeingTargeted
   - ObstaclesBeforeTarget
   - SeeBetterWeapon
   - SeeBlock
@@ -1626,6 +1627,7 @@ MonoBehaviour:
   - SeeHealingPotion
   - SeeShelter
   - SeeTargetsBack
+  - SeeUnitOfType
   - TargetClosestEnemy
   - TargetHasFullHealth
   - TargetHasLowHealth
@@ -1635,9 +1637,11 @@ MonoBehaviour:
   - TargetInRange
   - TargetInSkillRange
   - TargetIsFake
+  - TargetIsFriendly
   - TargetIsInFrontOfMe
   - TargetNotFullyHealthy
   - TargetWeakestEnemy
+  - TargetWeakestFriend
   _functionName: TargetInCloseRange
   Behaviour: {fileID: 11400000}
   CaptureControl: 0
@@ -1970,7 +1974,7 @@ MonoBehaviour:
   TransitionsIn:
   - {fileID: 4487492420423980127}
   - {fileID: -2515522285494972116}
-  FuncIndex: 17
+  FuncIndex: 19
   FuncNames:
   - DodgeBack
   - DodgeLeft
@@ -1983,6 +1987,8 @@ MonoBehaviour:
   - RunAround
   - RunAroundWaypoints
   - RunAway
+  - RunToEnemyBase
+  - RunToHomeBase
   - RunToTarget
   - RushForward
   - Stand
@@ -1997,7 +2003,7 @@ MonoBehaviour:
     FullClassName: Eliot.AgentComponents.StandardMotionActionInterface
     FullMethodName: WanderAround
     MethodParameters: []
-  ActionGroupIndex: 3
+  ActionGroupIndex: 4
 --- !u!114 &6417924290603299748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2178,7 +2184,7 @@ MonoBehaviour:
   Transitions: []
   TransitionsIn:
   - {fileID: -4532296212555931205}
-  FuncIndex: 16
+  FuncIndex: 18
   FuncNames:
   - DodgeBack
   - DodgeLeft
@@ -2191,6 +2197,8 @@ MonoBehaviour:
   - RunAround
   - RunAroundWaypoints
   - RunAway
+  - RunToEnemyBase
+  - RunToHomeBase
   - RunToTarget
   - RushForward
   - Stand
@@ -2205,7 +2213,7 @@ MonoBehaviour:
     FullClassName: Eliot.AgentComponents.StandardMotionActionInterface
     FullMethodName: WalkToTarget
     MethodParameters: []
-  ActionGroupIndex: 3
+  ActionGroupIndex: 4
 --- !u!114 &7261352199225990013
 MonoBehaviour:
   m_ObjectHideFlags: 1

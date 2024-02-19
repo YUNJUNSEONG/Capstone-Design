@@ -30,7 +30,7 @@ public class Sword : MonoBehaviour
         attackArea.enabled = true;
         trailEffect.enabled = true;
 
-        yield return new WaitForSeconds(attackTime-0.1f);
+        yield return new WaitForSeconds(attackTime/1.5F - 0.1f);
         attackArea.enabled = false;
         trailEffect.enabled = false;
     }

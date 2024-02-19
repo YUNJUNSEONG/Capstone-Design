@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
         Recover();
         if (Input.GetKeyDown(KeyCode.E))
         {
-            TryEnterPortal();
+            Interaction();
         }
     }
 
@@ -185,14 +185,13 @@ public class Player : MonoBehaviour
     IEnumerator AttackEnd(float attackTime, string animationBool)
     {
         anim.SetTrigger(animationBool);
-        yield return new WaitForSeconds(attackTime);
+        yield return new WaitForSeconds(attackTime/2);
         isAttack = false;
-        anim.SetTrigger(animationBool);
     }
     IEnumerator ClearCommand()
     {
-        yield return new WaitForSeconds(7);
-        skillCammand = "";
+        yield return new WaitForSeconds(3);
+        skillCammand = " ";
     }
     // 데미지 설정
     public int Damage()
@@ -299,13 +298,14 @@ public class Player : MonoBehaviour
                     int skilldamage = intSkillDamage + intLevelDamage;
                     sword.Use(skills[i].AnimationTime, skilldamage);
                     StartCoroutine(AttackEnd(skills[i].AnimationTime, skills[i].AnimationTrigger));
-                    skillCammand = "";
+                    skillCammand = " ";
                     break;
                 }
             }
         }
     }
-    void TryEnterPortal()
+
+    void Interaction()
     {
         // 플레이어와 상호작용할 수 있는 모든 Collider를 가져옴
         Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
@@ -318,6 +318,16 @@ public class Player : MonoBehaviour
             {
                 portal.TeleportPlayer(transform);
                 break; // 여러 포탈이 있을 경우 첫 번째 포탈만 사용
+            }
+        }
+
+        foreach (var collider in colliders)
+        {
+            HealSpace healSpace = collider.GetComponent<HealSpace>();
+            if (healSpace != null)
+            {
+                healSpace.HealPlayer();
+                break;
             }
         }
     }

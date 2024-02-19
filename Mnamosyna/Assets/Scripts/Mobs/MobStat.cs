@@ -34,6 +34,12 @@ public class MobStat : MonoBehaviour
     [SerializeField]
     protected float Move_Speed; // 이동 속도
 
+    [Header("공격 애니메이션")]
+    [SerializeField]
+    protected float ATK_Anim;
+    [SerializeField]
+    protected float Skill_Anim;
+
     public int max_hp { get { return Max_HP; } set { Max_HP = value; } }
     public int cur_hp { get { return Cur_HP; } set { Cur_HP = value; } }
 
@@ -44,4 +50,7 @@ public class MobStat : MonoBehaviour
     public float defense { get { return Defense; } set { Defense = value; } }
     public float atk_speed { get { return ATK_Speed; } set { ATK_Speed = value; } }
     public float move_speed { get { return Move_Speed; } set { Move_Speed = value; } }
+
+    public float atk_anim { get { return ATK_Anim; } set { ATK_Anim = value; } }
+    public float skill_anim { get { return Skill_Anim; } set { Skill_Anim = value; } }
 }

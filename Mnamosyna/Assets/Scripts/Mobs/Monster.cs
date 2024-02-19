@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+public enum CharacterState
+{
+    Idle,
+    Chasing,
+    Attack,
+    UsingSkill,
+    SkillCool
+}
 public class Monster : MonoBehaviour
 {
     public MobStat mobStat;
     public Transform player;
     public static Monster instance;
 
-    public bool isChase;
-    public bool isAttack;
-    public bool isSkill;
-    bool isSkillCool;
-    bool isSkillCoolInProgress;
+    private CharacterState state = CharacterState.Idle;
+
+    private const float WAIT_TIME = 0.1f;
+    bool isChase;
     bool isDamage;
 
     public Transform target;
@@ -84,7 +90,6 @@ public class Monster : MonoBehaviour
                     mobStat.cur_hp = Mathf.Max(0, mobStat.cur_hp - finalDamage);
 
                     Debug.Log("몬스터가 받은 피해 :" + finalDamage);
-
                 }
 
                 Vector3 reactVec = transform.position - other.transform.position;
@@ -108,6 +113,7 @@ public class Monster : MonoBehaviour
         }
     }
 
+    #region HitPlayer
     // 몬스터의 플레이어 타게팅
     void Targeting()
     {
@@ -116,79 +122,78 @@ public class Monster : MonoBehaviour
 
         RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange,LayerMask.GetMask("Player"));
         
-        if(rayHits.Length > 0 && !isAttack && !isSkill)
+        if(rayHits.Length > 0 && state != CharacterState.Attack && state != CharacterState.UsingSkill)
         {
             StartCoroutine(Attack());
-
             //몬스터가 플레이어를 마주친 이후 부터 스킬 쿨타임 활성화
             StartCoroutine(SkillCool());
+
+            StartCoroutine(Skill());
         }
     }
 
     IEnumerator Attack()
     {
+        if (state == CharacterState.UsingSkill)
+            yield break;
 
-        //스킬이 쿨타임일 경우
-        if (!isSkillCool)
-        {
-            isChase = false;
-            isAttack = true;
-            anim.SetBool("isAttack", true);
+        state = CharacterState.Attack;
+        PlayAnimation("isAttack");
+        yield return new WaitForSeconds(WAIT_TIME);
+        EnableCollider(attackArea);
 
-            yield return new WaitForSeconds(0.2f);
-            attackArea.enabled = true;
+        yield return new WaitForSeconds(mobStat.atk_anim - WAIT_TIME);
+        DisableCollider(attackArea);
+        PlayAnimation("isAttack", false);
 
-
-            yield return new WaitForSeconds(0.3f);
-            attackArea.enabled = false;
-
-            yield return new WaitForSeconds(mobStat.atk_speed);
-            isChase = true;
-            isAttack = false;
-            anim.SetBool("isAttack", false);
-        }
-        //스킬이 쿨타임이 아닐 경우
-        else
-        {
-            //스킬 사용
-            StartCoroutine(Skill());
-            //스킬 쿨타임 시작
-            StartCoroutine(SkillCool());
-        }
-
+        state = CharacterState.Chasing;
+        yield return new WaitForSeconds(mobStat.atk_speed);
     }
 
+    // 스킬 사용 코루틴
     IEnumerator Skill()
     {
-        isChase = false;
-        isAttack = true;
-        isSkill = true;
-        anim.SetBool("isSkill", true);
+        if (state == CharacterState.SkillCool)
+            yield break;
 
-        yield return new WaitForSeconds(0.2f);
-        skillArea.enabled = true;
+        state = CharacterState.UsingSkill;
+        PlayAnimation("isSkill");
+        yield return new WaitForSeconds(WAIT_TIME);
+        EnableCollider(skillArea);
 
-        yield return new WaitForSeconds(0.5f);
-        skillArea.enabled = false;
+        yield return new WaitForSeconds(mobStat.skill_anim - WAIT_TIME);
+        DisableCollider(skillArea);
+        PlayAnimation("isSkill", false);
 
         yield return new WaitForSeconds(mobStat.atk_speed);
-        isChase = true;
-        isAttack = false;
-        isSkill = false;
-        anim.SetBool("isSkill", false);
+
+        state = CharacterState.Chasing;
     }
 
-    IEnumerator SkillCool() 
+    // 스킬 쿨타임 코루틴
+    IEnumerator SkillCool()
     {
-        // 스킬 쿨타임이 초기화되지 않도록 조정
-        if (!isSkillCoolInProgress)
-        {
-            isSkillCoolInProgress = true;
-            isSkillCool = true;
-            yield return new WaitForSeconds(mobStat.skill_colltime);
-            isSkillCool = false;
-            isSkillCoolInProgress = false;  // 추가: Coroutine이 끝날 때 변수 초기화
-        }
+        state = CharacterState.SkillCool;
+        yield return new WaitForSeconds(mobStat.skill_colltime);
+        state = CharacterState.Chasing;
+    }
+
+    // 애니메이션 재생 함수
+    void PlayAnimation(string parameter, bool value = true)
+    {
+        anim.SetBool(parameter, value);
+    }
+
+    // 콜라이더 활성화 함수
+    void EnableCollider(Collider collider)
+    {
+        collider.enabled = true;
+    }
+
+    // 콜라이더 비활성화 함수
+    void DisableCollider(Collider collider)
+    {
+        collider.enabled = false;
     }
 
     public int Damage()
@@ -196,7 +201,7 @@ public class Monster : MonoBehaviour
         int damage = mobStat.attack;
         int skillDamage = mobStat.skill_attack;
 
-        if(isSkill)
+        if(state == CharacterState.UsingSkill)
         {
             return skillDamage;
         }
@@ -205,61 +210,76 @@ public class Monster : MonoBehaviour
             return damage;
         }
     }
+    #endregion
 
+    #region OnDamage
+    // 무적 시간 상수 정의
+    private const float INVINCIBILITY_TIME = 1f;
     IEnumerator OnDamage(Vector3 reactVec)
     {
-        isDamage = true; //몬스터 무적시간
-        // 피해를 받았을 때 잠시 색상을 반투명하게 변경하도록 스크립트 수정
-        mat.color = Color.black;
+        if (isDamage)
+            yield break;
 
-        yield return new WaitForSeconds(0.1f);
+        isDamage = true;
+        SetInvincible(true); // 몬스터를 무적 상태로 설정
+
+        SetColor(Color.black); // 피격 시 색상을 변경
+
+        yield return new WaitForSeconds(WAIT_TIME);
 
         if (mobStat.cur_hp > 0)
         {
-            rigid.isKinematic = false;
-            mat.color = Color.white;
-            anim.SetTrigger("getHit");
-
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 1.5f, ForceMode.Impulse);
-
-            rigid.isKinematic = true;
+            Hit(reactVec); // 피해를 처리하는 함수 호출
         }
         else
         {
-            rigid.isKinematic = false;
-            mat.color = Color.white;
-            gameObject.layer = 11;
-            isChase = false;
-            nav.enabled = false;
-            anim.SetTrigger("Die");
-
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 5, ForceMode.Impulse);
-
-            Destroy(gameObject,3);
-
-            rigid.isKinematic = true;
+            Death(reactVec); // 사망 처리하는 함수 호출
         }
 
-        isDamage = false;
+        yield return new WaitForSeconds(INVINCIBILITY_TIME);
+        SetInvincible(false); // 무적 상태 해제
+    }
+    // 피격 시 색상 변경 함수
+    void SetColor(Color color)
+    {
+        mat.color = color;
     }
 
-    /*void ChangeMaterialTransparency(float alphaValue)
+    // 무적 상태 설정 함수
+    void SetInvincible(bool invincible)
     {
-        // 머티리얼이 지정되어 있지 않으면 종료
-        if (mat == null)
-        {
-            Debug.LogError("Material is not assigned.");
-            return;
-        }
+        isDamage = invincible;
+    }
 
-        // 머티리얼의 색상을 가져오고 알파 값을 설정
-        Color color = mat.color;
-        color.a = alphaValue;
-        mat.color = color;
-    }*/
+    // 피해를 처리하는 함수
+    void Hit(Vector3 reactVec)
+    {
+        SetColor(Color.black); // 원래 색상으로 변경
+        anim.SetBool("getHit", true); // 피격 애니메이션 재생
 
+        reactVec = reactVec.normalized;
+        reactVec += Vector3.up;
+        rigid.AddForce(reactVec * 1.5f, ForceMode.Impulse);
+
+        rigid.isKinematic = true; // 물리 작용 해제
+    }
+
+    // 사망을 처리하는 함수
+    void Death(Vector3 reactVec)
+    {
+        SetColor(Color.black);  // 원래 색상으로 변경
+        gameObject.layer = 11; // 사망한 몬스터의 레이어 변경
+        isChase = false; // 추적 중지
+        nav.enabled = false; // 네비게이션 비활성화
+        anim.SetTrigger("Die"); // 사망 애니메이션 재생
+
+        reactVec = reactVec.normalized;
+        reactVec += Vector3.up;
+        rigid.AddForce(reactVec * 5, ForceMode.Impulse);
+
+        Destroy(gameObject, 2); // 일정 시간 후 게임 오브젝트 삭제
+
+        rigid.isKinematic = true; // 물리 작용 해제
+    }
+    #endregion
 }

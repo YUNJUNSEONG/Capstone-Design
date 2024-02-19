@@ -292,9 +292,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mobStat: {fileID: 3722551603204707504}
   player: {fileID: 0}
-  isChase: 0
-  isAttack: 0
-  isSkill: 0
   target: {fileID: 0}
   attackArea: {fileID: 7547642388814208423}
   skillArea: {fileID: 2460005207740387278}
@@ -319,6 +316,8 @@ MonoBehaviour:
   Defense: 0
   ATK_Speed: 3
   Move_Speed: 5
+  ATK_Anim: 0.8333333
+  Skill_Anim: 0.8333333
 --- !u!1 &3453651280779790392
 GameObject:
   m_ObjectHideFlags: 0

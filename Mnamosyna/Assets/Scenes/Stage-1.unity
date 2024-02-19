@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 2976e733d4dc604498220683f80664fc, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1001 &45571721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3501,6 +3501,8 @@ MonoBehaviour:
   Defense: 0
   ATK_Speed: 2
   Move_Speed: 1
+  Left_ATK_Speed: 0
+  Right_ATK_Speed: 0
 --- !u!114 &1563316879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3516,6 +3518,9 @@ MonoBehaviour:
   stat: {fileID: 1563316878}
   followCamera: {fileID: 963194227}
   isAttackReady: 0
+  skills: []
+  unlockSkills: []
+  skillCammand: 
 --- !u!4 &1563316886 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2346695583065940561, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
