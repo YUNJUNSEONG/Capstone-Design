@@ -10,7 +10,9 @@ using UnityEngine.Rendering.Universal.Internal;
 public class SkillData : ScriptableObject
 {
     public enum SkillType { Combo, Passive, Link }
-    public enum Element { Fire, Earth, Water, Air }
+    public enum Element { Fire, Air, Water, Earth }
+
+    public enum Tier { Tier1, Tier2, Tier3, Tier4 }
 
     [Header("# Skill Type")]
     public SkillType skillType;
@@ -19,6 +21,9 @@ public class SkillData : ScriptableObject
     public Element element;
     [ShowWhen("skillType", SkillType.Link)]
     public Element linkElement;
+
+    [Header("# Skill Tear")]
+    public Tier tier;
 
     [Header("# Main Info")]
     public int Id;

@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 134e76c84ceed754fb281d10bb001351, type: 3}
+  m_Name: 1.FCombo1
+  m_EditorClassIdentifier: 
+  skillType: 0
+  element: 0
+  linkElement: 0
+  Id: 1
+  Name: F COMBO1
+  Image: {fileID: 0}
+  Description: 
+  isUnlock: 0
+  childSkill:
+  - {fileID: 11400000, guid: d8bebcb61e5a94747b0ccf9e8817c60d, type: 2}
+  - {fileID: 11400000, guid: 6b8c25c313d15ec47985d37522fa1f4e, type: 2}
+  - {fileID: 11400000, guid: 358a127fb9c89e0449be7f23940e20e9, type: 2}
+  - {fileID: 11400000, guid: 32d4a692b39d8f14fb47020695509b66, type: 2}
+  Level: 0
+  maxLevel: 3
+  Command: LRL
+  AnimationTrigger: IsSkillLRL
+  AnimationTime: 2.8333333
+  damagePercent: 1
+  addDmg: 10
+  useStamina: 10
+  MaxHPBonus: 0
+  HealthRecoverBonus: 0
+  StaminaRecoverBonus: 0
+  ATKBonus: 0
+  CritChanceBonus: 0
+  CriticalBonus: 0
+  DefenseBonus: 0
+  AttackSpeedMultiplier: 0
+  MoveSpeedMultiplier: 0
+  LinkMaxHPBonus: 0
+  LinkHealthRecoverBonus: 0
+  LinkStaminaRecoverBonus: 0
+  LinkATKBonus: 0
+  LinkCritChanceBonus: 0
+  LinkCriticalBonus: 0
+  LinkDefenseBonus: 0
+  LinkAttackSpeedMultiplier: 0
+  LinkMoveSpeedMultiplier: 0

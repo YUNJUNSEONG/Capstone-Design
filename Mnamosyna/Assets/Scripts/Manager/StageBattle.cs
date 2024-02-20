@@ -83,14 +83,12 @@ public class StageBattle : MonoBehaviour
                 battleActive = false;
 
                 // 포탈 활성화
-                foreach (var barrier in portal)
+                foreach (var magic in portal)
                 {
                     Debug.Log("portal barrier disapear");
-                    barrier.SetActive(true);
+                    magic.SetActive(true);
                 }
 
-                // 여기에 필요한 종료 처리 로직 추가
-                // 예를 들어, 게임 종료 처리나 다음 단계로 전환하는 로직을 추가할 수 있습니다.
             }
 
             yield return null;
