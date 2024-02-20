@@ -890,11 +890,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1563316877}
+  playerCon: {fileID: 0}
   choices:
   - {fileID: 758649627}
   - {fileID: 14328646}
   - {fileID: 1736155458}
   LevelUpSkill: 
+  LockedSkill: 
   LevelBase: {fileID: 1474220347}
   CommandText: {fileID: 1802728311}
   UnlockSkill:
@@ -917,6 +919,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  DashUI: {fileID: 0}
 --- !u!4 &136093190
 Transform:
   m_ObjectHideFlags: 0
@@ -7223,6 +7226,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2650797072895291358, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6738062706553439, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -7998,6 +8005,7 @@ MonoBehaviour:
   stat: {fileID: 1563316891}
   followCamera: {fileID: 963194227}
   isAttackReady: 0
+  invincibilityTime: 1.5
   skills:
   - {fileID: 11400000, guid: b7709c284b7a97544a63d5f2e7f3f1a7, type: 2}
   - {fileID: 11400000, guid: 0d98e484fb0c1cd45993a5d3a84266de, type: 2}
@@ -8048,6 +8056,7 @@ MonoBehaviour:
   Move_Speed: 1
   Left_ATK_Speed: 1.9333333
   Right_ATK_Speed: 2.5
+  Dash_speed: 2.5
 --- !u!1001 &1579553585
 PrefabInstance:
   m_ObjectHideFlags: 0

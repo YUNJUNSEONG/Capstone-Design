@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     float vAxis;
     bool leftDown;
     bool rightDown;
+    bool shiftDown;
     bool isBorder;
     bool isDamage;
     public static bool isAttack;
@@ -24,6 +25,11 @@ public class Player : MonoBehaviour
 
     public Camera followCamera;
     public bool isAttackReady = true;
+
+    public float invincibilityTime = 1.5f; // 무적 지속 시간
+    private bool isInvincible = false; // 무적 상태 여부
+    private float invincibilityTimer = 0f; // 무적 지속 시간을 카운트하기 위한 타이머
+
 
     Vector3 moveVec;
     Animator anim;
@@ -78,10 +84,20 @@ public class Player : MonoBehaviour
         Move();
         LeftAttack();
         RightAttack();
+        Dash();
         Recover();
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interaction();
+        }
+        if (isInvincible)
+        {
+            invincibilityTimer -= Time.deltaTime;
+            if (invincibilityTimer <= 0)
+            {
+                isInvincible = false;
+            }
+
         }
     }
 
@@ -91,6 +107,7 @@ public class Player : MonoBehaviour
         vAxis = Input.GetAxisRaw("Vertical");
         leftDown = Input.GetButtonDown("Fire1");
         rightDown = Input.GetButtonDown("Fire2");
+        shiftDown = Input.GetButtonDown("Dash");
     }
 
     void Move()
@@ -137,6 +154,7 @@ public class Player : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward * 3, Color.white);
         isBorder = Physics.Raycast(transform.position, transform.forward, 3, LayerMask.GetMask("Wall"));
     }
+
     void LeftAttack()
     {
 
@@ -193,6 +211,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(3);
         skillCammand = " ";
     }
+
     // 데미지 설정
     public int Damage()
     {
@@ -229,7 +248,7 @@ public class Player : MonoBehaviour
                     int finalDamage = Mathf.RoundToInt(damage * (1 - stat.defense)); // 피해 감소 적용
                     stat.cur_hp = Mathf.Max(0, stat.cur_hp - finalDamage);
 
-                    StartCoroutine(OnDamage());
+                    StartCoroutine(TakeDamage());
                     Debug.Log("플레이어가 받은 피해 :" + finalDamage);
 
                 }
@@ -237,20 +256,27 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator OnDamage()
+    IEnumerator TakeDamage()
     {
-        isDamage = true;
-        foreach(SkinnedMeshRenderer mesh in meshs)
+        if(!isInvincible)
         {
-            mesh.material.color = Color.red;
-        }
+            isDamage = true;
+            foreach (SkinnedMeshRenderer mesh in meshs)
+            {
+                mesh.material.color = Color.red;
+            }
 
-        yield return new WaitForSeconds(1f);
-        isDamage = false;
+            yield return new WaitForSeconds(1f);
+            isDamage = false;
 
-        foreach (SkinnedMeshRenderer mesh in meshs)
-        {
-            mesh.material.color = Color.white;
+            foreach (SkinnedMeshRenderer mesh in meshs)
+            {
+                mesh.material.color = Color.white;
+            }
+
+            // 무적 상태로 설정
+            isInvincible = true;
+            invincibilityTimer = invincibilityTime;
         }
 
     }
@@ -276,6 +302,28 @@ public class Player : MonoBehaviour
             stat.cur_stamina += Mathf.RoundToInt(stat.stamina_recover * Time.deltaTime);
             stat.cur_stamina = Mathf.Clamp(stat.cur_stamina, 0, stat.max_stamina);
 
+        }
+    }
+
+    void Dash()
+    {
+        attackDelay += Time.deltaTime;
+        isAttackReady = stat.atk_speed < attackDelay;
+
+        if (shiftDown && isAttackReady && !isAttack && !isDash)
+        {
+            
+            if (CommandCoroutine != null)
+                StopCoroutine(CommandCoroutine);
+            skillCammand += 'S';
+            CommandCoroutine = StartCoroutine(ClearCommand());
+            UseSkill();
+            if (!isAttack)
+            {
+                sword.Use(stat.Dash_speed, Damage());
+                anim.SetTrigger("Dash");
+                attackDelay = 0;
+            }
         }
     }
 

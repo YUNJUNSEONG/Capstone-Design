@@ -21,8 +21,6 @@ public class StageBattle : MonoBehaviour
     public List<GameObject> portal; // 포탈배리어 게임 오브젝트
     public List<MobSpawnInfo> mobTypes; // 소환할 몬스터의 종류, 스폰 시간, 최대 소환 수
 
-    MobSpawnInfo mobTypeInfo = new MobSpawnInfo();
-
     public bool battleActive = false; // 배틀이 활성화 중인지 여부
 
     // 필드의 x와 z 범위를 결정합니다. 필드의 최소 및 최대 x와 z 값을 사용합니다.

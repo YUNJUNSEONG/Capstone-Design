@@ -51,6 +51,8 @@ public class PlayerStat : MonoBehaviour
     [SerializeField]
     protected float Right_ATK_Speed;
 
+    public float Dash_speed = 2.5f;
+
     public int max_hp { get { return Max_HP; } set { Max_HP = value; } }
     public int cur_hp { get { return Cur_HP; } set { Cur_HP = value; } }
     public int hp_recover { get { return HP_Recover; } set { HP_Recover = value; } }

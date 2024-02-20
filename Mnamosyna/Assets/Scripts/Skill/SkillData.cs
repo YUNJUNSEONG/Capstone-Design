@@ -37,56 +37,81 @@ public class SkillData : ScriptableObject
     [Header("# Combo Skill Data")]
 
     [Header("command & anim")]
+    [ShowWhen("skillType", SkillType.Combo)]
     public string Command;
+    [ShowWhen("skillType", SkillType.Combo)]
     public string AnimationTrigger;
+    [ShowWhen("skillType", SkillType.Combo)]
     public float AnimationTime;
 
     [Header("Damage")]
+    [ShowWhen("skillType", SkillType.Combo)]
     public float damagePercent;
+    [ShowWhen("skillType", SkillType.Combo)]
     public float addDmg;
+    [ShowWhen("skillType", SkillType.Combo)]
     public float useStamina;
 
 
     [Header("# Passive Skill Data")]
 
     [Header("Health Related")]
+    [ShowWhen("element", Element.Earth)]
     public int MaxHPBonus;
+    [ShowWhen("element", Element.Water)]
     public float HealthRecoverBonus;
 
     [Header("Stamina Related")]
+    [ShowWhen("element", Element.Water)]
     public float StaminaRecoverBonus;
 
     [Header("Attack Related")]
+    [ShowWhen("element", Element.Fire)]
     public float ATKBonus;
+    [ShowWhen("element", Element.Fire)]
     public float CritChanceBonus;
+    [ShowWhen("element", Element.Fire)]
     public float CriticalBonus;
 
     [Header("Defense")]
+    [ShowWhen("element", Element.Earth)]
     public float DefenseBonus;
 
     [Header("Speed Related")]
+    [ShowWhen("element", Element.Air)]
     public float AttackSpeedMultiplier;
+    [ShowWhen("element", Element.Air)]
     public float MoveSpeedMultiplier;
 
 
     [Header("# Link Skill Data")]
+
     [Header("Health Related")]
+    [ShowWhen("skillType", SkillType.Link, "linkElement", Element.Earth)]
     public int LinkMaxHPBonus;
+    [ShowWhen("skillType", SkillType.Link, "linkElement", Element.Water)]
     public float LinkHealthRecoverBonus;
 
     [Header("Stamina Related")]
+    [ShowWhen("skillType", SkillType.Link, "linkElement", Element.Water)]
     public float LinkStaminaRecoverBonus;
 
     [Header("Attack Related")]
+    [ShowWhen("skillType", SkillType.Link, "linkElement", Element.Fire)]
     public float LinkATKBonus;
+    [ShowWhen("skillType", SkillType.Link, "linkElement", Element.Fire)]
     public float LinkCritChanceBonus;
+    [ShowWhen("skillType", SkillType.Link, "linkElement", Element.Fire)]
     public float LinkCriticalBonus;
 
     [Header("Defense")]
+    [ShowWhen("skillType", SkillType.Link, "linkElement", Element.Earth)]
     public float LinkDefenseBonus;
 
     [Header("Speed Related")]
+    [ShowWhen("skillType", SkillType.Link, "linkElement", Element.Air)]
     public float LinkAttackSpeedMultiplier;
+    [ShowWhen("skillType", SkillType.Link, "linkElement", Element.Air)]
     public float LinkMoveSpeedMultiplier;
 
 }
