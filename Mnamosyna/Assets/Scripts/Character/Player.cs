@@ -38,9 +38,14 @@ public class Player : MonoBehaviour
     Sword sword;
 
     // 스킬 관련 코드
-    [SerializeField]
+    public int maxSkillSlots = 30;
+    public SkillData[] skillSlots;
+
+    // 전체 스킬
     private List<SkillData> skills = new List<SkillData>();
-    [SerializeField]
+    // 플레이어가 보유한 스킬 ID를 저장하는 리스트
+    private List<int> unlockSkillIds = new List<int>();
+    // 플레이어가 보유한 스킬 데이터를 저장하는 리스트
     private List<SkillData> unlockSkills = new List<SkillData>();
     public List<SkillData> UnlockSkills
     {
@@ -307,22 +312,25 @@ public class Player : MonoBehaviour
 
     void Dash()
     {
-        attackDelay += Time.deltaTime;
-        isAttackReady = stat.atk_speed < attackDelay;
-
-        if (shiftDown && isAttackReady && !isAttack && !isDash)
+        if (unlockSkills.Count > 0)
         {
-            
-            if (CommandCoroutine != null)
-                StopCoroutine(CommandCoroutine);
-            skillCammand += 'S';
-            CommandCoroutine = StartCoroutine(ClearCommand());
-            UseSkill();
-            if (!isAttack)
+            attackDelay += Time.deltaTime;
+            isAttackReady = stat.atk_speed < attackDelay;
+
+            if (shiftDown && isAttackReady && !isAttack && !isDash)
             {
-                sword.Use(stat.Dash_speed, Damage());
-                anim.SetTrigger("Dash");
-                attackDelay = 0;
+
+                if (CommandCoroutine != null)
+                    StopCoroutine(CommandCoroutine);
+                skillCammand += 'S';
+                CommandCoroutine = StartCoroutine(ClearCommand());
+                UseSkill();
+                if (!isAttack)
+                {
+                    sword.Use(stat.Dash_speed, Damage());
+                    anim.SetTrigger("Dash");
+                    attackDelay = 0;
+                }
             }
         }
     }

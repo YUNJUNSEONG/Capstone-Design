@@ -93,18 +93,19 @@ namespace skill
         {
             DashUI.GetComponent<Image>().enabled = true;
             DashUI.fillAmount = 0;
+            StartCoroutine(DashCoolTime());
         }
 
         IEnumerator DashCoolTime()
         {
-            //float coolTime = player.DashTime;
-            //while(coolTime > 0.0f)
+            float coolTime = 2.5f;
+            while(coolTime > 0.0f)
             {
-                // coolTime -= Time.deltaTime;
-                // DashUI.fillAmount = 1.0f - (coolTime / player.DashTime);
+                coolTime -= Time.deltaTime;
+                DashUI.fillAmount = 1.0f - (coolTime / 2.5f);
                 yield return new WaitForFixedUpdate();
             }
-            //DashUI.GetComponent<Image>().enabled = false;
+            DashUI.GetComponent<Image>().enabled = false;
         }
     }
 }
