@@ -69,6 +69,35 @@ public class Player : MonoBehaviour
 
     void Move()
     {
+        // 플레이어 입력을 화면 공간으로 변환
+        Vector3 inputDirection = new Vector3(hAxis, 0, vAxis);
+        inputDirection = Camera.main.transform.TransformDirection(inputDirection);
+        inputDirection.y = 0; // y축 변환은 무시 (플레이어는 바닥을 따라 움직임)
+
+        // 이동 벡터 정규화
+        moveVec = inputDirection.normalized;
+
+        if (!isAttackReady)
+        {
+            moveVec = Vector3.zero;
+        }
+
+        if (!isBorder)
+        {
+            // 플레이어를 이동 방향으로 이동
+            transform.position += moveVec * stat.move_speed * Time.deltaTime;
+        }
+
+        // 이동 여부에 따라 애니메이션 설정
+        anim.SetBool("isRun", moveVec != Vector3.zero);
+
+        // 플레이어가 이동하는 방향을 바라보도록 함
+        if (moveVec != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(moveVec);
+        }
+        
+        /*
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
         if (!isAttackReady)
