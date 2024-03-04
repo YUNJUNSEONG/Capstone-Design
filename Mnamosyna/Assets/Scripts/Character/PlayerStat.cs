@@ -6,14 +6,15 @@ using UnityEngine;
 public class PlayerStat : MonoBehaviour
 {
     public static PlayerStat instance;
+    public SkillData skill;
 
     [Header("체력 관련")]
     [SerializeField]
     protected int Max_HP = 150; // 최대 체력
     [SerializeField]
-    protected int Cur_HP = 150; // 현재 체력
+    public int Cur_HP = 150; // 현재 체력
     [SerializeField]
-    protected int HP_Recover = 0; // 1초 당 n 회복
+    protected float HP_Recover = 0; // 1초 당 n 회복
 
     [Header("스태미나 관련")]
     // 스테미나 관련 속성
@@ -55,7 +56,7 @@ public class PlayerStat : MonoBehaviour
 
     public int max_hp { get { return Max_HP; } set { Max_HP = value; } }
     public int cur_hp { get { return Cur_HP; } set { Cur_HP = value; } }
-    public int hp_recover { get { return HP_Recover; } set { HP_Recover = value; } }
+    public float hp_recover { get { return HP_Recover; } set { HP_Recover = value; } }
 
     public int max_stamina { get { return Max_Stamina; } set { Max_Stamina= value; } }
     public int cur_stamina { get { return Cur_Stamina; } set { Cur_Stamina = value; } }
@@ -73,17 +74,56 @@ public class PlayerStat : MonoBehaviour
     public float left_atk_speed{ get { return Left_ATK_Speed; } set { Left_ATK_Speed = value; } }
     public float right_atk_speed { get { return Right_ATK_Speed; } set { Right_ATK_Speed = value; } }
 
-    public void ApplySkill(SkillData Skill)
+    public void ApplySkill()
     {
-        // 패시브 스킬의 영향을 플레이어 스탯에 적용
-        // 예: passiveSkill에서 가져온 정보로 플레이어 스탯 조정
-        // 예: Max_HP += passiveSkill.MaxHPBonus;
-        // 예: ATK_Speed *= passiveSkill.AttackSpeedMultiplier;
+        max_hp += skill.MaxHPBonus;
+        max_hp -= skill.DimeritMaxHP;
+        max_hp += skill.LinkMaxHPBonus;
+
+        hp_recover += skill.HealthRecoverBonus;
+        hp_recover -= skill.DimeritHealthRecover;
+        hp_recover = skill.LinkHealthRecoverBonus;
+
+        stamina_recover += skill.StaminaRecoverBonus;
+        stamina_recover -= skill.DimeritStaminaRecover;
+        stamina_recover += skill.LinkStaminaRecoverBonus;
+
+        min_atk += skill.ATKBonus;
+        min_atk -= skill.DimeritATK;
+        min_atk += skill.LinkATKBonus;
+
+        max_atk += skill.ATKBonus;
+        max_atk -= skill.DimeritATK;
+        max_atk += skill.LinkATKBonus;
+
+        crit_chance += skill.CritChanceBonus;
+        crit_chance -= skill.DimeritCritChance;
+        crit_chance += skill.LinkCritChanceBonus;
+
+        critical += skill.CriticalBonus;
+        critical -= skill.DimeritCritical;
+        critical += skill.LinkCriticalBonus;
+
+        defense += skill.DefenseBonus;
+        defense -= skill.DimeritDefense;
+        defense += skill.LinkDefenseBonus;
+
+        atk_speed += skill.AttackSpeedMultiplier;
+        atk_speed -= skill.DimeritAttackSpeedMultiplier;
+        atk_speed += skill.LinkAttackSpeedMultiplier;
+
+        move_speed += skill.MoveSpeedMultiplier;
+        move_speed -= skill.DimeritMoveSpeedMultiplier;
+        move_speed += skill.LinkMoveSpeedMultiplier;
     }
 
     public void Awake()
     {
         instance = this;
+    }
+    public void Update()
+    {
+        ApplySkill();
     }
 
 }

@@ -522,12 +522,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7756522715712408775, guid: d8179ed2e96671d47a2f90184aba3dd3, type: 3}
+    - {fileID: 7144928155689336155, guid: d8179ed2e96671d47a2f90184aba3dd3, type: 3}
+    - {fileID: 7422553140205381179, guid: d8179ed2e96671d47a2f90184aba3dd3, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6544991204686259203, guid: d8179ed2e96671d47a2f90184aba3dd3, type: 3}
     - {fileID: 6111317510201733246, guid: d8179ed2e96671d47a2f90184aba3dd3, type: 3}
     - {fileID: 771107712687092583, guid: d8179ed2e96671d47a2f90184aba3dd3, type: 3}
     - {fileID: 7797828966509550195, guid: d8179ed2e96671d47a2f90184aba3dd3, type: 3}
     - {fileID: 6240787813955066133, guid: d8179ed2e96671d47a2f90184aba3dd3, type: 3}
+    - {fileID: 4976454318549538663, guid: d8179ed2e96671d47a2f90184aba3dd3, type: 3}
+    - {fileID: 2915356754837263863, guid: d8179ed2e96671d47a2f90184aba3dd3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8179ed2e96671d47a2f90184aba3dd3, type: 3}
@@ -547,6 +551,10 @@ PrefabInstance:
     - target: {fileID: 7858325352358339955, guid: 9a4f528c735ef2344b3af2205cb00aa9, type: 3}
       propertyPath: m_Name
       value: Medieval_Masonary_StepsPlatform_Cropped
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858325352358339964, guid: 9a4f528c735ef2344b3af2205cb00aa9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8811224615527386913, guid: 9a4f528c735ef2344b3af2205cb00aa9, type: 3}
       propertyPath: m_LocalScale.x

@@ -312,8 +312,8 @@ public class Player : MonoBehaviour
 
     void Dash()
     {
-        if (unlockSkills.Count > 0)
-        {
+        //if (unlockSkills.Count > 0)
+        //{
             attackDelay += Time.deltaTime;
             isAttackReady = stat.atk_speed < attackDelay;
 
@@ -332,7 +332,7 @@ public class Player : MonoBehaviour
                     attackDelay = 0;
                 }
             }
-        }
+        //}
     }
 
     private void UseSkill()
@@ -366,7 +366,6 @@ public class Player : MonoBehaviour
         // 플레이어와 상호작용할 수 있는 모든 Collider를 가져옴
         Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
 
-        // 가져온 Collider들 중 Potal 스크립트가 있는지 확인하고 있으면 텔레포트
         foreach (var collider in colliders)
         {
             Portal portal = collider.GetComponent<Portal>();
@@ -375,14 +374,11 @@ public class Player : MonoBehaviour
                 portal.TeleportPlayer(transform);
                 break; // 여러 포탈이 있을 경우 첫 번째 포탈만 사용
             }
-        }
 
-        foreach (var collider in colliders)
-        {
             HealSpace healSpace = collider.GetComponent<HealSpace>();
             if (healSpace != null)
             {
-                healSpace.HealPlayer();
+                healSpace.HealPlayer(gameObject); // 플레이어 게임 오브젝트를 전달
                 break;
             }
         }

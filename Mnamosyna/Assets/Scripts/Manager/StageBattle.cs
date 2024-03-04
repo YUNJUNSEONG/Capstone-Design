@@ -83,10 +83,10 @@ public class StageBattle : MonoBehaviour
                 battleActive = false;
 
                 // Æ÷Å» È°¼ºÈ­
-                foreach (var magic in portal)
+                foreach (var Portal in portal)
                 {
-                    Debug.Log("portal barrier disapear");
-                    magic.SetActive(true);
+                    Debug.Log("portal appear");
+                    Portal.SetActive(true);
                 }
 
             }

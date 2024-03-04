@@ -72,7 +72,7 @@ public class SkillData : ScriptableObject
 
     [Header("Attack Related")]
     [ShowWhen("element", Element.Fire)]
-    public float ATKBonus;
+    public int ATKBonus;
     [ShowWhen("element", Element.Fire)]
     public float CritChanceBonus;
     [ShowWhen("element", Element.Fire)]
@@ -89,6 +89,37 @@ public class SkillData : ScriptableObject
     public float MoveSpeedMultiplier;
 
 
+    [Header("# Dimerit Passive Skill Data")]
+
+    [Header("Health Related")]
+    [ShowWhen("element", Element.Air)]
+    public int DimeritMaxHP;
+    [ShowWhen("element", Element.Fire)]
+    public float DimeritHealthRecover;
+
+    [Header("Stamina Related")]
+    [ShowWhen("element", Element.Fire)]
+    public float DimeritStaminaRecover;
+
+    [Header("Attack Related")]
+    [ShowWhen("element", Element.Water)]
+    public int DimeritATK;
+    [ShowWhen("element", Element.Water)]
+    public float DimeritCritChance;
+    [ShowWhen("element", Element.Water)]
+    public float DimeritCritical;
+
+    [Header("Defense")]
+    [ShowWhen("element", Element.Air)]
+    public float DimeritDefense;
+
+    [Header("Speed Related")]
+    [ShowWhen("element", Element.Earth)]
+    public float DimeritAttackSpeedMultiplier;
+    [ShowWhen("element", Element.Earth)]
+    public float DimeritMoveSpeedMultiplier;
+
+
     [Header("# Link Skill Data")]
 
     [Header("Health Related")]
@@ -103,7 +134,7 @@ public class SkillData : ScriptableObject
 
     [Header("Attack Related")]
     [ShowWhen("skillType", SkillType.Link, "linkElement", Element.Fire)]
-    public float LinkATKBonus;
+    public int LinkATKBonus;
     [ShowWhen("skillType", SkillType.Link, "linkElement", Element.Fire)]
     public float LinkCritChanceBonus;
     [ShowWhen("skillType", SkillType.Link, "linkElement", Element.Fire)]

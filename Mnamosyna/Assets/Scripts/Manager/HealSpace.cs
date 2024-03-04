@@ -10,17 +10,19 @@ public class HealSpace : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            HealPlayer();
+            HealPlayer(other.gameObject);
         }
     }
 
-    public void HealPlayer()
+    public void HealPlayer(GameObject playerObject)
     {
-        PlayerStat player = GetComponent<PlayerStat>();
+        PlayerStat player = playerObject.GetComponent<PlayerStat>();
 
         if (player != null)
         {
+            Debug.Log("Player Heal!");
             player.cur_hp += healPlayer;
+
             Destroy(gameObject);
         }
     }
