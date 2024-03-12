@@ -10,27 +10,36 @@ namespace skill
     {
         SkillManager manager = new SkillManager();
         SkillSysUI ui = new SkillSysUI();
-        public void Unlock()
+        public void unlockPlayer(GameObject playerObject)
         {
             Time.timeScale = 0;
+
+            // UI 업데이트를 수행합니다.
+            ui.SetUnlockUI();
+
+
             manager.playerCon.SkillCammand = "";
             int choice = 0;
 
             while (choice < 3)
             {
-                int rand = UnityEngine.Random.Range(0, manager.playerCon.UnlockSkills.Count);
-                if (manager.LockedSkills.Contains(rand))
+                int rand = UnityEngine.Random.Range(0, manager.LockedSkills.Count);
+                int selectedSkillId = manager.LockedSkills[rand];
+
+                if (manager.LevelUpSkills.Contains(selectedSkillId))
                 {
-                    continue;
+                    continue; // 이미 보유한 스킬이면 건너뜁니다.
                 }
                 else
                 {
-                    manager.LockedSkills.Add(rand);
+                    manager.LevelUpSkills.Add(selectedSkillId); // 보유한 스킬 리스트에 추가합니다.
                     choice++;
                 }
             }
 
-            ui.SetUnlockUI();
+            // 시간 스케일을 원래 값으로 다시 설정합니다.
+            Time.timeScale = 1;
         }
+
     }
 }

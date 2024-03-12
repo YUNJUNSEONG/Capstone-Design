@@ -74,7 +74,7 @@ public class PlayerStat : MonoBehaviour
     public float left_atk_speed{ get { return Left_ATK_Speed; } set { Left_ATK_Speed = value; } }
     public float right_atk_speed { get { return Right_ATK_Speed; } set { Right_ATK_Speed = value; } }
 
-    public void ApplySkill()
+    /*public void ApplySkill()
     {
         max_hp += skill.MaxHPBonus;
         max_hp -= skill.DimeritMaxHP;
@@ -115,7 +115,7 @@ public class PlayerStat : MonoBehaviour
         move_speed += skill.MoveSpeedMultiplier;
         move_speed -= skill.DimeritMoveSpeedMultiplier;
         move_speed += skill.LinkMoveSpeedMultiplier;
-    }
+    } */
 
     public void Awake()
     {
@@ -123,7 +123,7 @@ public class PlayerStat : MonoBehaviour
     }
     public void Update()
     {
-        ApplySkill();
+        //ApplySkill();
     }
 
 }

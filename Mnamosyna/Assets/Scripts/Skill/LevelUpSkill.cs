@@ -9,7 +9,7 @@ namespace skill
     {
         SkillManager manager = new SkillManager();
         SkillSysUI ui = new SkillSysUI();
-        public void LevelUp()
+        public void levelUpPlayer(GameObject playerObject)
         {
             Time.timeScale = 0;
             manager.playerCon.SkillCammand = "";

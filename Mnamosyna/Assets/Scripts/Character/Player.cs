@@ -1,4 +1,5 @@
 using NUnit.Framework.Interfaces;
+using skill;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
@@ -42,7 +43,7 @@ public class Player : MonoBehaviour
     public SkillData[] skillSlots;
 
     // 전체 스킬
-    private List<SkillData> skills = new List<SkillData>();
+    private List<SkillData> allSkills = new List<SkillData>();
     // 플레이어가 보유한 스킬 ID를 저장하는 리스트
     private List<int> unlockSkillIds = new List<int>();
     // 플레이어가 보유한 스킬 데이터를 저장하는 리스트
@@ -347,13 +348,13 @@ public class Player : MonoBehaviour
                     if (CommandCoroutine != null)
                         StopCoroutine(CommandCoroutine);
                     isAttack = true;
-                    float floatSkillDamage = skills[i].damagePercent * Damage();
+                    float floatSkillDamage = allSkills[i].damagePercent * Damage();
                     int intSkillDamage = Mathf.RoundToInt(floatSkillDamage);
-                    float floatLevelDamage = skills[i].Level * skills[i].addDmg;
+                    float floatLevelDamage = allSkills[i].Level * allSkills[i].addDmg;
                     int intLevelDamage = Mathf.RoundToInt(floatLevelDamage);
                     int skilldamage = intSkillDamage + intLevelDamage;
-                    sword.Use(skills[i].AnimationTime, skilldamage);
-                    StartCoroutine(AttackEnd(skills[i].AnimationTime, skills[i].AnimationTrigger));
+                    sword.Use(allSkills[i].AnimationTime, skilldamage);
+                    StartCoroutine(AttackEnd(allSkills[i].AnimationTime, allSkills[i].AnimationTrigger));
                     skillCammand = " ";
                     break;
                 }
@@ -379,6 +380,20 @@ public class Player : MonoBehaviour
             if (healSpace != null)
             {
                 healSpace.HealPlayer(gameObject); // 플레이어 게임 오브젝트를 전달
+                break;
+            }
+
+            LevelUpSkill levelUpSkill = collider.GetComponent<LevelUpSkill>();
+            if (levelUpSkill != null)
+            {
+                levelUpSkill.levelUpPlayer(gameObject);
+                break;
+            }
+
+            UnlockSkill unlockSkill = collider.GetComponent<UnlockSkill>();
+            if(unlockSkill != null)
+            {
+                unlockSkill.unlockPlayer(gameObject);
                 break;
             }
         }
