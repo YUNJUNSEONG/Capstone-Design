@@ -1,10 +1,12 @@
 using Eliot.AgentComponents;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
 namespace skill
 {
     public class SkillManager : MonoBehaviour
@@ -13,14 +15,11 @@ namespace skill
         public GameObject player;
         public Player playerCon;
 
-        public GameObject[] choices = new GameObject[3]; //최대 선택 가능 수 3
-        public List<int> LevelUpSkills; //레벨 업 가능한 스킬 리스트(보유한 스킬 리스트) = unlockedSkill
-        public List<int> LockedSkills; //잠겨있는(잠금해제 가능한)스킬 리스트
+        public List<SkillData> LevelUpSkills; //레벨 업 가능한 스킬 리스트(보유한 스킬 리스트) = unlockedSkill
+        public List<SkillData> LockedSkills; //잠겨있는(잠금해제 가능한)스킬 리스트
         public List<SkillData> allSkills; //모든 스킬을 담아두는 리스트
 
-        public GameObject LevelBase;
         public Text CommandText;
-        public Image[] UnlockSkill = new Image[9];
         public List<SkillData> skillUI;
         public Image DashUI;
 
@@ -36,27 +35,17 @@ namespace skill
         {
             playerCon = player.GetComponent<Player>();
 
-            LevelUpSkills = new List<int>();
+            LevelUpSkills = new List<SkillData>();
 
-            LockedSkills = new List<int>();
+            LockedSkills = new List<SkillData>();
             SkillData[] allSkills = Resources.LoadAll<SkillData>("Skills"); // Skills 폴더에 있는 모든 ScriptableObject 로드
             foreach (SkillData skill in allSkills)
             {
-                LockedSkills.Add(skill.Id);
+                LockedSkills.Add(skill);
             }
 
             // 처음 스킬 중에서 3가지를 무작위로 선택
             List<SkillData> initialSkills = GetRandomInitialSkills(3);
-
-            // 선택한 스킬 출력 및 LevelUpSkill 리스트에 추가
-            foreach (SkillData skill in initialSkills)
-            {
-                Debug.Log("Selected Skill: " + skill.Name);
-                LevelUpSkills.Add(skill.Id);
-
-                // 자식 스킬 확인
-                CheckChildSkills(skill);
-            }
         }
 
         private void Update()
@@ -69,93 +58,58 @@ namespace skill
         List<SkillData> GetRandomInitialSkills(int count)
         {
             List<SkillData> selectedSkills = new List<SkillData>();
-            List<SkillData> initialSkills = new List<SkillData>();
 
-            // 가장 처음 스킬 필터링
-            foreach (int skillId in LockedSkills)
+            // 대쉬 스킬 4개를 처음 스킬로 설정
+            List<SkillData> initialSkills = new List<SkillData>();
+            foreach (SkillData skill in allSkills)
             {
-                SkillData skill = allSkills.Find(x => x.Id == skillId);
-                if (skill != null && (skill.Id == 0 || skill.Id == 15 || skill.Id == 30 || skill.Id == 45))
+                if (skill.Id == 0 || skill.Id == 15 || skill.Id == 30 || skill.Id == 45)
                 {
                     initialSkills.Add(skill);
                 }
             }
+            HashSet<int> selectedSkillIds = new HashSet<int>(); // 이미 선택된 스킬 ID를 기록하는 HashSet
 
+            // count 개의 스킬 선택
             while (selectedSkills.Count < count && initialSkills.Count > 0)
             {
                 int randIndex = Random.Range(0, initialSkills.Count);
                 SkillData randSkill = initialSkills[randIndex];
-                initialSkills.RemoveAt(randIndex);
 
-                // 이미 선택한 커맨드의 스킬은 제외
-                if (!LockedSkills.Contains(randSkill.Id))
+                // 이미 선택된 스킬인지 확인
+                if (!selectedSkillIds.Contains(randSkill.Id))
                 {
                     selectedSkills.Add(randSkill);
-                    // 선택한 스킬의 커맨드를 LockedSkill에 추가
-                    LockedSkills.Add(randSkill.Id);
+                    selectedSkillIds.Add(randSkill.Id); // 선택한 스킬의 ID를 기록
                 }
+                initialSkills.RemoveAt(randIndex); // 선택한 스킬은 초기 스킬 목록에서 제거
             }
 
             return selectedSkills;
         }
 
-        // 선택한 스킬의 자식 스킬 확인 및 출력
-        void CheckChildSkills(SkillData skill)
+        List<SkillData> GetRandomChildSkills(int count)
         {
-            foreach (SkillData childSkill in skill.childSkill)
+            List<SkillData> selectedSkills = new List<SkillData>();
+
+            //보유한 스킬의 자식 스킬확인
+
+            // count 개의 스킬 선택
+            while (selectedSkills.Count < count && initialSkills.Count > 0)
             {
-                if (!LockedSkills.Contains(childSkill.Id))
+                int randIndex = Random.Range(0, initialSkills.Count);
+                SkillData randSkill = initialSkills[randIndex];
+                  
+                // 이미 선택된 스킬인지 확인
+                if (!selectedSkillIds.Contains(randSkill.Id))
                 {
-                    Debug.Log("Child Skill: " + childSkill.Name);
+                    selectedSkills.Add(randSkill);
+                    selectedSkillIds.Add(randSkill.Id); // 선택한 스킬의 ID를 기록
                 }
-            }
-        }
-
-
-        public void choiceLevelUpSkill(int num)
-        {
-            if (playerCon.UnlockSkills[LevelUpSkills[num]].Level < playerCon.UnlockSkills[LevelUpSkills[num]].maxLevel)
-                playerCon.UnlockSkills[LevelUpSkills[num]].Level++;
-
-            for (int i = 0; i < playerCon.UnlockSkills[LevelUpSkills[num]].childSkill.Length; i++)
-            {
-                if (!playerCon.UnlockSkills.Contains(playerCon.UnlockSkills[LevelUpSkills[num]].childSkill[i]))
-                {
-                    playerCon.UnlockSkills.Add(playerCon.UnlockSkills[LevelUpSkills[num]].childSkill[i]);
-                }
-
+                initialSkills.RemoveAt(randIndex); // 선택한 스킬은 초기 스킬 목록에서 제거
             }
 
-            if (!skillUI.Contains(playerCon.UnlockSkills[LevelUpSkills[num]]))
-                skillUI.Add(playerCon.UnlockSkills[LevelUpSkills[num]]);
-
-            LevelBase.SetActive(false);
-            Player.isAttack = false;
-            skillUI.Sort(compareUISkills);
-            //playerCon.UnlockSkills.Sort(comparePlayerSkills);
-
-            for (int i = 0; i < skillUI.Count; i++)
-            {
-                UnlockSkill[i].GetComponent<Image>().enabled = true;
-                UnlockSkill[i].sprite = skillUI[i].Image;
-            }
-
-            Time.timeScale = 1;
-        }  
-
-        int compareUISkills(SkillData a, SkillData b)
-        {
-            return a.Id < b.Id ? -1 : 1;
-        }
-
-        int comparePlayerSkills(SkillData a, SkillData b)
-        {
-            if ((a.isUnlock && b.isUnlock) || (!a.isUnlock && !b.isUnlock))
-                return a.Id < b.Id ? -1 : 1;
-            else if (a.isUnlock)
-                return -1;
-            else
-                return 1;
+            return selectedSkills;
         }
 
         public void Dash()
@@ -178,4 +132,4 @@ namespace skill
         }
     }
 }
-
+*/

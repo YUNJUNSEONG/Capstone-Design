@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 public enum CharacterState
 {
     Idle,
@@ -44,7 +46,7 @@ public class Monster : MonoBehaviour
         instance = this;
         player = GameObject.FindWithTag("Player").transform;
 
-        Invoke("ChaseStart",1.5f);
+        Invoke("ChaseStart", 1.0f);
     }
 
     void Update()
@@ -54,7 +56,7 @@ public class Monster : MonoBehaviour
             nav.SetDestination(player.position);
             nav.isStopped = !isChase;
         }
-        
+
     }
 
 
@@ -78,9 +80,9 @@ public class Monster : MonoBehaviour
     //몬스터 피격 확인 및 데미지 부여
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Sword")
+        if (other.tag == "Sword")
         {
-            if(!isDamage)
+            if (!isDamage)
             {
                 if (Player.instance != null)
                 {
@@ -120,14 +122,13 @@ public class Monster : MonoBehaviour
         float targetRadius = 1.5f;
         float targetRange = 3f;
 
-        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange,LayerMask.GetMask("Player"));
-        
-        if(rayHits.Length > 0 && state != CharacterState.Attack && state != CharacterState.UsingSkill)
+        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
+
+        if (rayHits.Length > 0 && state != CharacterState.Attack && state != CharacterState.UsingSkill)
         {
             StartCoroutine(Attack());
             //몬스터가 플레이어를 마주친 이후 부터 스킬 쿨타임 활성화
             StartCoroutine(SkillCool());
-
             StartCoroutine(Skill());
         }
     }
@@ -201,7 +202,7 @@ public class Monster : MonoBehaviour
         int damage = mobStat.attack;
         int skillDamage = mobStat.skill_attack;
 
-        if(state == CharacterState.UsingSkill)
+        if (state == CharacterState.UsingSkill)
         {
             return skillDamage;
         }
@@ -282,4 +283,5 @@ public class Monster : MonoBehaviour
         rigid.isKinematic = true; // 물리 작용 해제
     }
     #endregion
+
 }

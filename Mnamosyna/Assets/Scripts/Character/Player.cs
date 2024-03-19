@@ -1,5 +1,5 @@
 using NUnit.Framework.Interfaces;
-using skill;
+//using skill;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
@@ -242,7 +242,7 @@ public class Player : MonoBehaviour
     // 피격
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "monsterAttack")
+        if(other.CompareTag("monsterAttack"))
         {
             if (!isDamage)
             {
@@ -382,7 +382,7 @@ public class Player : MonoBehaviour
                 healSpace.HealPlayer(gameObject); // 플레이어 게임 오브젝트를 전달
                 break;
             }
-
+            /*
             LevelUpSkill levelUpSkill = collider.GetComponent<LevelUpSkill>();
             if (levelUpSkill != null)
             {
@@ -396,6 +396,7 @@ public class Player : MonoBehaviour
                 unlockSkill.unlockPlayer(gameObject);
                 break;
             }
+            */
         }
     }
 
