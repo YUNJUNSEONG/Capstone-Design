@@ -3848,15 +3848,66 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b9e0dcab4517eda45849a353809cbb69, type: 2}
+    - target: {fileID: -6502647036632516265, guid: b4c55a102d509e24d977d2cf66013364, type: 3}
+      propertyPath: m_Name
+      value: Unlock-Base
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b4c55a102d509e24d977d2cf66013364, type: 3}
       propertyPath: m_Name
       value: Unlock-Base
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 390661457030483162, guid: b4c55a102d509e24d977d2cf66013364, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -6502647036632516265, guid: b4c55a102d509e24d977d2cf66013364, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4757700593360938618}
+    - targetCorrespondingSourceObject: {fileID: -6502647036632516265, guid: b4c55a102d509e24d977d2cf66013364, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6233892430983387695}
   m_SourcePrefab: {fileID: 100100000, guid: b4c55a102d509e24d977d2cf66013364, type: 3}
+--- !u!1 &5867861805723483838 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6502647036632516265, guid: b4c55a102d509e24d977d2cf66013364, type: 3}
+  m_PrefabInstance: {fileID: 8407976138260826089}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &4757700593360938618
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5867861805723483838}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6336624427631804120, guid: b4c55a102d509e24d977d2cf66013364, type: 3}
+--- !u!114 &6233892430983387695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5867861805723483838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c25d924083b39443858cca0b669be41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterPrefabs: []
 --- !u!4 &8297205827731857410 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b4c55a102d509e24d977d2cf66013364, type: 3}
