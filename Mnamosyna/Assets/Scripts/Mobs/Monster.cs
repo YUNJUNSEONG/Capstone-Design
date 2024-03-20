@@ -3,26 +3,31 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.XR.Haptics;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
-public enum CharacterState
-{
-    Idle,
-    Chasing,
-    Attack,
-    UsingSkill,
-    SkillCool
-}
+
 public class Monster : MonoBehaviour
 {
+
+    public enum State
+    {
+        Idle,
+        Chase,
+        Attack,
+        Skill,
+        die
+    }
+
     public MobStat mobStat;
     public Transform player;
-    public static Monster instance;
 
-    private CharacterState state = CharacterState.Idle;
+    public State state;
+    //public virtual float attackDist = 2.0f;
 
     private const float WAIT_TIME = 0.1f;
     bool isChase;
     bool isDamage;
+    public bool isDead = false;
 
     public Transform target;
     public BoxCollider attackArea;
@@ -43,7 +48,6 @@ public class Monster : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         mobStat = GetComponent<MobStat>();
-        instance = this;
         player = GameObject.FindWithTag("Player").transform;
 
         Invoke("ChaseStart", 1.0f);
@@ -106,6 +110,7 @@ public class Monster : MonoBehaviour
         FreezeVelocity();
         Targeting();
     }
+
     void FreezeVelocity()
     {
         if (isChase)
@@ -124,7 +129,7 @@ public class Monster : MonoBehaviour
 
         RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
 
-        if (rayHits.Length > 0 && state != CharacterState.Attack && state != CharacterState.UsingSkill)
+        if (rayHits.Length > 0 && state != State.Attack && state != State.Skill)
         {
             StartCoroutine(Attack());
             //몬스터가 플레이어를 마주친 이후 부터 스킬 쿨타임 활성화
@@ -135,10 +140,10 @@ public class Monster : MonoBehaviour
 
     IEnumerator Attack()
     {
-        if (state == CharacterState.UsingSkill)
+        if (state == State.Skill)
             yield break;
 
-        state = CharacterState.Attack;
+        state = State.Attack;
         PlayAnimation("isAttack");
         yield return new WaitForSeconds(WAIT_TIME);
         EnableCollider(attackArea);
@@ -147,17 +152,17 @@ public class Monster : MonoBehaviour
         DisableCollider(attackArea);
         PlayAnimation("isAttack", false);
 
-        state = CharacterState.Chasing;
+        state = State.Chase;
         yield return new WaitForSeconds(mobStat.atk_speed);
     }
 
     // 스킬 사용 코루틴
     IEnumerator Skill()
     {
-        if (state == CharacterState.SkillCool)
+        if (state == State.Skill)
             yield break;
 
-        state = CharacterState.UsingSkill;
+        state = State.Skill;
         PlayAnimation("isSkill");
         yield return new WaitForSeconds(WAIT_TIME);
         EnableCollider(skillArea);
@@ -168,15 +173,15 @@ public class Monster : MonoBehaviour
 
         yield return new WaitForSeconds(mobStat.atk_speed);
 
-        state = CharacterState.Chasing;
+        state = State.Chase;
     }
 
     // 스킬 쿨타임 코루틴
     IEnumerator SkillCool()
     {
-        state = CharacterState.SkillCool;
+        state = State.Skill;
         yield return new WaitForSeconds(mobStat.skill_colltime);
-        state = CharacterState.Chasing;
+        state = State.Skill;
     }
 
     // 애니메이션 재생 함수
@@ -200,16 +205,14 @@ public class Monster : MonoBehaviour
     public int Damage()
     {
         int damage = mobStat.attack;
-        int skillDamage = mobStat.skill_attack;
 
-        if (state == CharacterState.UsingSkill)
-        {
-            return skillDamage;
-        }
-        else
-        {
-            return damage;
-        }
+        return damage;
+    }
+
+    public int SkillDamage()
+    {
+        int skilldamage = mobStat.skill_attack; 
+        return skilldamage;
     }
     #endregion
 

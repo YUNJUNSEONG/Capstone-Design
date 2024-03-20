@@ -246,18 +246,21 @@ public class Player : MonoBehaviour
         {
             if (!isDamage)
             {
-                if(Monster.instance != null)
+                Monster monster = other.GetComponent<Monster>();// 몬스터 GameObject에 "Monster" 태그를 지정한 경우
                 {
-                    int damage = Monster.instance.Damage();
+                    if (monster != null)
+                    {
+                        int damage = monster.Damage(); // 몬스터의 Damage() 메서드 호cnf
+                        
+                        // 피해 처리
+                        int finalDamage = Mathf.RoundToInt(damage * (1 - stat.defense)); // 피해 감소 적용
+                        stat.cur_hp = Mathf.Max(0, stat.cur_hp - finalDamage);
 
-                    // 피해 처리
-                    int finalDamage = Mathf.RoundToInt(damage * (1 - stat.defense)); // 피해 감소 적용
-                    stat.cur_hp = Mathf.Max(0, stat.cur_hp - finalDamage);
-
-                    StartCoroutine(TakeDamage());
-                    Debug.Log("플레이어가 받은 피해 :" + finalDamage);
-
+                        StartCoroutine(TakeDamage());
+                        Debug.Log("플레이어가 받은 피해 :" + finalDamage);
+                    }
                 }
+
             }
         }
     }
