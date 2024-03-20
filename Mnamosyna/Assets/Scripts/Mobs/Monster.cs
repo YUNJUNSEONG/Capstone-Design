@@ -4,23 +4,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
-public enum CharacterState
-{
-    Idle,
-    Chasing,
-    Attack,
-    UsingSkill,
-    SkillCool
-}
+
 public class Monster : MonoBehaviour
 {
     public MobStat mobStat;
     public Transform player;
-    public static Monster instance;
 
-    private CharacterState state = CharacterState.Idle;
-
-    private const float WAIT_TIME = 0.1f;
+    protected const float WAIT_TIME = 0.1f;
     bool isChase;
     bool isDamage;
 
@@ -28,11 +18,11 @@ public class Monster : MonoBehaviour
     public BoxCollider attackArea;
     public BoxCollider skillArea;
 
-    Rigidbody rigid;
-    BoxCollider boxCollider;
-    Material mat;
-    NavMeshAgent nav;
-    Animator anim;
+    public Rigidbody rigid;
+    public BoxCollider boxCollider;
+    public Material mat;
+    public NavMeshAgent nav;
+    public Animator anim;
 
 
     void Awake()
@@ -43,7 +33,6 @@ public class Monster : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         mobStat = GetComponent<MobStat>();
-        instance = this;
         player = GameObject.FindWithTag("Player").transform;
 
         Invoke("ChaseStart", 1.0f);
@@ -101,117 +90,17 @@ public class Monster : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
-        FreezeVelocity();
-        Targeting();
-    }
-    void FreezeVelocity()
-    {
-        if (isChase)
-        {
-            rigid.velocity = Vector3.zero;
-            rigid.angularVelocity = Vector3.zero;
-        }
-    }
-
-    #region HitPlayer
-    // 몬스터의 플레이어 타게팅
-    void Targeting()
-    {
-        float targetRadius = 1.5f;
-        float targetRange = 3f;
-
-        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
-
-        if (rayHits.Length > 0 && state != CharacterState.Attack && state != CharacterState.UsingSkill)
-        {
-            StartCoroutine(Attack());
-            //몬스터가 플레이어를 마주친 이후 부터 스킬 쿨타임 활성화
-            StartCoroutine(SkillCool());
-            StartCoroutine(Skill());
-        }
-    }
-
-    IEnumerator Attack()
-    {
-        if (state == CharacterState.UsingSkill)
-            yield break;
-
-        state = CharacterState.Attack;
-        PlayAnimation("isAttack");
-        yield return new WaitForSeconds(WAIT_TIME);
-        EnableCollider(attackArea);
-
-        yield return new WaitForSeconds(mobStat.atk_anim - WAIT_TIME);
-        DisableCollider(attackArea);
-        PlayAnimation("isAttack", false);
-
-        state = CharacterState.Chasing;
-        yield return new WaitForSeconds(mobStat.atk_speed);
-    }
-
-    // 스킬 사용 코루틴
-    IEnumerator Skill()
-    {
-        if (state == CharacterState.SkillCool)
-            yield break;
-
-        state = CharacterState.UsingSkill;
-        PlayAnimation("isSkill");
-        yield return new WaitForSeconds(WAIT_TIME);
-        EnableCollider(skillArea);
-
-        yield return new WaitForSeconds(mobStat.skill_anim - WAIT_TIME);
-        DisableCollider(skillArea);
-        PlayAnimation("isSkill", false);
-
-        yield return new WaitForSeconds(mobStat.atk_speed);
-
-        state = CharacterState.Chasing;
-    }
-
-    // 스킬 쿨타임 코루틴
-    IEnumerator SkillCool()
-    {
-        state = CharacterState.SkillCool;
-        yield return new WaitForSeconds(mobStat.skill_colltime);
-        state = CharacterState.Chasing;
-    }
-
-    // 애니메이션 재생 함수
-    void PlayAnimation(string parameter, bool value = true)
-    {
-        anim.SetBool(parameter, value);
-    }
-
-    // 콜라이더 활성화 함수
-    void EnableCollider(Collider collider)
-    {
-        collider.enabled = true;
-    }
-
-    // 콜라이더 비활성화 함수
-    void DisableCollider(Collider collider)
-    {
-        collider.enabled = false;
-    }
-
     public int Damage()
     {
         int damage = mobStat.attack;
-        int skillDamage = mobStat.skill_attack;
+        return damage;
 
-        if (state == CharacterState.UsingSkill)
-        {
-            return skillDamage;
-        }
-        else
-        {
-            return damage;
-        }
     }
-    #endregion
+    public int SkillDamage()
+    {
+        int skilldamage = mobStat.skill_attack;
+        return skilldamage;
+    }
 
     #region OnDamage
     // 무적 시간 상수 정의
@@ -255,7 +144,7 @@ public class Monster : MonoBehaviour
     // 피해를 처리하는 함수
     void Hit(Vector3 reactVec)
     {
-        SetColor(Color.black); // 원래 색상으로 변경
+        SetColor(Color.white); // 원래 색상으로 변경
         anim.SetBool("getHit", true); // 피격 애니메이션 재생
 
         reactVec = reactVec.normalized;
