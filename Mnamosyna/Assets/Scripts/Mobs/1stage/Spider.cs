@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Spider : Monster
 {
-
     public enum State
     {
         Idle,
@@ -14,36 +13,16 @@ public class Spider : Monster
         GetHit,
         Die
     }
+
     private State state = State.Idle;
 
     public float chaseDis = 14.0f;
-    public float attackDis = 12.0f;
+    public float chargeDis = 10.0f;
+    public float attackDis = 1.0f;
     public bool isAttack;
 
-    // 추가: 코루틴 정지를 위한 변수
-    private Coroutine stateCoroutine;
 
-    private void Start()
-    {
-        // 변경: 코루틴 시작을 메서드로 호출
-        StartStateCoroutines();
-    }
-
-    // 변경: 코루틴을 시작하는 메서드
-    void StartStateCoroutines()
-    {
-        stateCoroutine = StartCoroutine(CheckState());
-        StartCoroutine(CheckStateForAction());
-    }
-
-    // 변경: 코루틴 정지하는 메서드
-    void StopStateCoroutines()
-    {
-        if (stateCoroutine != null)
-            StopCoroutine(stateCoroutine);
-    }
-
-    IEnumerator CheckState()
+    protected override IEnumerator CheckState()
     {
         while (!isDead)
         {
@@ -51,11 +30,11 @@ public class Spider : Monster
 
             float dist = Vector3.Distance(player.position, transform.position);
 
-            if (dist <= attackDis)
+            if (dist <= chargeDis)
             {
                 state = State.Attack;
             }
-            else if (dist <= chaseDis && dist >=attackDis)
+            else if (dist <= chaseDis && dist > attackDis)
             {
                 state = State.Chase;
             }
@@ -70,30 +49,31 @@ public class Spider : Monster
         }
     }
 
-    IEnumerator CheckStateForAction()
+    protected override IEnumerator CheckStateForAction()
     {
         while (!isDead)
         {
             switch (state)
             {
                 case State.Idle:
-                    nav.Stop();
+                    nav.isStopped = true;
                     anim.SetBool("isChase", false);
                     break;
 
                 case State.Chase:
                     nav.destination = player.position;
-                    nav.Resume();
+                    nav.isStopped = false;
                     anim.SetBool("isChase", true);
                     break;
 
                 case State.GetHit:
-                    nav.Stop();
+                    nav.isStopped = true;
                     anim.SetBool("isChase", false);
                     anim.SetTrigger("isGetHit");
                     break;
 
                 case State.Attack:
+                    nav.isStopped = true;
                     Targeting();
                     break;
             }
@@ -154,10 +134,4 @@ public class Spider : Monster
         yield return new WaitForSeconds(4.0f);
     }
 
-
-    // 변경: 게임 오브젝트가 파괴될 때 코루틴 정지
-    void OnDestroy()
-    {
-        StopStateCoroutines();
-    }
 }

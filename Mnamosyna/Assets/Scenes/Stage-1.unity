@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 2976e733d4dc604498220683f80664fc, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1001 &14593138
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8592,6 +8592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c0ba0a34498944a84d1368be403859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skill: {fileID: 0}
   Max_HP: 150
   Cur_HP: 150
   HP_Recover: 0
@@ -8605,6 +8606,9 @@ MonoBehaviour:
   Defense: 0
   ATK_Speed: 2
   Move_Speed: 1
+  Left_ATK_Speed: 0
+  Right_ATK_Speed: 0
+  Dash_speed: 2.5
 --- !u!114 &1563316879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8620,6 +8624,10 @@ MonoBehaviour:
   stat: {fileID: 1563316878}
   followCamera: {fileID: 0}
   isAttackReady: 0
+  invincibilityTime: 1.5
+  maxSkillSlots: 30
+  skillSlots: []
+  skillCammand: 
 --- !u!4 &1563316886 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2346695583065940561, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
@@ -9513,6 +9521,10 @@ PrefabInstance:
       propertyPath: monsterPrefabs.Array.data[4]
       value: 
       objectReference: {fileID: 8260027784172757114, guid: 3b568bf119a4fc64b8e1395dcf370cce, type: 3}
+    - target: {fileID: 8297205827731857410, guid: 4238ce970adcc59489941ed4eac8949a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8363662718145255270, guid: 4238ce970adcc59489941ed4eac8949a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.6

@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mimic : Monster
+public class Plant : Monster
 {
-
     public enum State
     {
         Idle,
@@ -19,7 +18,6 @@ public class Mimic : Monster
     public float chaseDis = 1.0f;
     public float attackDis = 0.5f;
     public bool isAttack;
-
 
     protected override IEnumerator CheckState()
     {
@@ -73,14 +71,7 @@ public class Mimic : Monster
                 case State.Attack:
                     nav.isStopped = true;
                     anim.SetBool("isChase", false);
-                    anim.SetBool("isSkill", false);
                     Targeting();
-                    break;
-
-                case State.Skill:
-                    nav.isStopped = true;
-                    anim.SetBool("isChase", false);
-                    anim.SetBool("isAttack", false);
                     break;
             }
 
@@ -134,6 +125,4 @@ public class Mimic : Monster
         isChase = true;
         anim.SetBool("isAttack", false);
     }
-
-
 }

@@ -818,38 +818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c638d1a20d301c4cad20de8ef82c6b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1563316877}
-  playerCon: {fileID: 1563316879}
-  choices:
-  - {fileID: 758649627}
-  - {fileID: 14328646}
-  - {fileID: 1736155458}
-  LevelUpSkills: 
-  LockedSkills: 
-  allSkills: []
-  LevelBase: {fileID: 1474220347}
-  CommandText: {fileID: 1802728311}
-  UnlockSkill:
-  - {fileID: 409985552}
-  - {fileID: 1121334487}
-  - {fileID: 1617744664}
-  - {fileID: 915958641}
-  - {fileID: 739171774}
-  - {fileID: 776047407}
-  - {fileID: 1329802296}
-  - {fileID: 540497775}
-  - {fileID: 1534801625}
-  skillUI:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  DashUI: {fileID: 0}
+
 --- !u!4 &136093190
 Transform:
   m_ObjectHideFlags: 0
@@ -7817,9 +7786,19 @@ MonoBehaviour:
   portal:
   - {fileID: 84919193}
   mobTypes:
-  - mobPrefab: {fileID: 2796891636347947207, guid: 67bf3f039d65f86419fb3b7363a03b1b, type: 3}
+
+  - mobPrefab: {fileID: 9023675424122254200, guid: 2e75c9cf127f748478d2f7656671fef1, type: 3}
     spawnInterval: 1
-    maxMobToSpawn: 3
+    maxMobToSpawn: 1
+    curMobSpawn: 0
+  - mobPrefab: {fileID: 7009070000134230165, guid: 9b35960187924484395f85fef15c58de, type: 3}
+    spawnInterval: 1
+    maxMobToSpawn: 1
+    curMobSpawn: 0
+  - mobPrefab: {fileID: 3944043161254834540, guid: 932ddb8bc449915419184831efd2b233, type: 3}
+    spawnInterval: 1
+    maxMobToSpawn: 1
+
     curMobSpawn: 0
   battleActive: 0
   minX: -18

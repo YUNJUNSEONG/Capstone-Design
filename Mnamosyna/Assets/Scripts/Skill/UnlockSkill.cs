@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //using skill;
-using Eliot.AgentComponents;
+//using Eliot.AgentComponents;
 
 /*
 namespace skill

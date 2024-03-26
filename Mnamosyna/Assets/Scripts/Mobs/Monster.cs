@@ -7,23 +7,38 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Monster : MonoBehaviour
 {
+
     public MobStat mobStat;
     public Transform player;
 
-    protected const float WAIT_TIME = 0.1f;
-    bool isChase;
-    bool isDamage;
+    protected const float WAIT_TIME = 0.2f;
+
+    protected bool isChase;
+    protected bool isDamage;
+    protected bool isDead = false;
 
     public Transform target;
     public BoxCollider attackArea;
     public BoxCollider skillArea;
 
-    public Rigidbody rigid;
-    public BoxCollider boxCollider;
-    public Material mat;
-    public NavMeshAgent nav;
-    public Animator anim;
 
+    protected Rigidbody rigid;
+    protected BoxCollider boxCollider;
+    protected Material mat;
+    protected NavMeshAgent nav;
+    protected Animator anim;
+
+    public GameObject babySlime;
+
+    // 추가: 코루틴 정지를 위한 변수
+    private Coroutine stateCoroutine;
+
+
+    protected void Start()
+    {
+        // 변경: 코루틴 시작을 메서드로 호출
+        StartStateCoroutines();
+    }
 
     void Awake()
     {
@@ -31,7 +46,7 @@ public class Monster : MonoBehaviour
         boxCollider = GetComponent<BoxCollider>();
         mat = GetComponentInChildren<SkinnedMeshRenderer>().material;
         nav = GetComponent<NavMeshAgent>();
-        anim = GetComponentInChildren<Animator>();
+        anim = GetComponent<Animator>();
         mobStat = GetComponent<MobStat>();
         player = GameObject.FindWithTag("Player").transform;
 
@@ -48,13 +63,44 @@ public class Monster : MonoBehaviour
 
     }
 
+    // 변경: 코루틴을 시작하는 메서드
+    void StartStateCoroutines()
+    {
+        stateCoroutine = StartCoroutine(CheckState());
+        StartCoroutine(CheckStateForAction());
+    }
+
+    // 변경: 코루틴 정지하는 메서드
+    void StopStateCoroutines()
+    {
+        if (stateCoroutine != null)
+            StopCoroutine(stateCoroutine);
+    }
+
+    protected virtual IEnumerator CheckState()
+    {
+        while (!isDead)
+        {
+            yield return new WaitForSeconds(WAIT_TIME);
+
+            float dist = Vector3.Distance(player.position, transform.position);
+        }
+    }
+
+    protected virtual IEnumerator CheckStateForAction()
+    {
+        while (!isDead)
+        {
+            yield return null;
+        }
+    }
 
     //플레이어 추적 시작
     void ChaseStart()
     {
         SetNavSpeed(mobStat.move_speed);
         isChase = true;
-        anim.SetBool("isRun", true);
+        anim.SetBool("isChase", true);
     }
 
     void SetNavSpeed(float speed)
@@ -107,12 +153,6 @@ public class Monster : MonoBehaviour
     private const float INVINCIBILITY_TIME = 1f;
     IEnumerator OnDamage(Vector3 reactVec)
     {
-        if (isDamage)
-            yield break;
-
-        isDamage = true;
-        SetInvincible(true); // 몬스터를 무적 상태로 설정
-
         SetColor(Color.black); // 피격 시 색상을 변경
 
         yield return new WaitForSeconds(WAIT_TIME);
@@ -127,7 +167,7 @@ public class Monster : MonoBehaviour
         }
 
         yield return new WaitForSeconds(INVINCIBILITY_TIME);
-        SetInvincible(false); // 무적 상태 해제
+        SetColor(Color.white); // 원래 색상으로 변경
     }
     // 피격 시 색상 변경 함수
     void SetColor(Color color)
@@ -135,42 +175,38 @@ public class Monster : MonoBehaviour
         mat.color = color;
     }
 
-    // 무적 상태 설정 함수
-    void SetInvincible(bool invincible)
-    {
-        isDamage = invincible;
-    }
+    // 무적 상태 설정
 
     // 피해를 처리하는 함수
     void Hit(Vector3 reactVec)
     {
-        SetColor(Color.white); // 원래 색상으로 변경
-        anim.SetBool("getHit", true); // 피격 애니메이션 재생
-
+        isDamage = true;
         reactVec = reactVec.normalized;
         reactVec += Vector3.up;
         rigid.AddForce(reactVec * 1.5f, ForceMode.Impulse);
-
-        rigid.isKinematic = true; // 물리 작용 해제
     }
 
     // 사망을 처리하는 함수
-    void Death(Vector3 reactVec)
+    public virtual void Death(Vector3 reactVec)
     {
-        SetColor(Color.black);  // 원래 색상으로 변경
+        isDead = true;
+        anim.SetTrigger("isDead");
         gameObject.layer = 11; // 사망한 몬스터의 레이어 변경
         isChase = false; // 추적 중지
         nav.enabled = false; // 네비게이션 비활성화
-        anim.SetTrigger("Die"); // 사망 애니메이션 재생
-
         reactVec = reactVec.normalized;
         reactVec += Vector3.up;
         rigid.AddForce(reactVec * 5, ForceMode.Impulse);
 
         Destroy(gameObject, 2); // 일정 시간 후 게임 오브젝트 삭제
-
-        rigid.isKinematic = true; // 물리 작용 해제
+        OnDestroy();
     }
     #endregion
+
+    // 변경: 게임 오브젝트가 파괴될 때 코루틴 정지
+    protected void OnDestroy()
+    {
+        StopStateCoroutines();
+    }
 
 }
