@@ -6,7 +6,7 @@ public class SkillLearnTestDebug : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("skill1: " + SkillManager.skill1);
+        Debug.Log("몬스터닿");
     }
 
 }

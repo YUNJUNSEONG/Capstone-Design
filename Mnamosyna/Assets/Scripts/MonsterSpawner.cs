@@ -5,12 +5,16 @@ using UnityEngine;
 public class MonsterSpawner : MonoBehaviour
 {
     public GameObject[] monsterPrefabs;//스폰할 몬스터 배열
+    public Magic0[] magicComponents;
     private Collider spawnAreaCollider;
+    
     public int spawnCount=0;
+    public int aliveCount = 0;
     
     void Awake()
     {
         spawnAreaCollider = GetComponent<Collider>();
+        aliveCount = spawnCount;
     }
 
     public void SpawnMonster()
@@ -21,53 +25,60 @@ public class MonsterSpawner : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < spawnCount; i++)
-        {
-            // 겹치지 않는 위치에 몬스터 스폰
-            SpawnMonsterPoint();
-        }
+        for (int i = 0; i < spawnCount; i++) {SpawnMonsterPoint(); }
     }
 
     void SpawnMonsterPoint()
     {
         Vector3 randomPoint = GetRandomPointInCollider(spawnAreaCollider);
-
-        // 랜덤한 몬스터 프리팹 선택
         GameObject selectedMonsterPrefab = monsterPrefabs[Random.Range(0, monsterPrefabs.Length)];
-
-        // 몬스터 프리팹을 해당 위치에 스폰
         GameObject monster = Instantiate(selectedMonsterPrefab, randomPoint, Quaternion.identity);
+
+        // 몬스터 죽음 추적
+        var meleeMonster = monster.GetComponent<MeleeMonster>();
+        if (meleeMonster != null)
+        {
+            meleeMonster.spawner = this;
+        }
+        else
+        {
+            Debug.LogError("스포너가 몬스터 스크립트 못 가져옴");
+        }
+    }
+    
+    public void CheckAliveCount()
+    {
+        if (aliveCount <= 0)
+        {
+            foreach (Magic0 magic in magicComponents)
+            {
+                magic.EnableComponents();
+            }
+        }
     }
     
     Vector3 GetRandomPointInCollider(Collider collider)
     {
-        while (true)
+        int maximumAttempts = 30;
+        for(int attempts = 0; attempts < maximumAttempts; attempts++)
         {
-            // 콜라이더 내의 랜덤한 위치 생성
             Vector3 randomPoint = new Vector3(
                 Random.Range(collider.bounds.min.x, collider.bounds.max.x),
-                Random.Range(collider.bounds.min.y, collider.bounds.max.y),
+                1f,
                 Random.Range(collider.bounds.min.z, collider.bounds.max.z)
             );
-
-            // 아래 방향으로 레이캐스트 발사하여 충돌 체크
+        
             RaycastHit hit;
             if (Physics.Raycast(randomPoint, Vector3.down, out hit))
             {
-                // 레이캐스트가 다른 콜라이더에 충돌하면 유효하지 않은 위치로 판단
-                if (hit.collider != collider)
+                if (hit.collider == collider) 
                 {
-                    continue; // 다시 위치 선택
+                    return randomPoint;
                 }
             }
-
-            // 유효한 위치가 확인되면 해당 위치 반환
-            return randomPoint;
         }
-    }
     
-    void Update()
-    {
-        
+        Debug.LogError("Collider 위의 위치 못찾");
+        return collider.bounds.center;
     }
 }
