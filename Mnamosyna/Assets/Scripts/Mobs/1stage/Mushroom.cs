@@ -17,8 +17,8 @@ public class Mushroom : Monster
 
     private State state = State.Idle;
 
-    public float chaseDis = 15.0f;
-    public float attackDis = 0.5f;
+    public float chaseDis = 30.0f;
+    public float attackDis = 0.1f;
     public bool isAttack;
 
 

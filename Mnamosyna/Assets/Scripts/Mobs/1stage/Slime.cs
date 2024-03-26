@@ -17,12 +17,9 @@ public class Slime : Monster
     private State state = State.Idle;
 
     public GameObject babySlime;
-    public float chaseDis = 15.0f;
-    public float attackDis = 0.5f;
+    public float chaseDis = 30.0f;
+    public float attackDis = 0.1f;
     public bool isAttack;
-    int skillCool = 0;
-
-
 
     protected override IEnumerator CheckState()
     {
@@ -84,7 +81,7 @@ public class Slime : Monster
 
                 case State.Skill:
                     nav.isStopped = true;
-                    UseSkill();
+                    Targeting();
                     break;
             }
 
@@ -117,7 +114,16 @@ public class Slime : Monster
 
         if (rayHits.Length > 0 && !isAttack)
         {
-            StartCoroutine(Attack());
+            if (skillCool <= 0)
+            {
+                // 스킬 사용
+                UseSkill();
+            }
+            else
+            {
+                // 일반 공격
+                StartCoroutine(Attack());
+            }
         }
     }
 
@@ -125,7 +131,7 @@ public class Slime : Monster
     {
         isChase = false;
         isAttack = true;
-        anim.SetBool("isAttack", true);
+        anim.SetTrigger("isAttack"); // 일반 공격 애니메이션 시작
         yield return new WaitForSeconds(0.2f);
         attackArea.enabled = true;
 
@@ -136,19 +142,14 @@ public class Slime : Monster
 
         isAttack = false;
         isChase = true;
-        anim.SetBool("isAttack", false);
     }
 
     void UseSkill()
     {
-        float targetRadius = 1.5f;
-        float targetRange = 2f;
-
-        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
-
-        if (rayHits.Length > 0 && !isAttack)
+        if (skillCool <= 0)
         {
             StartCoroutine(Skill());
+            skillCool = mobStat.skill_colltime; // 스킬 사용 후 쿨다운 초기화
         }
     }
 
@@ -156,7 +157,7 @@ public class Slime : Monster
     {
         isChase = false;
         isAttack = true;
-        anim.SetBool("isAttack", true);
+        anim.SetTrigger("isSkill"); // 스킬 애니메이션 시작
         yield return new WaitForSeconds(0.2f);
         attackArea.enabled = true;
 
@@ -167,7 +168,6 @@ public class Slime : Monster
 
         isAttack = false;
         isChase = true;
-        anim.SetBool("isAttack", false);
     }
 
     // 사망을 처리하는 함수
@@ -182,9 +182,10 @@ public class Slime : Monster
         reactVec += Vector3.up;
         rigid.AddForce(reactVec * 5, ForceMode.Impulse);
 
-        Invoke("Spawn", 1.5f);
+        Invoke("Spawn", 0.5f);
 
         Destroy(gameObject, 1); // 일정 시간 후 게임 오브젝트 삭제
+
         OnDestroy();
     }
 

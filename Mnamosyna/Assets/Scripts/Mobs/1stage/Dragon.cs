@@ -1,8 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class Bat : Monster
+public class Dragon : Monster
 {
     public enum State
     {
@@ -31,7 +31,7 @@ public class Bat : Monster
             {
                 state = State.Attack;
             }
-            else if(dist <= meleeAttackDis)
+            else if (dist <= meleeAttackDis)
             {
                 state = State.meleeAttack;
             }
@@ -120,5 +120,4 @@ public class Bat : Monster
         state = State.Chase;
         yield return new WaitForSeconds(mobStat.atk_speed);
     }
-
 }

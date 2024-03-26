@@ -21,6 +21,7 @@ public class Monster : MonoBehaviour
     public BoxCollider attackArea;
     public BoxCollider skillArea;
 
+    protected int skillCool; 
 
     protected Rigidbody rigid;
     protected BoxCollider boxCollider;
@@ -28,7 +29,6 @@ public class Monster : MonoBehaviour
     protected NavMeshAgent nav;
     protected Animator anim;
 
-    public GameObject babySlime;
 
     // 추가: 코루틴 정지를 위한 변수
     private Coroutine stateCoroutine;
@@ -38,6 +38,9 @@ public class Monster : MonoBehaviour
     {
         // 변경: 코루틴 시작을 메서드로 호출
         StartStateCoroutines();
+
+        skillCool = mobStat.skill_colltime; // 초기 스킬 쿨다운 설정
+        StartCoroutine(SkillCooldownTimer());
     }
 
     void Awake()
@@ -109,6 +112,15 @@ public class Monster : MonoBehaviour
         {
             // NavMeshAgent의 속도를 몬스터의 이동 속도로 설정합니다.
             nav.speed = speed;
+        }
+    }
+
+    IEnumerator SkillCooldownTimer()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f); // 1초마다 스킬 쿨다운을 감소시킴
+            skillCool = Mathf.Max(0, skillCool - 1);
         }
     }
 

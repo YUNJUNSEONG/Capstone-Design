@@ -818,7 +818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c638d1a20d301c4cad20de8ef82c6b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
 --- !u!4 &136093190
 Transform:
   m_ObjectHideFlags: 0
@@ -7786,25 +7785,15 @@ MonoBehaviour:
   portal:
   - {fileID: 84919193}
   mobTypes:
-
-  - mobPrefab: {fileID: 9023675424122254200, guid: 2e75c9cf127f748478d2f7656671fef1, type: 3}
-    spawnInterval: 1
-    maxMobToSpawn: 1
-    curMobSpawn: 0
-  - mobPrefab: {fileID: 7009070000134230165, guid: 9b35960187924484395f85fef15c58de, type: 3}
-    spawnInterval: 1
-    maxMobToSpawn: 1
-    curMobSpawn: 0
   - mobPrefab: {fileID: 3944043161254834540, guid: 932ddb8bc449915419184831efd2b233, type: 3}
-    spawnInterval: 1
-    maxMobToSpawn: 1
-
+    spawnInterval: 3
+    maxMobToSpawn: 5
     curMobSpawn: 0
   battleActive: 0
-  minX: -18
-  maxX: 18
-  minZ: 35
-  maxZ: 60
+  minX: 19
+  maxX: -19
+  minZ: 50
+  maxZ: 70
 --- !u!1001 &2129484554
 PrefabInstance:
   m_ObjectHideFlags: 0

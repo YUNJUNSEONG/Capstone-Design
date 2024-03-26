@@ -1,41 +1,40 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class Bat : Monster
+public class TurtleShell : Monster
 {
     public enum State
     {
         Idle,
         Chase,
         Attack,
-        meleeAttack,
+        Charge,
         GetHit,
         Die
     }
+
     private State state = State.Idle;
 
     public float chaseDis = 30.0f;
-    public float attackDis = 10.0f;
-    public float meleeAttackDis = 0.5f;
+    public float chargeDis = 5.0f;
+    public float attackDis = 0.1f;
+    public bool isAttack;
+
 
     protected override IEnumerator CheckState()
     {
         while (!isDead)
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(WAIT_TIME);
 
             float dist = Vector3.Distance(player.position, transform.position);
 
-            if (dist <= attackDis && dist >= meleeAttackDis)
+            if (dist <= chargeDis)
             {
                 state = State.Attack;
             }
-            else if(dist <= meleeAttackDis)
-            {
-                state = State.meleeAttack;
-            }
-            else if (dist <= chaseDis)
+            else if (dist <= chaseDis && dist > attackDis)
             {
                 state = State.Chase;
             }
@@ -67,11 +66,16 @@ public class Bat : Monster
                     anim.SetBool("isChase", true);
                     break;
 
+                case State.GetHit:
+                    nav.isStopped = true;
+                    anim.SetBool("isChase", false);
+                    anim.SetTrigger("isGetHit");
+                    break;
+
                 case State.Attack:
                     nav.isStopped = true;
                     Targeting();
                     break;
-
             }
 
             yield return null;
@@ -96,29 +100,37 @@ public class Bat : Monster
 
     void Targeting()
     {
-        float targetRadius = 1.5f;
-        float targetRange = 3f;
+        float targetRadius = 1f;
+        float targetRange = 12f;
 
         RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
 
-        if (rayHits.Length > 0 && state == State.Attack)
+        if (rayHits.Length > 0 && !isAttack)
         {
-            StartCoroutine(Attack());
+            StartCoroutine(Charge());
         }
     }
 
-    IEnumerator Attack()
+    IEnumerator Charge()
     {
-        state = State.Attack;
-        anim.SetTrigger("isAttack");
-        yield return new WaitForSeconds(WAIT_TIME);
+        isChase = false;
+        isAttack = true;
+        anim.SetBool("isCharge", true);
+
+        yield return new WaitForSeconds(0.2f);
+        rigid.AddForce(transform.forward * 20, ForceMode.Impulse);
         attackArea.enabled = true;
 
-        yield return new WaitForSeconds(mobStat.atk_anim - WAIT_TIME);
+        yield return new WaitForSeconds(1.5f);
+        rigid.velocity = Vector3.zero;
         attackArea.enabled = false;
 
-        state = State.Chase;
-        yield return new WaitForSeconds(mobStat.atk_speed);
-    }
+        yield return new WaitForSeconds(1.0f);
 
+        isAttack = false;
+        isChase = true;
+        anim.SetBool("isCharge", false);
+
+        yield return new WaitForSeconds(4.0f);
+    }
 }

@@ -17,9 +17,8 @@ public class Mimic : Monster
     private State state = State.Idle;
 
     public float chaseDis = 1.0f;
-    public float attackDis = 0.5f;
+    public float attackDis = 0.1f;
     public bool isAttack;
-
 
     protected override IEnumerator CheckState()
     {
@@ -134,6 +133,4 @@ public class Mimic : Monster
         isChase = true;
         anim.SetBool("isAttack", false);
     }
-
-
 }

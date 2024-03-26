@@ -16,9 +16,9 @@ public class Spider : Monster
 
     private State state = State.Idle;
 
-    public float chaseDis = 14.0f;
-    public float chargeDis = 10.0f;
-    public float attackDis = 1.0f;
+    public float chaseDis = 30.0f;
+    public float chargeDis = 5.0f;
+    public float attackDis = 0.1f;
     public bool isAttack;
 
 
@@ -107,11 +107,11 @@ public class Spider : Monster
 
         if (rayHits.Length > 0 && !isAttack)
         {
-            StartCoroutine(Attack());
+            StartCoroutine(Charge());
         }
     }
 
-    IEnumerator Attack()
+    IEnumerator Charge()
     {
         isChase = false;
         isAttack = true;
@@ -121,11 +121,11 @@ public class Spider : Monster
         rigid.AddForce(transform.forward * 20, ForceMode.Impulse);
         attackArea.enabled = true;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
         rigid.velocity = Vector3.zero;
         attackArea.enabled = false;
 
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(1.0f);
 
         isAttack = false;
         isChase = true;
