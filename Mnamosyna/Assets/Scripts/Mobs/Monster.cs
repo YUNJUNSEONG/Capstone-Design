@@ -13,15 +13,16 @@ public class Monster : MonoBehaviour
 
     protected const float WAIT_TIME = 0.2f;
 
-    protected bool isChase;
-    protected bool isDamage;
+    protected bool isChase = false;
+    protected bool isAttack = false;
+    protected bool isDamage = false;
     protected bool isDead = false;
 
     public Transform target;
     public BoxCollider attackArea;
     public BoxCollider skillArea;
 
-    protected int skillCool; 
+    protected float skillCool; 
 
     protected Rigidbody rigid;
     protected BoxCollider boxCollider;

@@ -18,7 +18,6 @@ public class Mimic : Monster
 
     public float chaseDis = 1.0f;
     public float attackDis = 0.1f;
-    public bool isAttack;
 
     protected override IEnumerator CheckState()
     {
@@ -89,19 +88,9 @@ public class Mimic : Monster
 
     void FixedUpdate()
     {
-        FreezeVelocity();
         Targeting();
     }
 
-    void FreezeVelocity()
-    {
-        if (state == State.Chase)
-        {
-            // 변경: 물리 처리를 중단하지 않음
-            rigid.velocity = Vector3.zero;
-            rigid.angularVelocity = Vector3.zero;
-        }
-    }
 
     void Targeting()
     {
