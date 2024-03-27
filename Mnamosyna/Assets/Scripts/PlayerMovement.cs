@@ -15,8 +15,8 @@ public class PlayerMovement : MonoBehaviour
     Camera followCamera;
     
     //공격받을때 깜빡이는 용도
-    public float flashDuration = 0.001f;
-    public int flashCount = 3;
+    public float flashDuration = 0.1f;
+    public int flashCount = 6;
     private List<Renderer> renderers;
 
     public void Awake()

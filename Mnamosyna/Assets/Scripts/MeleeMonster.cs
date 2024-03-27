@@ -28,9 +28,10 @@ public class MeleeMonster : MonoBehaviour
     [SerializeField] private float patrolRadius = 20f;
     
     
-    public float invincibleTime = 1f; // 공격받은후무적 시간
+    public float invincibleTime = 2f; // 공격받은후무적 시간
     private float lastDamagedTime;
     public MonsterSpawner spawner;
+    public GameObject exclamationMark;
     
     private float switchTime = 2.0f;
     private GameObject player;
@@ -55,6 +56,7 @@ public class MeleeMonster : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = distance;
         random = new System.Random();
+        exclamationMark.SetActive(false);
     }
     void RotateMonsterToCharacter()
     {
@@ -65,8 +67,12 @@ public class MeleeMonster : MonoBehaviour
     }
     public void ChangeState(MonsterState state)
     {
-        //Debug.Log("몬스터상태바뀜");
+        if (currentState == MonsterState.Patrol && state == MonsterState.Chase)  
+        {
+            StartCoroutine(ShowExclamationMarkForSeconds(3.0f));
+        }
         currentState = state;
+        
     }
 
     void Patrol()
@@ -172,7 +178,6 @@ public class MeleeMonster : MonoBehaviour
     
     public void TakeDamage(int damage)
     {
-        //Debug.Log("몬스터가 데미지 받았음");
         if (currentState != MonsterState.Patrol) {ChangeState(MonsterState.Chase);}
         
         if (Time.time >= lastDamagedTime + invincibleTime)
@@ -180,6 +185,8 @@ public class MeleeMonster : MonoBehaviour
             CurrentHP -= damage;
             lastDamagedTime = Time.time;
         }
+        
+        
         
         if (CurrentHP <= 0)   
         {
@@ -210,6 +217,13 @@ public class MeleeMonster : MonoBehaviour
     void MonsterAttackEnd()
     {
         isAttacking = false;
+    }
+    
+    IEnumerator ShowExclamationMarkForSeconds(float seconds)
+    {
+        exclamationMark.SetActive(true); 
+        yield return new WaitForSeconds(seconds);  
+        exclamationMark.SetActive(false);
     }
     
 }
