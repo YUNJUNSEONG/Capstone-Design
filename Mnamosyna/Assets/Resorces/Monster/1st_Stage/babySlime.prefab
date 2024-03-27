@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 61272673064329061}
   - component: {fileID: 3613921918250972420}
   - component: {fileID: -1963283055236409936}
+  - component: {fileID: -8608123848316441716}
   m_Layer: 8
   m_Name: babySlime
   m_TagString: Monster
@@ -221,8 +222,28 @@ MonoBehaviour:
   Defense: 0
   ATK_Speed: 5
   Move_Speed: 5
-  ATK_Anim: 0
-  Skill_Anim: 0
+  ATK_Anim: 1
+  Skill_Anim: 1
+--- !u!114 &-8608123848316441716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3253433137146834739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c8d87555d4a7a94db3764a30649bc1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mobStat: {fileID: -1963283055236409936}
+  player: {fileID: 0}
+  target: {fileID: 0}
+  attackArea: {fileID: 4982339516447418941}
+  skillArea: {fileID: 0}
+  chaseDis: 150
+  attackDis: 0.01
+  rotationSpeed: 5
 --- !u!1001 &8802425997021407997
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -130,7 +130,7 @@ public class Slime : Monster
         attackArea.enabled = true;
         Debug.Log("슬라임 공격");
 
-        yield return new WaitForSeconds(0.64f);
+        yield return new WaitForSeconds(0.84f);
         attackArea.enabled = false;
         anim.SetBool("isAttack", false);
 
@@ -152,7 +152,7 @@ public class Slime : Monster
         yield return new WaitForSeconds(0.1f);
         attackArea.enabled = true;
 
-        yield return new WaitForSeconds(0.74f);
+        yield return new WaitForSeconds(0.84f);
         attackArea.enabled = false;
         anim.SetBool("isSkill", false);
 
@@ -165,7 +165,7 @@ public class Slime : Monster
     // 사망을 처리하는 함수
     public override void Death(Vector3 reactVec)
     {
-
+        boxCollider.enabled = false;
         anim.SetTrigger("isDead");
         gameObject.layer = 11; // 사망한 몬스터의 레이어 변경
         isChase = false; // 추적 중지

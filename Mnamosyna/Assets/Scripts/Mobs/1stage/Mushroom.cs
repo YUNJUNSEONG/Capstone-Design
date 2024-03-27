@@ -125,16 +125,16 @@ public class Mushroom : Monster
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         anim.SetBool("isAttack", true); // 일반 공격 애니메이션 시작
         attackArea.enabled = true;
         Debug.Log("버섯 공격");
 
-        yield return new WaitForSeconds(mobStat.atk_anim - 0.1f);
+        yield return new WaitForSeconds(0.84f);
         attackArea.enabled = false;
         anim.SetBool("isAttack", false);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         isAttack = false;
         isChase = true;
         nav.destination = player.position;
@@ -152,11 +152,11 @@ public class Mushroom : Monster
         yield return new WaitForSeconds(0.1f);
         attackArea.enabled = true;
 
-        yield return new WaitForSeconds(mobStat.skill_anim - 0.1f);
+        yield return new WaitForSeconds(0.84f);
         attackArea.enabled = false;
         anim.SetBool("isSkill", false);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         isAttack = false;
         isChase = true;
         nav.destination = player.position;

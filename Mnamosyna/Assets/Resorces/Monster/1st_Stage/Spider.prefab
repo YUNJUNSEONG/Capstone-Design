@@ -1215,7 +1215,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1
+  m_Speed: 10
   m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -1247,7 +1247,7 @@ MonoBehaviour:
   Skill_CoolTime: 5
   Defense: 0
   ATK_Speed: 1
-  Move_Speed: 8
+  Move_Speed: 10
   ATK_Anim: 0.8333333
   Skill_Anim: 1.0666667
 --- !u!114 &456981309115266801
@@ -1268,7 +1268,7 @@ MonoBehaviour:
   attackArea: {fileID: 3507667535758935297}
   skillArea: {fileID: 0}
   chaseDis: 150
-  chargeDis: 5
+  chargeDis: 12
   attackDis: 0.01
   rotationSpeed: 5
   chargeCool: 0

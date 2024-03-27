@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 3275562169311499092}
   - component: {fileID: 2957902008266433242}
   - component: {fileID: 1177880541982693131}
-  - component: {fileID: -7921486313514525738}
+  - component: {fileID: -9045397636546304289}
   m_Layer: 0
   m_Name: Mushroom
   m_TagString: Untagged
@@ -137,6 +137,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8199834252836324688}
   - {fileID: 4831261837445611402}
   - {fileID: 6791903672458839927}
   m_Father: {fileID: 0}
@@ -245,17 +246,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Mushroom
-  Max_HP: 0
-  Cur_HP: 0
-  ATK: 0
-  Skill_ATK: 0
-  Skill_CoolTime: 0
+  Max_HP: 30
+  Cur_HP: 30
+  ATK: 5
+  Skill_ATK: 5
+  Skill_CoolTime: 5
   Defense: 0
-  ATK_Speed: 0
-  Move_Speed: 0
-  ATK_Anim: 0
-  Skill_Anim: 0
---- !u!114 &-7921486313514525738
+  ATK_Speed: 2
+  Move_Speed: 3
+  ATK_Anim: 1
+  Skill_Anim: 1
+--- !u!114 &-9045397636546304289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,13 +268,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8d87555d4a7a94db3764a30649bc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobStat: {fileID: 0}
+  mobStat: {fileID: 1177880541982693131}
   player: {fileID: 0}
   target: {fileID: 0}
-  attackArea: {fileID: 0}
+  attackArea: {fileID: 3129760809582517062}
   skillArea: {fileID: 0}
-  chaseDis: 30
-  attackDis: 2
+  chaseDis: 150
+  attackDis: 0.01
   rotationSpeed: 5
 --- !u!1 &837414560145850893
 GameObject:
@@ -755,6 +756,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 732779395000833051}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7889481667158918658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8199834252836324688}
+  - component: {fileID: 3129760809582517062}
+  m_Layer: 12
+  m_Name: mushroomAttack
+  m_TagString: monsterAttack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8199834252836324688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7889481667158918658}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.304}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1252282057550201747}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3129760809582517062
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7889481667158918658}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8664660103829719247
 GameObject:
   m_ObjectHideFlags: 0

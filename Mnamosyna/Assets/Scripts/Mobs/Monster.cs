@@ -193,6 +193,7 @@ public class Monster : MonoBehaviour
     // 피해를 처리하는 함수
     void Hit(Vector3 reactVec)
     {
+        anim.SetTrigger("isGetHit");
         isDamage = true;
         reactVec = reactVec.normalized;
         reactVec += Vector3.up;
