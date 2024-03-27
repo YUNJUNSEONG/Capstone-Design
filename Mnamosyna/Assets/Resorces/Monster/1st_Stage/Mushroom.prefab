@@ -115,8 +115,8 @@ GameObject:
   - component: {fileID: 9089123727867872872}
   - component: {fileID: 3275562169311499092}
   - component: {fileID: 2957902008266433242}
-  - component: {fileID: -7921486313514525738}
   - component: {fileID: 1177880541982693131}
+  - component: {fileID: -7921486313514525738}
   m_Layer: 0
   m_Name: Mushroom
   m_TagString: Untagged
@@ -182,7 +182,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &3275562169311499092
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -232,6 +232,29 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1177880541982693131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752502569830986135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f73b28429daec40b2aa65086bfe33e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Mushroom
+  Max_HP: 0
+  Cur_HP: 0
+  ATK: 0
+  Skill_ATK: 0
+  Skill_CoolTime: 0
+  Defense: 0
+  ATK_Speed: 0
+  Move_Speed: 0
+  ATK_Anim: 0
+  Skill_Anim: 0
 --- !u!114 &-7921486313514525738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,30 +274,7 @@ MonoBehaviour:
   skillArea: {fileID: 0}
   chaseDis: 30
   attackDis: 2
-  isAttack: 0
---- !u!114 &1177880541982693131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752502569830986135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27f73b28429daec40b2aa65086bfe33e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: 
-  Max_HP: 0
-  Cur_HP: 0
-  ATK: 0
-  Skill_ATK: 0
-  Skill_CoolTime: 0
-  Defense: 0
-  ATK_Speed: 0
-  Move_Speed: 0
-  ATK_Anim: 0
-  Skill_Anim: 0
+  rotationSpeed: 5
 --- !u!1 &837414560145850893
 GameObject:
   m_ObjectHideFlags: 0

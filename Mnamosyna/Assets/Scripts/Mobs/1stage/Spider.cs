@@ -16,10 +16,12 @@ public class Spider : Monster
 
     private State state = State.Idle;
 
-    public float chaseDis = 30.0f;
+    public float chaseDis = 150.0f;
     public float chargeDis = 5.0f;
-    public float attackDis = 0.1f;
+    public float attackDis = 0.01f;
+    public float rotationSpeed = 5.0f;
 
+    public float chargeCool = 0;
 
     protected override IEnumerator CheckState()
     {
@@ -29,17 +31,21 @@ public class Spider : Monster
 
             float dist = Vector3.Distance(player.position, transform.position);
 
-            if (dist <= chargeDis)
+            if (dist <= attackDis)
             {
                 state = State.Attack;
             }
-            else if (dist <= chaseDis && dist > attackDis)
+            else if (dist <= chaseDis && dist > chargeDis && !isAttack)
             {
                 state = State.Chase;
             }
             else if (isDamage)
             {
                 state = State.GetHit;
+            }
+            else if (dist <= chargeDis && dist > attackDis)
+            {
+                state = State.Charge;
             }
             else
             {
@@ -55,25 +61,28 @@ public class Spider : Monster
             switch (state)
             {
                 case State.Idle:
-                    nav.isStopped = true;
                     anim.SetBool("isChase", false);
                     break;
 
                 case State.Chase:
                     nav.destination = player.position;
-                    nav.isStopped = false;
                     anim.SetBool("isChase", true);
                     break;
 
                 case State.GetHit:
-                    nav.isStopped = true;
                     anim.SetBool("isChase", false);
                     anim.SetTrigger("isGetHit");
                     break;
 
                 case State.Attack:
-                    nav.isStopped = true;
-                    Targeting();
+                    anim.SetBool("isChase", false);
+                    yield return StartCoroutine(Attack());
+                    break;
+
+                case State.Charge:
+                    anim.SetBool("isChase", false);
+                    StartCoroutine(Charge());
+                    chargeCool = mobStat.skill_colltime;
                     break;
             }
 
@@ -96,17 +105,56 @@ public class Spider : Monster
 
         if (rayHits.Length > 0 && !isAttack)
         {
-            StartCoroutine(Charge());
+            if (chargeCool <= 0)
+            {
+                // 스킬 사용
+                state = State.Charge;
+            }
+            else
+            {
+                // 일반 공격
+                state = State.Attack; ;
+            }
         }
+        else
+        {
+            state = State.Chase;
+        }
+    }
+
+    IEnumerator Attack()
+    {
+        isChase = false;
+        isAttack = true;
+        Vector3 direction = (player.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+
+        yield return new WaitForSeconds(0.1f);
+        anim.SetBool("isAttack", true); // 일반 공격 애니메이션 시작
+        attackArea.enabled = true;
+        Debug.Log("거미 공격");
+
+        yield return new WaitForSeconds(mobStat.atk_anim - 0.1f);
+        attackArea.enabled = false;
+        anim.SetBool("isAttack", false);
+
+        yield return new WaitForSeconds(1.0f);
+        isAttack = false;
+        isChase = true;
+        nav.destination = player.position;
     }
 
     IEnumerator Charge()
     {
         isChase = false;
         isAttack = true;
-        anim.SetBool("isCharge", true);
+        Vector3 direction = (player.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
 
         yield return new WaitForSeconds(0.2f);
+        anim.SetBool("isCharge", true);
         rigid.AddForce(transform.forward * 20, ForceMode.Impulse);
         attackArea.enabled = true;
 
@@ -114,13 +162,12 @@ public class Spider : Monster
         rigid.velocity = Vector3.zero;
         attackArea.enabled = false;
 
+        anim.SetBool("isCharge", false);
+
         yield return new WaitForSeconds(1.0f);
 
         isAttack = false;
         isChase = true;
-        anim.SetBool("isCharge", false);
-
-        yield return new WaitForSeconds(4.0f);
     }
 
 }

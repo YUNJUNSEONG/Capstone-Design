@@ -1110,7 +1110,7 @@ GameObject:
   - component: {fileID: 5702994888496730225}
   - component: {fileID: 4178948083682470856}
   - component: {fileID: 8732087939527637051}
-  - component: {fileID: 3057636578992335338}
+  - component: {fileID: 456981309115266801}
   m_Layer: 8
   m_Name: Spider
   m_TagString: Monster
@@ -1176,8 +1176,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.51, z: 0}
+  m_Size: {x: 1.3, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &5702994888496730225
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1248,9 +1248,9 @@ MonoBehaviour:
   Defense: 0
   ATK_Speed: 1
   Move_Speed: 8
-  ATK_Anim: 1
-  Skill_Anim: 1
---- !u!114 &3057636578992335338
+  ATK_Anim: 0.8333333
+  Skill_Anim: 1.0666667
+--- !u!114 &456981309115266801
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1268,8 +1268,10 @@ MonoBehaviour:
   attackArea: {fileID: 3507667535758935297}
   skillArea: {fileID: 0}
   chaseDis: 150
-  attackDis: 2
-  isAttack: 0
+  chargeDis: 5
+  attackDis: 0.01
+  rotationSpeed: 5
+  chargeCool: 0
 --- !u!1 &7106513097634091591
 GameObject:
   m_ObjectHideFlags: 0

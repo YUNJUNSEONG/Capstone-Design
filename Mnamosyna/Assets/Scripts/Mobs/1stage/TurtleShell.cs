@@ -16,10 +16,9 @@ public class TurtleShell : Monster
 
     private State state = State.Idle;
 
-    public float chaseDis = 30.0f;
+    public float chaseDis = 150.0f;
     public float chargeDis = 5.0f;
-    public float attackDis = 0.1f;
-    public bool isAttack;
+    public float attackDis = 0.01f;
 
 
     protected override IEnumerator CheckState()
@@ -84,18 +83,7 @@ public class TurtleShell : Monster
 
     void FixedUpdate()
     {
-        FreezeVelocity();
         Targeting();
-    }
-
-    void FreezeVelocity()
-    {
-        if (state == State.Chase)
-        {
-            // 변경: 물리 처리를 중단하지 않음
-            rigid.velocity = Vector3.zero;
-            rigid.angularVelocity = Vector3.zero;
-        }
     }
 
     void Targeting()

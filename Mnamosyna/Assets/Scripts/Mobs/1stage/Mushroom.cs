@@ -17,9 +17,9 @@ public class Mushroom : Monster
 
     private State state = State.Idle;
 
-    public float chaseDis = 30.0f;
-    public float attackDis = 0.1f;
-
+    public float chaseDis = 150.0f;
+    public float attackDis = 0.01f;
+    public float rotationSpeed = 5.0f;
 
     protected override IEnumerator CheckState()
     {
@@ -33,13 +33,17 @@ public class Mushroom : Monster
             {
                 state = State.Attack;
             }
-            else if (dist <= chaseDis && dist >attackDis)
+            else if (dist <= chaseDis && dist > attackDis && !isAttack)
             {
                 state = State.Chase;
             }
             else if (isDamage)
             {
                 state = State.GetHit;
+            }
+            else if (dist <= attackDis)
+            {
+                state = State.Skill;
             }
             else
             {
@@ -55,24 +59,27 @@ public class Mushroom : Monster
             switch (state)
             {
                 case State.Idle:
-                    nav.isStopped = true;
                     anim.SetBool("isChase", false);
                     break;
 
                 case State.Chase:
                     nav.destination = player.position;
-                    nav.isStopped = false;
                     anim.SetBool("isChase", true);
                     break;
                 case State.GetHit:
-                    nav.isStopped = true;
                     anim.SetBool("isChase", false);
                     anim.SetTrigger("isGetHit");
                     break;
 
                 case State.Attack:
-                    nav.isStopped = true;
-                    Targeting();
+                    anim.SetBool("isChase", false);
+                    yield return StartCoroutine(Attack());
+                    break;
+
+                case State.Skill:
+                    anim.SetBool("isChase", false);
+                    yield return StartCoroutine(Skill());
+                    skillCool = mobStat.skill_colltime;
                     break;
             }
 
@@ -85,7 +92,6 @@ public class Mushroom : Monster
         Targeting();
     }
 
-
     void Targeting()
     {
         float targetRadius = 1.5f;
@@ -95,26 +101,65 @@ public class Mushroom : Monster
 
         if (rayHits.Length > 0 && !isAttack)
         {
-            StartCoroutine(Attack());
+            if (skillCool <= 0)
+            {
+                // 스킬 사용
+                state = State.Skill;
+            }
+            else
+            {
+                // 일반 공격
+                state = State.Attack; ;
+            }
+        }
+        else
+        {
+            state = State.Chase;
         }
     }
-
     IEnumerator Attack()
     {
         isChase = false;
         isAttack = true;
-        anim.SetBool("isAttack", true);
-        yield return new WaitForSeconds(0.2f);
+        Vector3 direction = (player.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+
+        yield return new WaitForSeconds(0.1f);
+        anim.SetBool("isAttack", true); // 일반 공격 애니메이션 시작
         attackArea.enabled = true;
+        Debug.Log("버섯 공격");
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(mobStat.atk_anim - 0.1f);
         attackArea.enabled = false;
+        anim.SetBool("isAttack", false);
 
-        yield return new WaitForSeconds(2.0f);
-
+        yield return new WaitForSeconds(0.5f);
         isAttack = false;
         isChase = true;
-        anim.SetBool("isAttack", false);
+        nav.destination = player.position;
+    }
+
+    IEnumerator Skill()
+    {
+        isChase = false;
+        isAttack = true;
+        Vector3 direction = (player.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+
+        anim.SetBool("isSkill", true); // 스킬 애니메이션 시작
+        yield return new WaitForSeconds(0.1f);
+        attackArea.enabled = true;
+
+        yield return new WaitForSeconds(mobStat.skill_anim - 0.1f);
+        attackArea.enabled = false;
+        anim.SetBool("isSkill", false);
+
+        yield return new WaitForSeconds(0.5f);
+        isAttack = false;
+        isChase = true;
+        nav.destination = player.position;
     }
 
 }
