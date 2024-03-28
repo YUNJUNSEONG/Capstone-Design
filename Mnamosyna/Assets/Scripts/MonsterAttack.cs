@@ -11,7 +11,6 @@ public class MonsterAttack : MonoBehaviour
         
         if(meleeMonster.isAttacking)
         {
-            Debug.Log("부딪");
             other.gameObject.GetComponent<PlayerMovement>().GetHit();
         }
     }

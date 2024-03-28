@@ -67,6 +67,12 @@ public class PlayerMovement : MonoBehaviour
     {
         anim.SetTrigger("GetHit");
         Flash();
+        var playerAttack = GetComponent<PlayerAttack>();
+        if (playerAttack != null)
+        {
+            playerAttack.DisableSwordCollider();
+        }
+        else{Debug.Log("isattacking변경실패");}
     }
     
     public void Flash()
