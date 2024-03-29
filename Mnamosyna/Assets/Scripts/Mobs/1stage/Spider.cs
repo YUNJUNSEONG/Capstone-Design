@@ -42,6 +42,7 @@ public class Spider : Monster
             else if (isDamage)
             {
                 state = State.GetHit;
+                isDamage = false;
             }
             else if (dist <= chargeDis && dist > attackDis)
             {
@@ -98,25 +99,19 @@ public class Spider : Monster
 
     void Targeting()
     {
-        float targetRadius = 0; ;
-        float targetRange = 0;
-        switch (state)
-        {
-            case State.Charge:
-                targetRadius = 1f;
-                targetRange = 12f;
-                break;
+        float targetRadius1 = 1.5f;
+        float targetRange1 = 2f;
 
-            case State.Attack:
-                targetRadius = 1.5f;
-                targetRange = 2f;
-                break;
-        }
-        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
+        RaycastHit[] rayHits1 = Physics.SphereCastAll(transform.position, targetRadius1, transform.forward, targetRange1, LayerMask.GetMask("Player"));
 
-        if (rayHits.Length > 0 && !isAttack)
+        float targetRadius2 = 1f;
+        float targetRange2 = 12f;
+
+        RaycastHit[] rayHits2 = Physics.SphereCastAll(transform.position, targetRadius2, transform.forward, targetRange2, LayerMask.GetMask("Player"));
+
+        if (rayHits1.Length > 0 && !isAttack)
         {
-            if (chargeCool <= 0)
+            if (rayHits2.Length > 0)
             {
                 // 스킬 사용
                 state = State.Charge;

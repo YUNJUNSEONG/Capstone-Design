@@ -7,6 +7,7 @@ public class Plant : Monster
     public enum State
     {
         Idle,
+        BattleIdle,
         Chase,
         Attack,
         Skill,
@@ -15,7 +16,7 @@ public class Plant : Monster
     }
     private State state = State.Idle;
 
-    public float chaseDis = 1.0f;
+    public float chaseDis = 10.0f;
     public float attackDis = 0.1f;
     public float rotationSpeed = 5.0f;
 
@@ -27,9 +28,9 @@ public class Plant : Monster
 
             float dist = Vector3.Distance(player.position, transform.position);
 
-            if (dist <= attackDis)
+            if (isDamage)
             {
-                state = State.Attack;
+                state = State.GetHit;
             }
             else if (dist <= chaseDis && dist > attackDis && !isAttack)
             {
@@ -38,14 +39,19 @@ public class Plant : Monster
             else if (isDamage)
             {
                 state = State.GetHit;
+                isDamage = false;
             }
             else if (dist <= attackDis)
             {
                 state = State.Skill;
             }
-            else
+            else if (dist > chaseDis)
             {
                 state = State.Idle;
+            }
+            else
+            {
+                state = State.BattleIdle;
             }
         }
     }
@@ -57,25 +63,39 @@ public class Plant : Monster
             switch (state)
             {
                 case State.Idle:
+                    anim.SetBool("isIdle", true);
                     anim.SetBool("isChase", false);
+                    nav.isStopped = true;
+                    break;
+
+                case State.BattleIdle:
+                    anim.SetBool("isIdle", false);
+                    nav.isStopped = false;
                     break;
 
                 case State.Chase:
                     nav.destination = player.position;
                     anim.SetBool("isChase", true);
+                    anim.SetBool("isIdle", false);
+                    nav.isStopped = false;
                     break;
+
                 case State.GetHit:
                     anim.SetBool("isChase", false);
                     anim.SetTrigger("isGetHit");
                     break;
 
                 case State.Attack:
+                    anim.SetBool("isIdle", false);
                     anim.SetBool("isChase", false);
+                    nav.isStopped = false;
                     yield return StartCoroutine(Attack());
                     break;
 
                 case State.Skill:
+                    anim.SetBool("isIdle", false);
                     anim.SetBool("isChase", false);
+                    nav.isStopped = false;
                     yield return StartCoroutine(Skill());
                     skillCool = mobStat.skill_colltime;
                     break;
@@ -107,12 +127,8 @@ public class Plant : Monster
             else
             {
                 // 일반 공격
-                state = State.Attack; ;
+                state = State.Attack;
             }
-        }
-        else
-        {
-            state = State.Chase;
         }
     }
     IEnumerator Attack()
@@ -126,13 +142,13 @@ public class Plant : Monster
         yield return new WaitForSeconds(0.1f);
         anim.SetBool("isAttack", true); // 일반 공격 애니메이션 시작
         attackArea.enabled = true;
-        Debug.Log("식인식물 공격");
+        Debug.Log("식물 공격");
 
-        yield return new WaitForSeconds(mobStat.atk_anim - 0.1f);
+        yield return new WaitForSeconds(mobStat.atk_anim);
         attackArea.enabled = false;
         anim.SetBool("isAttack", false);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         isAttack = false;
         isChase = true;
         nav.destination = player.position;
@@ -150,11 +166,11 @@ public class Plant : Monster
         yield return new WaitForSeconds(0.1f);
         attackArea.enabled = true;
 
-        yield return new WaitForSeconds(mobStat.skill_anim - 0.1f);
+        yield return new WaitForSeconds(mobStat.skill_anim);
         attackArea.enabled = false;
         anim.SetBool("isSkill", false);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         isAttack = false;
         isChase = true;
         nav.destination = player.position;

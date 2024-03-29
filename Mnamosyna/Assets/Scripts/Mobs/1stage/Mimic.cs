@@ -8,6 +8,7 @@ public class Mimic : Monster
     public enum State
     {
         Idle,
+        BattleIdle,
         Chase,
         Attack,
         Skill,
@@ -16,7 +17,7 @@ public class Mimic : Monster
     }
     private State state = State.Idle;
 
-    public float chaseDis = 1.0f;
+    public float chaseDis = 10.0f;
     public float attackDis = 0.1f;
     public float rotationSpeed = 5.0f;
 
@@ -28,9 +29,9 @@ public class Mimic : Monster
 
             float dist = Vector3.Distance(player.position, transform.position);
 
-            if (dist <= attackDis)
+            if (isDamage)
             {
-                state = State.Attack;
+                state = State.GetHit;
             }
             else if (dist <= chaseDis && dist > attackDis && !isAttack)
             {
@@ -39,14 +40,19 @@ public class Mimic : Monster
             else if (isDamage)
             {
                 state = State.GetHit;
+                isDamage = false;
             }
             else if (dist <= attackDis)
             {
                 state = State.Skill;
             }
-            else
+            else if (dist > chaseDis)
             {
                 state = State.Idle;
+            }
+            else
+            {
+                state = State.BattleIdle;
             }
         }
     }
@@ -58,25 +64,39 @@ public class Mimic : Monster
             switch (state)
             {
                 case State.Idle:
+                    anim.SetBool("isIdle", true);
                     anim.SetBool("isChase", false);
+                    nav.isStopped = true;
+                    break;
+
+                case State.BattleIdle:
+                    anim.SetBool("isIdle", false);
+                    nav.isStopped = false;
                     break;
 
                 case State.Chase:
                     nav.destination = player.position;
                     anim.SetBool("isChase", true);
+                    anim.SetBool("isIdle", false);
+                    nav.isStopped = false;
                     break;
+
                 case State.GetHit:
                     anim.SetBool("isChase", false);
                     anim.SetTrigger("isGetHit");
                     break;
 
                 case State.Attack:
+                    anim.SetBool("isIdle", false);
                     anim.SetBool("isChase", false);
+                    nav.isStopped = false;
                     yield return StartCoroutine(Attack());
                     break;
 
                 case State.Skill:
+                    anim.SetBool("isIdle", false);
                     anim.SetBool("isChase", false);
+                    nav.isStopped = false;
                     yield return StartCoroutine(Skill());
                     skillCool = mobStat.skill_colltime;
                     break;
@@ -108,12 +128,8 @@ public class Mimic : Monster
             else
             {
                 // 일반 공격
-                state = State.Attack; ;
+                state = State.Attack;
             }
-        }
-        else
-        {
-            state = State.Chase;
         }
     }
     IEnumerator Attack()
@@ -129,7 +145,7 @@ public class Mimic : Monster
         attackArea.enabled = true;
         Debug.Log("미믹 공격");
 
-        yield return new WaitForSeconds(mobStat.atk_anim - 0.1f);
+        yield return new WaitForSeconds(mobStat.atk_anim);
         attackArea.enabled = false;
         anim.SetBool("isAttack", false);
 
@@ -151,7 +167,7 @@ public class Mimic : Monster
         yield return new WaitForSeconds(0.1f);
         attackArea.enabled = true;
 
-        yield return new WaitForSeconds(mobStat.skill_anim - 0.1f);
+        yield return new WaitForSeconds(mobStat.skill_anim);
         attackArea.enabled = false;
         anim.SetBool("isSkill", false);
 

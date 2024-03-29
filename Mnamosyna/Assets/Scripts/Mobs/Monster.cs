@@ -13,7 +13,7 @@ public class Monster : MonoBehaviour
 
     protected const float WAIT_TIME = 0.2f;
 
-    protected bool isChase = false;
+    protected bool isChase;
     protected bool isAttack = false;
     protected bool isDamage = false;
     protected bool isDead = false;
@@ -193,7 +193,6 @@ public class Monster : MonoBehaviour
     // 피해를 처리하는 함수
     void Hit(Vector3 reactVec)
     {
-        anim.SetTrigger("isGetHit");
         isDamage = true;
         reactVec = reactVec.normalized;
         reactVec += Vector3.up;

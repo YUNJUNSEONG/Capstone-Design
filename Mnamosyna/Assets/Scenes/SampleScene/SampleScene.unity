@@ -7086,9 +7086,13 @@ MonoBehaviour:
   portal:
   - {fileID: 84919193}
   mobTypes:
-  - mobPrefab: {fileID: 3944043161254834540, guid: 932ddb8bc449915419184831efd2b233, type: 3}
-    spawnInterval: 3
-    maxMobToSpawn: 5
+  - mobPrefab: {fileID: 8711419382069577260, guid: 36042ff5b176f1f44ae3a5e536f54728, type: 3}
+    spawnInterval: 1
+    maxMobToSpawn: 1
+    curMobSpawn: 0
+  - mobPrefab: {fileID: 509018725579694082, guid: 7738a7ee96cf4244cb1ae785350ec4aa, type: 3}
+    spawnInterval: 1
+    maxMobToSpawn: 1
     curMobSpawn: 0
   battleActive: 0
   minX: 19

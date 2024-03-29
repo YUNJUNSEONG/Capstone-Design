@@ -284,6 +284,10 @@ public class Player : MonoBehaviour
                                                       
                         int finalDamage = Mathf.RoundToInt(damage * (1 - stat.defense)); // 피해 감소 적용
                         stat.cur_hp = Mathf.Max(0, stat.cur_hp - finalDamage);
+                        if(other.GetComponent<Rigidbody>() != null)
+                        {
+                            Destroy(other.gameObject);
+                        }
 
                         StartCoroutine(TakeDamage());
                         Debug.Log("플레이어가 받은 피해 :" + finalDamage);

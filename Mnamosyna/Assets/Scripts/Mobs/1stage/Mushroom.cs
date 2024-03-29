@@ -40,6 +40,7 @@ public class Mushroom : Monster
             else if (isDamage)
             {
                 state = State.GetHit;
+                isDamage = false;
             }
             else if (dist <= attackDis)
             {

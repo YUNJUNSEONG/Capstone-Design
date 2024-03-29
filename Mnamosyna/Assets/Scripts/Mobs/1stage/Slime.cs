@@ -40,6 +40,7 @@ public class Slime : Monster
             else if (isDamage)
             {
                 state = State.GetHit;
+                isDamage = false;
             }
             else if (dist <= attackDis )
             {
@@ -165,7 +166,6 @@ public class Slime : Monster
     // 사망을 처리하는 함수
     public override void Death(Vector3 reactVec)
     {
-        boxCollider.enabled = false;
         anim.SetTrigger("isDead");
         gameObject.layer = 11; // 사망한 몬스터의 레이어 변경
         isChase = false; // 추적 중지

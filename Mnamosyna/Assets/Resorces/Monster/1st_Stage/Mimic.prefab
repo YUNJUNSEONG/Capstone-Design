@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 2432230632141006673}
   - component: {fileID: 302062926089950726}
   - component: {fileID: 2893031730923936626}
-  - component: {fileID: -2716145035424014200}
+  - component: {fileID: 6666942772177736048}
   m_Layer: 8
   m_Name: Mimic
   m_TagString: Monster
@@ -507,7 +507,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -532,17 +532,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Mimic
-  Max_HP: 30
-  Cur_HP: 30
+  Max_HP: 1
+  Cur_HP: 1
   ATK: 5
   Skill_ATK: 5
   Skill_CoolTime: 5
   Defense: 0
   ATK_Speed: 5
-  Move_Speed: 5
-  ATK_Anim: 1
-  Skill_Anim: 1
---- !u!114 &-2716145035424014200
+  Move_Speed: 3
+  ATK_Anim: 0.8
+  Skill_Anim: 0.73333335
+--- !u!114 &6666942772177736048
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -559,7 +559,7 @@ MonoBehaviour:
   target: {fileID: 0}
   attackArea: {fileID: 9069566950816136799}
   skillArea: {fileID: 0}
-  chaseDis: 1
+  chaseDis: 10
   attackDis: 0.1
   rotationSpeed: 5
 --- !u!1 &4062895578506802094
