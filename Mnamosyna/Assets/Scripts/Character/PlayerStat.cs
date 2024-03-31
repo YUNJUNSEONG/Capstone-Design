@@ -7,18 +7,18 @@ public class PlayerStat : MonoBehaviour
 {
     [Header("체력 관련")]
     [SerializeField]
-    protected int Max_HP = 150; // 최대 체력
+    public int Max_HP = 150; // 최대 체력
     [SerializeField]
-    protected int Cur_HP = 150; // 현재 체력
+    public int Cur_HP = 150; // 현재 체력
     [SerializeField]
     protected int HP_Recover = 0; // 1초 당 n 회복
 
     [Header("스태미나 관련")]
     // 스테미나 관련 속성
     [SerializeField]
-    protected int Max_Stamina = 200;
+    public int Max_Stamina = 200;
     [SerializeField]
-    protected int Cur_Stamina = 200;
+    public int Cur_Stamina = 200;
     [SerializeField]
     protected float Stamina_Recover = 3;
 

@@ -147,10 +147,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16375
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 3118556872210959825}
+  player: {fileID: 0}
 --- !u!1 &4135020856604245524
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +187,7 @@ GameObject:
   - component: {fileID: 3118556872210959825}
   - component: {fileID: 3609588929746901358}
   - component: {fileID: 8478435011095593750}
-  - component: {fileID: 7436548900077562926}
+  - component: {fileID: 3459110106605388591}
   m_Layer: 8
   m_Name: Mushroom
   m_TagString: Monster
@@ -297,14 +298,14 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &7436548900077562926
-BoxCollider:
+--- !u!135 &3459110106605388591
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4135020856604245524}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ef8a34d636011f440b84a11560ce5b53, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -316,8 +317,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.94664294, z: 1}
-  m_Center: {x: 0, y: 0.483982, z: 0}
+  m_Radius: 0.57
+  m_Center: {x: 0, y: 0.61, z: -0.03}
 --- !u!1 &4848927784194047895
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +330,7 @@ GameObject:
   - component: {fileID: 1920666146354604882}
   - component: {fileID: 872538975540785984}
   - component: {fileID: 8022717697474003646}
-  - component: {fileID: 642298622010267103}
+  - component: {fileID: 236994179847708179}
   m_Layer: 5
   m_Name: HPbar_Back
   m_TagString: Untagged
@@ -394,7 +395,7 @@ MonoBehaviour:
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &642298622010267103
+--- !u!114 &236994179847708179
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -403,10 +404,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4848927784194047895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c466bac5fba56104f9939eec349952e3, type: 3}
+  m_Script: {fileID: 11500000, guid: e42cd0a296c3cf34283cfe3b6f1d5745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 4135020856604245524}
+  cameraTransform: {fileID: 0}
 --- !u!1 &5582084059004237368
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,8 +607,8 @@ Transform:
   m_GameObject: {fileID: 6157081096189437449}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.00000023842, y: 0, z: -27.673}
+  m_LocalScale: {x: 3.722622, y: 3.722622, z: 3.722622}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9221397602642939880}

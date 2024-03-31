@@ -17,7 +17,7 @@ public class SwordAttack : MonoBehaviour
         if (playerAttack.isAttacking)
         {
             if (other.gameObject.TryGetComponent<MeleeMonster>(out MeleeMonster monster)) {monster.TakeDamage(15);}
-            else {Debug.Log("몬스터정보를 가져올수 없음");}
+            //else {Debug.Log("몬스터정보를 가져올수 없음");}
         }
     }
     

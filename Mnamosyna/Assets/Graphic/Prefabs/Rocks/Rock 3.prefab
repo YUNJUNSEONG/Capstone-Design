@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 692716645}
   - component: {fileID: 692716647}
-  - component: {fileID: 692716646}
   - component: {fileID: 692716648}
-  - component: {fileID: 692716649}
+  - component: {fileID: 8012058852587015522}
   m_Layer: 0
   m_Name: Colliders
   m_TagString: Untagged
@@ -54,29 +53,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.05, y: 2.6, z: 5.07}
-  m_Center: {x: 0, y: 1.1, z: 0}
---- !u!65 &692716646
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692716644}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.47, y: 2.94, z: 3.1}
-  m_Center: {x: 0, y: 3.9, z: 0}
+  m_Size: {x: 4.05, y: 7.743098, z: 5.07}
+  m_Center: {x: 0, y: 3.67155, z: 0}
 --- !u!65 &692716648
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -98,27 +76,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.61, y: 3.59, z: 9.02}
   m_Center: {x: 0, y: 9.28, z: 0}
---- !u!65 &692716649
-BoxCollider:
+--- !u!208 &8012058852587015522
+NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 692716644}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.71, y: 2.28, z: 5.71}
-  m_Center: {x: 0, y: 6.4, z: 0}
+  m_Shape: 1
+  m_Extents: {x: 2.185, y: 3.645, z: 2.505}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 3.53, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1075463712287955896
 GameObject:
   m_ObjectHideFlags: 0

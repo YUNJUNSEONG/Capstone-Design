@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1234654676334429611}
   - component: {fileID: 4746496459669955755}
   - component: {fileID: 5502516786738239148}
+  - component: {fileID: 3571848196611160869}
   m_Layer: 0
   m_Name: Statue_1
   m_TagString: Untagged
@@ -103,5 +104,21 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.00692516, y: 0.06108119, z: 0.03018203}
-  m_Center: {x: -0.000039566457, y: 0.030012954, z: -0.0032120335}
+  m_Size: {x: 0.00692516, y: 0.06108119, z: 0.035759687}
+  m_Center: {x: -0.000039566457, y: 0.030012954, z: -0.0060008685}
+--- !u!208 &3571848196611160869
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5175119447053269721}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.007, y: 0.031000001, z: 0.018000001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.030000001, z: -0.006}
+  m_TimeToStationary: 0.5

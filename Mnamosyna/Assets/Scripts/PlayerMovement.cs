@@ -14,9 +14,12 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rigid;
     Camera followCamera;
     
+    public float invincibleTime = 2f; // 공격받은후무적 시간
+    private float lastDamagedTime;
+    
     //공격받을때 깜빡이는 용도
-    public float flashDuration = 0.1f;
-    public int flashCount = 6;
+    private float flashDuration = 0.1f;
+    private int flashCount = 4;
     private List<Renderer> renderers;
 
     public void Awake()
@@ -25,12 +28,10 @@ public class PlayerMovement : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         stat = GetComponent<PlayerStat>();
     }
-    
     private void Start()
     {
         renderers = new List<Renderer>(GetComponentsInChildren<Renderer>());
     }
-
     public void Update()
     {
         GetInput();
@@ -42,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
     }
-
     void Move()
     {
         Vector3 inputDirection = new Vector3(hAxis, 0, vAxis);
@@ -62,17 +62,23 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(moveVec);
         }
     }
-    
     public void GetHit()
     {
         anim.SetTrigger("GetHit");
         Flash();
         var playerAttack = GetComponent<PlayerAttack>();
-        if (playerAttack != null)
-        {
-            playerAttack.DisableSwordCollider();
-        }
+        if (playerAttack != null) {playerAttack.DisableSwordCollider();}
         else{Debug.Log("isattacking변경실패");}
+    }
+    public void TakeDamage(int damage)
+    {
+        if (Time.time >= lastDamagedTime + invincibleTime)
+        {
+            stat.Cur_HP -= damage;
+            lastDamagedTime = Time.time;
+        }
+        
+        //if (stat.Cur_HP <= 0) { }
     }
     
     public void Flash()

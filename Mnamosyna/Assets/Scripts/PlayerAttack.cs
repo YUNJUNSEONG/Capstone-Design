@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     Animator anim;
-    //public Collider SwordCollider;
+
     public bool isAttacking = false;
     private void Start()
     {
