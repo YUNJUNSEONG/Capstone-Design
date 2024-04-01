@@ -7,9 +7,9 @@ public class MonsterAttack : MonoBehaviour
 {
     private void OnCollisionEnter(Collision other)
     {
-        MeleeMonster meleeMonster = transform.parent.GetComponentInParent<MeleeMonster>();
+        Monster monster = transform.parent.GetComponentInParent<Monster>();
         
-        if(meleeMonster.isAttacking)
+        if(monster.isAttack)
         {
             other.gameObject.GetComponent<PlayerMovement>().GetHit();
         }

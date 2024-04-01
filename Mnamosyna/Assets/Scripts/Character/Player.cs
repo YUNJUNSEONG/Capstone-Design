@@ -268,7 +268,7 @@ public class Player : MonoBehaviour
     }
 
 
-    // 피격
+    /*/ 피격
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("monsterAttack"))
@@ -280,7 +280,7 @@ public class Player : MonoBehaviour
                     Monster monster = other.GetComponent<Monster>(); // 몬스터 GameObject의 Monster 스크립트를 가져옴
                     if (monster != null)
                     {
-                        int damage = monster.Damage(); // 몬스터의 Damage() 메서드 호출
+                        int damage = monster.Attack.Damage(); // 몬스터의 Damage() 메서드 호출
                                                       
                         int finalDamage = Mathf.RoundToInt(damage * (1 - stat.defense)); // 피해 감소 적용
                         stat.cur_hp = Mathf.Max(0, stat.cur_hp - finalDamage);
@@ -296,7 +296,7 @@ public class Player : MonoBehaviour
             }
         }
     }
-
+    */
     IEnumerator TakeDamage()
     {
         if(!isInvincible)

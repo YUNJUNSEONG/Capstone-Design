@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
+/*
 public class Bat : Monster
 {
     // 원거리 몬스터의 경우 ( 스킬 = 원거리 공격 )으로 설정 
@@ -191,3 +192,4 @@ public class Bat : Monster
     }
 
 }
+*/

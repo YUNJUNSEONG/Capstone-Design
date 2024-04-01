@@ -14,7 +14,7 @@ public class MeleeMonster : MonoBehaviour
         Die
     }
     private MonsterState currentState;
-    [SerializeField] public float MaxHP;
+    [SerializeField]  public float MaxHP;
     [SerializeField] public float CurrentHP;
     [SerializeField] private float ATK;
     [SerializeField] private float SkillATK;
@@ -54,7 +54,7 @@ public class MeleeMonster : MonoBehaviour
     private static readonly int Attack03Hash = Animator.StringToHash("Attack03");
     private static readonly int RunHash = Animator.StringToHash("Run");
     private static readonly int GetHitHash = Animator.StringToHash("GetHit");
-    private static readonly int DieHash = Animator.StringToHash("Die");
+    private static readonly int DieHash = Animator.StringToHash("Die"); 
     
     //공격받을때 깜빡이는 용도
     private float flashDuration = 0.1f;
@@ -65,7 +65,7 @@ public class MeleeMonster : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         animator = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>(); 
         agent.stoppingDistance = distance;
         random = new System.Random();
         exclamationMark.SetActive(false);
