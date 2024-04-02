@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 public class Dragon : Monster
 {
     // 원거리 몬스터의 경우 ( 스킬 = 원거리 공격 )으로 설정 
@@ -190,4 +190,4 @@ public class Dragon : Monster
         nav.destination = player.position;
     }
 
-}
+}*/

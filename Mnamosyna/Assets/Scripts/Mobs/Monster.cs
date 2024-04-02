@@ -142,7 +142,7 @@ public class Monster : MobStat
         switch (skillIndex)
         {
             case 0:  //기본 공격
-                if (Skill1CanUse<=0)
+                if (Skill1CanUse<=0 && attack1Radius <= 0)
                 {
                     Skill1();
                     Damage(skillIndex);
@@ -151,7 +151,7 @@ public class Monster : MobStat
                 else { anim.SetTrigger(BattleIdleHash); }
                 break;
             case 1: // 스킬 공격1
-                if (Skill2CanUse<=0)
+                if (Skill2CanUse<=0 && attack2Radius <= 0)
                 {
                     Skill2();
                     Damage(skillIndex);
@@ -160,7 +160,7 @@ public class Monster : MobStat
                 else { anim.SetTrigger(BattleIdleHash); }
                 break;
             case 2: //스킬 공격2
-                if (Skill3CanUse<=0)
+                if (Skill3CanUse<=0 && attack3Radius <= 0)
                 {
                     Skill3();
                     Damage(skillIndex);
