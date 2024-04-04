@@ -117,10 +117,6 @@ public class PlayerStat : MonoBehaviour
         move_speed += skill.LinkMoveSpeedMultiplier;
     } */
 
-    public void Awake()
-    {
-        instance = this;
-    }
     public void Update()
     {
         //ApplySkill();
