@@ -28,28 +28,43 @@ public class AttackRange : MonoBehaviour
     }
 }
 
-//원본
+//수정
 /*public class AttackRange : MonoBehaviour
 {
-    public MeleeMonster monster;
+    public Monster monster;
     public PlayerMovement player;
+    public CapsuleCollider Distance;
+
     void OnTriggerStay(Collider other)
     {
-        monster.ChangeState(MeleeMonster.MonsterState.Attack);
-        
-        if (monster.isAttacking)
+        monster.ChangeState(Monster.MonsterState.Attack);
+
+        if (monster.isAttack)
         {
-            if (other.gameObject.TryGetComponent<PlayerMovement>(out PlayerMovement player)) 
-            {player.TakeDamage(15);}
+            if (other.gameObject.TryGetComponent<PlayerMovement>(out PlayerMovement player))
+            {
+                player.TakeDamage(monster.Damage(0)); //monster의 데미지 0번 = 일반 공격
+            }
         }
-        
-        //if (other.gameObject.tag == "Player"){monster.ChangeState(MeleeMonster.MonsterState.Attack);}
-        
+
+        if (other.gameObject.tag == "Player"){monster.ChangeState(Monster.MonsterState.Attack);}
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        monster.ChangeState(MeleeMonster.MonsterState.Chase);
-        //if(other.gameObject.tag == "Player") {monster.ChangeState(MeleeMonster.MonsterState.Chase);}
+        monster.ChangeState(Monster.MonsterState.Chase);
+        if(other.gameObject.tag == "Player") {monster.ChangeState(Monster.MonsterState.Chase);}
+    }
+
+    void Awake()
+    {
+        Distance = GetComponent<CapsuleCollider>();
+        SetMaxDistance();
+    }
+
+    void SetMaxDistance()
+    {
+        Distance.radius = monster.patrol_radius;
     }
 }*/

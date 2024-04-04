@@ -8,28 +8,32 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
 
-public class Player : MonoBehaviour
+public class Player : PlayerStat
 {
-    public static Player instance;
     public PlayerStat stat;
 
 
     float hAxis;
     float vAxis;
+
     bool leftDown;
     bool rightDown;
     bool shiftDown;
     bool isBorder;
     bool isDamage;
-    public static bool isAttack;
-    public static bool isDash;
+    public bool isAttack;
+    public bool isDash;
 
     public Camera followCamera;
     public bool isAttackReady = true;
 
-    public float invincibilityTime = 1.5f; // 무적 지속 시간
-    private bool isInvincible = false; // 무적 상태 여부
-    private float invincibilityTimer = 0f; // 무적 지속 시간을 카운트하기 위한 타이머
+    public float invincibleTime = 1.0f; // 무적 지속 시간
+    private float lastDamagedTime;
+
+    //공격받을때 깜빡이는 용도
+    private float flashDuration = 0.1f;
+    private int flashCount = 4;
+    private List<Renderer> renderers;
 
 
     Vector3 moveVec;
@@ -63,7 +67,7 @@ public class Player : MonoBehaviour
         get { return skillCammand; }
         set { skillCammand = value; }
     }
-    //
+ 
 
     float attackDelay;
 
@@ -84,7 +88,7 @@ public class Player : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         GetInput();
         Move();
@@ -95,15 +99,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interaction();
-        }
-        if (isInvincible)
-        {
-            invincibilityTimer -= Time.deltaTime;
-            if (invincibilityTimer <= 0)
-            {
-                isInvincible = false;
-            }
-
         }
     }
 
@@ -234,20 +229,21 @@ public class Player : MonoBehaviour
             }
         }
     }
-
+    // 공격 끝났는지 확인하는 코루틴 => 삭제 가능성 높음
     IEnumerator AttackEnd(float attackTime, string animationBool)
     {
         anim.SetTrigger(animationBool);
         yield return new WaitForSeconds(attackTime/2);
         isAttack = false;
     }
+    // 플레이어의 스킬 커맨드 초기화 코루틴
     IEnumerator ClearCommand()
     {
         yield return new WaitForSeconds(3);
         skillCammand = " ";
     }
 
-    // 데미지 설정
+    // 플레이어의 데미지 설정
     public int Damage()
     {
         int baseDamage = Random.Range(stat.min_atk, stat.max_atk+1);
@@ -297,39 +293,66 @@ public class Player : MonoBehaviour
         }
     }
     */
-    IEnumerator TakeDamage()
+
+    // 피격 메서드
+    public void GetHit()
     {
-        if(!isInvincible)
+        anim.SetTrigger("GetHit");
+        Flash();
+        var playerAttack = GetComponent<PlayerAttack>();
+        if (playerAttack != null) { playerAttack.DisableSwordCollider(); }
+        else { Debug.Log("isattack변경실패"); }
+    }
+
+    //몬스터의 공격에 의한 데미지를 방어력 계산을 통해 최종 데미지 산출
+    public void TakeDamage(int damage)
+    {
+        if (Time.time >= lastDamagedTime + invincibleTime)
         {
-            isDamage = true;
-            foreach (SkinnedMeshRenderer mesh in meshs)
-            {
-                mesh.material.color = Color.red;
-            }
+            // 최종 데미지 = 플레이어의 공격데미지 * (1 - 방어력%)
+            int finalDamage = Mathf.RoundToInt(damage * (1 - Defense));
+            Cur_HP -= finalDamage;
+            lastDamagedTime = Time.time;
 
-            yield return new WaitForSeconds(1f);
-            isDamage = false;
-
-            foreach (SkinnedMeshRenderer mesh in meshs)
-            {
-                mesh.material.color = Color.white;
-            }
-
-            // 무적 상태로 설정
-            isInvincible = true;
-            invincibilityTimer = invincibilityTime;
         }
 
+        //if (stat.Cur_HP <= 0) { Die() }
+    }
+
+    // 피격시 점멸상태(무적 상태)
+    public void Flash()
+    {
+        StartCoroutine(DoFlash());
+    }
+    // 점멸 코루틴
+    private IEnumerator DoFlash()
+    {
+        for (int i = 0; i < flashCount; i++)
+        {
+            foreach (Renderer renderer in renderers)
+            {
+                renderer.enabled = false;
+            }
+
+            yield return new WaitForSeconds(flashDuration);
+
+            foreach (Renderer renderer in renderers)
+            {
+                renderer.enabled = true;
+            }
+
+            yield return new WaitForSeconds(flashDuration);
+        }
     }
 
     // 자동 회복 시스템
     void Recover()
     {
         // 체력 자동 회복
-        if (stat.cur_hp > 0 && stat.cur_hp < stat.max_hp)
+        if (Cur_HP > 0 && Cur_HP < Max_HP)
         {
-            stat.cur_hp += Mathf.RoundToInt(stat.hp_recover * Time.deltaTime);
-            stat.cur_hp = Mathf.Clamp(stat.cur_hp, 0, stat.max_hp);
+            Cur_HP += Mathf.RoundToInt(HP_Recover * Time.deltaTime);
+            Cur_HP = Mathf.Clamp(Cur_HP, 0, Max_HP);
 
             /* float deltaTimeValue = Time.deltaTime;
             Debug.Log("DeltaTime Value: " + deltaTimeValue);
@@ -338,14 +361,15 @@ public class Player : MonoBehaviour
         }
 
         // 스테미나 자동 회복
-        if (stat.cur_stamina < stat.max_stamina)
+        if (Cur_Stamina < Max_Stamina)
         {
-            stat.cur_stamina += Mathf.RoundToInt(stat.stamina_recover * Time.deltaTime);
-            stat.cur_stamina = Mathf.Clamp(stat.cur_stamina, 0, stat.max_stamina);
+            Cur_Stamina += Mathf.RoundToInt(Stamina_Recover * Time.deltaTime);
+            Cur_Stamina = Mathf.Clamp(Cur_Stamina, 0, Max_Stamina);
 
         }
     }
 
+    // 플레이어 대쉬
     void Dash()
     {
         //if (unlockSkills.Count > 0)
@@ -371,6 +395,7 @@ public class Player : MonoBehaviour
         //}
     }
 
+    // 스킬 사용 메서드
     private void UseSkill()
     {
         for (int i = unlockSkills.Count - 1; i >= 0; i--)
@@ -397,6 +422,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // 플레이어 상호작용 메서드
     void Interaction()
     {
         // 플레이어와 상호작용할 수 있는 모든 Collider를 가져옴

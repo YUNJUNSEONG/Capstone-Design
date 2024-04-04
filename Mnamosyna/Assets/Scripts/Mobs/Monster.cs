@@ -33,6 +33,7 @@ public class Monster : MobStat
 
     protected const float WAIT_TIME = 0.2f;
     public bool isAttack;
+    public bool isSkill;
     protected bool isChase;
     protected bool isDamage = false;
     protected bool isDead = false;
@@ -136,40 +137,42 @@ public class Monster : MobStat
     public void Attack()
     {
         RotateMonsterToCharacter();
-        // 쿨타임이 0이하 인 공격중 랜덤하게 출력
+        // 쿨타임이 0이하인 공격중 랜덤하게 출력
         int skillIndex = random.Next(0, NumberOfSkills);
+        isSkill = false;
 
         switch (skillIndex)
         {
             case 0:  //기본 공격
-                if (Skill1CanUse<=0 && attack1Radius <= 0)
+                if (Skill1CanUse <= 0 && attack1Radius <= 0)
                 {
+                    isSkill = false;
                     Skill1();
-                    Damage(skillIndex);
                     Skill1CanUse = SkillCoolTime1;
                 }
                 else { anim.SetTrigger(BattleIdleHash); }
                 break;
             case 1: // 스킬 공격1
-                if (Skill2CanUse<=0 && attack2Radius <= 0)
+                if (Skill2CanUse <= 0 && attack2Radius <= 0)
                 {
+                    isSkill = true;
                     Skill2();
-                    Damage(skillIndex);
                     Skill2CanUse = SkillCoolTime2;
                 }
                 else { anim.SetTrigger(BattleIdleHash); }
                 break;
             case 2: //스킬 공격2
-                if (Skill3CanUse<=0 && attack3Radius <= 0)
+                if (Skill3CanUse <= 0 && attack3Radius <= 0)
                 {
+                    isSkill = true;
                     Skill3();
-                    Damage(skillIndex);
                     Skill3CanUse = SkillCoolTime3;
                 }
                 else { anim.SetTrigger(BattleIdleHash); }
                 break;
         }
     }
+
     // 공격 애니메이션
     void Skill1()
     {

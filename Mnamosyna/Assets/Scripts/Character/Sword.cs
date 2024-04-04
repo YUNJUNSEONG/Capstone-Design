@@ -4,34 +4,46 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-    public PlayerStat stat;
-    public BoxCollider attackArea;
+    public Player player;
+    public Collider attackArea;
     public TrailRenderer trailEffect;
 
-    Coroutine attackCoroutine;
-    private int atk;
+    private void Awake()
+    {
+        attackArea = GetComponent<Collider>();
+    }
 
     public void Use(float attackTime, int Atk)
     {
-        atk = Atk;
-        if (attackCoroutine != null)
-        {
-            StopCoroutine(attackCoroutine);
-        }
-
-        attackCoroutine = StartCoroutine(Attack(attackTime, Atk));
+        StartCoroutine(Attack(attackTime, Atk));
     }
 
-
-    IEnumerator Attack(float attackTime, int Atk)
+    private IEnumerator Attack(float attackTime, int Atk)
     {
-        atk = Atk;
-        yield return new WaitForSeconds(0.1f);
         attackArea.enabled = true;
         trailEffect.enabled = true;
 
-        yield return new WaitForSeconds(attackTime/1.5F - 0.1f);
+        yield return new WaitForSeconds(attackTime / 1.5f);
+
         attackArea.enabled = false;
         trailEffect.enabled = false;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (player.isAttack )
+        {
+            if (other.gameObject.TryGetComponent<Monster>(out Monster monster)) { monster.TakeDamage(player.Damage()); }
+            //else {Debug.Log("몬스터정보를 가져올수 없음");}
+        }
+        /*
+         * if (player.isAttack && other.CompareTag("Monster"))
+        {
+            Monster monster = other.GetComponent<Monster>();
+            if (monster != null)
+            {
+                monster.TakeDamage(player.Damage());
+            }
+        */
     }
 }

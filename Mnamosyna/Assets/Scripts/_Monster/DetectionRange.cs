@@ -15,10 +15,12 @@ public class DetectionRange : MonoBehaviour
     }
 }
 
-//원본
+//수정
 /*public class DetectionRange : MonoBehaviour
 {
-    public MeleeMonster monster; 
+    public Monster monster; 
+    public CapsuleCollider Distance;
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -26,5 +28,16 @@ public class DetectionRange : MonoBehaviour
             //Debug.Log("플레이어가 범위 안에 들어옴");
             monster.ChangeState(MeleeMonster.MonsterState.Chase);
         }
+    }
+
+    void Awake()
+    {
+        Distance = GetComponent<CapsuleCollider>();
+        SetMaxDistance();
+    }
+
+    void SetDetectionDistance()
+    {
+        Distance.radius = monster.patrol_radius;
     }
 }*/

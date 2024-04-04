@@ -614,6 +614,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7799609617867364998, guid: 09216f358f215094a8ec9d00cebab613, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2117924248}
+    - targetCorrespondingSourceObject: {fileID: 7799609617867364998, guid: 09216f358f215094a8ec9d00cebab613, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2117924249}
   m_SourcePrefab: {fileID: 100100000, guid: 09216f358f215094a8ec9d00cebab613, type: 3}
 --- !u!4 &102158187 stripped
 Transform:
@@ -7073,6 +7076,23 @@ MonoBehaviour:
   maxX: -19
   minZ: 50
   maxZ: 70
+--- !u!114 &2117924249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117924247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c25d924083b39443858cca0b669be41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterPrefabs: []
+  magicComponents: []
+  NumberOfMonsters: 0
+  spawnCount: 0
+  aliveCount: 0
 --- !u!1001 &2129484554
 PrefabInstance:
   m_ObjectHideFlags: 0
