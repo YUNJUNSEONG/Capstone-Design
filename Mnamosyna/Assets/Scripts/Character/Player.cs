@@ -78,12 +78,12 @@ public class Player : PlayerStat
         sword = GetComponentInChildren<Sword>();
         meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
         stat = GetComponent<PlayerStat>();  
-        instance = this;
     }
     void Start()
     {
-        stat.cur_hp = PlayerStat.instance.max_hp;
-        stat.cur_stamina = PlayerStat.instance.max_stamina;
+        renderers = new List<Renderer>(GetComponentsInChildren<Renderer>());
+        Cur_HP = Max_HP;
+        Cur_Stamina = Max_Stamina;
     }
 
 
