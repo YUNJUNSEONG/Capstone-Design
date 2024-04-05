@@ -19,7 +19,7 @@ MonoBehaviour:
   Id: 3
   Name: F COMBO3
   Image: {fileID: 21300000, guid: 58e3f8ca3bacf0f4a8fff7e801b73cd1, type: 3}
-  Description: 
+  Description: .
   isUnlock: 0
   childSkill:
   - {fileID: 11400000, guid: a34e6ce4bef2af244bc77d50bfb7cef8, type: 2}
@@ -29,9 +29,9 @@ MonoBehaviour:
   Command: LSRL
   AnimationTrigger: IsSkillLSRL
   AnimationTime: 3.2333333
-  damagePercent: 1
-  addDmg: 10
-  useStamina: 10
+  damagePercent: 1.25
+  addDmg: 0.15
+  useStamina: 32
   MaxHPBonus: 0
   HealthRecoverBonus: 0
   StaminaRecoverBonus: 0

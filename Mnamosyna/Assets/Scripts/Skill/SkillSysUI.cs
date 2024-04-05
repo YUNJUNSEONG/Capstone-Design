@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/*
 namespace skill
 {
     public class SkillSysUI : MonoBehaviour
@@ -13,7 +13,7 @@ namespace skill
         {
             for (int i = 0; i < manager.choices.Length; i++)
             {
-                manager.choices[i].transform.GetChild(0).GetComponent<Image>().sprite = manager.playerCon.allSkills[manager.LevelUpSkills[i]].Image;
+                manager.choices[i].transform.GetChild(0).GetComponent<Image>().sprite = manager.playerCon.UnlockSkills[manager.LevelUpSkills[i]].Image;
 
                 manager.choices[i].transform.GetChild(1).GetComponent<Text>().text =
                     manager.playerCon.UnlockSkills[manager.LevelUpSkills[i]].Name.ToString() + '(' + manager.playerCon.UnlockSkills[manager.LevelUpSkills[i]].Command.ToString() + ')' + " Lv." + manager.playerCon.UnlockSkills[manager.LevelUpSkills[i]].Level;
@@ -27,7 +27,7 @@ namespace skill
 
                 if (manager.playerCon.UnlockSkills[manager.LevelUpSkills[i]].Level < manager.playerCon.UnlockSkills[manager.LevelUpSkills[i]].maxLevel)
                 {
-                    manager.choices[i].transform.GetChild(3).GetComponentInChildren<Text>().text = "Level Up";
+                    manager.choices[i].transform.GetChild(3).GetComponentInChildren<Text>().text = "UnLock Skill";
                 }
                 else
                 {
@@ -68,4 +68,4 @@ namespace skill
         }
     }
 }
-
+*/
