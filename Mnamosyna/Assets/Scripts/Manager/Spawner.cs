@@ -26,18 +26,8 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        waitTime -= Time.deltaTime;
     }
 
-    public void SpawnWaves()
-    {
-        for (int i = 0; i < waveMonsters.Count; i++)
-        {
-            SpawnWave(waveMonsters[i], numOfMonsters[i]);
-        }
-    }
-
-    /*
     public void SpawnWaves()
     {
         StartCoroutine(SpawnWavesCoroutine());
@@ -51,24 +41,35 @@ public class Spawner : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
         }
     }
-    */
+
     void SpawnWave(GameObject[] waveMonsters, int numOfMonster)
     {
-        Vector3 randomPoint = GetRandomPointInCollider(spawnAreaCollider);
 
-        GameObject selectedMonster = waveMonsters[Random.Range(0, waveMonsters.Length)];
-        GameObject monster = Instantiate(selectedMonster, randomPoint, Quaternion.identity);
-
-        // 몬스터죽으면 어라이브카운트 줄이는 함수를 몬스터쪽에서 불러오기 위한것
-        var Monster = monster.GetComponent<Monster>();
-        if (monster != null) 
+        for (int i = 0; i < numOfMonster; i++)
         {
-            //Monster.spawner = this;
+            Vector3 randomPoint = GetRandomPointInCollider(spawnAreaCollider);
+            GameObject selectedMonster = waveMonsters[Random.Range(0, waveMonsters.Length)];
+            GameObject monster = Instantiate(selectedMonster, randomPoint, Quaternion.identity);
+
+            // 몬스터죽으면 어라이브카운트 줄이는 함수를 몬스터쪽에서 불러오기 위한것
+            var Monster = monster.GetComponent<Monster>();
+            if (Monster != null)
+            {
+                Monster.spawner = this;
+            }
+        }
+    }
+
+    public void CheckAliveCount()
+    {
+        if (aliveCount <= 0 )//&& spawnCount<=0)
+        {
+            foreach (Magic0 magic in magicComponents) { magic.EnableComponents(); }
         }
     }
 
 
-        int GetTotalNumOfMonsters()
+    int GetTotalNumOfMonsters()
     {
         int total = 0;
         foreach (int num in numOfMonsters)

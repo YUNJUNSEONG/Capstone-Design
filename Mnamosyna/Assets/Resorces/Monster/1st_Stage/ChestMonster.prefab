@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 8461617736356750194}
   - component: {fileID: 1413485841263608427}
   - component: {fileID: 3411835885524163523}
+  - component: {fileID: 107908662603297239}
   m_Layer: 8
   m_Name: ChestMonster
   m_TagString: Monster
@@ -293,6 +294,40 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.75, z: 0.24}
+--- !u!114 &107908662603297239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942183099666616633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34d7dfc1db403e4db3299d15ace3c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Mimic
+  Max_HP: 30
+  Cur_HP: 60
+  ATK: 8
+  Skill_ATK1: 15
+  Skill_ATK2: 0
+  NumberOfSkills: 2
+  SkillCoolTime1: 5
+  SkillCoolTime2: 10
+  SkillCoolTime3: 0
+  Defense: 0
+  Move_Speed: 1
+  Distance: 0
+  patrolRadius: 15
+  attack1Radius: 1
+  attack2Radius: 2
+  attack3Radius: 0
+  invincibleTime: 1
+  spawner: {fileID: 0}
+  exclamationMark: {fileID: 1317033892894586279}
+  isAttack: 0
+  isSkill: 0
 --- !u!1 &6490341142810646243
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +338,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7455245378973367794}
   - component: {fileID: 7483196609024263805}
-  - component: {fileID: 4953424414781278154}
+  - component: {fileID: 3407104687029314617}
+  - component: {fileID: 5078700992796842970}
   m_Layer: 0
   m_Name: AttackRange
   m_TagString: Untagged
@@ -349,7 +385,30 @@ CapsuleCollider:
   m_Height: 2.6654642
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4953424414781278154
+--- !u!136 &3407104687029314617
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6490341142810646243}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5078700992796842970
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -358,11 +417,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6490341142810646243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f14c00cc73edc444c9e12c7b7ed3b7c6, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 107908662603297239}
   player: {fileID: 0}
+  attackDistance: {fileID: 7483196609024263805}
+  skillDistance: {fileID: 3407104687029314617}
 --- !u!1 &7099649415346723012
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,7 +492,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 107908662603297239}
+  Distance: {fileID: 8776180140896894354}
 --- !u!1 &7828686562257015740
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,6 +583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 2942183099666616633}
+  Monster: {fileID: 0}
 --- !u!1 &8294281529625999520
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,6 +675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 2942183099666616633}
+  Monster: {fileID: 107908662603297239}
 --- !u!114 &2190771380282692788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,8 +757,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Distance: {fileID: 0}
+  monster: {fileID: 107908662603297239}
+  Distance: {fileID: 7109387495368838035}
 --- !u!1001 &2529288333518280604
 PrefabInstance:
   m_ObjectHideFlags: 0

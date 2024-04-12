@@ -99,7 +99,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1289597353276475099}
   - component: {fileID: 4610096038399954637}
-  - component: {fileID: 5770378488607876782}
+  - component: {fileID: 6159041694133056516}
+  - component: {fileID: 3474673102611944305}
   m_Layer: 0
   m_Name: AttackRange
   m_TagString: Untagged
@@ -145,7 +146,30 @@ CapsuleCollider:
   m_Height: 2.6654642
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5770378488607876782
+--- !u!136 &6159041694133056516
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949271747167189938}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3474673102611944305
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,11 +178,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 949271747167189938}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f14c00cc73edc444c9e12c7b7ed3b7c6, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 7408416599904293729}
+  monster: {fileID: -6614494447403837572}
   player: {fileID: 0}
+  attackDistance: {fileID: 4610096038399954637}
+  skillDistance: {fileID: 6159041694133056516}
 --- !u!1 &1950705685860383456
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 7451204239203880121}
+  Monster: {fileID: -6614494447403837572}
 --- !u!114 &8453862224347198152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,6 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 7451204239203880121}
+  Monster: {fileID: 0}
 --- !u!1 &5470302780523336650
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,7 +551,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 7408416599904293729}
+  monster: {fileID: -6614494447403837572}
+  Distance: {fileID: 7425995676275712624}
 --- !u!1 &7451204239203880121
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,10 +563,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4326131614170588110}
   - component: {fileID: 1905300305952124795}
-  - component: {fileID: 7408416599904293729}
   - component: {fileID: 8425731846770920552}
   - component: {fileID: 4247397414704265557}
   - component: {fileID: 7927610473219805021}
+  - component: {fileID: -6614494447403837572}
   m_Layer: 8
   m_Name: Plant
   m_TagString: Monster
@@ -576,35 +605,6 @@ MonoBehaviour:
   spawnEffectPrefab: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
   yVector: -1
   zVector: 0
---- !u!114 &7408416599904293729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7451204239203880121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc12d4d56e7000d4fbc9cefafa1d7867, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 30
-  CurrentHP: 30
-  ATK: 7
-  SkillATK: 12
-  DEF: 0
-  ATKSpeed: 1
-  MoveSpeed: 1
-  NumberOfSkills: 2
-  SkillCoolTime1: 3
-  SkillCoolTime2: 10
-  SkillCoolTime3: 0
-  distance: 1.5
-  patrolRadius: 30
-  invincibleTime: 1
-  spawner: {fileID: 0}
-  exclamationMark: {fileID: 455944455902947362}
-  isAttacking: 0
 --- !u!95 &8425731846770920552
 Animator:
   serializedVersion: 5
@@ -671,6 +671,40 @@ CapsuleCollider:
   m_Height: 2.58
   m_Direction: 1
   m_Center: {x: 0, y: 1.18, z: 0.03}
+--- !u!114 &-6614494447403837572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7451204239203880121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34d7dfc1db403e4db3299d15ace3c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Plant
+  Max_HP: 30
+  Cur_HP: 50
+  ATK: 9
+  Skill_ATK1: 13
+  Skill_ATK2: 0
+  NumberOfSkills: 2
+  SkillCoolTime1: 3
+  SkillCoolTime2: 8
+  SkillCoolTime3: 0
+  Defense: 0
+  Move_Speed: 1
+  Distance: 0
+  patrolRadius: 15
+  attack1Radius: 1
+  attack2Radius: 2
+  attack3Radius: 0
+  invincibleTime: 1
+  spawner: {fileID: 0}
+  exclamationMark: {fileID: 455944455902947362}
+  isAttack: 0
+  isSkill: 0
 --- !u!1 &7988357179361435425
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,8 +773,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Distance: {fileID: 0}
+  monster: {fileID: -6614494447403837572}
+  Distance: {fileID: 8561671168935697917}
 --- !u!1001 &6329464743068822949
 PrefabInstance:
   m_ObjectHideFlags: 0

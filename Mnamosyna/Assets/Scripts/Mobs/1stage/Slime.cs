@@ -17,7 +17,7 @@ public class Slime : Monster
         anim.SetTrigger(DieHash);
         nav.isStopped = true;
         anim.SetBool(RunHash, false);
-        Knockback();
+        //Knockback();
         Invoke("Spawn", 1.0f);
         Invoke("DestroyObject", 2.0f);
         Collider collider = GetComponent<Collider>();

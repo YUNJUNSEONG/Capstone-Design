@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public class AttackRange : MonoBehaviour
 {
     public MeleeMonster monster;
@@ -26,10 +27,10 @@ public class AttackRange : MonoBehaviour
         monster.ChangeState(MeleeMonster.MonsterState.Chase);
         //if(other.gameObject.tag == "Player") {monster.ChangeState(MeleeMonster.MonsterState.Chase);}
     }
-}
+}*/
 
-//¼öÁ¤
-/*public class AttackRange : MonoBehaviour
+
+public class AttackRange : MonoBehaviour
 {
     public Monster monster;
     public PlayerMovement player;
@@ -67,4 +68,4 @@ public class AttackRange : MonoBehaviour
     {
         Distance.radius = monster.patrol_radius;
     }
-}*/
+}

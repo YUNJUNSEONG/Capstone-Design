@@ -11,7 +11,7 @@ public class MonsterAttack : MonoBehaviour
         
         if(monster.isAttack)
         {
-            other.gameObject.GetComponent<PlayerMovement>().GetHit();
+            other.gameObject.GetComponent<Player>().GetHit();
         }
     }
 }

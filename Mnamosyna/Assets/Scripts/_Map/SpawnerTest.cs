@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnerTest : MonoBehaviour
 {
-    public MonsterSpawner monsterSpawner;
+    public Spawner spawner;
     //[SerializeField] private GameObject monsterSpawnerObj;
     void Start()
     {
@@ -17,12 +17,12 @@ public class SpawnerTest : MonoBehaviour
         //monsterSpawner = monsterSpawnerObj.GetComponent<MonsterSpawner>();
         */
         
-        if(monsterSpawner == null)
+        if(spawner == null)
         {
             Debug.LogError("스크립트 못찾");
             return;
         }
-
+         
     }
     void OnTriggerEnter(Collider other)
     {
@@ -30,7 +30,8 @@ public class SpawnerTest : MonoBehaviour
         {
             GetComponent<Collider>().enabled = false;
             Debug.Log("몬스터스폰");
-            monsterSpawner.SpawnMonster();
+            spawner.SpawnWaves();
+            spawner.waitTime -= Time.deltaTime;
         }
     }
 }

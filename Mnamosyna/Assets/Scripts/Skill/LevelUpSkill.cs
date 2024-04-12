@@ -1,9 +1,9 @@
-//using skill;
+using skill;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
+
 namespace skill
 {
     public class LevelUpSkill : MonoBehaviour
@@ -19,6 +19,7 @@ namespace skill
             while (choice < 3)
             {
                 int rand = UnityEngine.Random.Range(0, manager.playerCon.UnlockSkills.Count);
+
                 if (manager.LevelUpSkills.Contains(rand))
                 {
                     continue;
@@ -34,4 +35,3 @@ namespace skill
         }
     }
 }
-*/

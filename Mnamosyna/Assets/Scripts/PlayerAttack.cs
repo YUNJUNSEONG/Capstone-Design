@@ -14,11 +14,11 @@ public class PlayerAttack : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
     }
 
-    void OnLeftAttack()
+    /*void OnLeftAttack()
     {
-        if (!isAttacking){anim.SetTrigger("LeftAttack");}
+        if (!isAttack){anim.SetTrigger("LeftAttack");}
         
-    }
+    }*/
     public void EnableSwordCollider() {isAttacking = true;}
     public void DisableSwordCollider() {isAttacking = false;}
 }

@@ -1,4 +1,3 @@
-//using Eliot.AgentComponents;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-/*
+
 namespace skill
 {
     public class SkillManager : MonoBehaviour
@@ -15,13 +14,18 @@ namespace skill
         public GameObject player;
         public Player playerCon;
 
-        public List<SkillData> LevelUpSkills; //레벨 업 가능한 스킬 리스트(보유한 스킬 리스트) = unlockedSkill
+        public List<int> LevelUpSkills; //레벨 업 가능한 스킬 리스트(보유한 스킬 리스트) = unlockedSkill
         public List<SkillData> LockedSkills; //잠겨있는(잠금해제 가능한)스킬 리스트
         public List<SkillData> allSkills; //모든 스킬을 담아두는 리스트
+        List<SkillData> initialSkills = new List<SkillData>();
+
+        public GameObject[] choices = new GameObject[3];
 
         public Text CommandText;
         public List<SkillData> skillUI;
         public Image DashUI;
+
+        public GameObject LevelBase;
 
         private void Awake()
         {
@@ -35,7 +39,7 @@ namespace skill
         {
             playerCon = player.GetComponent<Player>();
 
-            LevelUpSkills = new List<SkillData>();
+            //LevelUpSkills = new List<SkillData>();
 
             LockedSkills = new List<SkillData>();
             SkillData[] allSkills = Resources.LoadAll<SkillData>("Skills"); // Skills 폴더에 있는 모든 ScriptableObject 로드
@@ -60,7 +64,6 @@ namespace skill
             List<SkillData> selectedSkills = new List<SkillData>();
 
             // 대쉬 스킬 4개를 처음 스킬로 설정
-            List<SkillData> initialSkills = new List<SkillData>();
             foreach (SkillData skill in allSkills)
             {
                 if (skill.Id == 0 || skill.Id == 15 || skill.Id == 30 || skill.Id == 45)
@@ -99,7 +102,9 @@ namespace skill
             {
                 int randIndex = Random.Range(0, initialSkills.Count);
                 SkillData randSkill = initialSkills[randIndex];
-                  
+
+                HashSet<int> selectedSkillIds = new HashSet<int>(); // 이미 선택된 스킬 ID를 기록하는 HashSet
+
                 // 이미 선택된 스킬인지 확인
                 if (!selectedSkillIds.Contains(randSkill.Id))
                 {
@@ -132,4 +137,3 @@ namespace skill
         }
     }
 }
-*/

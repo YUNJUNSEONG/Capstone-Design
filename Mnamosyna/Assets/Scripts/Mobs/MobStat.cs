@@ -10,9 +10,9 @@ public class MobStat : MonoBehaviour
 
     [Header("체력 관련")]
     [SerializeField]
-    protected int Max_HP; // 최대 체력
+    public int Max_HP; // 최대 체력
     [SerializeField]
-    protected int Cur_HP; // 현재 체력
+    public int Cur_HP; // 현재 체력
 
     [Header("공격 관련")]
     // 공격 관련 속성
@@ -44,9 +44,9 @@ public class MobStat : MonoBehaviour
 
     [Header("거리")]
     [SerializeField]
-    protected float distance;
+    protected float Distance;
     [SerializeField]
-    protected float patrolRadius = 20f;
+    protected float patrolRadius = 70f;
     [SerializeField]
     protected float attack1Radius;
     [SerializeField]
@@ -68,6 +68,7 @@ public class MobStat : MonoBehaviour
     public float defense { get { return Defense; } set { Defense = value; } }
     public float move_speed { get { return Move_Speed; } set { Move_Speed = value; } }
 
+    public float distance { get { return Distance; } set { Distance = value; } }
     public float patrol_radius { get { return patrolRadius; } set { patrolRadius = value; } }
     public float attack1_radius { get { return attack1Radius; } set { attack1Radius = value; } }
     public float attack2_radius { get { return attack2Radius; } set { attack3Radius = value; } }

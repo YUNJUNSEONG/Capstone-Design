@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,6 +28,7 @@ public class SkillData : ScriptableObject
 
     [Header("# Main Info")]
     public int Id;
+    //public int ParentId;
     public string Name;
     public Sprite Image;
     [TextArea(3, 5)]
@@ -150,4 +152,8 @@ public class SkillData : ScriptableObject
     [ShowWhen("skillType", SkillType.Link, "linkElement", Element.Air)]
     public float LinkMoveSpeedMultiplier;
 
+    public static implicit operator int(SkillData v)
+    {
+        throw new NotImplementedException();
+    }
 }

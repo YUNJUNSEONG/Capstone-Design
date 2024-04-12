@@ -9,14 +9,14 @@ public class SwordAttack : MonoBehaviour
     public PlayerAttack playerAttack;
     private void Awake()
     {
-        SwordCollider = GetComponent<Collider>();
+        SwordCollider = GetComponentInChildren<Collider>();
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (playerAttack.isAttacking)
         {
-            if (other.gameObject.TryGetComponent<MeleeMonster>(out MeleeMonster monster)) {monster.TakeDamage(15);}
+            if (other.gameObject.TryGetComponent<Monster>(out Monster monster)) {monster.TakeDamage(15);}
             //else {Debug.Log("몬스터정보를 가져올수 없음");}
         }
     }

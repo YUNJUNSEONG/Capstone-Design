@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public class DetectionRange : MonoBehaviour
 {
     public MeleeMonster monster; 
@@ -10,13 +11,13 @@ public class DetectionRange : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             //Debug.Log("플레이어가 범위 안에 들어옴");
-            monster.ChangeState(MeleeMonster.MonsterState.Chase);
+            monster.ChangeState(MeleeMonster.MonsterState. );
         }
     }
-}
+}*/
 
-//수정
-/*public class DetectionRange : MonoBehaviour
+
+public class DetectionRange : MonoBehaviour
 {
     public Monster monster; 
     public CapsuleCollider Distance;
@@ -26,18 +27,18 @@ public class DetectionRange : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             //Debug.Log("플레이어가 범위 안에 들어옴");
-            monster.ChangeState(MeleeMonster.MonsterState.Chase);
+            monster.ChangeState(Monster.MonsterState.Chase);
         }
     }
 
     void Awake()
     {
         Distance = GetComponent<CapsuleCollider>();
-        SetMaxDistance();
+        SetDetectionDistance();
     }
 
     void SetDetectionDistance()
     {
         Distance.radius = monster.patrol_radius;
     }
-}*/
+}

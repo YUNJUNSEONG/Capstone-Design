@@ -10,8 +10,6 @@ using UnityEngine.SocialPlatforms;
 
 public class Player : PlayerStat
 {
-    public PlayerStat stat;
-
 
     float hAxis;
     float vAxis;
@@ -77,7 +75,6 @@ public class Player : PlayerStat
         rigid = GetComponent<Rigidbody>();
         sword = GetComponentInChildren<Sword>();
         meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
-        stat = GetComponent<PlayerStat>();  
     }
     void Start()
     {
@@ -129,7 +126,7 @@ public class Player : PlayerStat
         if (!isBorder)
         {
             // 플레이어를 이동 방향으로 이동
-            transform.position += moveVec * stat.move_speed * Time.deltaTime;
+            transform.position += moveVec * Move_Speed * Time.deltaTime;
         }
 
         // 이동 여부에 따라 애니메이션 설정
@@ -189,7 +186,7 @@ public class Player : PlayerStat
     {
 
         attackDelay += Time.deltaTime;
-        isAttackReady = stat.atk_speed < attackDelay;
+        isAttackReady = ATK_Speed < attackDelay;
 
         if (leftDown && isAttackReady && !isAttack && !isDash)
         {
@@ -201,7 +198,7 @@ public class Player : PlayerStat
 
             if (!isAttack)
             {
-                sword.Use(stat.left_atk_speed, Damage());
+                //sword.Use(Left_ATK_Speed, Damage());
                 anim.SetTrigger("LeftAttack");
                 attackDelay = 0;
             }
@@ -212,7 +209,7 @@ public class Player : PlayerStat
    void RightAttack()
     {
         attackDelay += Time.deltaTime;
-        isAttackReady = stat.atk_speed < attackDelay;
+        isAttackReady = ATK_Speed < attackDelay;
 
         if(rightDown && isAttackReady && !isAttack && !isDash)
         {
@@ -223,7 +220,7 @@ public class Player : PlayerStat
             UseSkill();
             if (!isAttack)
             {
-                sword.Use(stat.right_atk_speed, Damage());
+                //sword.Use(Right_ATK_Speed, Damage());
                 anim.SetTrigger("RightAttack");
                 attackDelay = 0;
             }
@@ -246,14 +243,14 @@ public class Player : PlayerStat
     // 플레이어의 데미지 설정
     public int Damage()
     {
-        int baseDamage = Random.Range(stat.min_atk, stat.max_atk+1);
+        int baseDamage = Random.Range(MIN_ATK, MAX_ATK+1);
 
-        bool isCritical = Random.value < stat.crit_chance;
+        bool isCritical = Random.value < Crit_Chance;
 
         //크리티컬 확률로 크리티컬 확인 후 데미지 적용
         if (isCritical)
         {
-            int criticalDamage = Mathf.RoundToInt(baseDamage * stat.critical);
+            int criticalDamage = Mathf.RoundToInt(baseDamage * Critical);
 
             return criticalDamage;
         }
@@ -301,7 +298,7 @@ public class Player : PlayerStat
         Flash();
         var playerAttack = GetComponent<PlayerAttack>();
         if (playerAttack != null) { playerAttack.DisableSwordCollider(); }
-        else { Debug.Log("isattack변경실패"); }
+        else { Debug.Log("isattacking변경실패"); }
     }
 
     //몬스터의 공격에 의한 데미지를 방어력 계산을 통해 최종 데미지 산출
@@ -375,7 +372,7 @@ public class Player : PlayerStat
         //if (unlockSkills.Count > 0)
         //{
             attackDelay += Time.deltaTime;
-            isAttackReady = stat.atk_speed < attackDelay;
+            isAttackReady = ATK_Speed < attackDelay;
 
             if (shiftDown && isAttackReady && !isAttack && !isDash)
             {
@@ -387,7 +384,7 @@ public class Player : PlayerStat
                 UseSkill();
                 if (!isAttack)
                 {
-                    sword.Use(stat.Dash_speed, Damage());
+                    //sword.Use(Dash_speed, Damage());
                     anim.SetTrigger("Dash");
                     attackDelay = 0;
                 }
@@ -413,7 +410,7 @@ public class Player : PlayerStat
                     float floatLevelDamage = allSkills[i].Level * allSkills[i].addDmg;
                     int intLevelDamage = Mathf.RoundToInt(floatLevelDamage);
                     int skilldamage = intSkillDamage + intLevelDamage;
-                    sword.Use(allSkills[i].AnimationTime, skilldamage);
+                    //sword.Use(allSkills[i].AnimationTime, skilldamage);
                     StartCoroutine(AttackEnd(allSkills[i].AnimationTime, allSkills[i].AnimationTrigger));
                     skillCammand = " ";
                     break;

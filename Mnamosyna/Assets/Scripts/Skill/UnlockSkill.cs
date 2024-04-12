@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using skill;
-//using Eliot.AgentComponents;
+using skill;
+using System.Linq;
 
-/*
+
 namespace skill
 {
     public class UnlockSkill : MonoBehaviour
@@ -20,7 +20,7 @@ namespace skill
             while (choice < 3)
             {
                 int rand = UnityEngine.Random.Range(0, manager.LockedSkills.Count);
-                int selectedSkillId = manager.LockedSkills[rand];
+                SkillData selectedSkillId = manager.LockedSkills[rand];
 
                 if (manager.LevelUpSkills.Contains(selectedSkillId))
                 {
@@ -43,4 +43,4 @@ namespace skill
 
     }
 }
-*/
+

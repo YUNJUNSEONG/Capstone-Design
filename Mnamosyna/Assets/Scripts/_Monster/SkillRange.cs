@@ -5,8 +5,9 @@ using UnityEngine;
 public class SkillRange : MonoBehaviour
 {
     public Monster monster;
-    public PlayerMovement player;
-    public CapsuleCollider Distance;
+    public Player player;
+    public CapsuleCollider attackDistance;
+    public CapsuleCollider skillDistance;
 
     void OnTriggerStay(Collider other)
     {
@@ -16,14 +17,14 @@ public class SkillRange : MonoBehaviour
         {
             if (monster.isSkill)
             {
-                if (other.gameObject.TryGetComponent<PlayerMovement>(out PlayerMovement player))
+                if (other.gameObject.TryGetComponent(out Player player))
                 {
                     player.TakeDamage(monster.Damage(1)); //monster의 데미지 1번 = 스킬 공격
                 }
             }
             else
             {
-                if (other.gameObject.TryGetComponent<PlayerMovement>(out PlayerMovement player))
+                if (other.gameObject.TryGetComponent(out Player player))
                 {
                     player.TakeDamage(monster.Damage(0)); //monster의 데미지 0번 = 기본 공격
                 }
@@ -31,24 +32,28 @@ public class SkillRange : MonoBehaviour
 
         }
 
-        //if (other.gameObject.tag == "Player"){monster.ChangeState(Monster.MonsterState.Attack);}
-
     }
 
     private void OnTriggerExit(Collider other)
     {
         monster.ChangeState(Monster.MonsterState.Chase);
-        //if(other.gameObject.tag == "Player") {monster.ChangeState(Monster.MonsterState.Chase);}
     }
 
     void Awake()
     {
-        Distance = GetComponent<CapsuleCollider>();
+        attackDistance = GetComponent<CapsuleCollider>();
+        skillDistance = GetComponent<CapsuleCollider>();
         SetAttackDistance();
+        SetSkillDistance();
     }
 
     void SetAttackDistance()
     {
-        Distance.radius = monster.patrol_radius;
+        attackDistance.radius = monster.attack1_radius;
+    }
+
+    void SetSkillDistance()
+    {
+        skillDistance.radius = monster.attack2_radius;
     }
 }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6669798340182740744}
   - component: {fileID: 1886290447861444567}
-  - component: {fileID: 3765029672565552709}
   - component: {fileID: 3367497283479022923}
   m_Layer: 0
   m_Name: swordCollider
@@ -55,20 +54,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000001, y: 3.4937582, z: 1}
   m_Center: {x: -0.0000017672369, y: 0.45969045, z: 0.00000014882981}
---- !u!114 &3765029672565552709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2640519211731190136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3bf2b7ebc55d124a98567e2101146ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SwordCollider: {fileID: 1886290447861444567}
-  playerAttack: {fileID: 0}
 --- !u!54 &3367497283479022923
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -446,7 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947bac3708be3684d8ca96f8455275ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttacking: 0
+  isAttack: 0
 --- !u!1001 &7190512446860061726
 PrefabInstance:
   m_ObjectHideFlags: 0

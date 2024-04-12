@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-/*
+
 namespace skill
 {
     public class SkillSysUI : MonoBehaviour
@@ -68,4 +68,4 @@ namespace skill
         }
     }
 }
-*/
+

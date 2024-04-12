@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1440499111773834827}
   - component: {fileID: 6816400987205336131}
-  - component: {fileID: 4471984016669181337}
+  - component: {fileID: 7916325373356675248}
+  - component: {fileID: 2119431080111305752}
   m_Layer: 0
   m_Name: AttackRange
   m_TagString: Untagged
@@ -56,7 +57,30 @@ CapsuleCollider:
   m_Height: 2.6654642
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4471984016669181337
+--- !u!136 &7916325373356675248
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294800339092486050}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2119431080111305752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,11 +89,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 294800339092486050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f14c00cc73edc444c9e12c7b7ed3b7c6, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 1861466690282137765}
+  monster: {fileID: 1537915643745528417}
   player: {fileID: 0}
+  attackDistance: {fileID: 7916325373356675248}
+  skillDistance: {fileID: 6816400987205336131}
 --- !u!1 &920396717856191259
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,8 +106,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9049196728435991539}
   - component: {fileID: 8526550793094404415}
-  - component: {fileID: 1861466690282137765}
   - component: {fileID: 8564160130454983622}
+  - component: {fileID: 1537915643745528417}
   - component: {fileID: 3756913315902718688}
   - component: {fileID: 6359046888042998929}
   m_Layer: 8
@@ -122,35 +148,6 @@ MonoBehaviour:
   spawnEffectPrefab: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
   yVector: -1
   zVector: 0
---- !u!114 &1861466690282137765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920396717856191259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc12d4d56e7000d4fbc9cefafa1d7867, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 30
-  CurrentHP: 30
-  ATK: 7
-  SkillATK: 12
-  DEF: 0
-  ATKSpeed: 1
-  MoveSpeed: 1
-  NumberOfSkills: 2
-  SkillCoolTime1: 3
-  SkillCoolTime2: 10
-  SkillCoolTime3: 0
-  distance: 1.5
-  patrolRadius: 30
-  invincibleTime: 1
-  spawner: {fileID: 0}
-  exclamationMark: {fileID: 7981255078091787905}
-  isAttacking: 0
 --- !u!95 &8564160130454983622
 Animator:
   serializedVersion: 5
@@ -172,6 +169,40 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1537915643745528417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920396717856191259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34d7dfc1db403e4db3299d15ace3c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: mushroom
+  Max_HP: 30
+  Cur_HP: 30
+  ATK: 5
+  Skill_ATK1: 8
+  Skill_ATK2: 0
+  NumberOfSkills: 2
+  SkillCoolTime1: 8
+  SkillCoolTime2: 15
+  SkillCoolTime3: 0
+  Defense: 0
+  Move_Speed: 3
+  Distance: 0
+  patrolRadius: 50
+  attack1Radius: 1
+  attack2Radius: 2
+  attack3Radius: 0
+  invincibleTime: 1
+  spawner: {fileID: 0}
+  exclamationMark: {fileID: 7981255078091787905}
+  isAttack: 0
+  isSkill: 0
 --- !u!195 &3756913315902718688
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -209,7 +240,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -283,7 +314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 1861466690282137765}
+  monster: {fileID: 1537915643745528417}
+  Distance: {fileID: 5477578850062518024}
 --- !u!1 &2119621623524083184
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +327,7 @@ GameObject:
   - component: {fileID: 2898997800593274570}
   - component: {fileID: 1432561056661336441}
   - component: {fileID: 1723603940173523703}
-  - component: {fileID: 6029613799521324664}
+  - component: {fileID: 7346665813474272960}
   m_Layer: 5
   m_Name: HPbar_Back
   m_TagString: Untagged
@@ -360,7 +392,7 @@ MonoBehaviour:
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6029613799521324664
+--- !u!114 &7346665813474272960
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -369,10 +401,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2119621623524083184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e42cd0a296c3cf34283cfe3b6f1d5745, type: 3}
+  m_Script: {fileID: 11500000, guid: c466bac5fba56104f9939eec349952e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 0}
+  monster: {fileID: 920396717856191259}
+  Monster: {fileID: 1537915643745528417}
 --- !u!1 &2387318188362802687
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 920396717856191259}
+  Monster: {fileID: 0}
 --- !u!114 &3898785806960438607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -737,8 +771,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Distance: {fileID: 0}
+  monster: {fileID: 1537915643745528417}
+  Distance: {fileID: 3008431711392296317}
 --- !u!1001 &2827593908581869337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -871,10 +905,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7193570045358338896, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: -6422308782938267371, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f2c23146ad62b744aaeeb0752ee60058, type: 2}
+    - target: {fileID: -5535738526285863919, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -4239188401747630622, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -3265616239772803336, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -2687126687330015303, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -1579431766654217469, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 81853675755050273, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 86467488910003320, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
       propertyPath: m_Name
       value: Mushroom
@@ -882,6 +948,46 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336492164220704931, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2860527216098962178, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2860527216098962178, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_TagString
+      value: monsterAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3895283340204452548, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998404249307382989, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829179815250207425, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6274877604245403457, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798214603281958561, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778104269707667378, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648972193675931579, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5866666021909216657, guid: 158744aabfd77ee4cbb7bfa61e4c4b79, type: 3}
@@ -940,7 +1046,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.57
+  m_Radius: 0.72
   m_Center: {x: -0.59, y: 0.21, z: 0}
 --- !u!114 &677065645043095374
 MonoBehaviour:

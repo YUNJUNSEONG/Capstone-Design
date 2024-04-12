@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class MonsterHPBar : MonoBehaviour
 {
     public GameObject monster;
-    private MeleeMonster meleeMonster;
+    public Monster Monster;
     private Image hpImage;  
 
     void Start()
     {
-        meleeMonster = GetComponentInParent<MeleeMonster>();
+        Monster = GetComponentInParent<Monster>();
         GameObject hpBarObject = GameObject.Find("HPbar"); 
         hpImage = GetComponent<Image>();
         
@@ -19,6 +19,6 @@ public class MonsterHPBar : MonoBehaviour
     
     void Update()
     {
-        hpImage.fillAmount = meleeMonster.CurrentHP / meleeMonster.MaxHP;
+        hpImage.fillAmount = Monster.Cur_HP / Monster.Max_HP;
     }
 }

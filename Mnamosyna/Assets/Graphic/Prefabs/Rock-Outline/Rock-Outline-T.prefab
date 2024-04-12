@@ -3864,9 +3864,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6502647036632516265, guid: b4c55a102d509e24d977d2cf66013364, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4757700593360938618}
-    - targetCorrespondingSourceObject: {fileID: -6502647036632516265, guid: b4c55a102d509e24d977d2cf66013364, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6233892430983387695}
   m_SourcePrefab: {fileID: 100100000, guid: b4c55a102d509e24d977d2cf66013364, type: 3}
 --- !u!1 &5867861805723483838 stripped
 GameObject:
@@ -3895,19 +3892,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6336624427631804120, guid: b4c55a102d509e24d977d2cf66013364, type: 3}
---- !u!114 &6233892430983387695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5867861805723483838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c25d924083b39443858cca0b669be41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterPrefabs: []
 --- !u!4 &8297205827731857410 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b4c55a102d509e24d977d2cf66013364, type: 3}

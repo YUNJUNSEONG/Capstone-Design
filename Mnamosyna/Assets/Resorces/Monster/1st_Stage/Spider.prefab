@@ -157,8 +157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Distance: {fileID: 0}
+  monster: {fileID: 8287691618259162692}
+  Distance: {fileID: 1276587126335820479}
 --- !u!1 &4054435175422184727
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 3744123920852989011}
+  monster: {fileID: 8287691618259162692}
+  Distance: {fileID: 6448749385905138347}
 --- !u!1 &5111203060194892491
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 6188915633788669329}
+  Monster: {fileID: 8287691618259162692}
 --- !u!114 &2892388839997007370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +344,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8559269707586805242}
   - component: {fileID: 8277221798393280929}
-  - component: {fileID: 5742379122711479714}
+  - component: {fileID: 1173212807834270058}
+  - component: {fileID: 1569992980182070133}
   m_Layer: 0
   m_Name: AttackRange
   m_TagString: Untagged
@@ -388,7 +391,30 @@ CapsuleCollider:
   m_Height: 2.6654642
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5742379122711479714
+--- !u!136 &1173212807834270058
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5878129780225179587}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1569992980182070133
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -397,11 +423,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5878129780225179587}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f14c00cc73edc444c9e12c7b7ed3b7c6, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 3744123920852989011}
+  monster: {fileID: 8287691618259162692}
   player: {fileID: 0}
+  attackDistance: {fileID: 8277221798393280929}
+  skillDistance: {fileID: 1173212807834270058}
 --- !u!1 &6102838530767006400
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,10 +543,10 @@ GameObject:
   m_Component:
   - component: {fileID: 808555300645358926}
   - component: {fileID: 6492786115962270981}
-  - component: {fileID: 3744123920852989011}
   - component: {fileID: 7778178886890047706}
   - component: {fileID: 3245108686248384118}
   - component: {fileID: 4893729329934521562}
+  - component: {fileID: 8287691618259162692}
   m_Layer: 8
   m_Name: Spider
   m_TagString: Monster
@@ -557,35 +585,6 @@ MonoBehaviour:
   spawnEffectPrefab: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
   yVector: -1
   zVector: 0
---- !u!114 &3744123920852989011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6188915633788669329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc12d4d56e7000d4fbc9cefafa1d7867, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 30
-  CurrentHP: 30
-  ATK: 7
-  SkillATK: 12
-  DEF: 0
-  ATKSpeed: 1
-  MoveSpeed: 1
-  NumberOfSkills: 2
-  SkillCoolTime1: 3
-  SkillCoolTime2: 10
-  SkillCoolTime3: 0
-  distance: 1.5
-  patrolRadius: 30
-  invincibleTime: 1
-  spawner: {fileID: 0}
-  exclamationMark: {fileID: 1073488393345065777}
-  isAttacking: 0
 --- !u!95 &7778178886890047706
 Animator:
   serializedVersion: 5
@@ -650,6 +649,40 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.72
   m_Center: {x: 0, y: 0.61, z: -0.03}
+--- !u!114 &8287691618259162692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6188915633788669329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34d7dfc1db403e4db3299d15ace3c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: spider
+  Max_HP: 50
+  Cur_HP: 50
+  ATK: 4
+  Skill_ATK1: 8
+  Skill_ATK2: 0
+  NumberOfSkills: 2
+  SkillCoolTime1: 4
+  SkillCoolTime2: 8
+  SkillCoolTime3: 0
+  Defense: 0
+  Move_Speed: 5
+  Distance: 0
+  patrolRadius: 70
+  attack1Radius: 1
+  attack2Radius: 8
+  attack3Radius: 0
+  invincibleTime: 1
+  spawner: {fileID: 0}
+  exclamationMark: {fileID: 1073488393345065777}
+  isAttack: 0
+  isSkill: 0
 --- !u!1 &7919103013863216683
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 6188915633788669329}
+  Monster: {fileID: 8287691618259162692}
 --- !u!1001 &4334856270784134629
 PrefabInstance:
   m_ObjectHideFlags: 0
