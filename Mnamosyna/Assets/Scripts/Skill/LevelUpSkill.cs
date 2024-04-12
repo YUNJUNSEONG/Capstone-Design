@@ -10,6 +10,8 @@ namespace skill
     {
         SkillManager manager = new SkillManager();
         SkillSysUI ui = new SkillSysUI();
+
+
         public void levelUpPlayer(GameObject playerObject)
         {
             Time.timeScale = 0;
@@ -32,6 +34,7 @@ namespace skill
             }
 
             ui.SetLevelUpUI();
+            Time.timeScale = 1;
         }
     }
 }
