@@ -1,46 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using skill;
-using System.Linq;
 
 
-namespace skill
+public class UnlockSkill : MonoBehaviour
 {
-    public class UnlockSkill : MonoBehaviour
+    public GameObject UnlockUI;
+    private void OnTriggerEnter(Collider other)
     {
-        SkillManager manager = new SkillManager();
-        SkillSysUI ui = new SkillSysUI();
-        public void unlockPlayer(GameObject playerObject)
+        Player player = other.GetComponent<Player>(); // 충돌한 오브젝트에서 플레이어 컴포넌트 가져오기
+        SkillManager skillManager = other.GetComponent<SkillManager>(); // 충돌한 오브젝트에서 스킬 매니저 컴포넌트 가져오기
+        if (player != null && skillManager != null)
         {
-            Time.timeScale = 0;
-
-            int choice = 0;
-
-            while (choice < 3)
-            {
-                int rand = UnityEngine.Random.Range(0, manager.LockedSkills.Count);
-                SkillData selectedSkillId = manager.LockedSkills[rand];
-
-                if (manager.LevelUpSkills.Contains(selectedSkillId))
-                {
-                    continue; // 이미 보유한 스킬이면 건너뜁니다.
-                }
-                else
-                {
-                    manager.LevelUpSkills.Add(selectedSkillId); // 보유한 스킬 리스트에 추가합니다.
-                    choice++;
-                }
-            }
-
-            // UI 업데이트를 수행합니다.
-            ui.SetUnlockUI();
-
-
-            // 시간 스케일을 원래 값으로 다시 설정합니다.
-            Time.timeScale = 1;
+            OpenUnlockUpUI(skillManager);
         }
 
     }
-}
 
+    public void OpenUnlockUpUI(SkillManager skillManager)
+    {
+        // 스킬 매니저의 LevelUp 메서드를 호출합니다.
+        skillManager.Unlock();
+    }
+}

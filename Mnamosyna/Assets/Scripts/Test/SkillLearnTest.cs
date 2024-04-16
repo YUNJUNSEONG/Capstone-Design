@@ -6,6 +6,6 @@ public class SkillLearnTest : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        SkillManager.SetLearnedSkill(ref SkillManager.skill1, true);
+        SkillManager1.SetLearnedSkill(ref SkillManager1.skill1, true);
     }
 }

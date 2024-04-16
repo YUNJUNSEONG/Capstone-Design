@@ -6,134 +6,160 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace skill
+public class SkillManager : MonoBehaviour
 {
-    public class SkillManager : MonoBehaviour
+    public static SkillManager instance;
+    public GameObject player;
+    private Player playerCon;
+
+    public GameObject[] choices = new GameObject[3];
+
+    public List<int> LevelUpSkill;
+    public GameObject LevelUpBase;
+
+    public List<int> UnlockSkill;
+    public GameObject UnlockBase;
+
+
+    public List<SkillData> skillUI;
+    public Image DashUI;
+
+
+    private void Awake()
     {
-        public static SkillManager instance;
-        public GameObject player;
-        public Player playerCon;
+        if (instance == null)
+            instance = this;
 
-        public List<int> LevelUpSkills; //레벨 업 가능한 스킬 리스트(보유한 스킬 리스트) = unlockedSkill
-        public List<SkillData> LockedSkills; //잠겨있는(잠금해제 가능한)스킬 리스트
-        public List<SkillData> allSkills; //모든 스킬을 담아두는 리스트
-        List<SkillData> initialSkills = new List<SkillData>();
-
-        public GameObject[] choices = new GameObject[3];
-
-        public Text CommandText;
-        public List<SkillData> skillUI;
-        public Image DashUI;
-
-        public GameObject LevelBase;
-
-        private void Awake()
-        {
-            if (instance == null)
-                instance = this;
-
-            skillUI.Clear();
-        }
-
-        private void Start()
-        {
-            playerCon = player.GetComponent<Player>();
-
-            //LevelUpSkills = new List<SkillData>();
-
-            LockedSkills = new List<SkillData>();
-            SkillData[] allSkills = Resources.LoadAll<SkillData>("Skills"); // Skills 폴더에 있는 모든 ScriptableObject 로드
-            foreach (SkillData skill in allSkills)
-            {
-                LockedSkills.Add(skill);
-            }
-
-            // 처음 스킬 중에서 3가지를 무작위로 선택
-            List<SkillData> initialSkills = GetRandomInitialSkills(3);
-        }
-
-        private void Update()
-        {
-            CommandText.text = "Command: ";
-            CommandText.text += playerCon.SkillCammand.Length > 5 ? playerCon.SkillCammand.Substring(playerCon.SkillCammand.Length - 5, 5) : playerCon.SkillCammand;
-        }
-
-        // 가장 처음 스킬 중에서 무작위로 count개의 스킬을 선택하는 함수
-        List<SkillData> GetRandomInitialSkills(int count)
-        {
-            List<SkillData> selectedSkills = new List<SkillData>();
-
-            // 대쉬 스킬 4개를 처음 스킬로 설정
-            foreach (SkillData skill in allSkills)
-            {
-                if (skill.Id == 0 || skill.Id == 15 || skill.Id == 30 || skill.Id == 45)
-                {
-                    initialSkills.Add(skill);
-                }
-            }
-            HashSet<int> selectedSkillIds = new HashSet<int>(); // 이미 선택된 스킬 ID를 기록하는 HashSet
-
-            // count 개의 스킬 선택
-            while (selectedSkills.Count < count && initialSkills.Count > 0)
-            {
-                int randIndex = Random.Range(0, initialSkills.Count);
-                SkillData randSkill = initialSkills[randIndex];
-
-                // 이미 선택된 스킬인지 확인
-                if (!selectedSkillIds.Contains(randSkill.Id))
-                {
-                    selectedSkills.Add(randSkill);
-                    selectedSkillIds.Add(randSkill.Id); // 선택한 스킬의 ID를 기록
-                }
-                initialSkills.RemoveAt(randIndex); // 선택한 스킬은 초기 스킬 목록에서 제거
-            }
-
-            return selectedSkills;
-        }
-
-        List<SkillData> GetRandomChildSkills(int count)
-        {
-            List<SkillData> selectedSkills = new List<SkillData>();
-
-            //보유한 스킬의 자식 스킬확인
-
-            // count 개의 스킬 선택
-            while (selectedSkills.Count < count && initialSkills.Count > 0)
-            {
-                int randIndex = Random.Range(0, initialSkills.Count);
-                SkillData randSkill = initialSkills[randIndex];
-
-                HashSet<int> selectedSkillIds = new HashSet<int>(); // 이미 선택된 스킬 ID를 기록하는 HashSet
-
-                // 이미 선택된 스킬인지 확인
-                if (!selectedSkillIds.Contains(randSkill.Id))
-                {
-                    selectedSkills.Add(randSkill);
-                    selectedSkillIds.Add(randSkill.Id); // 선택한 스킬의 ID를 기록
-                }
-                initialSkills.RemoveAt(randIndex); // 선택한 스킬은 초기 스킬 목록에서 제거
-            }
-
-            return selectedSkills;
-        }
-
-        public void Dash()
-        {
-            DashUI.GetComponent<Image>().enabled = true;
-            DashUI.fillAmount = 0;
-            StartCoroutine(DashCoolTime());
-        }
-
-        IEnumerator DashCoolTime()
-        {
-            float coolTime = 2.5f;
-            while(coolTime > 0.0f)
-            {
-                coolTime -= Time.deltaTime;
-                DashUI.fillAmount = 1.0f - (coolTime / 2.5f);
-                yield return new WaitForFixedUpdate();
-            }
-            DashUI.GetComponent<Image>().enabled = false;
-        }
+        skillUI.Clear();
     }
+
+    private void Start()
+    {
+        playerCon = player.GetComponent<Player>();
+    }
+
+    public void LevelUp()
+    {
+        Time.timeScale = 0;
+        playerCon.isAttack = true;
+        playerCon.SkillCammand = "";
+        int choice = 0;
+        LevelUpSkill = new List<int>();
+        while (choice < 3)
+        {
+            int rand = UnityEngine.Random.Range(0, playerCon.UnlockSkills.Count);
+            if (LevelUpSkill.Contains(rand))
+            {
+                continue;
+            }
+            else
+            {
+                LevelUpSkill.Add(rand);
+                choice++;
+            }
+        }
+
+        SetLeveUpUI();
+    }
+
+    void SetLeveUpUI()
+    {
+        for (int i = 0; i < choices.Length; i++)
+        {
+            choices[i].transform.GetChild(0).GetComponent<Image>().sprite = playerCon.UnlockSkills[LevelUpSkill[i]].Image;
+
+            choices[i].transform.GetChild(1).GetComponent<Text>().text =
+                playerCon.UnlockSkills[LevelUpSkill[i]].Name.ToString() + '(' + playerCon.UnlockSkills[LevelUpSkill[i]].Command.ToString() + ')' + " Lv." + playerCon.UnlockSkills[LevelUpSkill[i]].Level;
+
+            if (playerCon.UnlockSkills[LevelUpSkill[i]].Level == 0)
+                choices[i].transform.GetChild(2).GetComponent<Text>().text = playerCon.UnlockSkills[LevelUpSkill[i]].Description.ToString();
+            else if (playerCon.UnlockSkills[LevelUpSkill[i]].Level < playerCon.UnlockSkills[LevelUpSkill[i]].maxLevel)
+                choices[i].transform.GetChild(2).GetComponent<Text>().text = "데미지가 " + (playerCon.UnlockSkills[LevelUpSkill[i]].damagePercent +'%' + playerCon.UnlockSkills[LevelUpSkill[i]].addDmg * playerCon.UnlockSkills[LevelUpSkill[i]].Level) + "에서 " + (playerCon.UnlockSkills[LevelUpSkill[i]].damagePercent + playerCon.UnlockSkills[LevelUpSkill[i]].addDmg * (playerCon.UnlockSkills[LevelUpSkill[i]].Level + 1)) + "로 증가합니다.";
+            else
+                choices[i].transform.GetChild(2).GetComponent<Text>().text = "이 스킬은 마스터하셨습니다.";
+
+            if (playerCon.UnlockSkills[LevelUpSkill[i]].Level < playerCon.UnlockSkills[LevelUpSkill[i]].maxLevel)
+            {
+                choices[i].transform.GetChild(3).GetComponentInChildren<Text>().text = "Level Up";
+            }
+            else
+            {
+                choices[i].transform.GetChild(3).GetComponentInChildren<Text>().text = "Close";
+            }
+        }
+
+        LevelUpBase.SetActive(true);
+    }
+
+    public void Unlock()
+    {
+        Time.timeScale = 0;
+        playerCon.isAttack = true;
+        playerCon.SkillCammand = "";
+        int choice = 0;
+        UnlockSkill = new List<int>();
+        while (choice < 3)
+        {
+            int rand = UnityEngine.Random.Range(0, playerCon.UnlockSkills.Count);
+            if (UnlockSkill.Contains(rand))
+            {
+                continue;
+            }
+            else
+            {
+                UnlockSkill.Add(rand);
+                choice++;
+            }
+        }
+
+        SetUnlockUI();
+    }
+
+    void SetUnlockUI()
+    {
+        for (int i = 0; i < choices.Length; i++)
+        {
+            choices[i].transform.GetChild(0).GetComponent<Image>().sprite = playerCon.UnlockSkills[LevelUpSkill[i]].Image;
+
+            choices[i].transform.GetChild(1).GetComponent<Text>().text =
+                playerCon.UnlockSkills[LevelUpSkill[i]].Name.ToString() + '(' + playerCon.UnlockSkills[LevelUpSkill[i]].Command.ToString() + ')' + " Lv." + playerCon.UnlockSkills[LevelUpSkill[i]].Level;
+
+            if (playerCon.UnlockSkills[LevelUpSkill[i]].Level == 0)
+                choices[i].transform.GetChild(2).GetComponent<Text>().text = playerCon.UnlockSkills[LevelUpSkill[i]].Description.ToString();
+            else if (playerCon.UnlockSkills[LevelUpSkill[i]].Level < playerCon.UnlockSkills[LevelUpSkill[i]].maxLevel)
+                choices[i].transform.GetChild(2).GetComponent<Text>().text = "데미지가 " + (playerCon.UnlockSkills[LevelUpSkill[i]].damagePercent +'%' + playerCon.UnlockSkills[LevelUpSkill[i]].addDmg * playerCon.UnlockSkills[LevelUpSkill[i]].Level) + "에서 " + (playerCon.UnlockSkills[LevelUpSkill[i]].damagePercent + playerCon.UnlockSkills[LevelUpSkill[i]].addDmg * (playerCon.UnlockSkills[LevelUpSkill[i]].Level + 1)) + "로 증가합니다.";
+            else
+                choices[i].transform.GetChild(2).GetComponent<Text>().text = "이 스킬은 마스터하셨습니다.";
+
+            if (playerCon.UnlockSkills[LevelUpSkill[i]].Level < playerCon.UnlockSkills[LevelUpSkill[i]].maxLevel)
+            {
+                choices[i].transform.GetChild(3).GetComponentInChildren<Text>().text = "Level Up";
+            }
+            else
+            {
+                choices[i].transform.GetChild(3).GetComponentInChildren<Text>().text = "Close";
+            }
+        }
+
+        LevelUpBase.SetActive(true);
+    }
+
+
+    int compareUISkills(SkillData a, SkillData b)
+    {
+        return a.Id < b.Id ? -1 : 1;
+    }
+
+    int comparePlayerSkills(SkillData a, SkillData b)
+    {
+        if ((a.isUnlock && b.isUnlock) || (!a.isUnlock && !b.isUnlock))
+            return a.Id < b.Id ? -1 : 1;
+        else if (a.isUnlock)
+            return -1;
+        else
+            return 1;
+    }
+
+
 }
+

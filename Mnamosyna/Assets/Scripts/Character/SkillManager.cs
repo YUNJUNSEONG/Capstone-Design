@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillManager : MonoBehaviour
+public class SkillManager1 : MonoBehaviour
 {
     private static SkillManager skillManager;
 

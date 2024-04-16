@@ -12,6 +12,6 @@ public class PlayerHPBar : MonoBehaviour
     void Update()
     {
         hpImage.fillAmount = (float)stat.Cur_HP / stat.Max_HP;
-        stImage.fillAmount = ((float)stat.Cur_Stamina / stat.Max_Stamina) + 0.25f;
+        stImage.fillAmount = ((float)stat.Cur_Stamina / stat.Max_Stamina);
     }
 }

@@ -6,6 +6,7 @@ using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
+using static SkillData;
 
 
 public class Player : PlayerStat
@@ -31,6 +32,7 @@ public class Player : PlayerStat
     //공격받을때 깜빡이는 용도
     private float flashDuration = 0.1f;
     private int flashCount = 4;
+    private SkillManager skillManager;
     private List<Renderer> renderers;
 
 
@@ -79,6 +81,7 @@ public class Player : PlayerStat
     void Start()
     {
         renderers = new List<Renderer>(GetComponentsInChildren<Renderer>());
+        skillManager = GetComponent<SkillManager>();
         Cur_HP = Max_HP;
         Cur_Stamina = Max_Stamina;
     }
@@ -440,21 +443,21 @@ public class Player : PlayerStat
                 healSpace.HealPlayer(gameObject); // 플레이어 게임 오브젝트를 전달
                 break;
             }
-            /*
+            
             LevelUpSkill levelUpSkill = collider.GetComponent<LevelUpSkill>();
             if (levelUpSkill != null)
             {
-                levelUpSkill.levelUpPlayer(gameObject);
+                levelUpSkill.OpenLevelUpUI(skillManager);
                 break;
             }
 
             UnlockSkill unlockSkill = collider.GetComponent<UnlockSkill>();
             if(unlockSkill != null)
             {
-                unlockSkill.unlockPlayer(gameObject);
+                unlockSkill.OpenUnlockUpUI(skillManager);
                 break;
             }
-            */
+            
         }
     }
 
