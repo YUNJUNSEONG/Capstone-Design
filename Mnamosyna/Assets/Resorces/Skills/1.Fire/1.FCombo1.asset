@@ -19,21 +19,21 @@ MonoBehaviour:
   Id: 1
   Name: F COMBO1
   Image: {fileID: 21300000, guid: 1897e1552f60da8498cc4badf84369d0, type: 3}
-  Description: .
-  isUnlock: 1
+  Description: 
+  isUnlock: 0
   childSkill:
   - {fileID: 11400000, guid: d8bebcb61e5a94747b0ccf9e8817c60d, type: 2}
   - {fileID: 11400000, guid: 6b8c25c313d15ec47985d37522fa1f4e, type: 2}
   - {fileID: 11400000, guid: 358a127fb9c89e0449be7f23940e20e9, type: 2}
   - {fileID: 11400000, guid: 32d4a692b39d8f14fb47020695509b66, type: 2}
-  Level: 1
+  Level: 0
   maxLevel: 3
   Command: LRL
   AnimationTrigger: IsSkillLRL
   AnimationTime: 2.8333333
-  damagePercent: 1.1
-  addDmg: 0.15
-  useStamina: 28
+  damagePercent: 1
+  addDmg: 10
+  useStamina: 10
   MaxHPBonus: 0
   HealthRecoverBonus: 0
   StaminaRecoverBonus: 0

@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 44905655335312801}
   - component: {fileID: 4423132112776566583}
   - component: {fileID: 7515611279819252459}
-  - component: {fileID: -7081050054587879972}
-  - component: {fileID: -5969102566585450310}
   m_Layer: 0
   m_Name: RuneRock_1
   m_TagString: Untagged
@@ -85,40 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-7081050054587879972
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2180540433649752303}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.005262508, y: 0.020045197, z: 0.005718299}
-  m_Center: {x: 0.0000839805, y: 0.007486858, z: -0.000060655875}
---- !u!208 &-5969102566585450310
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2180540433649752303}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.003, y: 0.010000001, z: 0.003}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.007, z: 0}
-  m_TimeToStationary: 0.5

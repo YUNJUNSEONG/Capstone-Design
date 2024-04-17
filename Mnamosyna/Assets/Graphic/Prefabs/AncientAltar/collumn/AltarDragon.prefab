@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 7437326246694602508}
   - component: {fileID: 8072296264215230228}
   - component: {fileID: 4721176705169401776}
-  - component: {fileID: 4373856075628909927}
-  - component: {fileID: 2710138481969818383}
   m_Layer: 0
   m_Name: AltarDragon
   m_TagString: Untagged
@@ -85,40 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4373856075628909927
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6796735822995943298}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.01247618, y: 0.039494004, z: 0.018705659}
-  m_Center: {x: 0.000000005355105, y: 0.01747069, z: 0.0010359935}
---- !u!208 &2710138481969818383
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6796735822995943298}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.006, y: 0.020000001, z: 0.009000001}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.017, z: 0.001}
-  m_TimeToStationary: 0.5

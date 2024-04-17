@@ -1,223 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
-
-public class Monster : MobStat
+public enum CharacterState
 {
-    public enum MonsterState
-    {
-        Patrol,
-        Chase,
-        Attack,
-        Die
-    }
-    private MonsterState currentState;
+    Idle,
+    Chasing,
+    Attack,
+    UsingSkill,
+    SkillCool
+}
+public class Monster : MonoBehaviour
+{
+    public MobStat mobStat;
+    public Transform player;
+    public static Monster instance;
 
-    public float invincibleTime = 1f; // 공격받은후무적 시간
-    private float lastDamagedTime;
-    public MonsterSpawner spawner;
-    public GameObject exclamationMark;
+    private CharacterState state = CharacterState.Idle;
 
+    private const float WAIT_TIME = 0.1f;
+    bool isChase;
+    bool isDamage;
 
-    protected Transform player;
-    protected float switchTime = 2.0f;
+    public Transform target;
+    public BoxCollider attackArea;
+    public BoxCollider skillArea;
 
-    protected Rigidbody rigid; //리지드 바디
-    protected NavMeshAgent nav;
-    protected System.Random random;
-    protected Animator anim;
-
-
-    protected const float WAIT_TIME = 0.2f;
-    public bool isAttack;
-    public bool isSkill;
-    protected bool isChase;
-    protected bool isDamage = false;
-    protected bool isDead = false;
-    protected float Skill1CanUse = 0;
-    protected float Skill2CanUse = 0;
-    protected float Skill3CanUse = 0;
-
-    //애니메이션용
-    protected static readonly int BattleIdleHash = Animator.StringToHash("BattleIdle");
-    protected static readonly int Attack01Hash = Animator.StringToHash("Attack01");
-    protected static readonly int Attack02Hash = Animator.StringToHash("Attack02");
-    protected static readonly int Attack03Hash = Animator.StringToHash("Attack03");
-    protected static readonly int RunHash = Animator.StringToHash("Run");
-    protected static readonly int GetHitHash = Animator.StringToHash("GetHit");
-    protected static readonly int DieHash = Animator.StringToHash("Die");
-
-    //공격받을때 깜빡이는 용도
-    private float flashDuration = 0.1f;
-    private int flashCount = 2;
-    private List<Renderer> renderers;
+    Rigidbody rigid;
+    BoxCollider boxCollider;
+    Material mat;
+    NavMeshAgent nav;
+    Animator anim;
 
 
     void Awake()
     {
-        player = GameObject.FindWithTag("Player").transform;
         rigid = GetComponent<Rigidbody>();
+        boxCollider = GetComponent<BoxCollider>();
+        mat = GetComponentInChildren<SkinnedMeshRenderer>().material;
         nav = GetComponent<NavMeshAgent>();
-        nav.stoppingDistance =distance;
-        random = new System.Random();
-        exclamationMark.SetActive(false);
-        anim = GetComponent<Animator>();
-        renderers = new List<Renderer>(GetComponentsInChildren<Renderer>());
+        anim = GetComponentInChildren<Animator>();
+        mobStat = GetComponent<MobStat>();
+        instance = this;
+        player = GameObject.FindWithTag("Player").transform;
 
-        Invoke("ChaseStart", 1.0f);
-    }
-    // 몬스터의 상태 변경
-    public void ChangeState(MonsterState state)
-    {
-        if (currentState == MonsterState.Patrol && state == MonsterState.Chase)
-        {
-            StartCoroutine(ShowExclamationMarkForSeconds(3.0f));
-        }
-        currentState = state;
-    }
-    // 몬스터가 주변을 배회 => 추후 삭제 할 수도 있음
-    void Patrol()
-    {
-        anim.SetBool(RunHash, true);
-
-        if (switchTime <= 0)
-        {
-            Vector3 randomDirection = Random.insideUnitSphere * patrolRadius;
-            randomDirection += transform.position;
-            NavMeshHit hit;
-
-            if (NavMesh.SamplePosition(randomDirection, out hit, patrolRadius, 1))
-            {
-                Vector3 finalPosition = hit.position;
-                nav.SetDestination(finalPosition);
-            }
-            switchTime = Random.Range(2.0f, 5.0f);
-        }
-        else
-        { switchTime -= Time.deltaTime; }
-    }
-    // 몬스터를 플레이어 쪽으로 회전
-    void RotateMonsterToCharacter()
-    {
-        if (currentState == MonsterState.Die)
-        {
-            return;
-        }
-
-        Vector3 directionToCharacter = player.transform.position - transform.position;
-        directionToCharacter.y = 0;
-        Quaternion rotationToCharacter = Quaternion.LookRotation(directionToCharacter);
-        transform.rotation = rotationToCharacter;
+        Invoke("ChaseStart",1.5f);
     }
 
-    //몬스터의 플레이어 추적 상태 출력 함수
-    void Chase()
-    {
-        if (currentState == MonsterState.Die)
-        {
-            return;
-        }
-        SetNavSpeed(move_speed);
-        anim.SetBool(RunHash, true);
-        nav.SetDestination(player.transform.position);
-    }
-    // NavMeshAgent의 속도를 몬스터의 이동 속도로 설정
-    void SetNavSpeed(float speed)
-    {
-        if (nav != null)
-        {
-            nav.speed = speed;
-        }
-    }
-
-    // Attack 상태일 때 스킬 쿨타임에 따른 공격 실행 함수
-    public void Attack()
-    {
-        RotateMonsterToCharacter();
-        // 쿨타임이 0이하인 공격중 랜덤하게 출력
-        int skillIndex = random.Next(0, NumberOfSkills);
-        isSkill = false;
-
-        switch (skillIndex)
-        {
-            case 0:  //기본 공격
-                if (Skill1CanUse <= 0 && attack1Radius <= 0)
-                {
-                    isSkill = false;
-                    Skill1();
-                    Skill1CanUse = SkillCoolTime1;
-                }
-                else { anim.SetTrigger(BattleIdleHash); }
-                break;
-            case 1: // 스킬 공격1
-                if (Skill2CanUse <= 0 && attack2Radius <= 0)
-                {
-                    isSkill = true;
-                    Skill2();
-                    Skill2CanUse = SkillCoolTime2;
-                }
-                else { anim.SetTrigger(BattleIdleHash); }
-                break;
-            case 2: //스킬 공격2
-                if (Skill3CanUse <= 0 && attack3Radius <= 0)
-                {
-                    isSkill = true;
-                    Skill3();
-                    Skill3CanUse = SkillCoolTime3;
-                }
-                else { anim.SetTrigger(BattleIdleHash); }
-                break;
-        }
-    }
-
-    // 공격 애니메이션
-    void Skill1()
-    {
-        anim.SetTrigger(Attack01Hash);
-    }
-    void Skill2()
-    {
-        anim.SetTrigger(Attack02Hash);
-    }
-    void Skill3()
-    {
-        anim.SetTrigger(Attack03Hash);
-    }
-    // 몬스터의 공격에 따른 데미지 배정
-    public int Damage(int skillIndex)
-    {
-        int damage = 0;
-
-        switch (skillIndex)
-        {
-            case 0: // 기본 공격
-                damage = ATK; 
-                break;
-            case 1: // 스킬 공격1
-                damage = Skill_ATK1; 
-                break;
-            case 2: // 스킬 공격2
-                damage = Skill_ATK2;
-                break;
-            default:
-                // 지정되지 않은 스킬이면 damage 0
-                break;
-        }
-        return damage;
-    }
-
-    // 일정 시간동안 느낌표를 띄우는 코루틴
-    IEnumerator ShowExclamationMarkForSeconds(float seconds)
-    {
-        exclamationMark.SetActive(true);
-        yield return new WaitForSeconds(seconds);
-        exclamationMark.SetActive(false);
-    }
-
-    // 몬스터의 State 업데이트
     void Update()
     {
         if (nav.enabled)
@@ -225,110 +54,232 @@ public class Monster : MobStat
             nav.SetDestination(player.position);
             nav.isStopped = !isChase;
         }
-
-        if (currentState == MonsterState.Die)
-        {
-            return;
-        }
-
-        switch (currentState)
-        {
-            case MonsterState.Patrol:
-                Patrol();
-                break;
-            case MonsterState.Chase:
-                Chase();
-                break;
-            case MonsterState.Attack:
-                Attack();
-                break;
-        }
-        // 1초마다 스킬 쿨 감소
-        Skill1CanUse -= Time.deltaTime;
-        Skill2CanUse -= Time.deltaTime;
-        Skill3CanUse -= Time.deltaTime;
-
+        
     }
-    // 몬스터의 피격 상황 처리 함수
-    public void TakeDamage(int damage)
+
+
+    //플레이어 추적 시작
+    void ChaseStart()
     {
-        if (currentState != MonsterState.Patrol) { ChangeState(MonsterState.Chase); }
+        SetNavSpeed(mobStat.move_speed);
+        isChase = true;
+        anim.SetBool("isRun", true);
+    }
 
-        if (Time.time >= lastDamagedTime + invincibleTime)
+    void SetNavSpeed(float speed)
+    {
+        if (nav != null)
         {
-            // 최종 데미지 = 플레이어의 공격데미지 * (1 - 방어력%)
-            int finalDamage = Mathf.RoundToInt(damage * (1 - Defense));
-            Cur_HP -= finalDamage;
-            lastDamagedTime = Time.time;
-            anim.SetTrigger(GetHitHash);
-            Flash();
-        }
-
-        if (Cur_HP <= 0)
-        {
-            Die();
+            // NavMeshAgent의 속도를 몬스터의 이동 속도로 설정합니다.
+            nav.speed = speed;
         }
     }
-    // 피격시 몬스터 점멸효과 출력 함수
-    public void Flash()
+
+    //몬스터 피격 확인 및 데미지 부여
+    void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(DoFlash());
-    }
-    //점멸효과 출력 코루틴
-    private IEnumerator DoFlash()
-    {
-        for (int i = 0; i < flashCount; i++)
+        if(other.tag == "Sword")
         {
-            foreach (Renderer renderer in renderers)
+            if(!isDamage)
             {
-                renderer.enabled = false;
+                if (Player.instance != null)
+                {
+                    int damage = Player.instance.Damage();
+
+                    int finalDamage = Mathf.RoundToInt(damage * (1 - mobStat.defense));
+                    mobStat.cur_hp = Mathf.Max(0, mobStat.cur_hp - finalDamage);
+
+                    Debug.Log("몬스터가 받은 피해 :" + finalDamage);
+                }
+
+                Vector3 reactVec = transform.position - other.transform.position;
+
+                StartCoroutine(OnDamage(reactVec));
             }
-
-            yield return new WaitForSeconds(flashDuration);
-
-            foreach (Renderer renderer in renderers)
-            {
-                renderer.enabled = true;
-            }
-
-            yield return new WaitForSeconds(flashDuration);
         }
     }
-  
-    //사망 처리 함수
-    protected virtual void Die()
+
+    void FixedUpdate()
     {
-        if (isDead) return;
-
-        isDead = true;
-        ChangeState(MonsterState.Die);
-        anim.SetTrigger(DieHash);
-        nav.isStopped = true;
-        anim.SetBool(RunHash, false);
-        Knockback();
-        Invoke("DestroyObject", 2.0f);
-        Collider collider = GetComponent<Collider>();
-        if (collider != null) { collider.enabled = false; }
-
-        if (spawner != null)
+        FreezeVelocity();
+        Targeting();
+    }
+    void FreezeVelocity()
+    {
+        if (isChase)
         {
-            spawner.aliveCount--;
-            spawner.CheckAliveCount();
-            Debug.Log("남은 몬스터:"+spawner.aliveCount);
+            rigid.velocity = Vector3.zero;
+            rigid.angularVelocity = Vector3.zero;
+        }
+    }
+
+    #region HitPlayer
+    // 몬스터의 플레이어 타게팅
+    void Targeting()
+    {
+        float targetRadius = 1.5f;
+        float targetRange = 3f;
+
+        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange,LayerMask.GetMask("Player"));
+        
+        if(rayHits.Length > 0 && state != CharacterState.Attack && state != CharacterState.UsingSkill)
+        {
+            StartCoroutine(Attack());
+            //몬스터가 플레이어를 마주친 이후 부터 스킬 쿨타임 활성화
+            StartCoroutine(SkillCool());
+
+            StartCoroutine(Skill());
+        }
+    }
+
+    IEnumerator Attack()
+    {
+        if (state == CharacterState.UsingSkill)
+            yield break;
+
+        state = CharacterState.Attack;
+        PlayAnimation("isAttack");
+        yield return new WaitForSeconds(WAIT_TIME);
+        EnableCollider(attackArea);
+
+        yield return new WaitForSeconds(mobStat.atk_anim - WAIT_TIME);
+        DisableCollider(attackArea);
+        PlayAnimation("isAttack", false);
+
+        state = CharacterState.Chasing;
+        yield return new WaitForSeconds(mobStat.atk_speed);
+    }
+
+    // 스킬 사용 코루틴
+    IEnumerator Skill()
+    {
+        if (state == CharacterState.SkillCool)
+            yield break;
+
+        state = CharacterState.UsingSkill;
+        PlayAnimation("isSkill");
+        yield return new WaitForSeconds(WAIT_TIME);
+        EnableCollider(skillArea);
+
+        yield return new WaitForSeconds(mobStat.skill_anim - WAIT_TIME);
+        DisableCollider(skillArea);
+        PlayAnimation("isSkill", false);
+
+        yield return new WaitForSeconds(mobStat.atk_speed);
+
+        state = CharacterState.Chasing;
+    }
+
+    // 스킬 쿨타임 코루틴
+    IEnumerator SkillCool()
+    {
+        state = CharacterState.SkillCool;
+        yield return new WaitForSeconds(mobStat.skill_colltime);
+        state = CharacterState.Chasing;
+    }
+
+    // 애니메이션 재생 함수
+    void PlayAnimation(string parameter, bool value = true)
+    {
+        anim.SetBool(parameter, value);
+    }
+
+    // 콜라이더 활성화 함수
+    void EnableCollider(Collider collider)
+    {
+        collider.enabled = true;
+    }
+
+    // 콜라이더 비활성화 함수
+    void DisableCollider(Collider collider)
+    {
+        collider.enabled = false;
+    }
+
+    public int Damage()
+    {
+        int damage = mobStat.attack;
+        int skillDamage = mobStat.skill_attack;
+
+        if(state == CharacterState.UsingSkill)
+        {
+            return skillDamage;
         }
         else
         {
-            //Debug.LogError("몬스터 스크립트에서 몬스터 스포너 못 찾아옴");
+            return damage;
         }
     }
-    //사망시 넉백 처리
-    protected void Knockback()
+    #endregion
+
+    #region OnDamage
+    // 무적 시간 상수 정의
+    private const float INVINCIBILITY_TIME = 1f;
+    IEnumerator OnDamage(Vector3 reactVec)
     {
-        rigid.AddForce((transform.forward.normalized + Vector3.up) * 5f, ForceMode.Impulse);
+        if (isDamage)
+            yield break;
+
+        isDamage = true;
+        SetInvincible(true); // 몬스터를 무적 상태로 설정
+
+        SetColor(Color.black); // 피격 시 색상을 변경
+
+        yield return new WaitForSeconds(WAIT_TIME);
+
+        if (mobStat.cur_hp > 0)
+        {
+            Hit(reactVec); // 피해를 처리하는 함수 호출
+        }
+        else
+        {
+            Death(reactVec); // 사망 처리하는 함수 호출
+        }
+
+        yield return new WaitForSeconds(INVINCIBILITY_TIME);
+        SetInvincible(false); // 무적 상태 해제
     }
-    // 몬스터 삭제
-    void DestroyObject()
+    // 피격 시 색상 변경 함수
+    void SetColor(Color color)
     {
-        Destroy(gameObject);
+        mat.color = color;
     }
+
+    // 무적 상태 설정 함수
+    void SetInvincible(bool invincible)
+    {
+        isDamage = invincible;
+    }
+
+    // 피해를 처리하는 함수
+    void Hit(Vector3 reactVec)
+    {
+        SetColor(Color.black); // 원래 색상으로 변경
+        anim.SetBool("getHit", true); // 피격 애니메이션 재생
+
+        reactVec = reactVec.normalized;
+        reactVec += Vector3.up;
+        rigid.AddForce(reactVec * 1.5f, ForceMode.Impulse);
+
+        rigid.isKinematic = true; // 물리 작용 해제
+    }
+
+    // 사망을 처리하는 함수
+    void Death(Vector3 reactVec)
+    {
+        SetColor(Color.black);  // 원래 색상으로 변경
+        gameObject.layer = 11; // 사망한 몬스터의 레이어 변경
+        isChase = false; // 추적 중지
+        nav.enabled = false; // 네비게이션 비활성화
+        anim.SetTrigger("Die"); // 사망 애니메이션 재생
+
+        reactVec = reactVec.normalized;
+        reactVec += Vector3.up;
+        rigid.AddForce(reactVec * 5, ForceMode.Impulse);
+
+        Destroy(gameObject, 2); // 일정 시간 후 게임 오브젝트 삭제
+
+        rigid.isKinematic = true; // 물리 작용 해제
+    }
+    #endregion
 }

@@ -1,9 +1,8 @@
-//using skill;
+using skill;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
 namespace skill
 {
     public class LevelUpSkill : MonoBehaviour
@@ -34,4 +33,3 @@ namespace skill
         }
     }
 }
-*/

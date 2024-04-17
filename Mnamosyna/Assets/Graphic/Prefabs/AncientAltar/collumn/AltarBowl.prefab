@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 7661286721793364017}
   - component: {fileID: 6588697271389881150}
   - component: {fileID: 6169721785866400848}
-  - component: {fileID: 7564985743086080952}
-  - component: {fileID: 7158195268949791432}
   m_Layer: 0
   m_Name: AltarBowl
   m_TagString: Untagged
@@ -85,40 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7564985743086080952
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2938514661236334336}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.035513483, y: 0.018249955, z: 0.017904583}
-  m_Center: {x: 0.0000000027939677, y: 0.008118408, z: 0.000000027008355}
---- !u!208 &7158195268949791432
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2938514661236334336}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.018000001, y: 0.009000001, z: 0.009000001}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.008, z: 0}
-  m_TimeToStationary: 0.5
