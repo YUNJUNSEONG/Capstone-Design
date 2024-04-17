@@ -171,6 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1916988807192416354}
   - component: {fileID: 1916988807192416349}
+  - component: {fileID: 7717006555553073765}
   m_Layer: 0
   m_Name: Colliders
   m_TagString: Untagged
@@ -212,8 +213,24 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.95, y: 2.37, z: 2.47}
-  m_Center: {x: 0, y: 0.86, z: 0}
+  m_Size: {x: 2.4724817, y: 2.1299803, z: 2.47}
+  m_Center: {x: -0.09032512, y: 0.98001, z: 0}
+--- !u!208 &7717006555553073765
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916988807192416355}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.28, y: 1.265, z: 1.21}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.1, y: 1.18, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2039521294497320697
 GameObject:
   m_ObjectHideFlags: 0

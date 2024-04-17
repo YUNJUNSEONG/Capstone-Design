@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using skill;
-using Eliot.AgentComponents;
+//using skill;
+//using Eliot.AgentComponents;
 
+/*
 namespace skill
 {
     public class UnlockSkill : MonoBehaviour
@@ -14,11 +15,6 @@ namespace skill
         {
             Time.timeScale = 0;
 
-            // UI 업데이트를 수행합니다.
-            ui.SetUnlockUI();
-
-
-            manager.playerCon.SkillCammand = "";
             int choice = 0;
 
             while (choice < 3)
@@ -37,9 +33,14 @@ namespace skill
                 }
             }
 
+            // UI 업데이트를 수행합니다.
+            ui.SetUnlockUI();
+
+
             // 시간 스케일을 원래 값으로 다시 설정합니다.
             Time.timeScale = 1;
         }
 
     }
 }
+*/
