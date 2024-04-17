@@ -786,7 +786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &93030160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,7 +912,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstWaveMonsters: []
   secondWaveMonsters: []
+  thirdWaveMonsters: []
+  forthWaveMonsters: []
   numOfMonsters: 
+  Upgrade: {fileID: 0}
   magicComponents: []
   waitTime: 0
   aliveCount: 0
@@ -1422,7 +1425,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &171245387
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3756,7 +3759,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5c7885d37a3adc74a93ea99ca9d2fb78, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6a214f509ccb08b40ad921de4bc775da, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6750,7 +6753,10 @@ MonoBehaviour:
   - {fileID: 920396717856191259, guid: f6fccab52669862418d0b4a893663d2c, type: 3}
   - {fileID: 154257601896337909, guid: 8ee6be42aa9786b42a4fdf2b6b5422d1, type: 3}
   - {fileID: 7451204239203880121, guid: 0753a599e64065a41839de0c738c783b, type: 3}
+  thirdWaveMonsters: []
+  forthWaveMonsters: []
   numOfMonsters: 080000000c000000
+  Upgrade: {fileID: 0}
   magicComponents:
   - {fileID: 1146381982}
   - {fileID: 1279824550}
@@ -8048,7 +8054,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.42524073, y: -0.33973685, z: 0.17614047, w: 0.82019734}
-  m_LocalPosition: {x: 2.1, y: 8.81, z: -4.59}
+  m_LocalPosition: {x: 3, y: 9, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9900,7 +9906,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstWaveMonsters: []
   secondWaveMonsters: []
+  thirdWaveMonsters: []
+  forthWaveMonsters: []
   numOfMonsters: 
+  Upgrade: {fileID: 0}
   magicComponents: []
   waitTime: 0
   aliveCount: 0
@@ -11205,7 +11214,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5c7885d37a3adc74a93ea99ca9d2fb78, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6a214f509ccb08b40ad921de4bc775da, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14054,6 +14063,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1691624906}
   - component: {fileID: 1691624907}
+  - component: {fileID: 1691624908}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -14090,6 +14100,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1563316877}
   CommandText: {fileID: 209707701}
+--- !u!114 &1691624908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691624905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c638d1a20d301c4cad20de8ef82c6b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1563316877}
+  choices:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  LevelUpSkill: 
+  LevelUpBase: {fileID: 0}
+  UnlockSkill: 
+  UnlockBase: {fileID: 0}
+  skillUI: []
+  DashUI: {fileID: 0}
 --- !u!1001 &1693499301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14916,10 +14949,13 @@ MonoBehaviour:
   - {fileID: 920396717856191259, guid: f6fccab52669862418d0b4a893663d2c, type: 3}
   secondWaveMonsters:
   - {fileID: 920396717856191259, guid: f6fccab52669862418d0b4a893663d2c, type: 3}
+  thirdWaveMonsters: []
+  forthWaveMonsters: []
   numOfMonsters: 0700000008000000
+  Upgrade: {fileID: 0}
   magicComponents:
   - {fileID: 1068413072175040290}
-  waitTime: 20
+  waitTime: 10
   aliveCount: 0
 --- !u!1001 &1791680662
 PrefabInstance:
@@ -16393,7 +16429,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5c7885d37a3adc74a93ea99ca9d2fb78, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6a214f509ccb08b40ad921de4bc775da, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

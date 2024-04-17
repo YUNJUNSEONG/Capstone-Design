@@ -296,6 +296,7 @@ public class Monster : MobStat
         if (isDead) return;
 
         isDead = true;
+        gameObject.layer = 11;
         ChangeState(MonsterState.Die);
         anim.SetTrigger(DieHash);
         nav.isStopped = true;
@@ -321,6 +322,7 @@ public class Monster : MobStat
     {
         rigid.AddForce((transform.forward.normalized + Vector3.up) * 5f, ForceMode.Impulse);
     }*/
+
     // 몬스터 삭제
     void DestroyObject()
     {

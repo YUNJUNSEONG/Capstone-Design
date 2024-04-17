@@ -7,11 +7,15 @@ public class Spawner : MonoBehaviour
     public List<GameObject[]> waveMonsters = new List<GameObject[]>(); // 웨이브별 몬스터 배열 리스트
     public GameObject[] firstWaveMonsters;
     public GameObject[] secondWaveMonsters;
+    public GameObject[] thirdWaveMonsters;
+    public GameObject[] forthWaveMonsters;
     public List<int> numOfMonsters = new List<int>(); // 웨이브별 몬스터 수 리스트
 
-
+    public GameObject Upgrade;
     public Magic0[] magicComponents;
     private Collider spawnAreaCollider;
+
+    //int spawnCount = 4;
 
     public float waitTime; // 첫 소환 이후 대기시간
     public int aliveCount;
@@ -22,10 +26,17 @@ public class Spawner : MonoBehaviour
         aliveCount = GetTotalNumOfMonsters();
         waveMonsters.Add(firstWaveMonsters);
         waveMonsters.Add(secondWaveMonsters);
+        waveMonsters.Add(thirdWaveMonsters);
+        waveMonsters.Add(forthWaveMonsters);
     }
 
     private void Update()
     {
+        Vector3 playerPosition = transform.position;
+        Vector3 playerForward = transform.forward;
+
+        // 플레이어의 앞쪽으로 이동할 위치를 계산합니다.
+        Vector3 spawnPosition = playerPosition + playerForward * 5;
     }
 
     public void SpawnWaves()
@@ -39,6 +50,7 @@ public class Spawner : MonoBehaviour
         {
             SpawnWave(waveMonsters[i], numOfMonsters[i]);
             yield return new WaitForSeconds(waitTime);
+            //spawnCount -= 1;
         }
     }
 
@@ -102,5 +114,10 @@ public class Spawner : MonoBehaviour
 
         Debug.LogError("Collider 위의 위치 못찾");
         return collider.bounds.center;
+    }
+
+    void SpawnObject(Vector3 spawnPosition)
+    {
+        Instantiate(Upgrade, spawnPosition, Quaternion.identity);
     }
 }
