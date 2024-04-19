@@ -2,6 +2,7 @@ using NUnit.Framework.Interfaces;
 //using skill;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -43,14 +44,24 @@ public class Player : PlayerStat
     Sword sword;
 
     // 스킬 관련 코드
-    public int maxSkillSlots = 30;
-    public SkillData[] skillSlots;
+    //public int maxSkillSlots = 30;
+    //public SkillData[] skillSlots;
 
     // 전체 스킬
+    [SerializeField]
     private List<SkillData> allSkills = new List<SkillData>();
     // 플레이어가 보유한 스킬 ID를 저장하는 리스트
-    private List<int> unlockSkillIds = new List<int>();
+    //private List<int> unlockSkillIds = new List<int>();
     // 플레이어가 보유한 스킬 데이터를 저장하는 리스트
+    [SerializeField]
+    private List<SkillData> stanbySkills = new List<SkillData>();
+    public List<SkillData> StanbySkills
+    {
+        get { return stanbySkills; }
+        set { stanbySkills = value; }
+    }
+
+    [SerializeField]
     private List<SkillData> unlockSkills = new List<SkillData>();
     public List<SkillData> UnlockSkills
     {
@@ -81,9 +92,23 @@ public class Player : PlayerStat
     void Start()
     {
         renderers = new List<Renderer>(GetComponentsInChildren<Renderer>());
-        skillManager = GetComponent<SkillManager>();
         Cur_HP = Max_HP;
         Cur_Stamina = Max_Stamina;
+        foreach (SkillData skillData in allSkills)
+        {
+            skillData.Level = 0;
+            if (skillData.isUnlock)
+            {
+                unlockSkills.Add(skillData);
+            }
+        }
+
+        skillManager = FindObjectOfType<SkillManager>(); // scene에서 SkillManager 오브젝트를 찾아 할당
+        if (skillManager == null)
+        {
+            Debug.LogError("SkillManager를 찾을 수 없습니다.");
+        }
+
     }
 
 
@@ -372,8 +397,8 @@ public class Player : PlayerStat
     // 플레이어 대쉬
     void Dash()
     {
-        //if (unlockSkills.Count > 0)
-        //{
+        if (unlockSkills.Count > 0)
+        {
             attackDelay += Time.deltaTime;
             isAttackReady = ATK_Speed < attackDelay;
 
@@ -392,7 +417,7 @@ public class Player : PlayerStat
                     attackDelay = 0;
                 }
             }
-        //}
+        }
     }
 
     // 스킬 사용 메서드

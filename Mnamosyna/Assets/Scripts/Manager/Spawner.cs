@@ -32,11 +32,7 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        Vector3 playerPosition = transform.position;
-        Vector3 playerForward = transform.forward;
 
-        // 플레이어의 앞쪽으로 이동할 위치를 계산합니다.
-        Vector3 spawnPosition = playerPosition + playerForward * 5;
     }
 
     public void SpawnWaves()
@@ -76,6 +72,13 @@ public class Spawner : MonoBehaviour
     {
         if (aliveCount <= 0 )//&& spawnCount<=0)
         {
+            Vector3 playerPosition = transform.position;
+            Vector3 playerForward = transform.forward;
+
+            // 플레이어의 앞쪽으로 이동할 위치를 계산합니다.
+            Vector3 spawnPosition = playerPosition + playerForward * 1;
+
+            SpawnObject(spawnPosition);
             foreach (Magic0 magic in magicComponents) { magic.EnableComponents(); }
         }
     }

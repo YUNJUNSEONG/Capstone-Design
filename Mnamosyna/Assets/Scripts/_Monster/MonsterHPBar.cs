@@ -19,6 +19,6 @@ public class MonsterHPBar : MonoBehaviour
     
     void Update()
     {
-        hpImage.fillAmount = Monster.Cur_HP / Monster.Max_HP;
+        hpImage.fillAmount = (float)Monster.Cur_HP / Monster.Max_HP;
     }
 }

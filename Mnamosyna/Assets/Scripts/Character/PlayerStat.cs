@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerStat : MonoBehaviour
 {
     public static PlayerStat instance;
-    public SkillData skill;
 
     [Header("체력 관련")]
     [SerializeField]
