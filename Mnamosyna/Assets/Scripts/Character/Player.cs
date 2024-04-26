@@ -99,7 +99,7 @@ public class Player : PlayerStat
             skillData.Level = 0;
             if (skillData.isUnlock)
             {
-                unlockSkills.Add(skillData);
+                stanbySkills.Add(skillData);
             }
         }
 
@@ -485,5 +485,6 @@ public class Player : PlayerStat
             
         }
     }
+
 
 }

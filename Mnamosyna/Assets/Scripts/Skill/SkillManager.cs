@@ -31,6 +31,10 @@ public class SkillManager : MonoBehaviour
             instance = this;
 
         curSkills.Clear();
+
+        UnlockSkill = new List<int>(); // UnlockSkill 초기화
+        LevelUpSkill = new List<int>(); // LevelUpSkill 초기화
+
     }
 
     private void Start()
@@ -41,46 +45,39 @@ public class SkillManager : MonoBehaviour
     public void Unlock()
     {
         Time.timeScale = 0;
-        playerCon.SkillCammand = "";
-        int choice = 0;
         UnlockSkill = new List<int>();
-        while (choice < 3)
+        while (UnlockSkill.Count < 3)
         {
-            int rand = UnityEngine.Random.Range(0, playerCon.UnlockSkills.Count);
-            if (UnlockSkill.Contains(rand))
-            {
-                continue;
-            }
-            else
+            int rand = UnityEngine.Random.Range(0, playerCon.StanbySkills.Count);
+            if (!UnlockSkill.Contains(rand))
             {
                 UnlockSkill.Add(rand);
-                choice++;
             }
         }
 
         SetUnlockUI();
     }
 
+
     void SetUnlockUI()
     {
         for (int i = 0; i < unlockchoices.Length; i++)
         {
-            unlockchoices[i].transform.GetChild(0).GetComponent<Image>().sprite = playerCon.UnlockSkills[UnlockSkill[i]].Image;
+            unlockchoices[i].transform.GetChild(0).GetComponent<Image>().sprite = playerCon.StanbySkills[UnlockSkill[i]].Image;
 
             unlockchoices[i].transform.GetChild(1).GetComponent<Text>().text =
-                playerCon.UnlockSkills[UnlockSkill[i]].Name.ToString() + '(' + playerCon.UnlockSkills[UnlockSkill[i]].Command.ToString() + ')'  + playerCon.UnlockSkills[UnlockSkill[i]].Level;
+                playerCon.StanbySkills[UnlockSkill[i]].Name.ToString() + '(' + playerCon.StanbySkills[UnlockSkill[i]].Command.ToString() + ')'  + playerCon.StanbySkills[UnlockSkill[i]].Level;
 
-            if(playerCon.UnlockSkills[UnlockSkill[i]].Level == 0)
-                unlockchoices[i].transform.GetChild(2).GetComponent<Text>().text = playerCon.UnlockSkills[UnlockSkill[i]].Description.ToString();
-
-
-            if (playerCon.UnlockSkills[UnlockSkill[i]].Level < playerCon.UnlockSkills[UnlockSkill[i]].maxLevel)
-            {
-                unlockchoices[i].transform.GetChild(3).GetComponentInChildren<Text>().text = "Level Up";
-            }
+            if (playerCon.StanbySkills[UnlockSkill[i]].Level == 0)
+                unlockchoices[i].transform.GetChild(2).GetComponent<Text>().text = playerCon.StanbySkills[UnlockSkill[i]].Description.ToString();
+            else if (playerCon.UnlockSkills[UnlockSkill[i]].Level < playerCon.StanbySkills[UnlockSkill[i]].maxLevel)
+                unlockchoices[i].transform.GetChild(2).GetComponent<Text>().text = "데미지가 " + (playerCon.StanbySkills[UnlockSkill[i]].damagePercent +"%" + playerCon.StanbySkills[UnlockSkill[i]].addDmg * playerCon.StanbySkills[UnlockSkill[i]].Level) + "에서 " + (playerCon.StanbySkills[UnlockSkill[i]].damagePercent + playerCon.StanbySkills[UnlockSkill[i]].addDmg * (playerCon.StanbySkills[UnlockSkill[i]].Level + 1)) + "로 증가합니다.";
             else
+                unlockchoices[i].transform.GetChild(2).GetComponent<Text>().text = "이 스킬은 마스터하셨습니다.";
+             
+            if (playerCon.StanbySkills[UnlockSkill[i]].Level < playerCon.StanbySkills[UnlockSkill[i]].maxLevel)
             {
-                unlockchoices[i].transform.GetChild(3).GetComponentInChildren<Text>().text = "Close";
+                unlockchoices[i].transform.GetChild(3).GetComponentInChildren<Text>().text = "Unlock";
             }
         }
 
@@ -91,24 +88,27 @@ public class SkillManager : MonoBehaviour
     public void choiceUnlockSkill(int num)
     {
 
-        if (playerCon.UnlockSkills[LevelUpSkill[num]].Level < 1)
-            playerCon.UnlockSkills[LevelUpSkill[num]].Level++;
+        if (playerCon.StanbySkills[UnlockSkill[num]].Level == 0)
+            playerCon.StanbySkills[UnlockSkill[num]].Level++;
 
-        for (int i = 0; i < playerCon.UnlockSkills[UnlockSkill[num]].childSkill.Length; i++)
+
+        for (int i = 0; i < playerCon.StanbySkills[UnlockSkill[num]].childSkill.Length; i++)
         {
-            if (!playerCon.UnlockSkills.Contains(playerCon.UnlockSkills[UnlockSkill[num]].childSkill[i]))
+            if (!playerCon.StanbySkills.Contains(playerCon.StanbySkills[UnlockSkill[num]].childSkill[i]))
             {
-                playerCon.UnlockSkills.Add(playerCon.UnlockSkills[UnlockSkill[num]].childSkill[i]);
+                playerCon.StanbySkills.Add(playerCon.StanbySkills[UnlockSkill[num]].childSkill[i]);
             }
 
         }
 
-        if (!curSkills.Contains(playerCon.UnlockSkills[UnlockSkill[num]]))
-            curSkills.Add(playerCon.UnlockSkills[UnlockSkill[num]]);
+        if (!curSkills.Contains(playerCon.StanbySkills[UnlockSkill[num]]))
+            curSkills.Add(playerCon.StanbySkills[UnlockSkill[num]]);
 
         UnlockBase.SetActive(false);
         curSkills.Sort(compareUISkills);
-        playerCon.UnlockSkills.Sort(comparePlayerSkills);
+        playerCon.StanbySkills.Sort(comparePlayerSkills);
+        playerCon.UnlockSkills = curSkills;
+        //ClearSameCommand();
 
         Time.timeScale = 1;
     }
@@ -116,10 +116,9 @@ public class SkillManager : MonoBehaviour
     public void LevelUp()
     {
         Time.timeScale = 0;
-        playerCon.SkillCammand = "";
         int choice = 0;
         LevelUpSkill = new List<int>();
-        while (choice < 3)
+        while (choice < Mathf.Min(3, playerCon.UnlockSkills.Count))
         {
             int rand = UnityEngine.Random.Range(0, playerCon.UnlockSkills.Count);
             if (LevelUpSkill.Contains(rand))
@@ -148,7 +147,7 @@ public class SkillManager : MonoBehaviour
             if (playerCon.UnlockSkills[LevelUpSkill[i]].Level == 0)
                 levelUpchoices[i].transform.GetChild(2).GetComponent<Text>().text = playerCon.UnlockSkills[LevelUpSkill[i]].Description.ToString();
             else if (playerCon.UnlockSkills[LevelUpSkill[i]].Level < playerCon.UnlockSkills[LevelUpSkill[i]].maxLevel)
-                levelUpchoices[i].transform.GetChild(2).GetComponent<Text>().text = "데미지가 " + (playerCon.UnlockSkills[LevelUpSkill[i]].damagePercent +'%' + playerCon.UnlockSkills[LevelUpSkill[i]].addDmg * playerCon.UnlockSkills[LevelUpSkill[i]].Level) + "에서 " + (playerCon.UnlockSkills[LevelUpSkill[i]].damagePercent + playerCon.UnlockSkills[LevelUpSkill[i]].addDmg * (playerCon.UnlockSkills[LevelUpSkill[i]].Level + 1)) + "로 증가합니다.";
+                levelUpchoices[i].transform.GetChild(2).GetComponent<Text>().text = "데미지가 " + (playerCon.UnlockSkills[LevelUpSkill[i]].damagePercent +"%" + playerCon.UnlockSkills[LevelUpSkill[i]].addDmg * playerCon.UnlockSkills[LevelUpSkill[i]].Level) + "에서 " + (playerCon.UnlockSkills[LevelUpSkill[i]].damagePercent + playerCon.UnlockSkills[LevelUpSkill[i]].addDmg * (playerCon.UnlockSkills[LevelUpSkill[i]].Level + 1)) + "로 증가합니다.";
             else
                 levelUpchoices[i].transform.GetChild(2).GetComponent<Text>().text = "이 스킬은 마스터하셨습니다.";
 
@@ -199,22 +198,68 @@ public class SkillManager : MonoBehaviour
 
     void ClearSameCommand()
     {
-        // 중복된 커맨드를 확인하기 위한 딕셔너리
-        Dictionary<string, SkillData> command = new Dictionary<string, SkillData>();
+        // 각 커맨드에 해당하는 스킬 목록을 저장하는 리스트
+        Dictionary<string, List<SkillData>> commandsMap = new Dictionary<string, List<SkillData>>();
 
-        foreach (SkillData skillData in playerCon.UnlockSkills)
+        // 중복된 이름을 가진 패시브 스킬 제거를 위한 HashSet 및 리스트
+        HashSet<string> passiveSkillNames = new HashSet<string>();
+        List<SkillData> passiveSkillsToRemove = new List<SkillData>();
+
+        foreach (SkillData skillData in playerCon.StanbySkills)
         {
-            // 이미 같은 커맨드를 가진 스킬이 있는지 확인합니다.
-            if (!command.ContainsKey(skillData.Command))
+            if (string.IsNullOrEmpty(skillData.Command))
             {
-                // 중복된 커맨드가 없으면 현재 스킬을 딕셔너리에 추가합니다.
-                command.Add(skillData.Command, skillData);
+                // 커맨드가 없는 경우 패시브 스킬로 판단하고 중복된 이름을 가진 패시브를 삭제
+                if (passiveSkillNames.Contains(skillData.Name))
+                {
+                    passiveSkillsToRemove.Add(skillData);
+                }
+                else
+                {
+                    passiveSkillNames.Add(skillData.Name);
+                }
             }
             else
             {
-                // 중복된 커맨드가 있으면 해당 스킬을 제거합니다.
-                playerCon.UnlockSkills.Remove(skillData);
+                // 커맨드를 키로 하고 해당 커맨드에 해당하는 스킬을 값으로 하는 딕셔너리를 생성
+                if (!commandsMap.ContainsKey(skillData.Command))
+                {
+                    commandsMap.Add(skillData.Command, new List<SkillData>());
+                }
+                commandsMap[skillData.Command].Add(skillData);
             }
+        }
+
+        // 패시브 스킬 제거
+        foreach (SkillData skillToRemove in passiveSkillsToRemove)
+        {
+            playerCon.StanbySkills.Remove(skillToRemove);
+        }
+
+        // unlock으로 선택된 스킬과 그와 같은 커맨드를 가진 스킬들을 모두 제거
+        foreach (var kvp in commandsMap)
+        {
+            string command = kvp.Key;
+            List<SkillData> skillsWithSameCommand = kvp.Value;
+
+            // unlock으로 선택된 스킬과 그와 같은 커맨드를 가진 스킬들을 제거
+            if (skillsWithSameCommand.Exists(skill => UnlockSkill.Contains(skill.Id)))
+            {
+                foreach (SkillData skillData in skillsWithSameCommand)
+                {
+                    if (!UnlockSkill.Contains(skillData.Id))
+                    {
+                        playerCon.StanbySkills.Remove(skillData);
+                    }
+                }
+            }
+        }
+        // 딕셔너리의 내용을 출력
+        foreach (var kvp in commandsMap)
+        {
+            string command = kvp.Key;
+            List<SkillData> skillsWithSameCommand = kvp.Value;
+            Debug.Log("Command: " + command + ", Skills Count: " + skillsWithSameCommand.Count);
         }
     }
 
