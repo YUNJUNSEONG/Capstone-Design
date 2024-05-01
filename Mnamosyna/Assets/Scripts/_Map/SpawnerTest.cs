@@ -2,21 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnerTest : MonoBehaviour
+public class SpawnerTrigger : MonoBehaviour
 {
     public Spawner spawner;
-    //[SerializeField] private GameObject monsterSpawnerObj;
+    public RandomTalk randomTalk;
     void Start()
-    {
-        /*
-        if(monsterSpawnerObj == null)
-        {
-            Debug.LogError("Base 오브젝트를 못찾");
-            return;
-        }
-        //monsterSpawner = monsterSpawnerObj.GetComponent<MonsterSpawner>();
-        */
-        
+    {   
         if(spawner == null)
         {
             Debug.LogError("스크립트 못찾");
@@ -30,8 +21,15 @@ public class SpawnerTest : MonoBehaviour
         {
             GetComponent<Collider>().enabled = false;
             Debug.Log("몬스터스폰");
+            // 랜덤 대화 출력
+            if (randomTalk != null)
+            {
+                string dialogue = randomTalk.GetRandomDialogue();
+                Debug.Log(dialogue);
+            }
             spawner.SpawnWaves();
             spawner.waitTime -= Time.deltaTime;
+
         }
     }
 }

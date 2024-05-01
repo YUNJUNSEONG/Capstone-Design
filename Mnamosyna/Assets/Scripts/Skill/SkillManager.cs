@@ -108,7 +108,7 @@ public class SkillManager : MonoBehaviour
         curSkills.Sort(compareUISkills);
         playerCon.StanbySkills.Sort(comparePlayerSkills);
         playerCon.UnlockSkills = curSkills;
-        //ClearSameCommand();
+        ClearSameCommand();
 
         Time.timeScale = 1;
     }
@@ -198,70 +198,53 @@ public class SkillManager : MonoBehaviour
 
     void ClearSameCommand()
     {
-        // 각 커맨드에 해당하는 스킬 목록을 저장하는 리스트
-        Dictionary<string, List<SkillData>> commandsMap = new Dictionary<string, List<SkillData>>();
+        // StanbySkills와 UnlockSkills의 Command 및 이름을 추출하여 저장할 리스트 생성
+        List<string> stanbySkillsCommands = new List<string>();
+        List<string> stanbySkillsNames = new List<string>();
+        List<string> unlockSkillsCommands = new List<string>();
+        List<string> unlockSkillsNames = new List<string>();
 
-        // 중복된 이름을 가진 패시브 스킬 제거를 위한 HashSet 및 리스트
-        HashSet<string> passiveSkillNames = new HashSet<string>();
-        List<SkillData> passiveSkillsToRemove = new List<SkillData>();
-
-        foreach (SkillData skillData in playerCon.StanbySkills)
+        // StanbySkills와 UnlockSkills에서 Command 및 이름을 추출하여 리스트에 추가
+        foreach (var skill in playerCon.StanbySkills)
         {
-            if (string.IsNullOrEmpty(skillData.Command))
-            {
-                // 커맨드가 없는 경우 패시브 스킬로 판단하고 중복된 이름을 가진 패시브를 삭제
-                if (passiveSkillNames.Contains(skillData.Name))
-                {
-                    passiveSkillsToRemove.Add(skillData);
-                }
-                else
-                {
-                    passiveSkillNames.Add(skillData.Name);
-                }
-            }
+            if (!string.IsNullOrEmpty(skill.Command))
+                stanbySkillsCommands.Add(skill.Command);
             else
-            {
-                // 커맨드를 키로 하고 해당 커맨드에 해당하는 스킬을 값으로 하는 딕셔너리를 생성
-                if (!commandsMap.ContainsKey(skillData.Command))
-                {
-                    commandsMap.Add(skillData.Command, new List<SkillData>());
-                }
-                commandsMap[skillData.Command].Add(skillData);
-            }
+                stanbySkillsNames.Add(skill.name);
         }
 
-        // 패시브 스킬 제거
-        foreach (SkillData skillToRemove in passiveSkillsToRemove)
+        foreach (var skill in playerCon.UnlockSkills)
         {
-            playerCon.StanbySkills.Remove(skillToRemove);
+            if (!string.IsNullOrEmpty(skill.Command))
+                unlockSkillsCommands.Add(skill.Command);
+            else
+                unlockSkillsNames.Add(skill.name);
         }
 
-        // unlock으로 선택된 스킬과 그와 같은 커맨드를 가진 스킬들을 모두 제거
-        foreach (var kvp in commandsMap)
-        {
-            string command = kvp.Key;
-            List<SkillData> skillsWithSameCommand = kvp.Value;
+        // 삭제할 스킬 오브젝트들을 담을 리스트 생성
+        List<SkillData> skillsToRemove = new List<SkillData>();
 
-            // unlock으로 선택된 스킬과 그와 같은 커맨드를 가진 스킬들을 제거
-            if (skillsWithSameCommand.Exists(skill => UnlockSkill.Contains(skill.Id)))
-            {
-                foreach (SkillData skillData in skillsWithSameCommand)
-                {
-                    if (!UnlockSkill.Contains(skillData.Id))
-                    {
-                        playerCon.StanbySkills.Remove(skillData);
-                    }
-                }
-            }
-        }
-        // 딕셔너리의 내용을 출력
-        foreach (var kvp in commandsMap)
+        // StanbySkills에서 확인한 Command와 같은 Command를 가지는 스킬 오브젝트들을 삭제할 리스트에 추가
+        foreach (var skill in playerCon.StanbySkills)
         {
-            string command = kvp.Key;
-            List<SkillData> skillsWithSameCommand = kvp.Value;
-            Debug.Log("Command: " + command + ", Skills Count: " + skillsWithSameCommand.Count);
+            if (unlockSkillsCommands.Contains(skill.Command))
+                skillsToRemove.Add(skill);
+        }
+
+        // UnlockSkills에 있는 스킬 오브젝트의 이름과 같은 이름을 가지는 StanbySkills의 스킬 오브젝트들을 삭제할 리스트에 추가
+        foreach (var skill in playerCon.StanbySkills)
+        {
+            if (unlockSkillsNames.Contains(skill.name))
+                skillsToRemove.Add(skill);
+        }
+
+        // 스킬 오브젝트들을 한 번에 삭제
+        foreach (var skill in skillsToRemove)
+        {
+            playerCon.StanbySkills.Remove(skill);
         }
     }
 
-}
 
+}
+ 

@@ -816,6 +816,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c638d1a20d301c4cad20de8ef82c6b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  levelUpchoices:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  unlockchoices:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  LevelUpBase: {fileID: 0}
+  LevelUpSkill: 
+  UnlockBase: {fileID: 0}
+  UnlockSkill: 
+  curSkills: []
 --- !u!4 &136093190
 Transform:
   m_ObjectHideFlags: 0
@@ -2257,6 +2271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ff4a0440b808f442bf4b87fe16e0cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelupUI: {fileID: 0}
 --- !u!1 &639336489
 GameObject:
   m_ObjectHideFlags: 0
@@ -3618,6 +3633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929857180ae1db346bf5c41b11798957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelupUI: {fileID: 0}
 --- !u!1 &1005363592 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2092705867047829126, guid: 9686a6d22ea84a04d8e841c3f81820d3, type: 3}
@@ -5205,9 +5221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2532186fd10674cb6e02b4bbf3b11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stat: {fileID: 0}
+  player: {fileID: 0}
   attackArea: {fileID: 807227067}
-  trailEffect: {fileID: 807227066}
 --- !u!1001 &1439562133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5649,6 +5664,14 @@ PrefabInstance:
     - target: {fileID: 1856607675158624865, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1864943291531169853, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1864943291531169853, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1873462889628573327, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Layer
@@ -6302,12 +6325,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ac6bdfeeb7aab4b9f86f39d32cb41a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stat: {fileID: 1563316891}
+  Max_HP: 150
+  Cur_HP: 150
+  HP_Recover: 0
+  Max_Stamina: 200
+  Cur_Stamina: 200
+  Stamina_Recover: 3
+  MIN_ATK: 15
+  MAX_ATK: 20
+  Crit_Chance: 0
+  Critical: 1.5
+  Defense: 0
+  ATK_Speed: 2
+  Move_Speed: 1
+  Left_ATK_Speed: 0
+  Right_ATK_Speed: 0
+  Dash_speed: 2.5
+  isAttack: 0
+  isDash: 0
   followCamera: {fileID: 0}
   isAttackReady: 0
-  invincibilityTime: 1.5
-  maxSkillSlots: 30
-  skillSlots: []
+  invincibleTime: 1
+  allSkills: []
+  stanbySkills: []
+  unlockSkills: []
   skillCammand: 
 --- !u!4 &1563316886 stripped
 Transform:
@@ -6326,7 +6367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c0ba0a34498944a84d1368be403859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill: {fileID: 0}
   Max_HP: 150
   Cur_HP: 150
   HP_Recover: 0

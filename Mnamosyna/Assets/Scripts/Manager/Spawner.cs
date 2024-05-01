@@ -30,11 +30,6 @@ public class Spawner : MonoBehaviour
         waveMonsters.Add(forthWaveMonsters);
     }
 
-    private void Update()
-    {
-
-    }
-
     public void SpawnWaves()
     {
         StartCoroutine(SpawnWavesCoroutine());
@@ -44,9 +39,9 @@ public class Spawner : MonoBehaviour
     {
         for (int i = 0; i < waveMonsters.Count; i++)
         {
+            yield return new WaitForSeconds(0.5f);
             SpawnWave(waveMonsters[i], numOfMonsters[i]);
             yield return new WaitForSeconds(waitTime);
-            //spawnCount -= 1;
         }
     }
 
@@ -76,7 +71,7 @@ public class Spawner : MonoBehaviour
             Vector3 playerForward = transform.forward;
 
             // 플레이어의 앞쪽으로 이동할 위치를 계산합니다.
-            Vector3 spawnPosition = playerPosition + playerForward * 1;
+            Vector3 spawnPosition = playerPosition + playerForward * 1 + new Vector3(1, 1, 0);
 
             SpawnObject(spawnPosition);
             foreach (Magic0 magic in magicComponents) { magic.EnableComponents(); }
