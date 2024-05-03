@@ -24,12 +24,13 @@ public class SpawnerTrigger : MonoBehaviour
             // 랜덤 대화 출력
             if (randomTalk != null)
             {
-                string dialogue = randomTalk.GetRandomDialogue();
-                Debug.Log(dialogue);
+                randomTalk.DisplayRandomDialogue();
             }
             spawner.SpawnWaves();
             spawner.waitTime -= Time.deltaTime;
 
         }
     }
+
+
 }

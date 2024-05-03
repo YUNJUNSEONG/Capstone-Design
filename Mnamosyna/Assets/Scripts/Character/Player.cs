@@ -7,6 +7,8 @@ using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 using static SkillData;
 
 
@@ -42,6 +44,14 @@ public class Player : PlayerStat
     SkinnedMeshRenderer[] meshs;
     Rigidbody rigid;
     Sword sword;
+    // 각 속성에 해당하는 BaseMesh
+    public GameObject BaseMesh_Fire;
+    public GameObject BaseMesh_Water;
+    public GameObject BaseMesh_Air;
+    //public GameObject BaseMesh_Earth; => 나중에 추가하기
+    // 현재 설정된 BaseMesh
+    private GameObject currentBaseMesh;
+
 
     // 스킬 관련 코드
     //public int maxSkillSlots = 30;
@@ -109,6 +119,8 @@ public class Player : PlayerStat
             Debug.LogError("SkillManager를 찾을 수 없습니다.");
         }
 
+        currentBaseMesh = BaseMesh_Water;
+
     }
 
 
@@ -125,6 +137,7 @@ public class Player : PlayerStat
         {
             Interaction();
         }
+        ChangeWeapon();
     }
 
     void GetInput()
@@ -485,6 +498,100 @@ public class Player : PlayerStat
             
         }
     }
+
+    void ChangeWeapon()
+    {
+        // UnlockSkills 리스트가 비어 있는지 확인
+        if (UnlockSkills != null && UnlockSkills.Count > 0)
+        {
+            // 리스트의 첫 번째 요소를 가져옴
+            SkillData firstSkill = UnlockSkills[0];
+
+            if (firstSkill != null)
+            {
+                ChangeBaseMesh(firstSkill.element);
+            }
+            else
+            {
+                // 만약 첫 번째 스킬 데이터가 null인 경우, 기본 BaseMesh로 설정
+                ApplyBaseMesh(BaseMesh_Water); // 기본 BaseMesh로 설정
+            }
+        }
+        else
+        {
+            // UnlockSkills 리스트가 비어 있거나 첫 번째 요소가 null인 경우, 기본 BaseMesh로 설정
+            ApplyBaseMesh(BaseMesh_Water); // 기본 BaseMesh로 설정
+        }
+    }
+
+    void ChangeBaseMesh(Element element)
+    {
+        GameObject newBaseMesh = null;
+
+        if (element == Element.Fire)
+        {
+            newBaseMesh = BaseMesh_Fire;
+        }
+        else if (element == Element.Water)
+        {
+            newBaseMesh = BaseMesh_Water;
+        }
+        else if (element == Element.Air)
+        {
+            newBaseMesh = BaseMesh_Air;
+        }
+        else if (element == Element.Earth)
+        {
+            // newBaseMesh = BaseMesh_Earth;
+            newBaseMesh = BaseMesh_Water;
+        }
+        else
+        {
+            // 지정된 속성이 없는 경우, 기본 BaseMesh로 설정
+            newBaseMesh = BaseMesh_Water;
+        }
+
+        ApplyBaseMesh(newBaseMesh); // 새로운 BaseMesh 적용
+    }
+
+    // 새로운 BaseMesh를 적용하는 함수
+    private void ApplyBaseMesh(GameObject newBaseMesh)
+    {
+        if (newBaseMesh == null)
+        {
+            // 새로운 BaseMesh가 없으면 아무것도 하지 않음
+            return;
+        }
+
+        // 이전에 설정된 모든 GameObject를 비활성화
+        foreach (Transform childTransform in transform)
+        {
+            if (childTransform.gameObject != newBaseMesh)
+            {
+                childTransform.gameObject.SetActive(false);
+            }
+        }
+
+        // 현재 애니메이터를 가져옴
+        Animator currentAnimator = GetComponent<Animator>();
+        if (currentAnimator != null)
+        {
+            // 새로운 BaseMesh에 있는 애니메이터를 가져옴
+            Animator newMeshAnimator = newBaseMesh.GetComponent<Animator>();
+            if (newMeshAnimator != null)
+            {
+                // 애니메이션 컨트롤러를 교체
+                currentAnimator.runtimeAnimatorController = newMeshAnimator.runtimeAnimatorController;
+
+                // 아바타를 교체
+                currentAnimator.avatar = newMeshAnimator.avatar;
+            }
+        }
+
+        // 새로운 BaseMesh를 활성화
+        newBaseMesh.SetActive(true);
+    }
+
 
 
 }

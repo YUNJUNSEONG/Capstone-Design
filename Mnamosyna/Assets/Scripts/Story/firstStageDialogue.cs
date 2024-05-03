@@ -16,6 +16,10 @@ public class firstStageDialogue : MonoBehaviour
         dialogues.Add("첫 번째 스테이지 대사 1");
         dialogues.Add("첫 번째 스테이지 대사 2");
         dialogues.Add("첫 번째 스테이지 대사 3");
+        dialogues.Add("첫 번째 스테이지 대사 4");
+        dialogues.Add("첫 번째 스테이지 대사 5");
+        dialogues.Add("첫 번째 스테이지 대사 6");
+        dialogues.Add("첫 번째 스테이지 대사 7");
         // 이하 스테이지에 따라 추가...
     }
 
