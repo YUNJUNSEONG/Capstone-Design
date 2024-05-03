@@ -11,20 +11,26 @@ public class StartTutorial : MonoBehaviour
     private int StartcurrentStep = 0;
 
     private string[] tutorialSteps = {
-        "Welcome to the tutorial! Press SPACE to jump.",
-        "Great! Now use the arrow keys to move around.",
-        "You can interact with objects by pressing E.",
-        "That's it! You've completed the tutorial!",
-        "That's it! You've completed the tutorial!",
-        "당신이 이 곳을 빠져 나갈때까지 도와드릴게요.",
-        "WASD키를 이용하여 움직일 수 있어요.",
-        "마우스 왼클릭으로는 기본 공격을, 마우스 우클릭으로 특수 공격을 할 수 있어요",
+        "드디어 일어났군요. " +
+            "여기가 어디고 나는 누구냐고요?",
+        "성질도 급하셔라"+
+            "여기는 당신처럼 기억을 뺏긴 자들이 오는곳이예요.",
+        "제가 당신의 기억을 가져갔나고요?",
+        "반은 맞고 반은 틀렸어요."+
+            "나는 이곳의 주인이였어요..."+
+                "마룡에게 빼앗기기 전까진 말이죠.",
+        "당신은 그것에게 기억을 뺏기고 이 던전으로 던져진거예요.",
+        "이곳의 몬스터들을 처치하면 기억의 조각은 얻겠지만"+
+            "모든 기억을 찾으려면 마룡을 쓰러트려야해요"+
+                "저는 힘이 되지 못하겠지만 당신을 지켜보면서 말동무라도 되드릴게요...",
+        "WASD키를 이용하면 움직일 수 있을거예요.",
+        "그리고 마우스 왼클릭과 우클릭으로 적을 공격 할 수 있을거예요",
     };
 
     void Start()
     {
         // 게임 시작 시 튜토리얼 완료 상태를 불러옵니다.
-       tutorialCompleted = PlayerPrefs.GetInt("TutorialCompleted", 0) == 1;
+       //tutorialCompleted = PlayerPrefs.GetInt("TutorialCompleted", 0) == 1;
 
         // 튜토리얼이 완료되었으면 튜토리얼 UI를 비활성화합니다.
         if (tutorialCompleted)

@@ -13,13 +13,14 @@ public class firstStageDialogue : MonoBehaviour
     void InitializeDialogues()
     {
         // 각 스테이지에 맞는 대화를 추가합니다.
-        dialogues.Add("첫 번째 스테이지 대사 1");
-        dialogues.Add("첫 번째 스테이지 대사 2");
-        dialogues.Add("첫 번째 스테이지 대사 3");
-        dialogues.Add("첫 번째 스테이지 대사 4");
-        dialogues.Add("첫 번째 스테이지 대사 5");
-        dialogues.Add("첫 번째 스테이지 대사 6");
-        dialogues.Add("첫 번째 스테이지 대사 7");
+        dialogues.Add("대부분의 몬스터들은 당신을 죽이려 달려들거예요.");
+        dialogues.Add("안그런 몬스터가 있냐고요? ... 아마 없을걸요.");
+        dialogues.Add("작고 귀여운 버섯처럼 보이지만... 당신한테는 다를 거예요.");
+        dialogues.Add("슬라임들은 쓰러트리면 분열하니 조심하세요.");
+        dialogues.Add("저 작은 해츨링들이 뱉어내는 불은 무시할 정도가 아니예요. 잘 보고 피하세요.");
+        dialogues.Add("샐러맨더들이 내뿜는 불을 조심해요");
+        dialogues.Add("거미들을 조심하세요. 순식간에 들이박을거예요");
+        //dialogues.Add("");
         // 이하 스테이지에 따라 추가...
     }
 

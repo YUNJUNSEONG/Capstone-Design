@@ -131,8 +131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: slime
-  Max_HP: 40
-  Cur_HP: 40
+  Max_HP: 15
+  Cur_HP: 15
   ATK: 5
   Skill_ATK1: 10
   Skill_ATK2: 0
@@ -148,6 +148,7 @@ MonoBehaviour:
   attack2Radius: 2
   attack3Radius: 0
   invincibleTime: 1
+  spawner: {fileID: 0}
   exclamationMark: {fileID: 1508338185881107144}
   isAttack: 0
   isSkill: 0
