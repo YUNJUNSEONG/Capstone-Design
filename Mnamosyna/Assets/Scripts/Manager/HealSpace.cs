@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class HealSpace : MonoBehaviour
 {
     public int healPlayer = 100;
     SkillManager skillManager;
+
+    public Magic0[] magicComponents;
 
     private void Start()
     {
@@ -33,20 +36,28 @@ public class HealSpace : MonoBehaviour
             Debug.Log("Player Heal!");
             player.cur_hp += healPlayer;
 
-            OpenLevelUpUI(skillManager);
-
-            OpenUnlockUpUI(skillManager);
-
+            OpenUnlockUpUI(skillManager, () =>
+            {
+                // Unlock이 완료되면 LevelUp 호출
+                OpenLevelUpUI(skillManager);
+            });
 
             Destroy(gameObject);
+
+            foreach (Magic0 magic in magicComponents) { magic.EnableComponents(); }
         }
     }
 
-    public void OpenUnlockUpUI(SkillManager skillManager)
+    public void OpenUnlockUpUI(SkillManager skillManager, Action onUnlockComplete)
     {
-        // 스킬 매니저의 Unlock메서드를 호출합니다.
-        skillManager.Unlock();
+        // 스킬 매니저의 Unlock 메서드를 호출하고, 완료되면 콜백 호출
+        skillManager.Unlock(() =>
+        {
+            if (onUnlockComplete != null)
+                onUnlockComplete.Invoke(); // 콜백 호출
+        });
     }
+
 
     public void OpenLevelUpUI(SkillManager skillManager)
     {

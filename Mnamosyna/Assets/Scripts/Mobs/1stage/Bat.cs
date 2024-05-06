@@ -1,195 +1,62 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
-/*
 public class Bat : Monster
 {
-    // 원거리 몬스터의 경우 ( 스킬 = 원거리 공격 )으로 설정 
-    public enum State
+    // 원거리 공격 관련 변수
+    public GameObject projectilePrefab; // 발사체 프리팹
+    public float projectileSpeed = 10f; // 발사체 속도
+    public float attackRange = 10f; // 공격 사거리
+
+    // 상속받은 Update 함수 오버라이드
+    protected override void Update()
     {
-        Idle,
-        Chase,
-        Attack,
-        meleeAttack,
-        GetHit,
-        Die
+        base.Update(); // 부모 클래스의 Update 함수 호출
+
+        // 원거리 공격 실행
+        RangedAttack();
     }
-    private State state = State.Idle;
 
-    public float chaseDis = 30.0f;
-    public float attackDis = 10.0f;
-    public float meleeAttackDis = 0.5f;
-    public float rotationSpeed = 5.0f;
-
-    public bool ismeleeAttack;
-
-    public GameObject Throw;
-
-    protected override IEnumerator CheckState()
+    // 원거리 공격 실행 함수
+    void RangedAttack()
     {
-        while (!isDead)
+        // 플레이어가 원거리 사거리 내에 있으면 공격 실행
+        if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
         {
-            yield return new WaitForSeconds(0.2f);
+            // 플레이어 쪽을 바라보도록 회전
+            RotateMonsterToCharacter();
 
-            float dist = Vector3.Distance(player.position, transform.position);
+            // 발사체 생성 위치 계산
+            Vector3 spawnPosition = transform.position + transform.forward * 1.5f; // 바로 앞으로 위치 지정
 
-            if (dist <= attackDis && dist > meleeAttackDis)
+            // 발사체 생성 및 발사
+            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
+            Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
+            if (projectileRb != null)
             {
-                state = State.Attack;
-            }
-            else if (dist <= meleeAttackDis)
-            {
-                state = State.meleeAttack;
-            }
-            else if (dist <= chaseDis)
-            {
-                state = State.Chase;
-            }
-            else if (isDamage)
-            {
-                state = State.GetHit;
-                isDamage = false;
-            }
-            else
-            {
-                state = State.Idle;
+                Vector3 directionToPlayer = (player.transform.position - spawnPosition).normalized;
+                projectileRb.velocity = directionToPlayer * projectileSpeed;
             }
         }
     }
 
-    protected override IEnumerator CheckStateForAction()
+    // 몬스터의 공격에 따른 데미지 반환 함수 오버라이드
+    public override int Damage(int skillIndex)
     {
-        while (!isDead)
+        int damage = 0;
+
+        switch (skillIndex)
         {
-            switch (state)
-            {
-                case State.Idle:
-                    nav.isStopped = true;
-                    anim.SetBool("isChase", false);
-                    break;
-
-                case State.Chase:
-                    nav.destination = player.position;
-                    nav.isStopped = false;
-                    anim.SetBool("isChase", true);
-                    break;
-
-                case State.GetHit:
-                    anim.SetBool("isChase", false);
-                    anim.SetTrigger("isGetHit");
-                    break;
-
-                case State.Attack:
-                    anim.SetBool("isChase", false);
-                    anim.SetBool("ismeleeAttack", false);
-                    yield return StartCoroutine(Attack());
-                    break;
-
-                case State.meleeAttack:
-                    anim.SetBool("isChase", false);
-                    anim.SetBool("isAttack", false);
-                    yield return StartCoroutine(meleeAttack());
-                    break;
-
-            }
-
-            yield return null;
+            case 0: // 근거리 공격
+                damage = ATK;
+                break;
+            case 1: // 원거리 공격
+                damage = Skill_ATK1;
+                break;
+            default:
+                // 지정되지 않은 스킬이면 damage 0
+                break;
         }
+        return damage;
     }
-
-    void FixedUpdate()
-    {
-        Targeting();
-        melee();
-    }
-
-
-    void Targeting()
-    {
-        float targetRadius = 0.5f;
-        float targetRange = 12;
-
-
-        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
-
-        // 플레이어를 감지한 경우 상태를 조정하여 공격 실행
-        if (rayHits.Length > 0 && !isAttack && !ismeleeAttack)
-        {
-            state = State.Attack;
-        }
-        else
-        {
-            state = State.Chase;
-        }
-    }
-
-    void melee()
-    {
-        float targetRadius = 1.5f;
-        float targetRange = 2f;
-        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
-
-        if (rayHits.Length > 0 && !isAttack && !ismeleeAttack)
-        {
-            state = State.meleeAttack;
-        }
-        else
-        {
-            state = State.Chase;
-        }
-    }
-
-    IEnumerator Attack()
-    {
-        isChase = false;
-        ismeleeAttack = false;
-        isAttack = true;
-        Vector3 direction = (player.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-
-
-        yield return new WaitForSeconds(0.5f);
-        anim.SetBool("isAttack", true); // 일반 공격 애니메이션 시작
-        yield return new WaitForSeconds(mobStat.skill_anim);
-        GameObject Attack = Instantiate(Throw, transform.position, transform.rotation);
-        Rigidbody rigidAttack = Attack.GetComponent<Rigidbody>();
-        rigidAttack.velocity = transform.forward * 20;
-        Debug.Log("박쥐 원거리 공격");
-
-        yield return new WaitForSeconds(0.5f);
-        anim.SetBool("isAttack", false);
-
-        yield return new WaitForSeconds(2.0f);
-        isAttack = false;
-        isChase = true;
-        nav.destination = player.position;
-    }
-
-    IEnumerator meleeAttack()
-    {
-        isChase = false;
-        isAttack = false;
-        ismeleeAttack = true;
-        Vector3 direction = (player.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-
-        yield return new WaitForSeconds(0.1f);
-        anim.SetBool("ismeleeAttack", true); // 일반 공격 애니메이션 시작
-        attackArea.enabled = true;
-        Debug.Log("박쥐 근거리 공격");
-
-        yield return new WaitForSeconds(mobStat.atk_anim);
-        attackArea.enabled = false;
-        anim.SetBool("ismeleeAttack", false);
-
-        yield return new WaitForSeconds(1.0f);
-        isAttack = false;
-        isChase = true;
-        nav.destination = player.position;
-    }
-
 }
-*/

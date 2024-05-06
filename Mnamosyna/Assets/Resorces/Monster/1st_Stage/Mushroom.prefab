@@ -182,8 +182,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: mushroom
-  Max_HP: 30
-  Cur_HP: 30
+  Max_HP: 15
+  Cur_HP: 15
   ATK: 5
   Skill_ATK1: 8
   Skill_ATK2: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
   Move_Speed: 3
   Distance: 0
   patrolRadius: 50
-  attack1Radius: 1
+  attack1Radius: 0.1
   attack2Radius: 2
   attack3Radius: 0
   invincibleTime: 1

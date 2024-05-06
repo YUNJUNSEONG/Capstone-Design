@@ -538,7 +538,7 @@ CapsuleCollider:
   m_Radius: 7.506199
   m_Height: 15.012398
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 7.3447657}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4451155142670918810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,8 +684,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Plant
-  Max_HP: 15
-  Cur_HP: 15
+  Max_HP: 25
+  Cur_HP: 25
   ATK: 9
   Skill_ATK1: 13
   Skill_ATK2: 0
@@ -697,7 +697,7 @@ MonoBehaviour:
   Move_Speed: 1
   Distance: 0
   patrolRadius: 15
-  attack1Radius: 1
+  attack1Radius: 0.1
   attack2Radius: 2
   attack3Radius: 0
   invincibleTime: 1
