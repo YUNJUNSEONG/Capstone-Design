@@ -6,6 +6,7 @@ public class StartTutorial : MonoBehaviour
 {
     public Text tutorialText;
     public GameObject tutorialUI;
+    public Image characterImage;
     private bool tutorialCompleted = false;
 
     private int StartcurrentStep = 0;
@@ -30,7 +31,7 @@ public class StartTutorial : MonoBehaviour
     void Start()
     {
         // 게임 시작 시 튜토리얼 완료 상태를 불러옵니다.
-       //tutorialCompleted = PlayerPrefs.GetInt("TutorialCompleted", 0) == 1;
+        //tutorialCompleted = PlayerPrefs.GetInt("TutorialCompleted", 0) == 1;
 
         // 튜토리얼이 완료되었으면 튜토리얼 UI를 비활성화합니다.
         if (tutorialCompleted)
@@ -43,6 +44,9 @@ public class StartTutorial : MonoBehaviour
             tutorialUI.SetActive(true);
             Time.timeScale = 0;
             UpdateTutorialText();
+
+            // 캐릭터 이미지를 활성화합니다.
+            characterImage.gameObject.SetActive(true);
         }
     }
 

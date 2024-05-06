@@ -100,7 +100,7 @@ public class Monster : MobStat
         { switchTime -= Time.deltaTime; }
     }
     // 몬스터를 플레이어 쪽으로 회전
-    void RotateMonsterToCharacter()
+    protected void RotateMonsterToCharacter()
     {
         if (currentState == MonsterState.Die)
         {
@@ -186,7 +186,7 @@ public class Monster : MobStat
         anim.SetTrigger(Attack03Hash);
     }*/
     // 몬스터의 공격에 따른 데미지 배정
-    public int Damage(int skillIndex)
+    public virtual int Damage(int skillIndex)
     {
         int damage = 0;
 
@@ -217,7 +217,7 @@ public class Monster : MobStat
     }
 
     // 몬스터의 State 업데이트
-    void Update()
+    protected virtual void Update()
     {
 
         if (currentState == MonsterState.Die)

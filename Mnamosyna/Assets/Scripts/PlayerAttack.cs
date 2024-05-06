@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    Animator anim;
+    public Animator anim;
 
     public bool isAttacking = false;
     private void Start()
@@ -14,11 +14,15 @@ public class PlayerAttack : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
     }
 
-    /*void OnLeftAttack()
+    void OnLeftAttack()
     {
-        if (!isAttack){anim.SetTrigger("LeftAttack");}
+        if (!isAttacking){anim.SetTrigger("LeftAttack");}
         
-    }*/
+    }
+    void OnRightAttack()
+    {
+        if (!isAttacking) { anim.SetTrigger("RightAttack"); }
+    }
     public void EnableSwordCollider() {isAttacking = true;}
     public void DisableSwordCollider() {isAttacking = false;}
 }

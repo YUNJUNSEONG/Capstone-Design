@@ -17,9 +17,10 @@ MonoBehaviour:
   linkElement: 0
   tier: 1
   Id: 6
-  Name: F COMBO6
-  Image: {fileID: 21300000, guid: 5608b86e29209794dad9c93cb9d34a5f, type: 3}
-  Description: 
+  Name: "\uB099\uD654"
+  Image: {fileID: 21300000, guid: 47b00ae2f28abac498f804378b792366, type: 3}
+  Description: "\uD06C\uAC8C \uBCA0\uC5B4\uC624\uB974\uBA70 \uB6F0\uC5B4\uC624\uB974\uACE0
+    \uB5A8\uC5B4\uC9C0\uBA74\uC11C \uB300\uAC80\uC744 \uCC0D\uC5B4\uB0B4\uB9BD\uB2C8\uB2E4"
   isUnlock: 0
   childSkill:
   - {fileID: 11400000, guid: 1fc84a14b1bbdd343a401afd24e1f661, type: 2}
@@ -28,19 +29,27 @@ MonoBehaviour:
   maxLevel: 3
   Command: RLLR
   AnimationTrigger: IsSkillRLLR
-  AnimationTime: 3.6
+  AnimationTime: 4.967
   damagePercent: 1.5
   addDmg: 0.1
   useStamina: 10
   MaxHPBonus: 0
+  addMaxHPBonus: 0
   HealthRecoverBonus: 0
+  addHealthRecoverBonus: 0
   StaminaRecoverBonus: 0
+  addStaminaRecoverBonus: 0
   ATKBonus: 0
+  addATKBonus: 0
   CritChanceBonus: 0
+  addCritChanceBonus: 0
   CriticalBonus: 0
   DefenseBonus: 0
+  addDefenseBonus: 0
   AttackSpeedMultiplier: 0
+  addAttackSpeedMultiplier: 0
   MoveSpeedMultiplier: 0
+  addMoveSpeedMultiplier: 0
   DimeritMaxHP: 0
   DimeritHealthRecover: 0
   DimeritStaminaRecover: 0

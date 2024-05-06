@@ -65,30 +65,46 @@ public class SkillData : ScriptableObject
     [Header("Health Related")]
     [ShowWhen("element", Element.Earth)]
     public int MaxHPBonus;
+    [ShowWhen("element", Element.Earth)]
+    public int addMaxHPBonus;
     [ShowWhen("element", Element.Water)]
     public float HealthRecoverBonus;
+    [ShowWhen("element", Element.Water)]
+    public float addHealthRecoverBonus;
 
     [Header("Stamina Related")]
     [ShowWhen("element", Element.Water)]
     public float StaminaRecoverBonus;
+    [ShowWhen("element", Element.Water)]
+    public float addStaminaRecoverBonus;
 
     [Header("Attack Related")]
     [ShowWhen("element", Element.Fire)]
-    public int ATKBonus;
+    public float ATKBonus;
+    [ShowWhen("element", Element.Fire)]
+    public float addATKBonus;
     [ShowWhen("element", Element.Fire)]
     public float CritChanceBonus;
+    [ShowWhen("element", Element.Fire)]
+    public float addCritChanceBonus;
     [ShowWhen("element", Element.Fire)]
     public float CriticalBonus;
 
     [Header("Defense")]
     [ShowWhen("element", Element.Earth)]
     public float DefenseBonus;
+    [ShowWhen("element", Element.Earth)]
+    public float addDefenseBonus;
 
     [Header("Speed Related")]
     [ShowWhen("element", Element.Air)]
     public float AttackSpeedMultiplier;
     [ShowWhen("element", Element.Air)]
+    public float addAttackSpeedMultiplier;
+    [ShowWhen("element", Element.Air)]
     public float MoveSpeedMultiplier;
+    [ShowWhen("element", Element.Air)]
+    public float addMoveSpeedMultiplier;
 
 
     [Header("# Dimerit Passive Skill Data")]

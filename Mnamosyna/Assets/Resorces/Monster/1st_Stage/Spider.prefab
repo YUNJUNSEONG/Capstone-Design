@@ -214,7 +214,7 @@ CapsuleCollider:
   m_Radius: 7.506199
   m_Height: 15.012398
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 7.3447657}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8266626227844486821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,8 +662,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: spider
-  Max_HP: 50
-  Cur_HP: 50
+  Max_HP: 20
+  Cur_HP: 20
   ATK: 4
   Skill_ATK1: 8
   Skill_ATK2: 0
@@ -675,7 +675,7 @@ MonoBehaviour:
   Move_Speed: 5
   Distance: 0
   patrolRadius: 70
-  attack1Radius: 1
+  attack1Radius: 0.1
   attack2Radius: 8
   attack3Radius: 0
   invincibleTime: 1
