@@ -18,7 +18,7 @@ MonoBehaviour:
   tier: 1
   Id: 34
   Name: "\uBB3C\uB808\uBC29\uC544"
-  Image: {fileID: 21300000, guid: 4472a59f230dd4548af94cecfb4eabfe, type: 3}
+  Image: {fileID: 21300000, guid: 0a24c8f66875be249a9cc06f07114e6a, type: 3}
   Description: 
   isUnlock: 0
   childSkill:
@@ -29,9 +29,9 @@ MonoBehaviour:
   Command: LSRR
   AnimationTrigger: IsSkillLSRR
   AnimationTime: 3.2333333
-  damagePercent: 1
-  addDmg: 10
-  useStamina: 10
+  damagePercent: 1.15
+  addDmg: 0.1
+  useStamina: 30
   MaxHPBonus: 0
   addMaxHPBonus: 0
   HealthRecoverBonus: 0

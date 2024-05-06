@@ -24,19 +24,20 @@ public class SkillManager : MonoBehaviour
 
 
     public List<SkillData> curSkills; // 현재 보유한 스킬
-                                      //public Image DashUI;
+    //public Image DashUI;
+
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
 
-        curSkills = new List<SkillData>(); // curSkills 초기화 추가
+        curSkills.Clear();
 
         UnlockSkill = new List<int>(); // UnlockSkill 초기화
         LevelUpSkill = new List<int>(); // LevelUpSkill 초기화
-    }
 
+    }
 
     private void Start()
     {
@@ -47,9 +48,7 @@ public class SkillManager : MonoBehaviour
     {
         Time.timeScale = 0;
         UnlockSkill = new List<int>();
-
-        // 실제 UI에 출력할 스킬의 개수를 계산합니다.
-        int numSkillsToShow = Mathf.Min(3, playerCon.StanbySkills.Count);
+        int numSkillsToShow = Mathf.Min(3, playerCon.StanbySkills.Count); // 실제 UI에 출력할 스킬의 개수를 계산합니다.
 
         // UnlockSkill 리스트에 스킬을 추가합니다.
         for (int i = 0; i < numSkillsToShow; i++)
@@ -69,38 +68,80 @@ public class SkillManager : MonoBehaviour
 
     void SetUnlockUI()
     {
-        UnlockBase.SetActive(true); // UnlockBase 활성화
-
         // UnlockSkill 리스트의 길이를 가져옵니다.
-        int numSkillsToShow = Mathf.Min(UnlockSkill.Count, unlockchoices.Length);
+        int numSkillsToShow = UnlockSkill.Count;
 
-        // UnlockSkill 리스트의 길이만큼 반복하여 UI 설정
-        for (int i = 0; i < numSkillsToShow; i++)
+        Debug.Log("UnlockSkill Count: " + UnlockSkill.Count);
+        for (int i = 0; i < UnlockSkill.Count; i++)
         {
-            int skillIndex = UnlockSkill[i];
-            SkillData skillData = playerCon.StanbySkills[skillIndex];
+            Debug.Log("UnlockSkill[" + i + "]: " + UnlockSkill[i]);
+        }
 
-            // UI 요소 설정
-            unlockchoices[i].SetActive(true); // 해당 스킬 UI 활성화
-            unlockchoices[i].transform.GetChild(0).GetComponent<Image>().sprite = skillData.Image; // 이미지 설정
-            string skillNameAndCommand = skillData.Name.ToString();
-            if (!string.IsNullOrEmpty(skillData.Command))
+        // UnlockSkill 리스트의 길이와 unlockchoices 배열의 길이를 비교하여 작을 때만 해당하는 부분을 실행합니다.
+        if (numSkillsToShow < unlockchoices.Length)
+        {
+            for (int i = 0; i < numSkillsToShow; i++)
             {
-                skillNameAndCommand += " (" + skillData.Command.ToString() + ")";
+                // 유효성 검사를 추가하여 유효하지 않은 인덱스에 대한 처리를 수행합니다.
+                if (UnlockSkill[i] < playerCon.StanbySkills.Count)
+                {
+                    int skillIndex = UnlockSkill[i];
+                    SkillData skillData = playerCon.StanbySkills[skillIndex];
+
+                    // UI 요소 설정 코드를 여기에 추가합니다.
+                }
+                else
+                {
+                    Debug.LogError("Invalid index in UnlockSkill list: " + UnlockSkill[i]);
+                }
             }
-            unlockchoices[i].transform.GetChild(1).GetComponent<Text>().text = skillNameAndCommand;
-
-            unlockchoices[i].transform.GetChild(2).GetComponent<Text>().text = skillData.skillType.ToString(); // 스킬 종류 속성 설정
-            unlockchoices[i].transform.GetChild(3).GetComponent<Text>().text = skillData.Description; // 스킬 설명 설정
         }
-
-        // 남은 UI 비활성화
-        for (int i = numSkillsToShow; i < unlockchoices.Length; i++)
+        else
         {
-            unlockchoices[i].SetActive(false);
-        }
-    }
+            for (int i = 0; i < unlockchoices.Length; i++)
+            {
+                int skillIndex = UnlockSkill[i]; // 현재 선택된 스킬의 인덱스
 
+                Debug.Log("Selected Skill Index: " + skillIndex); // 선택된 스킬의 인덱스를 로그로 출력
+
+                // 선택된 스킬 데이터 가져오기
+                SkillData skillData = playerCon.StanbySkills[skillIndex];
+                Debug.Log("Selected Skill Data: " + skillData); // 선택된 스킬 데이터를 로그로 출력
+                Debug.Log("========================================================");
+
+
+                // UI 요소 설정
+                // 1. 이미지 설정
+                unlockchoices[i].transform.GetChild(0).GetComponent<Image>().sprite = skillData.Image;
+
+                // 2. 스킬 이름과 커맨드 설정 (커맨드가 없는 경우 출력하지 않음)
+                string skillNameAndCommand = skillData.Name.ToString();
+                if (!string.IsNullOrEmpty(skillData.Command))
+                {
+                    skillNameAndCommand += " (" + skillData.Command.ToString() + ")";
+                }
+                unlockchoices[i].transform.GetChild(1).GetComponent<Text>().text = skillNameAndCommand;
+
+                // 3. 스킬의 종류 속성과 출력 (combo / Link / Passive)
+                unlockchoices[i].transform.GetChild(2).GetComponent<Text>().text =  skillData.skillType.ToString();
+
+                // 4. 스킬의 설명 출력
+                // 설명이 없는 경우 출력하지 않음
+                if (!string.IsNullOrEmpty(skillData.Description))
+                {
+                    unlockchoices[i].transform.GetChild(3).GetComponent<Text>().text = skillData.Description.ToString();
+                }
+                else
+                {
+                    unlockchoices[i].transform.GetChild(3).GetComponent<Text>().text = "";
+                }
+
+                //unlockchoices[i].transform.GetChild(4).GetComponent<Text>().text = skillData.element.ToString();
+            }
+        }
+
+        UnlockBase.SetActive(true);
+    }
 
 
     public void choiceUnlockSkill(int num)
@@ -151,23 +192,25 @@ public class SkillManager : MonoBehaviour
     public void LevelUp()
     {
         Time.timeScale = 0;
+        int choice = 0;
         LevelUpSkill = new List<int>();
 
         // 플레이어가 보유한 스킬의 개수를 가져옵니다.
         int numSkills = playerCon.UnlockSkills.Count;
 
         // UI에 출력할 스킬의 개수를 설정합니다.
-        int numSkillsToShow = Mathf.Min(numSkills, 3);
+        int numSkillsToShow = Mathf.Min(numSkills, levelUpchoices.Length);
 
         // 만약 UI에 출력할 스킬의 개수가 0 이상이라면
         if (numSkillsToShow > 0)
         {
-            while (LevelUpSkill.Count < numSkillsToShow)
+            while (choice < numSkillsToShow)
             {
                 int rand = UnityEngine.Random.Range(0, numSkills);
                 if (!LevelUpSkill.Contains(rand))
                 {
                     LevelUpSkill.Add(rand);
+                    choice++;
                 }
             }
 
@@ -183,36 +226,63 @@ public class SkillManager : MonoBehaviour
 
     void SetLeveUpUI()
     {
-        LevelUpBase.SetActive(true); // LevelUpBase 활성화
-
         // LevelUpSkill 리스트의 길이를 가져옵니다.
-        int numSkillsToShow = Mathf.Min(LevelUpSkill.Count, levelUpchoices.Length);
+        int numSkillsToShow = LevelUpSkill.Count;
 
-        // LevelUpSkill 리스트의 길이만큼 반복하여 UI 설정
-        for (int i = 0; i < numSkillsToShow; i++)
+        // LevelUpSkill 리스트의 길이가 levelUpchoices 배열의 길이보다 작다면
+        // 실제 UI에 출력할 스킬의 개수를 numSkillsToShow에 맞춰야 합니다.
+        if (numSkillsToShow < levelUpchoices.Length)
         {
-            int skillIndex = LevelUpSkill[i];
-            SkillData skillData = playerCon.UnlockSkills[skillIndex];
-
-            // UI 요소 설정
-            levelUpchoices[i].SetActive(true); // 해당 스킬 UI 활성화
-            levelUpchoices[i].transform.GetChild(0).GetComponent<Image>().sprite = skillData.Image; // 이미지 설정
-            string skillNameAndCommand = skillData.Name.ToString();
-            if (!string.IsNullOrEmpty(skillData.Command))
+            // LevelUpSkill 리스트의 길이가 levelUpchoices 배열의 길이보다 작을 때는
+            // LevelUpSkill 리스트의 길이만큼만 반복문을 실행합니다.
+            for (int i = 0; i < numSkillsToShow; i++)
             {
-                skillNameAndCommand += " (" + skillData.Command.ToString() + ")";
+                // LevelUpSkill 리스트에서 인덱스를 가져와 사용하기 전에 유효성을 확인합니다.
+                if (LevelUpSkill[i] < playerCon.UnlockSkills.Count)
+                {
+                    // 유효한 인덱스라면 UI 요소를 설정합니다.
+                    levelUpchoices[i].transform.GetChild(0).GetComponent<Image>().sprite = playerCon.UnlockSkills[LevelUpSkill[i]].Image;
+                    levelUpchoices[i].transform.GetChild(1).GetComponent<Text>().text =
+                        playerCon.UnlockSkills[LevelUpSkill[i]].Name.ToString() + '(' + playerCon.UnlockSkills[LevelUpSkill[i]].Command.ToString() + ')' + " Lv." + playerCon.UnlockSkills[LevelUpSkill[i]].Level;
+
+                    // 기타 UI 요소 설정 코드도 이어서 작성합니다.
+                }
+                else
+                {
+                    // 유효하지 않은 인덱스일 경우에 대한 처리를 여기에 추가할 수 있습니다.
+                    Debug.LogError("Invalid index in LevelUpSkill list: " + LevelUpSkill[i]);
+                }
             }
-            levelUpchoices[i].transform.GetChild(1).GetComponent<Text>().text = skillNameAndCommand;
-            levelUpchoices[i].transform.GetChild(3).GetComponent<Text>().text = skillData.Description; // 스킬 설명 설정
         }
-
-        // 남은 UI 비활성화
-        for (int i = numSkillsToShow; i < levelUpchoices.Length; i++)
+        else
         {
-            levelUpchoices[i].SetActive(false);
-        }
-    }
+            /*
+            for (int i = 0; i < levelUpchoices.Length; i++)
+            {
+                levelUpchoices[i].transform.GetChild(0).GetComponent<Image>().sprite = playerCon.UnlockSkills[LevelUpSkill[i]].Image;
 
+                levelUpchoices[i].transform.GetChild(1).GetComponent<Text>().text =
+                    playerCon.UnlockSkills[LevelUpSkill[i]].Name.ToString() + '(' + playerCon.UnlockSkills[LevelUpSkill[i]].Command.ToString() + ')' + " Lv." + playerCon.UnlockSkills[LevelUpSkill[i]].Level;
+
+                if (playerCon.UnlockSkills[LevelUpSkill[i]].Level == 0)
+                    levelUpchoices[i].transform.GetChild(2).GetComponent<Text>().text = playerCon.UnlockSkills[LevelUpSkill[i]].Description.ToString();
+                else if (playerCon.UnlockSkills[LevelUpSkill[i]].Level < playerCon.UnlockSkills[LevelUpSkill[i]].maxLevel)
+                    levelUpchoices[i].transform.GetChild(2).GetComponent<Text>().text = "데미지가 " + (playerCon.UnlockSkills[LevelUpSkill[i]].damagePercent +"%" + playerCon.UnlockSkills[LevelUpSkill[i]].addDmg * playerCon.UnlockSkills[LevelUpSkill[i]].Level) + "에서 " + (playerCon.UnlockSkills[LevelUpSkill[i]].damagePercent + playerCon.UnlockSkills[LevelUpSkill[i]].addDmg * (playerCon.UnlockSkills[LevelUpSkill[i]].Level + 1)) + "로 증가합니다.";
+                else
+                    levelUpchoices[i].transform.GetChild(2).GetComponent<Text>().text = "이 스킬은 마스터하셨습니다.";
+                if (playerCon.UnlockSkills[LevelUpSkill[i]].Level < playerCon.UnlockSkills[LevelUpSkill[i]].maxLevel)
+                {
+                    levelUpchoices[i].transform.GetChild(3).GetComponentInChildren<Text>().text = "Level Up";
+                }
+                else
+                {
+                    levelUpchoices[i].transform.GetChild(3).GetComponentInChildren<Text>().text = "Close";
+                }
+            }*/
+        }
+
+        LevelUpBase.SetActive(true);
+    }
 
 
     public void choiceLevelUpSkill(int num)
@@ -298,4 +368,3 @@ public class SkillManager : MonoBehaviour
 
 
 }
- 

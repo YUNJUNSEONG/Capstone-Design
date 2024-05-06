@@ -18,7 +18,7 @@ MonoBehaviour:
   tier: 1
   Id: 35
   Name: "\uC5ED\uB958"
-  Image: {fileID: 21300000, guid: fce4f289d1ea8ab46b366e4c25225c9f, type: 3}
+  Image: {fileID: 21300000, guid: 860038024ec81194e866ada4f8ff17e4, type: 3}
   Description: 
   isUnlock: 0
   childSkill:
@@ -29,9 +29,9 @@ MonoBehaviour:
   Command: RLLL
   AnimationTrigger: IsSkillRLLL
   AnimationTime: 3.3
-  damagePercent: 1
-  addDmg: 10
-  useStamina: 10
+  damagePercent: 1.2
+  addDmg: 0.15
+  useStamina: 30
   MaxHPBonus: 0
   addMaxHPBonus: 0
   HealthRecoverBonus: 0

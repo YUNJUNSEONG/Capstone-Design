@@ -18,7 +18,7 @@ MonoBehaviour:
   tier: 3
   Id: 39
   Name: "\uD3ED\uB8E1"
-  Image: {fileID: 21300000, guid: 4b8ce65138a8a6f4b8548fdc65c3705d, type: 3}
+  Image: {fileID: 21300000, guid: cbf46ab67ae4f3246ae943b67623391d, type: 3}
   Description: 
   isUnlock: 0
   childSkill: []
@@ -27,9 +27,9 @@ MonoBehaviour:
   Command: RSLR
   AnimationTrigger: isSkillRSLR
   AnimationTime: 0
-  damagePercent: 0
-  addDmg: 0
-  useStamina: 0
+  damagePercent: 1.8
+  addDmg: 0.2
+  useStamina: 50
   MaxHPBonus: 0
   addMaxHPBonus: 0
   HealthRecoverBonus: 0

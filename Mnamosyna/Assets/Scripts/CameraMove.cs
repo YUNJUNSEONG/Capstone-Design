@@ -12,22 +12,24 @@ public class CameraMove: MonoBehaviour
     // Update is called once per frame
     private Quaternion initialRotation; //초기 카메라 셋팅값 저장 하기 위해
 
-    void start()
+    void Start()
     {
         //초기 카메라 셋팅값 저장하기 위해 / destination tag 찾기 실행
         initialRotation = transform.rotation;
         destination = GameObject.FindGameObjectWithTag("destination");
     }    
+
+    
     void Update()
     {
-        if (_isCameraEventEnded)
-            CameraEvent();
-        else
+        //if (_isCameraEventEnded)
+            //CameraEvent();
+        //else
             //초기 카메라 셋팅 값 가져오기
             transform.rotation = initialRotation;
             transform.position = new Vector3(target.transform.position.x + offset.x, offset.y, target.transform.position.z + offset.z);
     }
-
+    /*
     void CameraEvent()
     {
         //1. 안개 에셋이 카메라 이벤트 동안 켜졌다 꺼지기
@@ -43,5 +45,5 @@ public class CameraMove: MonoBehaviour
             _isCameraEventEnded = true;
             _pos_v = 0f;
         }
-    }
+    }*/
 }

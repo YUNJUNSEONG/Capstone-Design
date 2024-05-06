@@ -18,7 +18,7 @@ MonoBehaviour:
   tier: 2
   Id: 37
   Name: "\uC720\uC218"
-  Image: {fileID: 21300000, guid: 3c58ae5539306214ab6cc7f622faa954, type: 3}
+  Image: {fileID: 21300000, guid: a999acda4a58af34694e4ff856db61fb, type: 3}
   Description: 
   isUnlock: 0
   childSkill:
@@ -28,9 +28,9 @@ MonoBehaviour:
   Command: LSRSL
   AnimationTrigger: IsSkillLSRSL
   AnimationTime: 4.1666665
-  damagePercent: 1
-  addDmg: 10
-  useStamina: 10
+  damagePercent: 1.35
+  addDmg: 0.15
+  useStamina: 35
   MaxHPBonus: 0
   addMaxHPBonus: 0
   HealthRecoverBonus: 0
