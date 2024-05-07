@@ -48,16 +48,20 @@ public class SkillManager : MonoBehaviour
     {
         Time.timeScale = 0;
         UnlockSkill = new List<int>();
+        HashSet<int> selectedIndexes = new HashSet<int>(); // 이미 선택된 스킬의 인덱스를 추적하기 위한 HashSet 생성
         int numSkillsToShow = Mathf.Min(3, playerCon.StanbySkills.Count); // 실제 UI에 출력할 스킬의 개수를 계산합니다.
 
         // UnlockSkill 리스트에 스킬을 추가합니다.
         for (int i = 0; i < numSkillsToShow; i++)
         {
-            int rand = UnityEngine.Random.Range(0, playerCon.StanbySkills.Count);
-            if (!UnlockSkill.Contains(rand))
+            int rand;
+            do
             {
-                UnlockSkill.Add(rand);
-            }
+                rand = UnityEngine.Random.Range(0, playerCon.StanbySkills.Count);
+            } while (selectedIndexes.Contains(rand)); // 이미 선택된 스킬이면 다시 랜덤 선택
+
+            UnlockSkill.Add(rand);
+            selectedIndexes.Add(rand); // 선택한 스킬의 인덱스를 HashSet에 추가
         }
 
         SetUnlockUI();
@@ -65,6 +69,7 @@ public class SkillManager : MonoBehaviour
         // 콜백 함수를 호출합니다.
         onUnlockComplete?.Invoke();
     }
+
 
     void SetUnlockUI()
     {
@@ -192,8 +197,8 @@ public class SkillManager : MonoBehaviour
     public void LevelUp()
     {
         Time.timeScale = 0;
-        int choice = 0;
         LevelUpSkill = new List<int>();
+        HashSet<int> selectedIndexes = new HashSet<int>(); // 이미 선택된 스킬의 인덱스를 추적하기 위한 HashSet 생성
 
         // 플레이어가 보유한 스킬의 개수를 가져옵니다.
         int numSkills = playerCon.UnlockSkills.Count;
@@ -204,14 +209,18 @@ public class SkillManager : MonoBehaviour
         // 만약 UI에 출력할 스킬의 개수가 0 이상이라면
         if (numSkillsToShow > 0)
         {
+            int choice = 0;
             while (choice < numSkillsToShow)
             {
-                int rand = UnityEngine.Random.Range(0, numSkills);
-                if (!LevelUpSkill.Contains(rand))
+                int rand;
+                do
                 {
-                    LevelUpSkill.Add(rand);
-                    choice++;
-                }
+                    rand = UnityEngine.Random.Range(0, numSkills);
+                } while (selectedIndexes.Contains(rand)); // 이미 선택된 스킬이면 다시 랜덤 선택
+
+                LevelUpSkill.Add(rand);
+                selectedIndexes.Add(rand); // 선택한 스킬의 인덱스를 HashSet에 추가
+                choice++;
             }
 
             SetLeveUpUI();
@@ -222,6 +231,7 @@ public class SkillManager : MonoBehaviour
             Debug.LogWarning("There are no skills to level up.");
         }
     }
+
 
 
     void SetLeveUpUI()
@@ -256,7 +266,7 @@ public class SkillManager : MonoBehaviour
         }
         else
         {
-            /*
+            
             for (int i = 0; i < levelUpchoices.Length; i++)
             {
                 levelUpchoices[i].transform.GetChild(0).GetComponent<Image>().sprite = playerCon.UnlockSkills[LevelUpSkill[i]].Image;
@@ -265,20 +275,20 @@ public class SkillManager : MonoBehaviour
                     playerCon.UnlockSkills[LevelUpSkill[i]].Name.ToString() + '(' + playerCon.UnlockSkills[LevelUpSkill[i]].Command.ToString() + ')' + " Lv." + playerCon.UnlockSkills[LevelUpSkill[i]].Level;
 
                 if (playerCon.UnlockSkills[LevelUpSkill[i]].Level == 0)
-                    levelUpchoices[i].transform.GetChild(2).GetComponent<Text>().text = playerCon.UnlockSkills[LevelUpSkill[i]].Description.ToString();
+                    levelUpchoices[i].transform.GetChild(3).GetComponent<Text>().text = playerCon.UnlockSkills[LevelUpSkill[i]].Description.ToString();
                 else if (playerCon.UnlockSkills[LevelUpSkill[i]].Level < playerCon.UnlockSkills[LevelUpSkill[i]].maxLevel)
-                    levelUpchoices[i].transform.GetChild(2).GetComponent<Text>().text = "데미지가 " + (playerCon.UnlockSkills[LevelUpSkill[i]].damagePercent +"%" + playerCon.UnlockSkills[LevelUpSkill[i]].addDmg * playerCon.UnlockSkills[LevelUpSkill[i]].Level) + "에서 " + (playerCon.UnlockSkills[LevelUpSkill[i]].damagePercent + playerCon.UnlockSkills[LevelUpSkill[i]].addDmg * (playerCon.UnlockSkills[LevelUpSkill[i]].Level + 1)) + "로 증가합니다.";
+                    levelUpchoices[i].transform.GetChild(3).GetComponent<Text>().text = "데미지가 " + (playerCon.UnlockSkills[LevelUpSkill[i]].damagePercent*100  + playerCon.UnlockSkills[LevelUpSkill[i]].addDmg*100 +"% 에서 " + (playerCon.UnlockSkills[LevelUpSkill[i]].damagePercent*100 + playerCon.UnlockSkills[LevelUpSkill[i]].addDmg*100 * (playerCon.UnlockSkills[LevelUpSkill[i]].Level+1)) +"%"+ "로 증가합니다.");
                 else
                     levelUpchoices[i].transform.GetChild(2).GetComponent<Text>().text = "이 스킬은 마스터하셨습니다.";
                 if (playerCon.UnlockSkills[LevelUpSkill[i]].Level < playerCon.UnlockSkills[LevelUpSkill[i]].maxLevel)
                 {
-                    levelUpchoices[i].transform.GetChild(3).GetComponentInChildren<Text>().text = "Level Up";
+                    levelUpchoices[i].transform.GetChild(2).GetComponentInChildren<Text>().text = "Level Up";
                 }
                 else
                 {
-                    levelUpchoices[i].transform.GetChild(3).GetComponentInChildren<Text>().text = "Close";
+                    levelUpchoices[i].transform.GetChild(2).GetComponentInChildren<Text>().text = "Close";
                 }
-            }*/
+            }
         }
 
         LevelUpBase.SetActive(true);

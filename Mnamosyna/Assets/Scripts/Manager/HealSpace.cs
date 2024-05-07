@@ -35,6 +35,7 @@ public class HealSpace : MonoBehaviour
         {
             Debug.Log("Player Heal!");
             player.cur_hp += healPlayer;
+            player.cur_stamina += healPlayer;   
 
             OpenUnlockUpUI(skillManager, () =>
             {

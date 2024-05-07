@@ -29,7 +29,11 @@ public class Player : PlayerStat
     public Camera followCamera;
     public bool isAttackReady = true;
 
-    public float invincibleTime = 1.0f; // 무적 지속 시간
+    public float invincibleTime = 3.0f; // 무적 지속 시간
+    private bool isInvincible = false;
+
+    // 무적 상태의 지속 시간 (초)
+    public float invincibleDuration = 2.0f;
     private float lastDamagedTime;
 
     //공격받을때 깜빡이는 용도
@@ -138,6 +142,8 @@ public class Player : PlayerStat
             Interaction();
         }
         ChangeWeapon();
+        //ttackInvincible();
+
     }
 
     void GetInput()
@@ -239,9 +245,12 @@ public class Player : PlayerStat
 
             if (!isAttack)
             {
+                var playerAttack = GetComponent<PlayerAttack>();
+                if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
                 //sword.Use(Left_ATK_Speed, Damage());
                 anim.SetTrigger("LeftAttack");
                 attackDelay = 0;
+                Invoke("attackend", 2.0f);
             }
 
         }
@@ -261,11 +270,21 @@ public class Player : PlayerStat
             UseSkill();
             if (!isAttack)
             {
+                var playerAttack = GetComponent<PlayerAttack>();
+                if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
                 //sword.Use(Right_ATK_Speed, Damage());
                 anim.SetTrigger("RightAttack");
                 attackDelay = 0;
+                Invoke("attackend", 2.0f);
             }
+
         }
+    }
+
+    void attackend()
+    {
+        var playerAttack = GetComponent<PlayerAttack>();
+        if (playerAttack != null) { playerAttack.DisableSwordCollider(); }
     }
     // 공격 끝났는지 확인하는 코루틴 => 삭제 가능성 높음
     IEnumerator AttackEnd(float attackTime, string animationBool)
@@ -273,6 +292,8 @@ public class Player : PlayerStat
         anim.SetTrigger(animationBool);
         yield return new WaitForSeconds(attackTime/2);
         isAttack = false;
+        var playerAttack = GetComponent<PlayerAttack>();
+        if (playerAttack != null) { playerAttack.DisableSwordCollider(); }
     }
     // 플레이어의 스킬 커맨드 초기화 코루틴
     IEnumerator ClearCommand()
@@ -337,15 +358,15 @@ public class Player : PlayerStat
     {
         anim.SetTrigger("GetHit");
         Flash();
-        var playerAttack = GetComponent<PlayerAttack>();
-        if (playerAttack != null) { playerAttack.DisableSwordCollider(); }
-        else { Debug.Log("isattacking변경실패"); }
+        //var playerAttack = GetComponent<PlayerAttack>();
+        //if (playerAttack != null) { playerAttack.DisableSwordCollider(); }
+        //else { Debug.Log("isattacking변경실패"); }
     }
 
     //몬스터의 공격에 의한 데미지를 방어력 계산을 통해 최종 데미지 산출
     public void TakeDamage(int damage)
     {
-        if (Time.time >= lastDamagedTime + invincibleTime)
+        if (Time.time >= lastDamagedTime + invincibleDuration)
         {
             // 최종 데미지 = 플레이어의 공격데미지 * (1 - 방어력%)
             int finalDamage = Mathf.RoundToInt(damage * (1 - Defense));
@@ -425,9 +446,12 @@ public class Player : PlayerStat
                 UseSkill();
                 if (!isAttack)
                 {
+                    var playerAttack = GetComponent<PlayerAttack>();
+                    if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
                     //sword.Use(Dash_speed, Damage());
                     anim.SetTrigger("Dash");
                     attackDelay = 0;
+                    Invoke("attackend", 2.0f);
                 }
             }
         }
@@ -453,6 +477,10 @@ public class Player : PlayerStat
                     int skilldamage = intSkillDamage + intLevelDamage;
                     //sword.Use(allSkills[i].AnimationTime, skilldamage);
                     StartCoroutine(AttackEnd(allSkills[i].AnimationTime, allSkills[i].AnimationTrigger));
+                    var playerAttack = GetComponent<PlayerAttack>();
+                    if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
+
+                    cur_stamina -= (unlockSkills[i].useStamina);
                     skillCammand = " ";
                     break;
                 }
@@ -592,6 +620,61 @@ public class Player : PlayerStat
         newBaseMesh.SetActive(true);
     }
 
+    /*
+    private void OnTriggerEnter(Collider other)
+    {
+        if (isInvincible)
+        {
+            // 플레이어가 무적 상태인 경우에는 몬스터 레이어와의 충돌을 무시
+            if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+            {
+                Physics.IgnoreCollision(other, GetComponent<Collider>());
+            }
+            return;
+        }
 
+        if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+        {
+            // 플레이어가 몬스터와 충돌한 경우
+            PenetrateMonster(other);
+        }
+    }
+    private Collider currentMonsterCollider;
+
+    public void PenetrateMonster(Collider monsterCollider)
+    {
+        // 플레이어를 무적 상태로 전환
+        isInvincible = true;
+        currentMonsterCollider = monsterCollider;
+
+        // GetHit 메서드 호출
+        //GetHit();
+
+        StartCoroutine(BecomeInvincible());
+    }
+
+    private IEnumerator BecomeInvincible()
+    {
+        yield return new WaitForSeconds(invincibleDuration);
+
+        // 무적 상태가 끝나면 다시 몬스터와의 충돌을 감지하도록 설정
+        isInvincible = false;
+        if (currentMonsterCollider != null)
+        {
+            Physics.IgnoreCollision(currentMonsterCollider, GetComponent<Collider>(), false);
+        }
+    }
+
+
+    void AttackInvincible()
+    {
+        if(isAttack == true)
+        {
+            isInvincible = true;
+
+            StartCoroutine(BecomeInvincible());
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Monster"), true);
+        }
+    }*/
 
 }

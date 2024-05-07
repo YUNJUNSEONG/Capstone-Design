@@ -7,22 +7,32 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public Animator anim;
-
+    public Player player;
     public bool isAttacking = false;
+
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        player = GetComponentInChildren<Player>();
     }
-
+    /*
     void OnLeftAttack()
     {
-        if (!isAttacking){anim.SetTrigger("LeftAttack");}
-        
+        if (!isAttacking)
+        {
+            anim.SetTrigger("LeftAttack");
+        }
     }
+
     void OnRightAttack()
     {
-        if (!isAttacking) { anim.SetTrigger("RightAttack"); }
-    }
-    public void EnableSwordCollider() {isAttacking = true;}
-    public void DisableSwordCollider() {isAttacking = false;}
+        if (!isAttacking)
+        {
+            anim.SetTrigger("RightAttack");
+        }
+    }*/
+
+    public void EnableSwordCollider() { isAttacking = true; }
+    public void DisableSwordCollider() { isAttacking = false; }
 }
+

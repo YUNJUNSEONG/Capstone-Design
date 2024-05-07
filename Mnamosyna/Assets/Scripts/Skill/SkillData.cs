@@ -57,7 +57,7 @@ public class SkillData : ScriptableObject
     [ShowWhen("skillType", SkillType.Combo)]
     public float addDmg;
     [ShowWhen("skillType", SkillType.Combo)]
-    public float useStamina;
+    public int useStamina;
 
 
     [Header("# Passive Skill Data")]
