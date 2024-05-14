@@ -23,7 +23,7 @@ public class RandomTalk : MonoBehaviour
     {
         if (dialogueText == null)
         {
-            Debug.LogError("대화 텍스트(Text)를 찾을 수 없습니다.");
+            Debug.LogError("대화 텍스트를 찾을 수 없습니다.");
             return;
         }
 
