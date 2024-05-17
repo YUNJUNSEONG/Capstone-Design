@@ -567,6 +567,7 @@ GameObject:
   - component: {fileID: 4247397414704265557}
   - component: {fileID: 7927610473219805021}
   - component: {fileID: -6614494447403837572}
+  - component: {fileID: 6054500732431256209}
   m_Layer: 8
   m_Name: Plant
   m_TagString: Monster
@@ -663,7 +664,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -705,6 +706,18 @@ MonoBehaviour:
   exclamationMark: {fileID: 455944455902947362}
   isAttack: 0
   isSkill: 0
+--- !u!114 &6054500732431256209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7451204239203880121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea5cc86c5bf67a7458db1899d0582087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7988357179361435425
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,52 +1172,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c0eeb07ec945ed743bc80119980dc84b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5677319070812383146}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 635547659545568360, guid: c0eeb07ec945ed743bc80119980dc84b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6604577015307888266}
-    - targetCorrespondingSourceObject: {fileID: 635547659545568360, guid: c0eeb07ec945ed743bc80119980dc84b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3065947539682425680}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0eeb07ec945ed743bc80119980dc84b, type: 3}
---- !u!1 &6106719272604739634 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 635547659545568360, guid: c0eeb07ec945ed743bc80119980dc84b, type: 3}
-  m_PrefabInstance: {fileID: 6660410331571440730}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6604577015307888266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6106719272604739634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea5cc86c5bf67a7458db1899d0582087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!135 &3065947539682425680
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6106719272604739634}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.65
-  m_Center: {x: -0.41, y: 0.09, z: 0}
 --- !u!4 &6621486161830685617 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c0eeb07ec945ed743bc80119980dc84b, type: 3}

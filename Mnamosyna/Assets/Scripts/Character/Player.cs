@@ -52,6 +52,7 @@ public class Player : PlayerStat
     public GameObject BaseMesh_Fire;
     public GameObject BaseMesh_Water;
     public GameObject BaseMesh_Air;
+    public GameObject BaseMesh_Earth;
     //public GameObject BaseMesh_Earth; => 나중에 추가하기
     // 현재 설정된 BaseMesh
     private GameObject currentBaseMesh;
@@ -570,8 +571,7 @@ public class Player : PlayerStat
         }
         else if (element == Element.Earth)
         {
-            // newBaseMesh = BaseMesh_Earth;
-            newBaseMesh = BaseMesh_Water;
+            newBaseMesh = BaseMesh_Earth;
         }
         else
         {

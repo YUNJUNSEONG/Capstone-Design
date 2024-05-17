@@ -145,6 +145,7 @@ public class Monster : MobStat
             case 0:  //기본 공격
                 if (Skill1CanUse <= 0 )//&& attack1Radius <= 0)
                 {
+                    isAttack = true;
                     isSkill = false;
                     Skill1();
                     Skill1CanUse = SkillCoolTime1;
@@ -154,6 +155,7 @@ public class Monster : MobStat
             case 1: // 스킬 공격1
                 if (Skill2CanUse <= 0 )//&& attack2Radius <=0 )
                 {
+                    isAttack = true;
                     isSkill = true;
                     Skill2();
                     Skill2CanUse = SkillCoolTime2;
@@ -176,10 +178,13 @@ public class Monster : MobStat
     void Skill1()
     {
         anim.SetTrigger(Attack01Hash);
+        isAttack = false;
     }
     void Skill2()
     {
         anim.SetTrigger(Attack02Hash);
+        isAttack = false;
+        isSkill = false;
     }
    /* void Skill3()
     {
@@ -330,7 +335,8 @@ public class Monster : MobStat
     }
     void MonsterAttackStart()
     {
-        isAttack = true;
+        isAttack = true;  
+           
     }
     void MonsterAttackEnd()
     {
