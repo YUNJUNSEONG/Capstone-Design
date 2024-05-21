@@ -131,7 +131,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.3333323, y: 46.930695}
+  m_AnchoredPosition: {x: -0.3333323, y: 45}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1733366839454198563
@@ -312,7 +312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.078, y: -1.076}
+  m_AnchoredPosition: {x: 0, y: 0.95}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8157324400557773778
@@ -675,6 +675,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bat
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d394930783f5fe34d84f52fc2998e8fa, type: 3}
+      propertyPath: m_TagString
+      value: Monster
+      objectReference: {fileID: 0}
     - target: {fileID: 4167280743394806330, guid: d394930783f5fe34d84f52fc2998e8fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -724,10 +728,10 @@ PrefabInstance:
       addedObject: {fileID: 2740811746155629156}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d394930783f5fe34d84f52fc2998e8fa, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6348271973091281228}
+      addedObject: {fileID: 2367959626497239307}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d394930783f5fe34d84f52fc2998e8fa, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1471632398070907765}
+      addedObject: {fileID: 6348271973091281228}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d394930783f5fe34d84f52fc2998e8fa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 940814023172953257}
@@ -758,30 +762,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!195 &6348271973091281228
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6067499684410550453}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 3
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!136 &1471632398070907765
-CapsuleCollider:
+--- !u!135 &2367959626497239307
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -795,14 +777,34 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.8
-  m_Height: 1
-  m_Direction: 1
+  serializedVersion: 3
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &6348271973091281228
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6067499684410550453}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 560
+  m_StoppingDistance: 3
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &940814023172953257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,17 +818,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Bat
-  Max_HP: 20
-  Cur_HP: 20
+  Max_HP: 15
+  Cur_HP: 15
   ATK: 5
-  Skill_ATK1: 10
+  Skill_ATK1: 8
   Skill_ATK2: 0
   NumberOfSkills: 2
   SkillCoolTime1: 4
-  SkillCoolTime2: 8
+  SkillCoolTime2: 6
   SkillCoolTime3: 0
   Defense: 0
-  Move_Speed: 5
+  Move_Speed: 3
   Distance: 0
   patrolRadius: 70
   attack1Radius: 1
@@ -835,11 +837,13 @@ MonoBehaviour:
   invincibleTime: 1
   spawner: {fileID: 0}
   exclamationMark: {fileID: 208823215779860991}
+  firstAttackAnimationLength: 0
+  secondAttackAnimationLength: 0
   isAttack: 0
   isSkill: 0
   projectilePrefab: {fileID: 3685667109570152068, guid: 04bdc72b39f80ff498c301c98d80315d, type: 3}
+  projectileSpawnOffset: {x: 0, y: 0, z: 1}
   projectileSpeed: 10
-  attackRange: 10
 --- !u!4 &6881436993648439823 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d394930783f5fe34d84f52fc2998e8fa, type: 3}

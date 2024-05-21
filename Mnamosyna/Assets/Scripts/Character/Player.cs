@@ -14,6 +14,8 @@ using static SkillData;
 
 public class Player : PlayerStat
 {
+    public delegate void PlayerDeathHandler();
+    public event PlayerDeathHandler OnPlayerDeath;
 
     float hAxis;
     float vAxis;
@@ -23,6 +25,7 @@ public class Player : PlayerStat
     bool shiftDown;
     bool isBorder;
     bool isDamage;
+    public bool isDead = false;
     public bool isAttack;
     public bool isDash;
 
@@ -271,6 +274,7 @@ public class Player : PlayerStat
             UseSkill();
             if (!isAttack)
             {
+                isAttack = true;
                 var playerAttack = GetComponent<PlayerAttack>();
                 if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
                 //sword.Use(Right_ATK_Speed, Damage());
@@ -286,6 +290,7 @@ public class Player : PlayerStat
     {
         var playerAttack = GetComponent<PlayerAttack>();
         if (playerAttack != null) { playerAttack.DisableSwordCollider(); }
+        isAttack = false;
     }
     // 공격 끝났는지 확인하는 코루틴 => 삭제 가능성 높음
     IEnumerator AttackEnd(float attackTime, string animationBool)
@@ -322,7 +327,7 @@ public class Player : PlayerStat
             return baseDamage;
         }
     }
-
+     
 
     /*/ 피격
     void OnTriggerEnter(Collider other)
@@ -372,11 +377,12 @@ public class Player : PlayerStat
             // 최종 데미지 = 플레이어의 공격데미지 * (1 - 방어력%)
             int finalDamage = Mathf.RoundToInt(damage * (1 - Defense));
             Cur_HP -= finalDamage;
+            GetHit();
             lastDamagedTime = Time.time;
 
         }
 
-        //if (stat.Cur_HP <= 0) { Die() }
+        if (Cur_HP <= 0) { Die(); }
     }
 
     // 피격시 점멸상태(무적 상태)
@@ -618,6 +624,15 @@ public class Player : PlayerStat
 
         // 새로운 BaseMesh를 활성화
         newBaseMesh.SetActive(true);
+    }
+    public void Die()
+    {
+        isDead = true;
+        if(OnPlayerDeath != null)
+        {
+            OnPlayerDeath();
+        }
+
     }
 
     /*

@@ -13,25 +13,6 @@ public class SkillRange : MonoBehaviour
     {
         monster.ChangeState(Monster.MonsterState.Attack);
 
-        if (monster.isAttack)
-        {
-            if (monster.isSkill)
-            {
-                if (other.gameObject.TryGetComponent(out Player player))
-                {
-                    player.TakeDamage(monster.Damage(1)); //monster의 데미지 1번 = 스킬 공격
-                }
-            }
-            else
-            {
-                if (other.gameObject.TryGetComponent(out Player player))
-                {
-                    player.TakeDamage(monster.Damage(0)); //monster의 데미지 0번 = 기본 공격
-                }
-            }
-
-        }
-
     }
 
     private void OnTriggerExit(Collider other)

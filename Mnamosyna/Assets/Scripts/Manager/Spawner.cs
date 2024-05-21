@@ -15,10 +15,15 @@ public class Spawner : MonoBehaviour
     public Magic0[] magicComponents;
     private Collider spawnAreaCollider;
 
-    //int spawnCount = 4;
-
     public float waitTime; // 첫 소환 이후 대기시간
     public int aliveCount;
+
+    // 전투 종료 이벤트 델리게이트 및 이벤트
+    public delegate void CombatEndHandler();
+    public event CombatEndHandler OnCombatEnd;
+
+    public bool isCombatEnded { get; set; } = false;
+    private bool hasSpawnedUpgrade = false;
 
     void Awake()
     {
@@ -47,7 +52,6 @@ public class Spawner : MonoBehaviour
 
     void SpawnWave(GameObject[] waveMonsters, int numOfMonster)
     {
-
         for (int i = 0; i < numOfMonster; i++)
         {
             Vector3 randomPoint = GetRandomPointInCollider(spawnAreaCollider);
@@ -65,19 +69,22 @@ public class Spawner : MonoBehaviour
 
     public void CheckAliveCount()
     {
-        if (aliveCount <= 0 )//&& spawnCount<=0)
+        //aliveCount--;
+        if (aliveCount <= 0)
         {
-            Vector3 playerPosition = transform.position;
-            Vector3 playerForward = transform.forward;
+            OnCombatEnd?.Invoke(); // 모든 몬스터가 죽었을 때 이벤트 호출
+            Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+            Vector3 playerForward = GameObject.FindGameObjectWithTag("Player").transform.forward;
 
-            // 플레이어의 앞쪽으로 이동할 위치를 계산합니다.
-            Vector3 spawnPosition = playerPosition + playerForward * 1 + new Vector3(1, 1, 0);
+            // 플레이어의 바로 앞 위치를 계산합니다.
+            Vector3 spawnOffset = new Vector3(2.0f, 0.1f, 0); // 바로 앞 위치에서의 오프셋
+            Vector3 spawnPosition = playerPosition + playerForward * spawnOffset.x + Vector3.up * spawnOffset.y;
 
             SpawnObject(spawnPosition);
+            isCombatEnded = true;
             foreach (Magic0 magic in magicComponents) { magic.EnableComponents(); }
         }
     }
-
 
     int GetTotalNumOfMonsters()
     {
@@ -116,6 +123,11 @@ public class Spawner : MonoBehaviour
 
     void SpawnObject(Vector3 spawnPosition)
     {
-        Instantiate(Upgrade, spawnPosition, Quaternion.identity);
+        // Upgrade를 생성했는지 확인하고, 한 번 생성되었다면 더 이상 생성하지 않습니다.
+        if (!hasSpawnedUpgrade)
+        {
+            Instantiate(Upgrade, spawnPosition, Quaternion.identity);
+            hasSpawnedUpgrade = true; // Upgrade를 생성했음을 표시
+        }
     }
 }

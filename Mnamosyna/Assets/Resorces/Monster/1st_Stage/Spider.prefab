@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 8287691618259162692}
+  monster: {fileID: 6435794756727544494}
   Distance: {fileID: 1276587126335820479}
 --- !u!1 &4054435175422184727
 GameObject:
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 8287691618259162692}
+  monster: {fileID: 6435794756727544494}
   Distance: {fileID: 6448749385905138347}
 --- !u!1 &5111203060194892491
 GameObject:
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 6188915633788669329}
-  Monster: {fileID: 8287691618259162692}
+  Monster: {fileID: 0}
 --- !u!114 &2892388839997007370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 8287691618259162692}
+  monster: {fileID: 6435794756727544494}
   player: {fileID: 0}
   attackDistance: {fileID: 8277221798393280929}
   skillDistance: {fileID: 1173212807834270058}
@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 7778178886890047706}
   - component: {fileID: 3245108686248384118}
   - component: {fileID: 4893729329934521562}
-  - component: {fileID: 8287691618259162692}
+  - component: {fileID: 6435794756727544494}
   m_Layer: 8
   m_Name: Spider
   m_TagString: Monster
@@ -617,9 +617,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 1
-  m_Acceleration: 8
+  m_Acceleration: 20
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -643,13 +643,13 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.72
+  m_Radius: 1
   m_Center: {x: 0, y: 0.61, z: -0.03}
---- !u!114 &8287691618259162692
+--- !u!114 &6435794756727544494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -658,31 +658,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 6188915633788669329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a34d7dfc1db403e4db3299d15ace3c1e, type: 3}
+  m_Script: {fileID: 11500000, guid: b84f649ba8d68c640a1407343bf340a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: spider
-  Max_HP: 20
-  Cur_HP: 20
-  ATK: 4
-  Skill_ATK1: 8
+  Name: Spider
+  Max_HP: 25
+  Cur_HP: 25
+  ATK: 5
+  Skill_ATK1: 5
   Skill_ATK2: 0
   NumberOfSkills: 2
-  SkillCoolTime1: 4
+  SkillCoolTime1: 3
   SkillCoolTime2: 8
   SkillCoolTime3: 0
   Defense: 0
   Move_Speed: 5
   Distance: 0
   patrolRadius: 70
-  attack1Radius: 0.1
+  attack1Radius: 0.5
   attack2Radius: 8
   attack3Radius: 0
   invincibleTime: 1
   spawner: {fileID: 0}
   exclamationMark: {fileID: 1073488393345065777}
+  firstAttackAnimationLength: 0.8333333
+  secondAttackAnimationLength: 1.0666667
   isAttack: 0
   isSkill: 0
+  chargeDuration: 1
+  chargeSpeed: 10
+  chargeDistance: 10
 --- !u!1 &7919103013863216683
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 6188915633788669329}
-  Monster: {fileID: 8287691618259162692}
+  Monster: {fileID: 0}
 --- !u!1001 &4334856270784134629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -858,52 +863,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: b83edd8cf71cf0c4294840b22043a62c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1064203563839380675}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 635547659545568360, guid: b83edd8cf71cf0c4294840b22043a62c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 710119111884099602}
-    - targetCorrespondingSourceObject: {fileID: 635547659545568360, guid: b83edd8cf71cf0c4294840b22043a62c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5241297051179865125}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b83edd8cf71cf0c4294840b22043a62c, type: 3}
---- !u!1 &3817200859343559053 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 635547659545568360, guid: b83edd8cf71cf0c4294840b22043a62c, type: 3}
-  m_PrefabInstance: {fileID: 4334856270784134629}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &710119111884099602
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3817200859343559053}
-  m_Material: {fileID: 13400000, guid: ef8a34d636011f440b84a11560ce5b53, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 8
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 16375
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.72
-  m_Center: {x: -0.6, y: 0, z: 0}
---- !u!114 &5241297051179865125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3817200859343559053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea5cc86c5bf67a7458db1899d0582087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &4297060434668362254 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b83edd8cf71cf0c4294840b22043a62c, type: 3}

@@ -23,6 +23,7 @@ public class Slime : Monster
         Collider collider = GetComponent<Collider>();
         if (collider != null) { collider.enabled = false; }
 
+        
         if (spawner != null)
         {
             spawner.aliveCount--;
@@ -42,6 +43,7 @@ public class Slime : Monster
         Vector3 spawnPosition = transform.position; // 몬스터의 현재 위치를 기준으로 소환합니다.
         Instantiate(babySlime, spawnPosition, Quaternion.identity);
         Instantiate(babySlime, spawnPosition, Quaternion.identity); // 두 마리를 소환합니다.
+        spawner.aliveCount += 2;
     }
 
 }

@@ -1,62 +1,94 @@
-using System.Collections;
 using UnityEngine;
 
-public class Bat : Monster
+public class RangeMonster : Monster
 {
-    // 원거리 공격 관련 변수
-    public GameObject projectilePrefab; // 발사체 프리팹
-    public float projectileSpeed = 10f; // 발사체 속도
-    public float attackRange = 10f; // 공격 사거리
+    // 투사체 프리팹
+    public GameObject projectilePrefab;
 
-    // 상속받은 Update 함수 오버라이드
-    protected override void Update()
+    // 투사체 발사 위치 오프셋
+    public Vector3 projectileSpawnOffset = Vector3.forward;
+
+    // 투사체 발사 속도
+    public float projectileSpeed = 10.0f;
+
+    // 투사체 사거리
+    public float projectileRange = 10.0f;
+
+    protected override void Awake()
     {
-        base.Update(); // 부모 클래스의 Update 함수 호출
-
-        // 원거리 공격 실행
-        RangedAttack();
+        base.Awake();
     }
 
-    // 원거리 공격 실행 함수
-    void RangedAttack()
+    void Start()
     {
-        // 플레이어가 원거리 사거리 내에 있으면 공격 실행
-        if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
-        {
-            // 플레이어 쪽을 바라보도록 회전
-            RotateMonsterToCharacter();
-
-            // 발사체 생성 위치 계산
-            Vector3 spawnPosition = transform.position + transform.forward * 1.5f; // 바로 앞으로 위치 지정
-
-            // 발사체 생성 및 발사
-            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
-            Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
-            if (projectileRb != null)
-            {
-                Vector3 directionToPlayer = (player.transform.position - spawnPosition).normalized;
-                projectileRb.velocity = directionToPlayer * projectileSpeed;
-            }
-        }
+        Skill2CanUse = 0f; // 초기 스킬2의 쿨타임을 0으로 설정
     }
 
-    // 몬스터의 공격에 따른 데미지 반환 함수 오버라이드
-    public override int Damage(int skillIndex)
+    protected override void Attack()
     {
-        int damage = 0;
+        // 쿨타임이 0이하인 공격 중 랜덤하게 출력
+        int skillIndex = random.Next(0, NumberOfSkills);
 
         switch (skillIndex)
         {
-            case 0: // 근거리 공격
-                damage = ATK;
+            case 0:  // 기본 공격
+                if (Skill1CanUse <= 0)
+                {
+                    MonsterAttackStart();
+                    Skill1();
+                    Skill1CanUse = SkillCoolTime1;
+                }
+                else { anim.SetTrigger(BattleIdleHash); }
                 break;
             case 1: // 원거리 공격
-                damage = Skill_ATK1;
-                break;
-            default:
-                // 지정되지 않은 스킬이면 damage 0
+                if (Skill2CanUse <= 0)
+                {
+                    MonsterAttackStart();
+                    isSkill = true;
+                    FireProjectile();
+                    Skill2CanUse = SkillCoolTime2;
+                }
+                else { anim.SetTrigger(BattleIdleHash); }
                 break;
         }
-        return damage;
     }
+
+    void FireProjectile()
+    {
+        if (currentState == MonsterState.Die || player == null)
+        {
+            return;
+        }
+
+        // 몬스터의 전방 방향 벡터를 얻어옴
+        Vector3 forwardDirection = transform.forward;
+
+        // 투사체 발사 위치 계산
+        Vector3 spawnPosition = transform.position + forwardDirection * projectileSpawnOffset.magnitude;
+
+        // 플레이어 방향으로 투사체 발사
+        Vector3 direction = (player.transform.position - spawnPosition).normalized;
+        GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
+        Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
+        projectileRigidbody.velocity = direction * projectileSpeed;
+
+        // 일정 시간 후 투사체 삭제
+        Destroy(projectile, projectileRange / projectileSpeed);
+    }
+
+    // 투사체 충돌 처리
+    private void OnCollisionEnter(Collision collision)
+    {
+        // 플레이어와 충돌했을 때
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // 플레이어에게 데미지 입히기
+            collision.gameObject.GetComponent<Player>().TakeDamage(Damage(1));
+
+            // 충돌한 투사체 삭제
+            Destroy(gameObject);
+        }
+    }
+
+
 }
