@@ -637,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d394930783f5fe34d84f52fc2998e8fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.218
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d394930783f5fe34d84f52fc2998e8fa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -831,17 +831,17 @@ MonoBehaviour:
   Move_Speed: 3
   Distance: 0
   patrolRadius: 70
-  attack1Radius: 2
+  attack1Radius: 1
   attack2Radius: 10
   attack3Radius: 0
   invincibleTime: 1
   spawner: {fileID: 0}
   exclamationMark: {fileID: 447449637993846935}
-  firstAttackAnimationLength: 0
-  secondAttackAnimationLength: 0
+  firstAttackAnimationLength: 1.0666667
+  secondAttackAnimationLength: 1.066667
   isAttack: 0
   isSkill: 0
-  projectilePrefab: {fileID: 3685667109570152068, guid: cfd801759a04eba438b23336dd5a0691, type: 3}
+  projectilePrefab: {fileID: 3685667109570152068, guid: 04bdc72b39f80ff498c301c98d80315d, type: 3}
   projectileSpawnOffset: {x: 0, y: 0, z: 1}
 --- !u!4 &6881436993648439823 stripped
 Transform:

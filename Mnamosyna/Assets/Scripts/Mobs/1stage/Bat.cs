@@ -13,7 +13,7 @@ public class Bat : Monster
         base.Awake();
     }
 
-     void Start()
+    void Start()
     {
         Skill2CanUse = 0f; // 초기 스킬2의 쿨타임을 0으로 설정
     }
@@ -47,11 +47,9 @@ public class Bat : Monster
         }
     }
 
-    protected override void Skill2()
+    // 이 메서드는 애니메이션 이벤트에서 호출됩니다.
+    public void FireProjectile()
     {
-        anim.SetTrigger(Attack02Hash);
-        Invoke("OnSecondAttackAnimationEnd", secondAttackAnimationLength);
-
         if (currentState == MonsterState.Die || player == null)
         {
             return;

@@ -11,19 +11,33 @@ public class SkillRange : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        monster.ChangeState(Monster.MonsterState.Attack);
-
+        if (other.CompareTag("Player")) // 충돌한 객체가 플레이어인지 확인
+        {
+            monster.ChangeState(Monster.MonsterState.Attack);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        monster.ChangeState(Monster.MonsterState.Chase);
+        if (other.CompareTag("Player")) // 충돌한 객체가 플레이어인지 확인
+        {
+            monster.ChangeState(Monster.MonsterState.Chase);
+        }
     }
 
     void Awake()
     {
-        attackDistance = GetComponent<CapsuleCollider>();
-        skillDistance = GetComponent<CapsuleCollider>();
+        // 오브젝트에 두 개의 CapsuleCollider가 있다고 가정하고 올바르게 할당
+        CapsuleCollider[] colliders = GetComponents<CapsuleCollider>();
+        if (colliders.Length == 2)
+        {
+            attackDistance = colliders[0];
+            skillDistance = colliders[1];
+        }
+        else
+        {
+            Debug.LogError("CapsuleCollider 컴포넌트가 두 개여야 합니다");
+        }
         SetAttackDistance();
         SetSkillDistance();
     }

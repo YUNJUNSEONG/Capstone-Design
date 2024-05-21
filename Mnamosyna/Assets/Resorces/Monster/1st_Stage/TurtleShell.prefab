@@ -895,14 +895,14 @@ MonoBehaviour:
   Name: Turtle
   Max_HP: 35
   Cur_HP: 35
-  ATK: 6
-  Skill_ATK1: 8
+  ATK: 5
+  Skill_ATK1: 6
   Skill_ATK2: 0
   NumberOfSkills: 2
   SkillCoolTime1: 5
   SkillCoolTime2: 10
   SkillCoolTime3: 0
-  Defense: 5
+  Defense: 0.3
   Move_Speed: 3
   Distance: 0
   patrolRadius: 70
@@ -912,8 +912,8 @@ MonoBehaviour:
   invincibleTime: 1
   spawner: {fileID: 0}
   exclamationMark: {fileID: 8181907727707431818}
-  firstAttackAnimationLength: 0
-  secondAttackAnimationLength: 0
+  firstAttackAnimationLength: 0.8333333
+  secondAttackAnimationLength: 0.8333333
   isAttack: 0
   isSkill: 0
   chargeDuration: 1

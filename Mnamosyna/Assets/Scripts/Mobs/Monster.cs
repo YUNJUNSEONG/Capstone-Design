@@ -27,7 +27,6 @@ public class Monster : MobStat
     // 두 번째 공격 애니메이션의 길이 (초 단위)
     public float secondAttackAnimationLength;
 
-
     protected GameObject player;
     protected float switchTime = 2.0f;
 
@@ -35,7 +34,6 @@ public class Monster : MobStat
     protected NavMeshAgent nav;
     protected System.Random random;
     protected Animator anim;
-
 
     protected const float WAIT_TIME = 0.2f;
     public bool isAttack = false;
@@ -61,7 +59,6 @@ public class Monster : MobStat
     private int flashCount = 2;
     private List<Renderer> renderers;
 
-
     protected virtual void Awake()
     {
         isAttack = false;
@@ -73,9 +70,8 @@ public class Monster : MobStat
         exclamationMark.SetActive(false);
         anim = GetComponent<Animator>();
         renderers = new List<Renderer>(GetComponentsInChildren<Renderer>());
-
-        //Invoke("ChaseStart", 1.0f);
     }
+
     // 몬스터의 상태 변경
     public void ChangeState(MonsterState state)
     {
@@ -85,6 +81,7 @@ public class Monster : MobStat
         }
         currentState = state;
     }
+
     // 몬스터가 주변을 배회 => 추후 삭제 할 수도 있음
     void Patrol()
     {
@@ -106,6 +103,7 @@ public class Monster : MobStat
         else
         { switchTime -= Time.deltaTime; }
     }
+
     // 몬스터를 플레이어 쪽으로 회전
     protected void RotateMonsterToCharacter()
     {
@@ -131,6 +129,7 @@ public class Monster : MobStat
         anim.SetBool(RunHash, true);
         nav.SetDestination(player.transform.position);
     }
+
     // NavMeshAgent의 속도를 몬스터의 이동 속도로 설정
     void SetNavSpeed(float speed)
     {
@@ -144,12 +143,12 @@ public class Monster : MobStat
     protected virtual void Attack()
     {
         // 쿨타임이 0이하인 공격중 랜덤하게 출력
-        int skillIndex = random.Next(0, NumberOfSkills);
+        int skillIndex = random.Next(0, 2); // NumberOfSkills는 2로 설정
 
         switch (skillIndex)
         {
             case 0:  //기본 공격
-                if (Skill1CanUse <= 0)//&& attack1Radius <= 0)
+                if (Skill1CanUse <= 0 && Vector3.Distance(transform.position, player.transform.position) <= attack1Radius)
                 {
                     MonsterAttackStart();
                     Skill1();
@@ -158,7 +157,7 @@ public class Monster : MobStat
                 else { anim.SetTrigger(BattleIdleHash); }
                 break;
             case 1: // 스킬 공격1
-                if (Skill2CanUse <= 0)//&& attack2Radius <=0 )
+                if (Skill2CanUse <= 0 && Vector3.Distance(transform.position, player.transform.position) <= attack2Radius)
                 {
                     MonsterAttackStart();
                     isSkill = true;
@@ -167,15 +166,6 @@ public class Monster : MobStat
                 }
                 else { anim.SetTrigger(BattleIdleHash); }
                 break;
-                /*case 2: //스킬 공격2
-                    if (Skill3CanUse <= 0 )
-                    {
-                        isSkill = true;
-                        Skill3();
-                        Skill3CanUse = SkillCoolTime3;
-                    }
-                    else { anim.SetTrigger(BattleIdleHash); }
-                    break;*/
         }
     }
 
@@ -185,15 +175,13 @@ public class Monster : MobStat
         anim.SetTrigger(Attack01Hash);
         Invoke("OnFirstAttackAnimationEnd", firstAttackAnimationLength);
     }
+
     protected virtual void Skill2()
     {
         anim.SetTrigger(Attack02Hash);
         Invoke("OnSecondAttackAnimationEnd", secondAttackAnimationLength);
     }
-    /* void Skill3()
-     {
-         anim.SetTrigger(Attack03Hash);
-     }*/
+
     // 몬스터의 공격에 따른 데미지 배정
     public virtual int Damage(int skillIndex)
     {
@@ -207,9 +195,6 @@ public class Monster : MobStat
             case 1: // 스킬 공격1
                 damage = Skill_ATK1;
                 break;
-            /*case 2: // 스킬 공격2
-                damage = Skill_ATK2;
-                break;*/
             default:
                 // 지정되지 않은 스킬이면 damage 0
                 break;
@@ -228,7 +213,6 @@ public class Monster : MobStat
     // 몬스터의 State 업데이트
     protected virtual void Update()
     {
-
         if (currentState == MonsterState.Die)
         {
             return;
@@ -246,14 +230,15 @@ public class Monster : MobStat
                 Attack();
                 break;
         }
+
         // 1초마다 스킬 쿨 감소
         Skill1CanUse -= Time.deltaTime;
         Skill2CanUse -= Time.deltaTime;
         Skill3CanUse -= Time.deltaTime;
 
         RotateMonsterToCharacter();
-
     }
+
     // 몬스터의 피격 상황 처리 함수
     public void TakeDamage(int damage)
     {
@@ -282,6 +267,7 @@ public class Monster : MobStat
     {
         StartCoroutine(DoFlash());
     }
+
     //점멸효과 출력 코루틴
     private IEnumerator DoFlash()
     {
@@ -314,7 +300,6 @@ public class Monster : MobStat
         anim.SetTrigger(DieHash);
         nav.isStopped = true;
         anim.SetBool(RunHash, false);
-        //Knockback();
         Invoke("DestroyObject", 2.0f);
         Collider collider = GetComponent<Collider>();
         if (collider != null) { collider.enabled = false; }
@@ -331,40 +316,21 @@ public class Monster : MobStat
         }
     }
 
-    //사망시 넉백 처리
-    /*protected void Knockback()
-    {
-        rigid.AddForce((transform.forward.normalized + Vector3.up) * 5f, ForceMode.Impulse);
-    }*/
-
     // 몬스터 삭제
     void DestroyObject()
     {
         Destroy(gameObject);
     }
+
     protected void MonsterAttackStart()
     {
         isAttack = true;
-
     }
+
     void MonsterAttackEnd()
     {
         isAttack = false;
     }
-
-    // Add a method to handle the monster's attack collision
-    /*
-    private void OnCollisionEnter(Collision other)
-    {
-        if (isAttack)
-        {
-            Player player = other.gameObject.GetComponent<Player>();
-            if (player != null)
-            {
-                other.gameObject.GetComponent<Player>().GetHit();
-            }
-        }
-    }*/
 
     // 첫 번째 공격 애니메이션이 끝날 때 호출될 함수
     public void OnFirstAttackAnimationEnd()
@@ -379,6 +345,7 @@ public class Monster : MobStat
         isAttack = false;
         isSkill = false;
     }
+
     protected virtual void OnTriggerStay(Collider other)
     {
         if (isAttack)
@@ -387,17 +354,16 @@ public class Monster : MobStat
             {
                 if (other.gameObject.TryGetComponent(out Player player))
                 {
-                    player.TakeDamage(Damage(1)); //monster의 데미지 1번 = 스킬 공격
+                    player.TakeDamage(Damage(1)); // monster의 데미지 1번 = 스킬 공격
                 }
             }
             else
             {
                 if (other.gameObject.TryGetComponent(out Player player))
                 {
-                    player.TakeDamage(Damage(0)); //monster의 데미지 0번 = 기본 공격
+                    player.TakeDamage(Damage(0)); // monster의 데미지 0번 = 기본 공격
                 }
             }
-
         }
     }
 }
