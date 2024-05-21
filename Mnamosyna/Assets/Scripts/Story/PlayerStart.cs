@@ -40,8 +40,8 @@ public class PlayerStart : MonoBehaviour
         // Idle 상태가 될 때까지 대기
         while (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
         {
-            yield return new WaitForSeconds(1f);
-            yield return null; // 한 프레임 대기
+            yield return new WaitForSeconds(2f);
+            //yield return null; // 한 프레임 대기
         }
         // 지지 오브젝트 제거
         if (supportObject != null)
@@ -51,8 +51,7 @@ public class PlayerStart : MonoBehaviour
         // 애니메이션이 끝난 후 튜토리얼 메시지 시작
         List<string> startTutorialMessages = new List<string>
         {
-            "드디어 일어나셨군요.",
-            "나는 므나모시나. 당신을 도와주기 위해 왔어요.",
+            "드디어 일어나셨군요.\r\n나는 므나모시나, 당신을 도와주기 위해 왔어요.",
             "여기는 어디냐고요?",
             "여기는 당신처럼 기억을 뺏긴 자들이 오는곳이예요.",
             "당신은 마룡의 저주를 받아 기억을 잃어버린거예요.",

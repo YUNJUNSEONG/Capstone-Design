@@ -40,22 +40,21 @@ public class Spider : Monster
                 {
                     MonsterAttackStart();
                     isSkill = true;
-                    Charge();
+                    Skill2();
                     Skill2CanUse = SkillCoolTime2;
                 }
                 else { anim.SetTrigger(BattleIdleHash); }
                 break;
         }
     }
-
-    void Charge()
+    protected override void Skill2()
     {
         if (currentState == MonsterState.Die)
         {
             return;
         }
-
         anim.SetTrigger(Attack02Hash);
+        Invoke("OnSecondAttackAnimationEnd", secondAttackAnimationLength);
         StartCoroutine(PerformCharge());
     }
 

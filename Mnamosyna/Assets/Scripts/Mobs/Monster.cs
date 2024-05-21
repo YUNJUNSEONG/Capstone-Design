@@ -185,7 +185,7 @@ public class Monster : MobStat
         anim.SetTrigger(Attack01Hash);
         Invoke("OnFirstAttackAnimationEnd", firstAttackAnimationLength);
     }
-    protected void Skill2()
+    protected virtual void Skill2()
     {
         anim.SetTrigger(Attack02Hash);
         Invoke("OnSecondAttackAnimationEnd", secondAttackAnimationLength);
@@ -250,6 +250,8 @@ public class Monster : MobStat
         Skill1CanUse -= Time.deltaTime;
         Skill2CanUse -= Time.deltaTime;
         Skill3CanUse -= Time.deltaTime;
+
+        RotateMonsterToCharacter();
 
     }
     // 몬스터의 피격 상황 처리 함수

@@ -12,8 +12,9 @@ public class CombatTrigger : MonoBehaviour
         {
             List<string> combatTutorialMessages = new List<string>
             {
-                "전투가 시작됩니다.",
-                "적을 공격하세요."
+                "곧 몬스터들이 당신을 죽이려 몰려올거예요.",
+                "각 구역마다 일정 수의 몬스터가 출몰해요",
+                "마우스 좌클릭(L)과 우클릭(R)을 이용해 적을 공격할 수 있어요.\r\n살아 남아서 이 곳을 탈출하죠.",
             };
             storyManager.StartTutorial(StoryManager.TutorialType.Combat, combatTutorialMessages);
 

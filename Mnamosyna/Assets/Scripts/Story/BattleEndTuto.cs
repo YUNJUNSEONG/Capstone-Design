@@ -12,8 +12,10 @@ public class BattleEndTuto : MonoBehaviour
         {
             List<string> postCombatTutorialMessages = new List<string>
             {
-                "전투가 끝났습니다.",
-                "아이템을 획득하세요."
+                "모든 몬스터를 처치했어요.\r\n이제 이곳에서는 몬스터가 나오지 않을거예요.",
+                "저길 보세요!",
+                "저건 당신이 잃어버린 기억의 조각이에요.\r\n당신이 잊고 있던 기술을 떠올릴 수 있을거예요.",
+                "E키를 눌러서 조각을 회수하세요."
             };
             storyManager.StartTutorial(StoryManager.TutorialType.PostCombat, postCombatTutorialMessages);
 

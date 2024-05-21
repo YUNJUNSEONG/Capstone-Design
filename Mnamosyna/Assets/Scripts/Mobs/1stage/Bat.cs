@@ -1,25 +1,19 @@
 using UnityEngine;
 
-public class RangeMonster : Monster
+public class Bat : Monster
 {
     // 투사체 프리팹
     public GameObject projectilePrefab;
 
     // 투사체 발사 위치 오프셋
-    public Vector3 projectileSpawnOffset = Vector3.forward;
-
-    // 투사체 발사 속도
-    public float projectileSpeed = 10.0f;
-
-    // 투사체 사거리
-    public float projectileRange = 10.0f;
+    public Vector3 projectileSpawnOffset = new Vector3(0, 1.0f, 0);
 
     protected override void Awake()
     {
         base.Awake();
     }
 
-    void Start()
+     void Start()
     {
         Skill2CanUse = 0f; // 초기 스킬2의 쿨타임을 0으로 설정
     }
@@ -45,7 +39,7 @@ public class RangeMonster : Monster
                 {
                     MonsterAttackStart();
                     isSkill = true;
-                    FireProjectile();
+                    Skill2();
                     Skill2CanUse = SkillCoolTime2;
                 }
                 else { anim.SetTrigger(BattleIdleHash); }
@@ -53,8 +47,11 @@ public class RangeMonster : Monster
         }
     }
 
-    void FireProjectile()
+    protected override void Skill2()
     {
+        anim.SetTrigger(Attack02Hash);
+        Invoke("OnSecondAttackAnimationEnd", secondAttackAnimationLength);
+
         if (currentState == MonsterState.Die || player == null)
         {
             return;
@@ -64,31 +61,14 @@ public class RangeMonster : Monster
         Vector3 forwardDirection = transform.forward;
 
         // 투사체 발사 위치 계산
-        Vector3 spawnPosition = transform.position + forwardDirection * projectileSpawnOffset.magnitude;
+        Vector3 spawnPosition = transform.position + forwardDirection * projectileSpawnOffset.z + projectileSpawnOffset;
 
         // 플레이어 방향으로 투사체 발사
         Vector3 direction = (player.transform.position - spawnPosition).normalized;
-        GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
-        Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
-        projectileRigidbody.velocity = direction * projectileSpeed;
+        GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(direction));
 
-        // 일정 시간 후 투사체 삭제
-        Destroy(projectile, projectileRange / projectileSpeed);
+        // 투사체의 Projectile 컴포넌트 설정
+        Projectile projectileComponent = projectile.GetComponent<Projectile>();
+        projectileComponent.damage = Skill_ATK1; // 몬스터의 공격력을 투사체 데미지로 설정
     }
-
-    // 투사체 충돌 처리
-    private void OnCollisionEnter(Collision collision)
-    {
-        // 플레이어와 충돌했을 때
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            // 플레이어에게 데미지 입히기
-            collision.gameObject.GetComponent<Player>().TakeDamage(Damage(1));
-
-            // 충돌한 투사체 삭제
-            Destroy(gameObject);
-        }
-    }
-
-
 }
