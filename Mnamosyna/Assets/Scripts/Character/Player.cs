@@ -14,8 +14,7 @@ using static SkillData;
 
 public class Player : PlayerStat
 {
-    public delegate void PlayerDeathHandler();
-    public event PlayerDeathHandler OnPlayerDeath;
+    public GameObject gameOverPanel;
 
     float hAxis;
     float vAxis;
@@ -128,6 +127,7 @@ public class Player : PlayerStat
         }
 
         currentBaseMesh = BaseMesh_Water;
+        gameOverPanel.SetActive(false);
     }
 
 
@@ -147,6 +147,10 @@ public class Player : PlayerStat
         }
         ChangeWeapon();
         //ttackInvincible();
+        if (Cur_HP <= 0)
+        {
+            Die();
+        }
 
     }
 
@@ -628,11 +632,9 @@ public class Player : PlayerStat
     public void Die()
     {
         isDead = true;
-        if(OnPlayerDeath != null)
-        {
-            OnPlayerDeath();
-        }
-
+        anim.SetTrigger("Dead");
+        gameOverPanel.SetActive(true); // 게임오버 패널 활성화
+        Time.timeScale = 0f;
     }
 
     /*
