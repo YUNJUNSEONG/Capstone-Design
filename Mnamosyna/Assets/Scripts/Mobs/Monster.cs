@@ -16,7 +16,7 @@ public class Monster : MobStat
     }
     protected MonsterState currentState;
 
-    public float invincibleTime = 1f; // 공격받은 후 무적 시간
+    public float invincibleTime = 1f; // 공격받은후무적 시간
     private float lastDamagedTime;
     public Spawner spawner;
     public GameObject exclamationMark;
@@ -30,7 +30,7 @@ public class Monster : MobStat
     protected GameObject player;
     protected float switchTime = 2.0f;
 
-    protected Rigidbody rigid; // 리지드 바디
+    protected Rigidbody rigid; //리지드 바디
     protected NavMeshAgent nav;
     protected System.Random random;
     protected Animator anim;
@@ -45,7 +45,7 @@ public class Monster : MobStat
     protected float Skill2CanUse = 0;
     protected float Skill3CanUse = 0;
 
-    // 애니메이션용
+    //애니메이션용
     protected static readonly int BattleIdleHash = Animator.StringToHash("BattleIdle");
     protected static readonly int Attack01Hash = Animator.StringToHash("Attack01");
     protected static readonly int Attack02Hash = Animator.StringToHash("Attack02");
@@ -54,7 +54,7 @@ public class Monster : MobStat
     protected static readonly int GetHitHash = Animator.StringToHash("GetHit");
     protected static readonly int DieHash = Animator.StringToHash("Die");
 
-    // 공격받을 때 깜빡이는 용도
+    //공격받을때 깜빡이는 용도
     private float flashDuration = 0.1f;
     private int flashCount = 2;
     private List<Renderer> renderers;
@@ -82,7 +82,7 @@ public class Monster : MobStat
         currentState = state;
     }
 
-    // 몬스터가 주변을 배회
+    // 몬스터가 주변을 배회 => 추후 삭제 할 수도 있음
     void Patrol()
     {
         anim.SetBool(RunHash, true);
@@ -101,9 +101,7 @@ public class Monster : MobStat
             switchTime = Random.Range(2.0f, 5.0f);
         }
         else
-        {
-            switchTime -= Time.deltaTime;
-        }
+        { switchTime -= Time.deltaTime; }
     }
 
     // 몬스터를 플레이어 쪽으로 회전
@@ -120,10 +118,10 @@ public class Monster : MobStat
         transform.rotation = rotationToCharacter;
     }
 
-    // 몬스터의 플레이어 추적 상태 출력 함수
+    //몬스터의 플레이어 추적 상태 출력 함수
     void Chase()
     {
-        if (currentState == MonsterState.Die || isAttack)
+        if (currentState == MonsterState.Die)
         {
             return;
         }
@@ -144,22 +142,19 @@ public class Monster : MobStat
     // Attack 상태일 때 스킬 쿨타임에 따른 공격 실행 함수
     protected virtual void Attack()
     {
-        // 쿨타임이 0이하인 공격 중 랜덤하게 출력
+        // 쿨타임이 0이하인 공격중 랜덤하게 출력
         int skillIndex = random.Next(0, 2); // NumberOfSkills는 2로 설정
 
         switch (skillIndex)
         {
-            case 0:  // 기본 공격
+            case 0:  //기본 공격
                 if (Skill1CanUse <= 0 && Vector3.Distance(transform.position, player.transform.position) <= attack1Radius)
                 {
                     MonsterAttackStart();
                     Skill1();
                     Skill1CanUse = SkillCoolTime1;
                 }
-                else
-                {
-                    anim.SetTrigger(BattleIdleHash);
-                }
+                else { anim.SetTrigger(BattleIdleHash); }
                 break;
             case 1: // 스킬 공격1
                 if (Skill2CanUse <= 0 && Vector3.Distance(transform.position, player.transform.position) <= attack2Radius)
@@ -169,10 +164,7 @@ public class Monster : MobStat
                     Skill2();
                     Skill2CanUse = SkillCoolTime2;
                 }
-                else
-                {
-                    anim.SetTrigger(BattleIdleHash);
-                }
+                else { anim.SetTrigger(BattleIdleHash); }
                 break;
         }
     }
@@ -210,7 +202,7 @@ public class Monster : MobStat
         return damage;
     }
 
-    // 일정 시간 동안 느낌표를 띄우는 코루틴
+    // 일정 시간동안 느낌표를 띄우는 코루틴
     IEnumerator ShowExclamationMarkForSeconds(float seconds)
     {
         exclamationMark.SetActive(true);
@@ -252,10 +244,7 @@ public class Monster : MobStat
     {
         if (isDead) return; // 이미 죽은 몬스터인 경우 데미지를 받지 않음
 
-        if (currentState != MonsterState.Patrol)
-        {
-            ChangeState(MonsterState.Chase);
-        }
+        if (currentState != MonsterState.Patrol) { ChangeState(MonsterState.Chase); }
 
         if (Time.time >= lastDamagedTime + invincibleTime)
         {
@@ -273,13 +262,13 @@ public class Monster : MobStat
         }
     }
 
-    // 피격 시 몬스터 점멸 효과 출력 함수
+    // 피격시 몬스터 점멸효과 출력 함수
     public void Flash()
     {
         StartCoroutine(DoFlash());
     }
 
-    // 점멸 효과 출력 코루틴
+    //점멸효과 출력 코루틴
     private IEnumerator DoFlash()
     {
         for (int i = 0; i < flashCount; i++)
@@ -300,7 +289,7 @@ public class Monster : MobStat
         }
     }
 
-    // 사망 처리 함수
+    //사망 처리 함수
     protected virtual void Die()
     {
         if (isDead) return;
@@ -323,7 +312,7 @@ public class Monster : MobStat
         }
         else
         {
-            // Debug.LogError("몬스터 스크립트에서 몬스터 스포너 못 찾아옴");
+            //Debug.LogError("몬스터 스크립트에서 몬스터 스포너 못 찾아옴");
         }
     }
 
@@ -336,15 +325,11 @@ public class Monster : MobStat
     protected void MonsterAttackStart()
     {
         isAttack = true;
-        anim.SetBool(RunHash, false); // 공격 중일 때 이동 애니메이션 비활성화
-        nav.isStopped = true; // 공격 중일 때 NavMeshAgent 정지
     }
 
     void MonsterAttackEnd()
     {
         isAttack = false;
-        anim.SetBool(RunHash, true); // 공격이 끝나면 이동 애니메이션 활성화
-        nav.isStopped = false; // 공격이 끝나면 NavMeshAgent 다시 활성화
     }
 
     // 첫 번째 공격 애니메이션이 끝날 때 호출될 함수
@@ -352,8 +337,6 @@ public class Monster : MobStat
     {
         isAttack = false;
         isSkill = false;
-        anim.SetBool(RunHash, true); // 공격이 끝나면 이동 애니메이션 활성화
-        nav.isStopped = false; // 공격이 끝나면 NavMeshAgent 다시 활성화
     }
 
     // 두 번째 공격 애니메이션이 끝날 때 호출될 함수
@@ -361,8 +344,6 @@ public class Monster : MobStat
     {
         isAttack = false;
         isSkill = false;
-        anim.SetBool(RunHash, true); // 공격이 끝나면 이동 애니메이션 활성화
-        nav.isStopped = false; // 공격이 끝나면 NavMeshAgent 다시 활성화
     }
 
     protected virtual void OnTriggerStay(Collider other)
@@ -386,5 +367,3 @@ public class Monster : MobStat
         }
     }
 }
-
-
