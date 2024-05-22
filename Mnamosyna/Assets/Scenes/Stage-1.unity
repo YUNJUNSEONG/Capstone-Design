@@ -1495,6 +1495,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153070722}
   m_CullTransparentMesh: 1
+--- !u!1 &159988924 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9091597138575324598, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+  m_PrefabInstance: {fileID: 1563316872}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &159988927
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159988924}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.39, y: 1.0068922, z: 0.89628273}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &163539196
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2051,6 +2077,10 @@ PrefabInstance:
     - target: {fileID: 5759381839465164018, guid: 6982426b07c689e40ace82c13f156882, type: 3}
       propertyPath: m_Name
       value: Portal_skill_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490583329323755221, guid: 6982426b07c689e40ace82c13f156882, type: 3}
+      propertyPath: m_Name
+      value: Magic-5to6_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4290,7 +4320,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 16375
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -4518,6 +4548,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7580419991027236207, guid: c1adaf60e6b613e4a8316e35cef75af9, type: 3}
   m_PrefabInstance: {fileID: 352154374}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &352793148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 352793149}
+  - component: {fileID: 352793150}
+  m_Layer: 0
+  m_Name: UnlockTuto
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &352793149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352793148}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 821978725}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &352793150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352793148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 214a919ce9803fa4d844eb6ef3f57b18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storyManager: {fileID: 828810126}
+  unlock: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
+  unlockSkill: {fileID: 5748448366678204727, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
 --- !u!1001 &354416529
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4526,6 +4603,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1379946909}
     m_Modifications:
+    - target: {fileID: 2275882024672787534, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_Name
+      value: Magic-6toBoss
+      objectReference: {fileID: 0}
     - target: {fileID: 3155673606254428082, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -34.93
@@ -4588,6 +4669,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1996135828}
     m_Modifications:
+    - target: {fileID: 2275882024672787534, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_Name
+      value: Magic-6toBoss
+      objectReference: {fileID: 0}
     - target: {fileID: 3155673606254428082, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.43
@@ -4816,6 +4901,10 @@ PrefabInstance:
     - target: {fileID: 3155673606254428082, guid: 597c50e17edf35442ac830b3c26ab538, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209650437338898790, guid: 597c50e17edf35442ac830b3c26ab538, type: 3}
+      propertyPath: m_Name
+      value: Magic-5to6_2
       objectReference: {fileID: 0}
     - target: {fileID: 5759381839465164018, guid: 597c50e17edf35442ac830b3c26ab538, type: 3}
       propertyPath: m_Name
@@ -8427,7 +8516,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 16375
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -8627,6 +8716,8 @@ Transform:
   - {fileID: 1015125716}
   - {fileID: 15227482}
   - {fileID: 98831502}
+  - {fileID: 352793149}
+  - {fileID: 1084053168}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &825529925
@@ -8679,7 +8770,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 16375
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -9118,6 +9209,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal_water
       objectReference: {fileID: 0}
+    - target: {fileID: 8490583329323755221, guid: 6982426b07c689e40ace82c13f156882, type: 3}
+      propertyPath: m_Name
+      value: Magic-healto4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9163,7 +9258,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 16375
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -9778,6 +9873,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7580419991027236207, guid: c1adaf60e6b613e4a8316e35cef75af9, type: 3}
   m_PrefabInstance: {fileID: 923280142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &931447996 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2108049790450734273, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+  m_PrefabInstance: {fileID: 1563316872}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &947757207
 GameObject:
@@ -10720,7 +10820,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 16375
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -11145,6 +11245,127 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7580419991027236207, guid: c1adaf60e6b613e4a8316e35cef75af9, type: 3}
   m_PrefabInstance: {fileID: 1079918551}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1084053167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1084053168}
+  - component: {fileID: 1084053172}
+  - component: {fileID: 1084053171}
+  - component: {fileID: 1084053169}
+  - component: {fileID: 1084053173}
+  m_Layer: 0
+  m_Name: HealTuto
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1084053168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084053167}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.64719284, z: -0, w: 0.7623264}
+  m_LocalPosition: {x: -42, y: -0.4924388, z: 333.7}
+  m_LocalScale: {x: 46.75631, y: 6.3888597, z: 0.84573007}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 821978725}
+  m_LocalEulerAnglesHint: {x: 0, y: -80.661, z: 0}
+--- !u!136 &1084053169
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084053167}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 16375
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.15
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1084053171
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084053167}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1084053172
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084053167}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1084053173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084053167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3bd5c3a7cf909a4bb057c827c715916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storyManager: {fileID: 828810126}
 --- !u!1001 &1084938112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15062,7 +15283,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 16375
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -15222,6 +15443,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1108548822656551655, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1108548822656551655, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 8ae88da57fe50fe489be2a0f271c2c8c, type: 2}
     - target: {fileID: 1244627018094800144, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -15241,6 +15470,14 @@ PrefabInstance:
     - target: {fileID: 1574034334309464889, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588254102793965179, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588254102793965179, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1630080677986320963, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Layer
@@ -15333,7 +15570,7 @@ PrefabInstance:
     - target: {fileID: 2110182118286695449, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Avatar
       value: 
-      objectReference: {fileID: 9000000, guid: 79c3c97fcfd3f43449092387f58643b8, type: 3}
+      objectReference: {fileID: 9000000, guid: 23da26f57f2eaa143ace47260745d626, type: 3}
     - target: {fileID: 2110182118286695449, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -15341,7 +15578,7 @@ PrefabInstance:
     - target: {fileID: 2110182118286695449, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: ecc40ac941ac0d3408b6d3ec98ec58f6, type: 2}
+      objectReference: {fileID: 9100000, guid: 5bda520b33ec4694884adc501c734741, type: 2}
     - target: {fileID: 2146546682506339537, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -15606,6 +15843,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4677745113221993473, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9f0feaf2e747e294e910f087b500b133, type: 2}
     - target: {fileID: 4701734882163081175, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -15745,6 +15986,14 @@ PrefabInstance:
     - target: {fileID: 6266075631846685193, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449849091267678365, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449849091267678365, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6461302155299562848, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Layer
@@ -16066,6 +16315,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4205993427900693886, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1989441945}
+    - targetCorrespondingSourceObject: {fileID: 9091597138575324598, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 159988927}
   m_SourcePrefab: {fileID: 100100000, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
 --- !u!95 &1563316873 stripped
 Animator:
@@ -16089,22 +16341,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ac6bdfeeb7aab4b9f86f39d32cb41a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Max_HP: 1500
-  Cur_HP: 1500
-  HP_Recover: 0
+  Max_HP: 150
+  Cur_HP: 150
   Max_Stamina: 200
   Cur_Stamina: 200
-  Stamina_Recover: 3
-  MIN_ATK: 15
-  MAX_ATK: 20
-  Crit_Chance: 0
-  Critical: 1.5
-  Defense: 0
-  ATK_Speed: 2
-  Move_Speed: 1
-  Left_ATK_Speed: 1
-  Right_ATK_Speed: 1
   Dash_speed: 2.5
+  unlockedSkills: []
   isDead: 0
   isAttack: 0
   isDash: 0
@@ -16112,10 +16354,10 @@ MonoBehaviour:
   isAttackReady: 0
   invincibleTime: 1
   invincibleDuration: 2
-  BaseMesh_Fire: {fileID: 1860086579}
+  BaseMesh_Fire: {fileID: 931447996}
   BaseMesh_Water: {fileID: 115108252}
   BaseMesh_Air: {fileID: 593865329}
-  BaseMesh_Earth: {fileID: 0}
+  BaseMesh_Earth: {fileID: 1781434169}
   allSkills:
   - {fileID: 11400000, guid: 044e1824897efca4fb84f4af3c418d38, type: 2}
   - {fileID: 11400000, guid: b7709c284b7a97544a63d5f2e7f3f1a7, type: 2}
@@ -16177,18 +16419,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dc1d7c8b447d87e4d977a3e0cbde25e7, type: 2}
   - {fileID: 11400000, guid: 7e57b498b5f07ee49ae770d086ed8c8e, type: 2}
   - {fileID: 11400000, guid: 71b26b7c5c300814bb20cdbd7e2f763d, type: 2}
-  - {fileID: 11400000, guid: d85cc549867c5ca4f9ae14abe53db636, type: 2}
-  - {fileID: 11400000, guid: e19f855230532f8459f71ba3ed2208e5, type: 2}
-  - {fileID: 11400000, guid: d469ef9abc590b44f9822990da5b7c9f, type: 2}
-  - {fileID: 11400000, guid: a5fd5d26094cafe4c915cf335a6d153c, type: 2}
-  - {fileID: 11400000, guid: f14d34388d63cde4db55dde3fbe1b1a0, type: 2}
-  - {fileID: 11400000, guid: 3d3ae0031a682e9449389ea786a2903b, type: 2}
-  - {fileID: 11400000, guid: 32d4a692b39d8f14fb47020695509b66, type: 2}
-  - {fileID: 11400000, guid: bc2c8d4bd1733304680f2e877b5f3012, type: 2}
-  - {fileID: 11400000, guid: c997b1d5a153911418d97bd306f93e9e, type: 2}
-  - {fileID: 11400000, guid: 10db33948a0855643b4af878bae12b7e, type: 2}
-  - {fileID: 11400000, guid: 691af728224ced947999b9eabd2e21dd, type: 2}
-  - {fileID: 11400000, guid: 040e87dab057b27469b79b897a33044f, type: 2}
   stanbySkills: []
   unlockSkills: []
   skillCammand: 
@@ -16560,6 +16790,10 @@ PrefabInstance:
     - target: {fileID: 5759381839465164018, guid: 6982426b07c689e40ace82c13f156882, type: 3}
       propertyPath: m_Name
       value: Portal_skill_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490583329323755221, guid: 6982426b07c689e40ace82c13f156882, type: 3}
+      propertyPath: m_Name
+      value: Magic-4to5_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17436,6 +17670,8 @@ MonoBehaviour:
   UnlockBase: {fileID: 947757207}
   UnlockSkill: 
   curSkills: []
+  EndUnlockSkillChoie: 0
+  StartLevelUpSkillChoie: 0
 --- !u!1001 &1693499301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17626,6 +17862,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnlockMemory
       objectReference: {fileID: 0}
+    - target: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5748448366678204727, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
+      propertyPath: storyManager
+      value: 
+      objectReference: {fileID: 828810126}
     - target: {fileID: 8652189374129799482, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -18450,6 +18694,11 @@ MonoBehaviour:
   - {fileID: 1068413072175040290}
   waitTime: 8
   aliveCount: 0
+--- !u!1 &1781434169 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5965483074636646951, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+  m_PrefabInstance: {fileID: 1563316872}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1791680662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18746,6 +18995,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 656373976}
     m_Modifications:
+    - target: {fileID: 2275882024672787534, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_Name
+      value: Magic-6toBoss
+      objectReference: {fileID: 0}
     - target: {fileID: 3155673606254428082, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -38.7
@@ -19046,6 +19299,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5209650437338898790, guid: 597c50e17edf35442ac830b3c26ab538, type: 3}
+      propertyPath: m_Name
+      value: Magic-4to5_2
+      objectReference: {fileID: 0}
     - target: {fileID: 5759381839465164018, guid: 597c50e17edf35442ac830b3c26ab538, type: 3}
       propertyPath: m_Name
       value: Portal_skill_2
@@ -19086,6 +19343,10 @@ PrefabInstance:
     - target: {fileID: 794828816375683814, guid: 6e0e9377f59971141b8f4666c4e9bbf4, type: 3}
       propertyPath: m_Name
       value: LevelUpMemory
+      objectReference: {fileID: 0}
+    - target: {fileID: 794828816375683814, guid: 6e0e9377f59971141b8f4666c4e9bbf4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 798393174231972190, guid: 6e0e9377f59971141b8f4666c4e9bbf4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19440,11 +19701,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8363662718145255270, guid: 1d6cc38a6d465aa49a0f24d45ce818d2, type: 3}
   m_PrefabInstance: {fileID: 1859350335}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1860086579 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 573777149921892474, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
-  m_PrefabInstance: {fileID: 1563316872}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1862590313 stripped
 Transform:
@@ -20785,7 +21041,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 16375
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -21498,6 +21754,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal_skill_1
       objectReference: {fileID: 0}
+    - target: {fileID: 8490583329323755221, guid: 6982426b07c689e40ace82c13f156882, type: 3}
+      propertyPath: m_Name
+      value: Magic-5to6_3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22163,6 +22423,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5209650437338898790, guid: 597c50e17edf35442ac830b3c26ab538, type: 3}
+      propertyPath: m_Name
+      value: Magic-5to6_2
+      objectReference: {fileID: 0}
     - target: {fileID: 5759381839465164018, guid: 597c50e17edf35442ac830b3c26ab538, type: 3}
       propertyPath: m_Name
       value: Portal_skill_2
@@ -22317,6 +22581,10 @@ PrefabInstance:
     - target: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
       propertyPath: m_Name
       value: UnlockMemory (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5748448366678204727, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
       propertyPath: UnlockUI

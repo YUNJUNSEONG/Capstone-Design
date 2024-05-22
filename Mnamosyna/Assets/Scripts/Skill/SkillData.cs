@@ -80,9 +80,9 @@ public class SkillData : ScriptableObject
 
     [Header("Attack Related")]
     [ShowWhen("element", Element.Fire)]
-    public float ATKBonus;
+    public int ATKBonus;
     [ShowWhen("element", Element.Fire)]
-    public float addATKBonus;
+    public int addATKBonus;
     [ShowWhen("element", Element.Fire)]
     public float CritChanceBonus;
     [ShowWhen("element", Element.Fire)]

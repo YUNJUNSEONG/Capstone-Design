@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,48 +6,35 @@ public class PlayerStat : MonoBehaviour
     public static PlayerStat instance;
 
     [Header("체력 관련")]
-    [SerializeField]
-    public int Max_HP = 150;
-    [SerializeField]
-    public int Cur_HP = 150;
-    [SerializeField]
-    protected float HP_Recover = 0;
+    public int Max_HP = 150; // 최대 체력
+    public int Cur_HP = 150; // 현재 체력
+    protected float HP_Recover = 0; // 1초 당 n 회복
 
     [Header("스태미나 관련")]
-    [SerializeField]
     public int Max_Stamina = 200;
-    [SerializeField]
     public int Cur_Stamina = 200;
-    [SerializeField]
     protected float Stamina_Recover = 3;
 
     [Header("공격 관련")]
-    [SerializeField]
     protected int MIN_ATK = 15;
-    [SerializeField]
     protected int MAX_ATK = 20;
-    [SerializeField]
     protected float Crit_Chance = 0;
-    [SerializeField]
     protected float Critical = 1.5f;
 
     [Header("방어력")]
-    [SerializeField]
-    protected float Defense = 0.0f;
+    protected float Defense = 0.0f; // 방어력 n%
 
     [Header("속도 관련")]
-    [SerializeField]
-    protected float ATK_Speed = 2.0f;
-    [SerializeField]
-    protected float Move_Speed = 1.0f;
+    protected float ATK_Speed = 2.0f; // 공격 딜레이 속도
+    protected float Move_Speed = 1.0f; // 이동 속도
 
     [Header("공격 애니메이션")]
-    [SerializeField]
     protected float Left_ATK_Speed;
-    [SerializeField]
     protected float Right_ATK_Speed;
 
     public float Dash_speed = 2.5f;
+
+    public List<SkillData> unlockedSkills = new List<SkillData>();
 
     public int max_hp { get { return Max_HP; } set { Max_HP = value; } }
     public int cur_hp { get { return Cur_HP; } set { Cur_HP = value; } }
@@ -70,8 +56,107 @@ public class PlayerStat : MonoBehaviour
     public float left_atk_speed { get { return Left_ATK_Speed; } set { Left_ATK_Speed = value; } }
     public float right_atk_speed { get { return Right_ATK_Speed; } set { Right_ATK_Speed = value; } }
 
-    void Update()
+    private void Awake()
     {
-        // 스탯 관련 업데이트 로직
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        ApplySkills();
+    }
+
+    private void Update()
+    {
+        // Update player's stats based on unlocked skills
+        ApplySkills();
+    }
+
+    private void ApplySkills()
+    {
+        // Reset stats to base values
+        Max_HP = 150;
+        HP_Recover = 0;
+        Max_Stamina = 200;
+        Stamina_Recover = 3;
+        MIN_ATK = 15;
+        MAX_ATK = 20;
+        Crit_Chance = 0;
+        Critical = 1.5f;
+        Defense = 0.0f;
+        ATK_Speed = 2.0f;
+        Move_Speed = 1.0f;
+
+        // Apply each unlocked skill's bonuses
+        foreach (SkillData skill in unlockedSkills)
+        {
+            if (skill.isUnlock)
+            {
+                switch (skill.element)
+                {
+                    case SkillData.Element.Fire:
+                        MIN_ATK += skill.ATKBonus;
+                        MAX_ATK += skill.ATKBonus;
+                        Crit_Chance += skill.CritChanceBonus;
+                        Critical += skill.CriticalBonus;
+                        break;
+
+                    case SkillData.Element.Air:
+                        ATK_Speed += skill.AttackSpeedMultiplier;
+                        Move_Speed += skill.MoveSpeedMultiplier;
+                        break;
+
+                    case SkillData.Element.Water:
+                        HP_Recover += skill.HealthRecoverBonus;
+                        Stamina_Recover += skill.StaminaRecoverBonus;
+                        break;
+
+                    case SkillData.Element.Earth:
+                        Max_HP += skill.MaxHPBonus;
+                        Defense += skill.DefenseBonus;
+                        break;
+                }
+
+                // Apply link skill specific bonuses
+                if (skill.skillType == SkillData.SkillType.Link)
+                {
+                    switch (skill.linkElement)
+                    {
+                        case SkillData.Element.Fire:
+                            MIN_ATK += skill.LinkATKBonus;
+                            MAX_ATK += skill.LinkATKBonus;
+                            Crit_Chance += skill.LinkCritChanceBonus;
+                            Critical += skill.LinkCriticalBonus;
+                            break;
+
+                        case SkillData.Element.Air:
+                            ATK_Speed += skill.LinkAttackSpeedMultiplier;
+                            Move_Speed += skill.LinkMoveSpeedMultiplier;
+                            break;
+
+                        case SkillData.Element.Water:
+                            HP_Recover += skill.LinkHealthRecoverBonus;
+                            Stamina_Recover += skill.LinkStaminaRecoverBonus;
+                            break;
+
+                        case SkillData.Element.Earth:
+                            Max_HP += skill.LinkMaxHPBonus;
+                            Defense += skill.LinkDefenseBonus;
+                            break;
+                    }
+                }
+            }
+        }
+
+        // Clamp current HP and stamina to their new max values
+        Cur_HP = Mathf.Min(Cur_HP, Max_HP);
+        Cur_Stamina = Mathf.Min(Cur_Stamina, Max_Stamina);
     }
 }

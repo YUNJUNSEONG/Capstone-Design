@@ -128,12 +128,12 @@ public class Player : PlayerStat
         }
 
         currentBaseMesh = BaseMesh_Water;
-
     }
 
 
+
     // Update is called once per frame
-    new void Update()
+    void Update()
     {
         GetInput();
         Move();
@@ -419,21 +419,20 @@ public class Player : PlayerStat
         {
             Cur_HP += Mathf.RoundToInt(HP_Recover * Time.deltaTime);
             Cur_HP = Mathf.Clamp(Cur_HP, 0, Max_HP);
-
-            /* float deltaTimeValue = Time.deltaTime;
-            Debug.Log("DeltaTime Value: " + deltaTimeValue);
-            float recoveredAmount = Mathf.RoundToInt(stat.hp_recover * Time.deltaTime);
-            Debug.Log("Recovered Amount: " + recoveredAmount); */
         }
 
         // 스테미나 자동 회복
         if (Cur_Stamina < Max_Stamina)
         {
+            Debug.Log("현재 스테미나: " + Cur_Stamina);
+            Debug.Log("최대 스테미나: " + Max_Stamina);
+            Debug.Log("스테미나 회복률: " + Stamina_Recover);
             Cur_Stamina += Mathf.RoundToInt(Stamina_Recover * Time.deltaTime);
             Cur_Stamina = Mathf.Clamp(Cur_Stamina, 0, Max_Stamina);
-
+            Debug.Log("회복된 스테미나: " + Cur_Stamina);
         }
     }
+
 
     // 플레이어 대쉬
     void Dash()
@@ -458,6 +457,7 @@ public class Player : PlayerStat
                     //sword.Use(Dash_speed, Damage());
                     anim.SetTrigger("Dash");
                     attackDelay = 0;
+                    cur_stamina -= (unlockSkills[0].useStamina);
                     Invoke("attackend", 2.0f);
                 }
             }
