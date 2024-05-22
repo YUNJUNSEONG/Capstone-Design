@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 7275374858518964437}
+  monster: {fileID: -3098666956601388303}
   Distance: {fileID: 7618173750819990333}
 --- !u!1 &3324434224805896753
 GameObject:
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 5130816394197404534}
-  Monster: {fileID: 7275374858518964437}
+  Monster: {fileID: -3098666956601388303}
 --- !u!1 &3610590710435190938
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +213,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0
+  m_Radius: 3
   m_Height: 2.6654642
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -236,7 +236,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.2
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 7275374858518964437}
+  monster: {fileID: -3098666956601388303}
   player: {fileID: 0}
   attackDistance: {fileID: 7903086346630596471}
   skillDistance: {fileID: 5777595176657253092}
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 7275374858518964437}
+  monster: {fileID: -3098666956601388303}
   Distance: {fileID: 8714040129993023386}
 --- !u!1 &4162572557569085720
 GameObject:
@@ -529,9 +529,9 @@ GameObject:
   - component: {fileID: 5065389233846770288}
   - component: {fileID: 5279665142209067420}
   - component: {fileID: 5743713792701649695}
-  - component: {fileID: 7275374858518964437}
   - component: {fileID: 3316957227709649069}
   - component: {fileID: 6225425385652290039}
+  - component: {fileID: -3098666956601388303}
   m_Layer: 8
   m_Name: Salamander
   m_TagString: Monster
@@ -595,44 +595,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7275374858518964437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5130816394197404534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0299977dbf5b75489c79d0e6793bc87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Salamander
-  Max_HP: 30
-  Cur_HP: 30
-  ATK: 6
-  Skill_ATK1: 9
-  Skill_ATK2: 0
-  NumberOfSkills: 2
-  SkillCoolTime1: 3
-  SkillCoolTime2: 8
-  SkillCoolTime3: 0
-  Defense: 0
-  Move_Speed: 5
-  Distance: 0
-  patrolRadius: 70
-  attack1Radius: 1
-  attack2Radius: 3
-  attack3Radius: 0
-  invincibleTime: 1
-  spawner: {fileID: 0}
-  exclamationMark: {fileID: 4162572557569085720}
-  firstAttackAnimationLength: 0
-  secondAttackAnimationLength: 0
-  isAttack: 0
-  isSkill: 0
-  projectilePrefab: {fileID: 3685667109570152068, guid: cfd801759a04eba438b23336dd5a0691, type: 3}
-  projectileSpawnOffset: {x: 0, y: 1, z: 0}
 --- !u!195 &3316957227709649069
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -676,6 +638,45 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.9
   m_Center: {x: 0, y: 0.49, z: 0}
+--- !u!114 &-3098666956601388303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5130816394197404534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcfede7d5e941e94abbe03f3812670b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Salamander
+  Max_HP: 30
+  Cur_HP: 30
+  ATK: 6
+  Skill_ATK1: 9
+  Skill_ATK2: 0
+  NumberOfSkills: 2
+  SkillCoolTime1: 4
+  SkillCoolTime2: 8
+  SkillCoolTime3: 0
+  Defense: 0
+  Move_Speed: 5
+  Distance: 0
+  patrolRadius: 70
+  attack1Radius: 1.5
+  attack2Radius: 3
+  attack3Radius: 0
+  invincibleTime: 1
+  spawner: {fileID: 0}
+  exclamationMark: {fileID: 4162572557569085720}
+  firstAttackAnimationLength: 0.8333333
+  secondAttackAnimationLength: 2
+  isAttack: 0
+  isSkill: 0
+  projectilePrefab: {fileID: 3685667109570152068, guid: 4af10aaf06366f4468c8ff5385709a8f, type: 3}
+  projectileSpawnOffset: {x: 0, y: 1, z: 0}
+  projectileSpawnInterval: 0.5
 --- !u!1 &7604973689262535630
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,7 +768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 5130816394197404534}
-  Monster: {fileID: 7275374858518964437}
+  Monster: {fileID: -3098666956601388303}
 --- !u!114 &1359336804496273969
 MonoBehaviour:
   m_ObjectHideFlags: 0
