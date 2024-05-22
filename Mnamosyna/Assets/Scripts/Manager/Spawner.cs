@@ -77,8 +77,9 @@ public class Spawner : MonoBehaviour
             Vector3 playerForward = GameObject.FindGameObjectWithTag("Player").transform.forward;
 
             // 플레이어의 바로 앞 위치를 계산합니다.
-            Vector3 spawnOffset = new Vector3(2.0f, 0.1f, 0); // 바로 앞 위치에서의 오프셋
-            Vector3 spawnPosition = playerPosition + playerForward * spawnOffset.x + Vector3.up * spawnOffset.y;
+            Vector3 spawnOffset = new Vector3(2.0f, 0, 0); // y 값을 포함하지 않음
+            Vector3 spawnPosition = playerPosition + playerForward * spawnOffset.x;
+            spawnPosition.y = 1.0f; // y 값을 1로 설정
 
             SpawnObject(spawnPosition);
             isCombatEnded = true;

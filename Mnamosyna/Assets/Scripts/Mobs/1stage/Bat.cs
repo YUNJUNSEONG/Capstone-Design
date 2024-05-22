@@ -8,10 +8,6 @@ public class Bat : Monster
     // 투사체 발사 위치 오프셋
     public Vector3 projectileSpawnOffset = new Vector3(0, 1.0f, 0);
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
 
     void Start()
     {
@@ -26,7 +22,7 @@ public class Bat : Monster
         switch (skillIndex)
         {
             case 0:  // 기본 공격
-                if (Skill1CanUse <= 0)
+                if (Skill1CanUse <= 0 && Vector3.Distance(transform.position, player.transform.position) <= attack1Radius)
                 {
                     MonsterAttackStart();
                     Skill1();
@@ -35,7 +31,7 @@ public class Bat : Monster
                 else { anim.SetTrigger(BattleIdleHash); }
                 break;
             case 1: // 원거리 공격
-                if (Skill2CanUse <= 0)
+                if (Skill2CanUse <= 0 && Vector3.Distance(transform.position, player.transform.position) <= attack2Radius)
                 {
                     MonsterAttackStart();
                     isSkill = true;

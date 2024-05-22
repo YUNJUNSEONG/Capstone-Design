@@ -9,11 +9,6 @@ public class Spider : Monster
     public float chargeSpeed = 10.0f; // 돌진 속도
     public float chargeDistance = 10.0f; // 돌진 거리
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
     void Start()
     {
         Skill2CanUse = 0f;
@@ -27,7 +22,7 @@ public class Spider : Monster
         switch (skillIndex)
         {
             case 0:  // 기본 공격
-                if (Skill1CanUse <= 0)
+                if (Skill1CanUse <= 0 && Vector3.Distance(transform.position, player.transform.position) <= attack1Radius)
                 {
                     MonsterAttackStart();
                     Skill1();
@@ -36,7 +31,7 @@ public class Spider : Monster
                 else { anim.SetTrigger(BattleIdleHash); }
                 break;
             case 1: // 돌진 공격
-                if (Skill2CanUse <= 0)
+                if (Skill2CanUse <= 0 && Vector3.Distance(transform.position, player.transform.position) <= attack2Radius)
                 {
                     MonsterAttackStart();
                     isSkill = true;
