@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Monster : MobStat
 {
@@ -306,10 +305,10 @@ public class Monster : MobStat
         if (isDead) return;
 
         isDead = true;
+        nav.isStopped = true;
         gameObject.layer = 11;
         ChangeState(MonsterState.Die);
         anim.SetTrigger(DieHash);
-        nav.isStopped = true;
         anim.SetBool(RunHash, false);
         Invoke("DestroyObject", 2.0f);
         Collider collider = GetComponent<Collider>();
@@ -337,14 +336,14 @@ public class Monster : MobStat
     {
         isAttack = true;
         anim.SetBool(RunHash, false); // 공격 중일 때 이동 애니메이션 비활성화
-        nav.isStopped = true; // 공격 중일 때 NavMeshAgent 정지
+        //nav.isStopped = true; // 공격 중일 때 NavMeshAgent 정지
     }
 
     void MonsterAttackEnd()
     {
         isAttack = false;
         anim.SetBool(RunHash, true); // 공격이 끝나면 이동 애니메이션 활성화
-        nav.isStopped = false; // 공격이 끝나면 NavMeshAgent 다시 활성화
+        //nav.isStopped = false; // 공격이 끝나면 NavMeshAgent 다시 활성화
     }
 
     // 첫 번째 공격 애니메이션이 끝날 때 호출될 함수
@@ -353,7 +352,7 @@ public class Monster : MobStat
         isAttack = false;
         isSkill = false;
         anim.SetBool(RunHash, true); // 공격이 끝나면 이동 애니메이션 활성화
-        nav.isStopped = false; // 공격이 끝나면 NavMeshAgent 다시 활성화
+        //nav.isStopped = false; // 공격이 끝나면 NavMeshAgent 다시 활성화
     }
 
     // 두 번째 공격 애니메이션이 끝날 때 호출될 함수
@@ -362,7 +361,7 @@ public class Monster : MobStat
         isAttack = false;
         isSkill = false;
         anim.SetBool(RunHash, true); // 공격이 끝나면 이동 애니메이션 활성화
-        nav.isStopped = false; // 공격이 끝나면 NavMeshAgent 다시 활성화
+        //nav.isStopped = false; // 공격이 끝나면 NavMeshAgent 다시 활성화
     }
 
     protected virtual void OnTriggerStay(Collider other)
