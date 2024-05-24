@@ -585,7 +585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 2942183099666616633}
-  Monster: {fileID: 0}
+  Monster: {fileID: 107908662603297239}
 --- !u!1 &8294281529625999520
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,56 +937,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2d8069a2244c6d84bb41f7e1fc0a4037, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2844065167514663793}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: -6277578490630713353, guid: 2d8069a2244c6d84bb41f7e1fc0a4037, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4508006807178251940}
-    - targetCorrespondingSourceObject: {fileID: -6277578490630713353, guid: 2d8069a2244c6d84bb41f7e1fc0a4037, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6729545013606084274}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d8069a2244c6d84bb41f7e1fc0a4037, type: 3}
 --- !u!4 &5224315370701739435 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2d8069a2244c6d84bb41f7e1fc0a4037, type: 3}
   m_PrefabInstance: {fileID: 5695582773309813312}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7488159913334930871 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -6277578490630713353, guid: 2d8069a2244c6d84bb41f7e1fc0a4037, type: 3}
-  m_PrefabInstance: {fileID: 5695582773309813312}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &4508006807178251940
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7488159913334930871}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.68
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.12, z: 0}
---- !u!114 &6729545013606084274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7488159913334930871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea5cc86c5bf67a7458db1899d0582087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -54,7 +54,14 @@ public class PlayerStat : MonoBehaviour
     public float left_atk_speed { get { return Left_ATK_Speed; } set { Left_ATK_Speed = value; } }
     public float right_atk_speed { get { return Right_ATK_Speed; } set { Right_ATK_Speed = value; } }
 
-    public List<SkillData> unlockedSkills = new List<SkillData>();
+    [SerializeField]
+    private List<SkillData> unlockSkills = new List<SkillData>();
+
+    public List<SkillData> UnlockSkills
+    {
+        get { return unlockSkills; }
+        set { unlockSkills = value; }
+    }
 
     private void Awake()
     {
@@ -81,21 +88,9 @@ public class PlayerStat : MonoBehaviour
 
     private void ApplySkills()
     {
-        // Reset stats to base values
-        Max_HP = 150;
-        HP_Recover = 0;
-        Max_Stamina = 200;
-        Stamina_Recover = 3;
-        MIN_ATK = 15;
-        MAX_ATK = 20;
-        Crit_Chance = 0;
-        Critical = 1.5f;
-        Defense = 0.0f;
-        ATK_Speed = 2.0f;
-        Move_Speed = 1.0f;
 
         // Apply each unlocked skill's bonuses
-        foreach (SkillData skill in unlockedSkills)
+        foreach (SkillData skill in unlockSkills)
         {
             if (skill.isUnlock)
             {
@@ -113,22 +108,21 @@ public class PlayerStat : MonoBehaviour
         switch (skill.element)
         {
             case SkillData.Element.Fire:
-                MIN_ATK += skill.ATKBonus;
-                MAX_ATK += skill.ATKBonus;
-                Crit_Chance += skill.CritChanceBonus;
-                Critical += skill.CriticalBonus;
+                MIN_ATK += skill.addATKBonus;
+                MAX_ATK += skill.addATKBonus;
+                Crit_Chance += skill.addCritChanceBonus;
                 break;
             case SkillData.Element.Air:
-                ATK_Speed += skill.AttackSpeedMultiplier;
-                Move_Speed += skill.MoveSpeedMultiplier;
+                ATK_Speed += skill.addAttackSpeedMultiplier;
+                Move_Speed += skill.addMoveSpeedMultiplier;
                 break;
             case SkillData.Element.Water:
-                HP_Recover += skill.HealthRecoverBonus;
-                Stamina_Recover += skill.StaminaRecoverBonus;
+                HP_Recover += skill.addHealthRecoverBonus;
+                Stamina_Recover += skill.addStaminaRecoverBonus;
                 break;
             case SkillData.Element.Earth:
-                Max_HP += skill.MaxHPBonus;
-                Defense += skill.DefenseBonus;
+                Max_HP += skill.addMaxHPBonus;
+                Defense += skill.addDefenseBonus;
                 break;
         }
 

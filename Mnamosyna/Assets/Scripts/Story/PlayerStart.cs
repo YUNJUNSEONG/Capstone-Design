@@ -19,7 +19,7 @@ public class PlayerStart : MonoBehaviour
 
     void InitializePlayer()
     {
-        playerAnimator.Play("LyingDown");
+        //playerAnimator.Play("LyingDown");
 
         StartCoroutine(TriggerStandUpAnimation());
     }
@@ -27,15 +27,16 @@ public class PlayerStart : MonoBehaviour
 
     IEnumerator TriggerStandUpAnimation()
     {
+        
         // 누워있는 애니메이션 재생 시간 (2초) 동안 대기
-        yield return new WaitForSeconds(1.5f);
-
+        yield return new WaitForSeconds(0.3f);
+        /*
         // 일어나는 애니메이션 트리거
         playerAnimator.SetTrigger("StandUpTrigger");
 
         // 일어나는 애니메이션이 끝날 때까지 대기
-        while (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("StandUp") &&
-               playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        while (playerAnimator.GetCurrentAnimatorStateInfo(1).IsName("StandUp") &&
+               playerAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime < 1.0f)
         {
             yield return null; // 한 프레임 대기
         }
@@ -48,13 +49,13 @@ public class PlayerStart : MonoBehaviour
         {
             yield return null; // 한 프레임 대기
         }
-
+        */
         // 지지 오브젝트 제거
         if (supportObject != null)
         {
             Destroy(supportObject);
         }
-
+        
         // 애니메이션이 끝난 후 튜토리얼 메시지 시작
         List<string> startTutorialMessages = new List<string>
         {

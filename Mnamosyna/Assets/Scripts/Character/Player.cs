@@ -77,13 +77,10 @@ public class Player : PlayerStat
         get { return stanbySkills; }
         set { stanbySkills = value; }
     }
-
-    [SerializeField]
-    private List<SkillData> unlockSkills = new List<SkillData>();
-    public List<SkillData> UnlockSkills
+    public List<SkillData> unlockedSkills
     {
-        get { return unlockSkills; }
-        set { unlockSkills = value; }
+        get { return UnlockSkills; }
+        set { UnlockSkills = value; }
     }
 
     Coroutine CommandCoroutine = null;
@@ -128,6 +125,7 @@ public class Player : PlayerStat
 
         currentBaseMesh = BaseMesh_Water;
         gameOverPanel.SetActive(false);
+        StartCoroutine(RegenerateStats());
     }
 
 
@@ -140,10 +138,10 @@ public class Player : PlayerStat
         {
             Move();
         }
+        ChangeWeapon();
         LeftAttack();
         RightAttack();
         Dash();
-        Recover();
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interaction();
@@ -383,32 +381,33 @@ public class Player : PlayerStat
     }
 
     // 자동 회복 시스템
-    void Recover()
+    IEnumerator RegenerateStats()
     {
-        // 체력 자동 회복
-        if (Cur_HP > 0 && Cur_HP < Max_HP)
+        while (true)
         {
-            // HP_Recover는 1초에 회복되는 체력 양을 나타냅니다.
-            Cur_HP += Mathf.RoundToInt(HP_Recover * Time.deltaTime);
-            // 회복된 체력이 최대 체력을 넘지 않도록 제한합니다.
-            Cur_HP = Mathf.Clamp(Cur_HP, 0, Max_HP);
-        }
+            yield return new WaitForSeconds(1); // 1초마다 실행
 
-        // 스테미나 자동 회복
-        if (Cur_Stamina < Max_Stamina)
-        {
-            Debug.Log("현재 스테미나: " + Cur_Stamina);
-            Debug.Log("최대 스테미나: " + Max_Stamina);
-            Debug.Log("스테미나 회복률: " + Stamina_Recover);
-            // Stamina_Recover는 1초에 회복되는 스테미나 양을 나타냅니다.
-            //Cur_Stamina += Mathf.RoundToInt(Stamina_Recover * Time.deltaTime);
-            // 회복된 스테미나가 최대 스테미나를 넘지 않도록 제한합니다.
-            //Cur_Stamina = Mathf.Clamp(Cur_Stamina, 0, Max_Stamina);
-            Debug.Log("회복된 스테미나: " + Cur_Stamina);
+            // 체력 회복
+            if (Cur_HP > 0 && Cur_HP < Max_HP)
+            {
+                int hpToRecover = Mathf.RoundToInt(HP_Recover);
+                Cur_HP += hpToRecover;
+                Cur_HP = Mathf.Clamp(Cur_HP, 0, Max_HP);
+            }
 
-            int staminaToRecover = Mathf.RoundToInt(Stamina_Recover * Time.deltaTime);
-            Cur_Stamina += staminaToRecover;
-            Cur_Stamina = Mathf.Clamp(Cur_Stamina, 0, Max_Stamina);
+            // 스테미나 회복
+            if (cur_stamina < Max_Stamina)
+            {
+                Debug.Log("현재 스테미나: " + cur_stamina);
+                Debug.Log("최대 스테미나: " + Max_Stamina);
+                Debug.Log("스테미나 회복률: " + Stamina_Recover);
+
+                int staminaToRecover = Mathf.RoundToInt(Stamina_Recover);
+                cur_stamina += staminaToRecover;
+                cur_stamina = Mathf.Clamp(cur_stamina, 0, Max_Stamina);
+
+                Debug.Log("회복된 스테미나: " + cur_stamina);
+            }
         }
     }
 
@@ -417,7 +416,7 @@ public class Player : PlayerStat
     // 플레이어 대쉬
     void Dash()
     {
-        if (unlockSkills.Count > 0)
+        if (unlockedSkills.Count > 0)
         {
             attackDelay += Time.deltaTime;
             isAttackReady = ATK_Speed < attackDelay;
@@ -437,44 +436,54 @@ public class Player : PlayerStat
                     if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
                     anim.SetTrigger("Dash");
                     attackDelay = 0;
-                    Cur_Stamina -= (unlockSkills[0].useStamina);
+                    Cur_Stamina -= (unlockedSkills[0].useStamina);
                     Invoke("attackend", 1.0f);
                 }
             }
         }
     }
- 
+
 
     // 스킬 사용 메서드
     private void UseSkill()
     {
-        for (int i = unlockSkills.Count - 1; i >= 0; i--)
+        for (int i = unlockedSkills.Count - 1; i >= 0; i--)
         {
-            if (skillCammand.EndsWith(unlockSkills[i].Command))
+            // 패시브 스킬을 무시하기 위해 Command가 빈 문자열이 아닌 경우에만 처리
+            if (!string.IsNullOrEmpty(unlockedSkills[i].Command) && skillCammand.EndsWith(unlockedSkills[i].Command))
             {
-                if (unlockSkills[i].Level > 0)
+                if (unlockedSkills[i].Level > 0)
                 {
+                    // 스킬 사용에 필요한 스태미나가 현재 스태미나보다 많은지 체크
+                    if (Cur_Stamina < unlockedSkills[i].useStamina)
+                    {
+                        Debug.Log("스태미나가 부족합니다.");
+                        continue;
+                    }
+
                     isAttack = true;
-                    print(unlockSkills[i].AnimationTrigger);
+                    print(unlockedSkills[i].AnimationTrigger);
                     if (CommandCoroutine != null)
                         StopCoroutine(CommandCoroutine);
-                    float floatSkillDamage = allSkills[i].damagePercent * Damage();
+                    float floatSkillDamage = unlockedSkills[i].damagePercent * Damage();
                     int intSkillDamage = Mathf.RoundToInt(floatSkillDamage);
-                    float floatLevelDamage = allSkills[i].Level * allSkills[i].addDmg;
+                    float floatLevelDamage = unlockedSkills[i].Level * unlockedSkills[i].addDmg;
                     int intLevelDamage = Mathf.RoundToInt(floatLevelDamage);
                     int skilldamage = intSkillDamage + intLevelDamage;
-                    //sword.Use(allSkills[i].AnimationTime, skilldamage);
-                    StartCoroutine(AttackEnd(allSkills[i].AnimationTime, allSkills[i].AnimationTrigger));
+                    // sword.Use(allSkills[i].AnimationTime, skilldamage);
+                    StartCoroutine(AttackEnd(unlockedSkills[i].AnimationTime, unlockedSkills[i].AnimationTrigger));
                     var playerAttack = GetComponent<PlayerAttack>();
                     if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
 
-                    Cur_Stamina -= (unlockSkills[i].useStamina);
+                    Cur_Stamina -= unlockedSkills[i].useStamina;
                     skillCammand = " ";
                     break;
                 }
             }
         }
     }
+
+
 
     // 플레이어 상호작용 메서드
     void Interaction()
@@ -611,8 +620,14 @@ public class Player : PlayerStat
         isDead = true;
         anim.SetTrigger("Dead");
         gameOverPanel.SetActive(true); // 게임오버 패널 활성화
+        Invoke("StopTime", 2f); // 2초 뒤에 StopTime 메서드 실행
+    }
+
+    private void StopTime()
+    {
         Time.timeScale = 0f;
     }
+
 
     /*
     private void OnTriggerEnter(Collider other)
