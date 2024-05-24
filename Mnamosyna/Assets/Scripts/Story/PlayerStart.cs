@@ -1,31 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerStart : MonoBehaviour
 {
     public StoryManager storyManager;
-    public Animator playerAnimator; // 이미 존재하는 Animator 컴포넌트를 참조
+    public Animator playerAnimator;
     public Rigidbody rb;
-    public GameObject supportObject; // 플레이어 밑에 배치된 지지 오브젝트
+    public GameObject supportObject;
 
     void Start()
     {
-        // 플레이어가 누워있는 애니메이션을 시작
+        InitializePlayer();
+    }
+    public void RestartGameInitialization()
+    {
+        InitializePlayer(); // 게임 다시 시작 시 호출되는 메서드
+    }
+
+    void InitializePlayer()
+    {
         playerAnimator.Play("LyingDown");
 
-        // 일정 시간 후에 일어나는 애니메이션을 트리거
         StartCoroutine(TriggerStandUpAnimation());
     }
+
 
     IEnumerator TriggerStandUpAnimation()
     {
         // 누워있는 애니메이션 재생 시간 (2초) 동안 대기
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
 
         // 일어나는 애니메이션 트리거
         playerAnimator.SetTrigger("StandUpTrigger");
-
 
         // 일어나는 애니메이션이 끝날 때까지 대기
         while (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("StandUp") &&
@@ -40,14 +46,15 @@ public class PlayerStart : MonoBehaviour
         // Idle 상태가 될 때까지 대기
         while (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
         {
-            yield return new WaitForSeconds(2f);
-            //yield return null; // 한 프레임 대기
+            yield return null; // 한 프레임 대기
         }
+
         // 지지 오브젝트 제거
         if (supportObject != null)
         {
             Destroy(supportObject);
         }
+
         // 애니메이션이 끝난 후 튜토리얼 메시지 시작
         List<string> startTutorialMessages = new List<string>
         {
@@ -67,13 +74,11 @@ public class PlayerStart : MonoBehaviour
 
     public void StopMovement()
     {
-        // 플레이어 움직임을 멈추기 위해 isKinematic을 설정
         rb.isKinematic = true;
     }
 
     public void ResumeMovement()
     {
-        // 플레이어 움직임을 다시 시작하기 위해 isKinematic 해제
         rb.isKinematic = false;
     }
 }

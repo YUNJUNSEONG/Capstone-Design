@@ -18,28 +18,36 @@ MonoBehaviour:
   tier: 2
   Id: 22
   Name: A COMBO7
-  Image: {fileID: 21300000, guid: 3c58ae5539306214ab6cc7f622faa954, type: 3}
+  Image: {fileID: 21300000, guid: c6873045e5c1c8145aea4134fb119e0f, type: 3}
   Description: 
   isUnlock: 0
   childSkill:
   - {fileID: 11400000, guid: 3b743852475caaf4c8df085eadea4197, type: 2}
   Level: 0
   maxLevel: 3
-  Command: LSRSL
-  AnimationTrigger: IsSkillLSRSL
+  Command: SRSL
+  AnimationTrigger: IsSkillSRSL
   AnimationTime: 4.1666665
   damagePercent: 1
   addDmg: 10
   useStamina: 10
   MaxHPBonus: 0
+  addMaxHPBonus: 0
   HealthRecoverBonus: 0
+  addHealthRecoverBonus: 0
   StaminaRecoverBonus: 0
+  addStaminaRecoverBonus: 0
   ATKBonus: 0
+  addATKBonus: 0
   CritChanceBonus: 0
+  addCritChanceBonus: 0
   CriticalBonus: 0
   DefenseBonus: 0
+  addDefenseBonus: 0
   AttackSpeedMultiplier: 0
+  addAttackSpeedMultiplier: 0
   MoveSpeedMultiplier: 0
+  addMoveSpeedMultiplier: 0
   DimeritMaxHP: 0
   DimeritHealthRecover: 0
   DimeritStaminaRecover: 0

@@ -18,8 +18,8 @@ MonoBehaviour:
   tier: 0
   Id: 25
   Name: A Passive1
-  Image: {fileID: 21300000, guid: 2969d90b86698124696637a6df64a112, type: 3}
-  Description: 
+  Image: {fileID: 21300000, guid: fb6ff418249c68e4e869fae6c4adf9b6, type: 3}
+  Description: "\uACF5\uACA9 \uC18D\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   isUnlock: 0
   childSkill:
   - {fileID: 11400000, guid: ca321a0476b31fd40b8a2737607ac8c4, type: 2}
@@ -33,14 +33,22 @@ MonoBehaviour:
   addDmg: 0
   useStamina: 0
   MaxHPBonus: 0
+  addMaxHPBonus: 0
   HealthRecoverBonus: 0
+  addHealthRecoverBonus: 0
   StaminaRecoverBonus: 0
+  addStaminaRecoverBonus: 0
   ATKBonus: 0
+  addATKBonus: 0
   CritChanceBonus: 0
+  addCritChanceBonus: 0
   CriticalBonus: 0
   DefenseBonus: 0
+  addDefenseBonus: 0
   AttackSpeedMultiplier: 0
+  addAttackSpeedMultiplier: 0
   MoveSpeedMultiplier: 0
+  addMoveSpeedMultiplier: 0
   DimeritMaxHP: 0
   DimeritHealthRecover: 0
   DimeritStaminaRecover: 0

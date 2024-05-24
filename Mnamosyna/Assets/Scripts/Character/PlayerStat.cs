@@ -8,24 +8,24 @@ public class PlayerStat : MonoBehaviour
     [Header("체력 관련")]
     public int Max_HP = 150; // 최대 체력
     public int Cur_HP = 150; // 현재 체력
-    protected float HP_Recover = 0; // 1초 당 n 회복
+    public float HP_Recover = 0; // 1초 당 n 회복
 
     [Header("스태미나 관련")]
     public int Max_Stamina = 200;
     public int Cur_Stamina = 200;
-    protected float Stamina_Recover = 3;
+    public float Stamina_Recover = 3;
 
     [Header("공격 관련")]
-    protected int MIN_ATK = 15;
-    protected int MAX_ATK = 20;
-    protected float Crit_Chance = 0;
+    public int MIN_ATK = 15;
+    public int MAX_ATK = 20;
+    public float Crit_Chance = 0;
     protected float Critical = 1.5f;
 
     [Header("방어력")]
-    protected float Defense = 0.0f; // 방어력 n%
+    public float Defense = 0.0f; // 방어력 n%
 
     [Header("속도 관련")]
-    protected float ATK_Speed = 2.0f; // 공격 딜레이 속도
+    public float ATK_Speed = 2.0f; // 공격 딜레이 속도
     protected float Move_Speed = 1.0f; // 이동 속도
 
     [Header("공격 애니메이션")]
@@ -33,8 +33,6 @@ public class PlayerStat : MonoBehaviour
     protected float Right_ATK_Speed;
 
     public float Dash_speed = 2.5f;
-
-    public List<SkillData> unlockedSkills = new List<SkillData>();
 
     public int max_hp { get { return Max_HP; } set { Max_HP = value; } }
     public int cur_hp { get { return Cur_HP; } set { Cur_HP = value; } }
@@ -56,6 +54,8 @@ public class PlayerStat : MonoBehaviour
     public float left_atk_speed { get { return Left_ATK_Speed; } set { Left_ATK_Speed = value; } }
     public float right_atk_speed { get { return Right_ATK_Speed; } set { Right_ATK_Speed = value; } }
 
+    public List<SkillData> unlockedSkills = new List<SkillData>();
+
     private void Awake()
     {
         if (instance == null)
@@ -75,7 +75,7 @@ public class PlayerStat : MonoBehaviour
 
     private void Update()
     {
-        // Update player's stats based on unlocked skills
+        // Apply player's skills every frame (optional: remove if not needed every frame)
         ApplySkills();
     }
 
@@ -99,64 +99,63 @@ public class PlayerStat : MonoBehaviour
         {
             if (skill.isUnlock)
             {
-                switch (skill.element)
-                {
-                    case SkillData.Element.Fire:
-                        MIN_ATK += skill.ATKBonus;
-                        MAX_ATK += skill.ATKBonus;
-                        Crit_Chance += skill.CritChanceBonus;
-                        Critical += skill.CriticalBonus;
-                        break;
-
-                    case SkillData.Element.Air:
-                        ATK_Speed += skill.AttackSpeedMultiplier;
-                        Move_Speed += skill.MoveSpeedMultiplier;
-                        break;
-
-                    case SkillData.Element.Water:
-                        HP_Recover += skill.HealthRecoverBonus;
-                        Stamina_Recover += skill.StaminaRecoverBonus;
-                        break;
-
-                    case SkillData.Element.Earth:
-                        Max_HP += skill.MaxHPBonus;
-                        Defense += skill.DefenseBonus;
-                        break;
-                }
-
-                // Apply link skill specific bonuses
-                if (skill.skillType == SkillData.SkillType.Link)
-                {
-                    switch (skill.linkElement)
-                    {
-                        case SkillData.Element.Fire:
-                            MIN_ATK += skill.LinkATKBonus;
-                            MAX_ATK += skill.LinkATKBonus;
-                            Crit_Chance += skill.LinkCritChanceBonus;
-                            Critical += skill.LinkCriticalBonus;
-                            break;
-
-                        case SkillData.Element.Air:
-                            ATK_Speed += skill.LinkAttackSpeedMultiplier;
-                            Move_Speed += skill.LinkMoveSpeedMultiplier;
-                            break;
-
-                        case SkillData.Element.Water:
-                            HP_Recover += skill.LinkHealthRecoverBonus;
-                            Stamina_Recover += skill.LinkStaminaRecoverBonus;
-                            break;
-
-                        case SkillData.Element.Earth:
-                            Max_HP += skill.LinkMaxHPBonus;
-                            Defense += skill.LinkDefenseBonus;
-                            break;
-                    }
-                }
+                ApplySkill(skill);
             }
         }
 
         // Clamp current HP and stamina to their new max values
         Cur_HP = Mathf.Min(Cur_HP, Max_HP);
         Cur_Stamina = Mathf.Min(Cur_Stamina, Max_Stamina);
+    }
+
+    private void ApplySkill(SkillData skill)
+    {
+        switch (skill.element)
+        {
+            case SkillData.Element.Fire:
+                MIN_ATK += skill.ATKBonus;
+                MAX_ATK += skill.ATKBonus;
+                Crit_Chance += skill.CritChanceBonus;
+                Critical += skill.CriticalBonus;
+                break;
+            case SkillData.Element.Air:
+                ATK_Speed += skill.AttackSpeedMultiplier;
+                Move_Speed += skill.MoveSpeedMultiplier;
+                break;
+            case SkillData.Element.Water:
+                HP_Recover += skill.HealthRecoverBonus;
+                Stamina_Recover += skill.StaminaRecoverBonus;
+                break;
+            case SkillData.Element.Earth:
+                Max_HP += skill.MaxHPBonus;
+                Defense += skill.DefenseBonus;
+                break;
+        }
+
+        // Apply link skill specific bonuses
+        if (skill.skillType == SkillData.SkillType.Link)
+        {
+            switch (skill.linkElement)
+            {
+                case SkillData.Element.Fire:
+                    MIN_ATK += skill.LinkATKBonus;
+                    MAX_ATK += skill.LinkATKBonus;
+                    Crit_Chance += skill.LinkCritChanceBonus;
+                    Critical += skill.LinkCriticalBonus;
+                    break;
+                case SkillData.Element.Air:
+                    ATK_Speed += skill.LinkAttackSpeedMultiplier;
+                    Move_Speed += skill.LinkMoveSpeedMultiplier;
+                    break;
+                case SkillData.Element.Water:
+                    HP_Recover += skill.LinkHealthRecoverBonus;
+                    Stamina_Recover += skill.LinkStaminaRecoverBonus;
+                    break;
+                case SkillData.Element.Earth:
+                    Max_HP += skill.LinkMaxHPBonus;
+                    Defense += skill.LinkDefenseBonus;
+                    break;
+            }
+        }
     }
 }

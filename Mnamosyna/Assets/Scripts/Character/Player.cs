@@ -136,7 +136,10 @@ public class Player : PlayerStat
     void Update()
     {
         GetInput();
-        Move();
+        if (!isAttack)
+        {
+            Move();
+        }
         LeftAttack();
         RightAttack();
         Dash();
@@ -146,12 +149,10 @@ public class Player : PlayerStat
             Interaction();
         }
         ChangeWeapon();
-        //ttackInvincible();
         if (Cur_HP <= 0)
         {
             Die();
         }
-
     }
 
     void GetInput()
@@ -162,6 +163,7 @@ public class Player : PlayerStat
         rightDown = Input.GetButtonDown("Fire2");
         shiftDown = Input.GetButtonDown("Dash");
     }
+
 
     void Move()
     {
@@ -192,35 +194,8 @@ public class Player : PlayerStat
         {
             transform.rotation = Quaternion.LookRotation(moveVec);
         }
-        
-        /*
-        moveVec = new Vector3(hAxis, 0, vAxis).normalized;
-
-        if (!isAttackReady)
-        {
-            moveVec = Vector3.zero;
-        }
-
-        if (!isBorder)
-        {
-            transform.position += moveVec * stat.move_speed *  Time.deltaTime;
-        }
-
-        anim.SetBool("isRun", moveVec != Vector3.zero);
-
-
-        //키보드 회전
-        transform.LookAt(transform.position + moveVec);
-        // 마우스 회전
-        /* Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit rayHit;
-        if(Physics.Raycast(ray, out rayHit, 100))
-        {
-            Vector3 nextVec = rayHit.point - transform.position;
-            nextVec.y = 0;
-            transform.LookAt(transform.position + nextVec);
-        } */
     }
+
 
     void FixedUpdate()
     {
@@ -239,7 +214,6 @@ public class Player : PlayerStat
 
     void LeftAttack()
     {
-
         attackDelay += Time.deltaTime;
         isAttackReady = ATK_Speed < attackDelay;
 
@@ -253,23 +227,25 @@ public class Player : PlayerStat
 
             if (!isAttack)
             {
+                isAttack = true;
                 var playerAttack = GetComponent<PlayerAttack>();
-                if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
-                //sword.Use(Left_ATK_Speed, Damage());
+                if (playerAttack != null)
+                {
+                    playerAttack.EnableSwordCollider();
+                }
                 anim.SetTrigger("LeftAttack");
                 attackDelay = 0;
-                Invoke("attackend", 2.0f);
+                Invoke("attackend", 1.0f); // Invoke를 사용하여 일정 시간 후 attackend 호출
             }
-
         }
     }
 
-   void RightAttack()
+    void RightAttack()
     {
         attackDelay += Time.deltaTime;
         isAttackReady = ATK_Speed < attackDelay;
 
-        if(rightDown && isAttackReady && !isAttack && !isDash)
+        if (rightDown && isAttackReady && !isAttack && !isDash)
         {
             if (CommandCoroutine != null)
                 StopCoroutine(CommandCoroutine);
@@ -280,31 +256,46 @@ public class Player : PlayerStat
             {
                 isAttack = true;
                 var playerAttack = GetComponent<PlayerAttack>();
-                if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
-                //sword.Use(Right_ATK_Speed, Damage());
+                if (playerAttack != null)
+                {
+                    playerAttack.EnableSwordCollider();
+                }
                 anim.SetTrigger("RightAttack");
                 attackDelay = 0;
-                Invoke("attackend", 2.0f);
+                Invoke("attackend", 1.0f); // Invoke를 사용하여 일정 시간 후 attackend 호출
             }
-
         }
     }
 
     void attackend()
     {
         var playerAttack = GetComponent<PlayerAttack>();
-        if (playerAttack != null) { playerAttack.DisableSwordCollider(); }
+        if (playerAttack != null)
+        {
+            playerAttack.DisableSwordCollider();
+        }
         isAttack = false;
     }
-    // 공격 끝났는지 확인하는 코루틴 => 삭제 가능성 높음
-    IEnumerator AttackEnd(float attackTime, string animationBool)
+
+    private IEnumerator AttackEnd(float attackTime, string animationTrigger)
     {
-        anim.SetTrigger(animationBool);
+        // 애니메이션 트리거 설정 및 대기
+        anim.SetTrigger(animationTrigger);
         yield return new WaitForSeconds(attackTime/2);
+
+        // 공격 종료 후 애니메이터 트리거 리셋
+        anim.ResetTrigger(animationTrigger);
+        // 공격 상태 해제
         isAttack = false;
+        anim.SetTrigger("idle");
+
         var playerAttack = GetComponent<PlayerAttack>();
-        if (playerAttack != null) { playerAttack.DisableSwordCollider(); }
+        if (playerAttack != null)
+        {
+            playerAttack.DisableSwordCollider();
+        }
     }
+
     // 플레이어의 스킬 커맨드 초기화 코루틴
     IEnumerator ClearCommand()
     {
@@ -333,36 +324,6 @@ public class Player : PlayerStat
     }
      
 
-    /*/ 피격
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("monsterAttack"))
-        {
-            if (!isDamage)
-            {
-                if (other.CompareTag("Monster")) // 몬스터 GameObject에 "Monster" 태그를 지정한 경우
-                {
-                    Monster monster = other.GetComponent<Monster>(); // 몬스터 GameObject의 Monster 스크립트를 가져옴
-                    if (monster != null)
-                    {
-                        int damage = monster.Attack.Damage(); // 몬스터의 Damage() 메서드 호출
-                                                      
-                        int finalDamage = Mathf.RoundToInt(damage * (1 - stat.defense)); // 피해 감소 적용
-                        stat.cur_hp = Mathf.Max(0, stat.cur_hp - finalDamage);
-                        if(other.GetComponent<Rigidbody>() != null)
-                        {
-                            Destroy(other.gameObject);
-                        }
-
-                        StartCoroutine(TakeDamage());
-                        Debug.Log("플레이어가 받은 피해 :" + finalDamage);
-                    }
-                }
-            }
-        }
-    }
-    */
-
     // 피격 메서드
     public void GetHit()
     {
@@ -376,18 +337,24 @@ public class Player : PlayerStat
     //몬스터의 공격에 의한 데미지를 방어력 계산을 통해 최종 데미지 산출
     public void TakeDamage(int damage)
     {
+        // 플레이어가 공격 중일 때는 데미지를 무시
+        if (isAttack) return;
+
         if (Time.time >= lastDamagedTime + invincibleDuration)
         {
-            // 최종 데미지 = 플레이어의 공격데미지 * (1 - 방어력%)
+            // 최종 데미지 = 플레이어의 공격 데미지 * (1 - 방어력%)
             int finalDamage = Mathf.RoundToInt(damage * (1 - Defense));
             Cur_HP -= finalDamage;
             GetHit();
             lastDamagedTime = Time.time;
 
+            if (Cur_HP <= 0)
+            {
+                Die();
+            }
         }
-
-        if (Cur_HP <= 0) { Die(); }
     }
+
 
     // 피격시 점멸상태(무적 상태)
     public void Flash()
@@ -421,7 +388,9 @@ public class Player : PlayerStat
         // 체력 자동 회복
         if (Cur_HP > 0 && Cur_HP < Max_HP)
         {
+            // HP_Recover는 1초에 회복되는 체력 양을 나타냅니다.
             Cur_HP += Mathf.RoundToInt(HP_Recover * Time.deltaTime);
+            // 회복된 체력이 최대 체력을 넘지 않도록 제한합니다.
             Cur_HP = Mathf.Clamp(Cur_HP, 0, Max_HP);
         }
 
@@ -431,11 +400,18 @@ public class Player : PlayerStat
             Debug.Log("현재 스테미나: " + Cur_Stamina);
             Debug.Log("최대 스테미나: " + Max_Stamina);
             Debug.Log("스테미나 회복률: " + Stamina_Recover);
-            Cur_Stamina += Mathf.RoundToInt(Stamina_Recover * Time.deltaTime);
-            Cur_Stamina = Mathf.Clamp(Cur_Stamina, 0, Max_Stamina);
+            // Stamina_Recover는 1초에 회복되는 스테미나 양을 나타냅니다.
+            //Cur_Stamina += Mathf.RoundToInt(Stamina_Recover * Time.deltaTime);
+            // 회복된 스테미나가 최대 스테미나를 넘지 않도록 제한합니다.
+            //Cur_Stamina = Mathf.Clamp(Cur_Stamina, 0, Max_Stamina);
             Debug.Log("회복된 스테미나: " + Cur_Stamina);
+
+            int staminaToRecover = Mathf.RoundToInt(Stamina_Recover * Time.deltaTime);
+            Cur_Stamina += staminaToRecover;
+            Cur_Stamina = Mathf.Clamp(Cur_Stamina, 0, Max_Stamina);
         }
     }
+
 
 
     // 플레이어 대쉬
@@ -456,17 +432,18 @@ public class Player : PlayerStat
                 UseSkill();
                 if (!isAttack)
                 {
+                    isAttack = true;
                     var playerAttack = GetComponent<PlayerAttack>();
                     if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
-                    //sword.Use(Dash_speed, Damage());
                     anim.SetTrigger("Dash");
                     attackDelay = 0;
-                    cur_stamina -= (unlockSkills[0].useStamina);
-                    Invoke("attackend", 2.0f);
+                    Cur_Stamina -= (unlockSkills[0].useStamina);
+                    Invoke("attackend", 1.0f);
                 }
             }
         }
     }
+ 
 
     // 스킬 사용 메서드
     private void UseSkill()
@@ -477,10 +454,10 @@ public class Player : PlayerStat
             {
                 if (unlockSkills[i].Level > 0)
                 {
+                    isAttack = true;
                     print(unlockSkills[i].AnimationTrigger);
                     if (CommandCoroutine != null)
                         StopCoroutine(CommandCoroutine);
-                    isAttack = true;
                     float floatSkillDamage = allSkills[i].damagePercent * Damage();
                     int intSkillDamage = Mathf.RoundToInt(floatSkillDamage);
                     float floatLevelDamage = allSkills[i].Level * allSkills[i].addDmg;
@@ -491,7 +468,7 @@ public class Player : PlayerStat
                     var playerAttack = GetComponent<PlayerAttack>();
                     if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
 
-                    cur_stamina -= (unlockSkills[i].useStamina);
+                    Cur_Stamina -= (unlockSkills[i].useStamina);
                     skillCammand = " ";
                     break;
                 }

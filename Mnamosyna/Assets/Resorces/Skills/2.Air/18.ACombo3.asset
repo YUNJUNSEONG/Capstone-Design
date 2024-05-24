@@ -18,7 +18,7 @@ MonoBehaviour:
   tier: 1
   Id: 18
   Name: A COMBO3
-  Image: {fileID: 21300000, guid: 58e3f8ca3bacf0f4a8fff7e801b73cd1, type: 3}
+  Image: {fileID: 21300000, guid: 6dc485242c04d2a45af008de39e96a80, type: 3}
   Description: 
   isUnlock: 0
   childSkill:
@@ -26,21 +26,29 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e19f855230532f8459f71ba3ed2208e5, type: 2}
   Level: 0
   maxLevel: 3
-  Command: LSRL
-  AnimationTrigger: IsSkillLSRL
+  Command: SRL
+  AnimationTrigger: IsSkillSRL
   AnimationTime: 3.2333333
   damagePercent: 1
   addDmg: 10
   useStamina: 10
   MaxHPBonus: 0
+  addMaxHPBonus: 0
   HealthRecoverBonus: 0
+  addHealthRecoverBonus: 0
   StaminaRecoverBonus: 0
+  addStaminaRecoverBonus: 0
   ATKBonus: 0
+  addATKBonus: 0
   CritChanceBonus: 0
+  addCritChanceBonus: 0
   CriticalBonus: 0
   DefenseBonus: 0
+  addDefenseBonus: 0
   AttackSpeedMultiplier: 0
+  addAttackSpeedMultiplier: 0
   MoveSpeedMultiplier: 0
+  addMoveSpeedMultiplier: 0
   DimeritMaxHP: 0
   DimeritHealthRecover: 0
   DimeritStaminaRecover: 0
