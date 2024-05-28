@@ -423,22 +423,25 @@ public class Player : PlayerStat
 
             if (shiftDown && isAttackReady && !isAttack && !isDash)
             {
-
-                if (CommandCoroutine != null)
-                    StopCoroutine(CommandCoroutine);
-                skillCammand += 'S';
-                CommandCoroutine = StartCoroutine(ClearCommand());
-                UseSkill();
-                if (!isAttack)
+                if (Cur_Stamina >= unlockedSkills[0].useStamina)
                 {
-                    isAttack = true;
-                    var playerAttack = GetComponent<PlayerAttack>();
-                    if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
-                    anim.SetTrigger("Dash");
-                    attackDelay = 0;
-                    Cur_Stamina -= (unlockedSkills[0].useStamina);
-                    Invoke("attackend", 1.0f);
+                    if (CommandCoroutine != null)
+                        StopCoroutine(CommandCoroutine);
+                    skillCammand += 'S';
+                    CommandCoroutine = StartCoroutine(ClearCommand());
+                    UseSkill();
+                    if (!isAttack)
+                    {
+                        isAttack = true;
+                        var playerAttack = GetComponent<PlayerAttack>();
+                        if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
+                        anim.SetTrigger("Dash");
+                        attackDelay = 0;
+                        Cur_Stamina -= (unlockedSkills[0].useStamina);
+                        Invoke("attackend", 1.0f);
+                    }
                 }
+                
             }
         }
     }
@@ -454,14 +457,9 @@ public class Player : PlayerStat
             {
                 if (unlockedSkills[i].Level > 0)
                 {
-                    // 스킬 사용에 필요한 스태미나가 현재 스태미나보다 많은지 체크
-                    if (Cur_Stamina < unlockedSkills[i].useStamina)
+                    if(Cur_Stamina >= unlockedSkills[i].useStamina)
                     {
-                        Debug.Log("스태미나가 부족합니다.");
-                        continue;
-                    }
-
-                    isAttack = true;
+                                            isAttack = true;
                     print(unlockedSkills[i].AnimationTrigger);
                     if (CommandCoroutine != null)
                         StopCoroutine(CommandCoroutine);
@@ -478,6 +476,12 @@ public class Player : PlayerStat
                     Cur_Stamina -= unlockedSkills[i].useStamina;
                     skillCammand = " ";
                     break;
+                    }
+                    else
+                    {
+                        Debug.Log("스테미너가 부족합니다.");
+                        break;
+                    }
                 }
             }
         }
@@ -620,7 +624,7 @@ public class Player : PlayerStat
         isDead = true;
         anim.SetTrigger("Dead");
         gameOverPanel.SetActive(true); // 게임오버 패널 활성화
-        Invoke("StopTime", 2f); // 2초 뒤에 StopTime 메서드 실행
+        Invoke("StopTime", 0.6f); // 2초 뒤에 StopTime 메서드 실행
     }
 
     private void StopTime()
