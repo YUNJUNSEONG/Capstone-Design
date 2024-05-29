@@ -25,13 +25,16 @@ public class Player : PlayerStat
     bool isBorder;
     bool isDamage;
     public bool isDead = false;
-    public bool isAttack;
-    public bool isDash;
+    public bool isAttack = false;
+    public bool isAttackReady = true;
+    private float attackDelay = 0.0f;
+    public bool isDash = false;
+    private Coroutine CommandCoroutine = null;
+    private Queue<string> inputBuffer = new Queue<string>();
 
     public Camera followCamera;
-    public bool isAttackReady = true;
 
-    public float invincibleTime = 3.0f; // 무적 지속 시간
+    public float invincibleTime = 1.0f; // 무적 지속 시간
     private bool isInvincible = false;
 
     // 무적 상태의 지속 시간 (초)
@@ -40,7 +43,7 @@ public class Player : PlayerStat
 
     //공격받을때 깜빡이는 용도
     private float flashDuration = 0.1f;
-    private int flashCount = 4;
+    private int flashCount = 5;
     private SkillManager skillManager;
     private List<Renderer> renderers;
 
@@ -83,8 +86,6 @@ public class Player : PlayerStat
         set { UnlockSkills = value; }
     }
 
-    Coroutine CommandCoroutine = null;
-
     [SerializeField]
     private string skillCammand;
     public string SkillCammand
@@ -92,9 +93,7 @@ public class Player : PlayerStat
         get { return skillCammand; }
         set { skillCammand = value; }
     }
- 
 
-    float attackDelay;
 
     void Awake()
     {
@@ -139,9 +138,9 @@ public class Player : PlayerStat
             Move();
         }
         ChangeWeapon();
-        LeftAttack();
-        RightAttack();
-        Dash();
+        //LeftAttack();
+        //RightAttack();
+        //Dash();
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interaction();
@@ -150,6 +149,12 @@ public class Player : PlayerStat
         if (Cur_HP <= 0)
         {
             Die();
+        }
+
+        HandleInput();
+        if (!isAttack && inputBuffer.Count > 0)
+        {
+            ProcessNextInput();
         }
     }
 
@@ -162,7 +167,6 @@ public class Player : PlayerStat
         shiftDown = Input.GetButtonDown("Dash");
     }
 
-
     void Move()
     {
         // 플레이어 입력을 화면 공간으로 변환
@@ -172,11 +176,6 @@ public class Player : PlayerStat
 
         // 이동 벡터 정규화
         moveVec = inputDirection.normalized;
-
-        if (!isAttackReady)
-        {
-            moveVec = Vector3.zero;
-        }
 
         if (!isBorder)
         {
@@ -212,15 +211,8 @@ public class Player : PlayerStat
 
     void LeftAttack()
     {
-        attackDelay += Time.deltaTime;
-        isAttackReady = ATK_Speed < attackDelay;
-
-        if (leftDown && isAttackReady && !isAttack && !isDash)
+        if (isAttackReady && !isDash)
         {
-            if (CommandCoroutine != null)
-                StopCoroutine(CommandCoroutine);
-            skillCammand += 'L';
-            CommandCoroutine = StartCoroutine(ClearCommand());
             UseSkill();
 
             if (!isAttack)
@@ -233,23 +225,17 @@ public class Player : PlayerStat
                 }
                 anim.SetTrigger("LeftAttack");
                 attackDelay = 0;
-                Invoke("attackend", 1.0f); // Invoke를 사용하여 일정 시간 후 attackend 호출
+                StartCoroutine(AttackEnd("LeftAttack"));
             }
         }
     }
 
     void RightAttack()
     {
-        attackDelay += Time.deltaTime;
-        isAttackReady = ATK_Speed < attackDelay;
-
-        if (rightDown && isAttackReady && !isAttack && !isDash)
+        if (isAttackReady && !isDash)
         {
-            if (CommandCoroutine != null)
-                StopCoroutine(CommandCoroutine);
-            skillCammand += 'R';
-            CommandCoroutine = StartCoroutine(ClearCommand());
             UseSkill();
+
             if (!isAttack)
             {
                 isAttack = true;
@@ -260,7 +246,68 @@ public class Player : PlayerStat
                 }
                 anim.SetTrigger("RightAttack");
                 attackDelay = 0;
-                Invoke("attackend", 1.0f); // Invoke를 사용하여 일정 시간 후 attackend 호출
+                StartCoroutine(AttackEnd("RightAttack"));
+            }
+        }
+    }
+    // 플레이어 대쉬
+    void Dash()
+    {
+        if (unlockedSkills.Count > 0 && isAttackReady && !isAttack && !isDash)
+        {
+            if (Cur_Stamina >= unlockedSkills[0].useStamina)
+            {
+                UseSkill();
+
+                if (!isAttack)
+                {
+                    isAttack = true;
+                    var playerAttack = GetComponent<PlayerAttack>();
+                    if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
+                    anim.SetTrigger("Dash");
+                    attackDelay = 0;
+                    Cur_Stamina -= (unlockedSkills[0].useStamina);
+                    StartCoroutine(AttackEnd("Dash"));
+                }
+            }
+        }
+    }
+
+    // 스킬 사용 메서드
+    void UseSkill()
+    {
+        for (int i = unlockedSkills.Count - 1; i >= 0; i--)
+        {
+            if (!string.IsNullOrEmpty(unlockedSkills[i].Command) && skillCammand.EndsWith(unlockedSkills[i].Command))
+            {
+                if (unlockedSkills[i].Level > 0 && Cur_Stamina >= unlockedSkills[i].useStamina)
+                {
+                    isAttack = true;
+                    Debug.Log(unlockedSkills[i].AnimationTrigger);
+                    if (CommandCoroutine != null)
+                    {
+                        StopCoroutine(CommandCoroutine);
+                    }
+                    float floatSkillDamage = unlockedSkills[i].damagePercent * Damage();
+                    int intSkillDamage = Mathf.RoundToInt(floatSkillDamage);
+                    float floatLevelDamage = unlockedSkills[i].Level * unlockedSkills[i].addDmg;
+                    int intLevelDamage = Mathf.RoundToInt(floatLevelDamage);
+                    int skillDamage = intSkillDamage + intLevelDamage;
+
+                    anim.SetTrigger(unlockedSkills[i].AnimationTrigger);  // 애니메이션 트리거 설정
+                    StartCoroutine(AttackEnd(unlockedSkills[i].AnimationTrigger));
+                    var playerAttack = GetComponent<PlayerAttack>();
+                    if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
+
+                    Cur_Stamina -= unlockedSkills[i].useStamina;
+                    skillCammand = "";
+                    break;
+                }
+                else
+                {
+                    Debug.Log("스테미너가 부족합니다.");
+                    break;
+                }
             }
         }
     }
@@ -275,22 +322,51 @@ public class Player : PlayerStat
         isAttack = false;
     }
 
-    private IEnumerator AttackEnd(float attackTime, string animationTrigger)
+    IEnumerator AttackEnd(string animationTrigger)
     {
-        // 애니메이션 트리거 설정 및 대기
-        anim.SetTrigger(animationTrigger);
-        yield return new WaitForSeconds(attackTime/2);
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        while (!stateInfo.IsName(animationTrigger))
+        {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
 
-        // 공격 종료 후 애니메이터 트리거 리셋
-        anim.ResetTrigger(animationTrigger);
-        // 공격 상태 해제
-        isAttack = false;
-        anim.SetTrigger("idle");
+        // 애니메이션 길이의 절반만큼 대기
+        float animationLength = stateInfo.length / 2;
+        yield return new WaitForSeconds(animationLength);
 
         var playerAttack = GetComponent<PlayerAttack>();
         if (playerAttack != null)
         {
             playerAttack.DisableSwordCollider();
+        }
+
+        isAttack = false;
+        isAttackReady = true;
+
+        if (inputBuffer.Count > 0)
+        {
+            ProcessNextInput();
+        }
+    }
+
+    //입력 처리 및 다음 버퍼 추가
+    void HandleInput()
+    {
+        attackDelay += Time.deltaTime;
+        isAttackReady = ATK_Speed <= attackDelay;
+
+        if (leftDown)
+        {
+            AddInputToBuffer("L");
+        }
+        if (rightDown)
+        {
+            AddInputToBuffer("R");
+        }
+        if (shiftDown)
+        {
+            AddInputToBuffer("S");
         }
     }
 
@@ -300,6 +376,39 @@ public class Player : PlayerStat
         yield return new WaitForSeconds(3);
         skillCammand = " ";
     }
+
+    //커맨드 버퍼에 넣기
+    void AddInputToBuffer(string input)
+    {
+        inputBuffer.Enqueue(input);
+        if (CommandCoroutine != null)
+        {
+            StopCoroutine(CommandCoroutine);
+        }
+        skillCammand += input;
+        CommandCoroutine = StartCoroutine(ClearCommand());
+    }
+    //입력 버퍼에서 다음 입력을 꺼내어 처리
+    void ProcessNextInput()
+    {
+        if (inputBuffer.Count > 0 && !isAttack)
+        {
+            string nextInput = inputBuffer.Dequeue();
+            switch (nextInput)
+            {
+                case "L":
+                    LeftAttack();
+                    break;
+                case "R":
+                    RightAttack();
+                    break;
+                case "S":
+                    Dash();
+                    break;
+            }
+        }
+    }
+
 
     // 플레이어의 데미지 설정
     public int Damage()
@@ -410,83 +519,6 @@ public class Player : PlayerStat
             }
         }
     }
-
-
-
-    // 플레이어 대쉬
-    void Dash()
-    {
-        if (unlockedSkills.Count > 0)
-        {
-            attackDelay += Time.deltaTime;
-            isAttackReady = ATK_Speed < attackDelay;
-
-            if (shiftDown && isAttackReady && !isAttack && !isDash)
-            {
-                if (Cur_Stamina >= unlockedSkills[0].useStamina)
-                {
-                    if (CommandCoroutine != null)
-                        StopCoroutine(CommandCoroutine);
-                    skillCammand += 'S';
-                    CommandCoroutine = StartCoroutine(ClearCommand());
-                    UseSkill();
-                    if (!isAttack)
-                    {
-                        isAttack = true;
-                        var playerAttack = GetComponent<PlayerAttack>();
-                        if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
-                        anim.SetTrigger("Dash");
-                        attackDelay = 0;
-                        Cur_Stamina -= (unlockedSkills[0].useStamina);
-                        Invoke("attackend", 1.0f);
-                    }
-                }
-                
-            }
-        }
-    }
-
-
-    // 스킬 사용 메서드
-    private void UseSkill()
-    {
-        for (int i = unlockedSkills.Count - 1; i >= 0; i--)
-        {
-            // 패시브 스킬을 무시하기 위해 Command가 빈 문자열이 아닌 경우에만 처리
-            if (!string.IsNullOrEmpty(unlockedSkills[i].Command) && skillCammand.EndsWith(unlockedSkills[i].Command))
-            {
-                if (unlockedSkills[i].Level > 0)
-                {
-                    if(Cur_Stamina >= unlockedSkills[i].useStamina)
-                    {
-                                            isAttack = true;
-                    print(unlockedSkills[i].AnimationTrigger);
-                    if (CommandCoroutine != null)
-                        StopCoroutine(CommandCoroutine);
-                    float floatSkillDamage = unlockedSkills[i].damagePercent * Damage();
-                    int intSkillDamage = Mathf.RoundToInt(floatSkillDamage);
-                    float floatLevelDamage = unlockedSkills[i].Level * unlockedSkills[i].addDmg;
-                    int intLevelDamage = Mathf.RoundToInt(floatLevelDamage);
-                    int skilldamage = intSkillDamage + intLevelDamage;
-                    // sword.Use(allSkills[i].AnimationTime, skilldamage);
-                    StartCoroutine(AttackEnd(unlockedSkills[i].AnimationTime, unlockedSkills[i].AnimationTrigger));
-                    var playerAttack = GetComponent<PlayerAttack>();
-                    if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
-
-                    Cur_Stamina -= unlockedSkills[i].useStamina;
-                    skillCammand = " ";
-                    break;
-                    }
-                    else
-                    {
-                        Debug.Log("스테미너가 부족합니다.");
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
 
 
     // 플레이어 상호작용 메서드
