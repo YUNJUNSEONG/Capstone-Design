@@ -1,29 +1,31 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public List<GameObject[]> waveMonsters = new List<GameObject[]>(); // 웨이브별 몬스터 배열 리스트
+    public List<GameObject[]> waveMonsters = new List<GameObject[]>();
     public GameObject[] firstWaveMonsters;
     public GameObject[] secondWaveMonsters;
     public GameObject[] thirdWaveMonsters;
     public GameObject[] forthWaveMonsters;
-    public List<int> numOfMonsters = new List<int>(); // 웨이브별 몬스터 수 리스트
+    public List<int> numOfMonsters = new List<int>();
 
     public GameObject Upgrade;
     public Magic0[] magicComponents;
     private Collider spawnAreaCollider;
 
-    public float waitTime; // 첫 소환 이후 대기시간
+    public float waitTime;
     public int aliveCount;
 
-    // 전투 종료 이벤트 델리게이트 및 이벤트
     public delegate void CombatEndHandler();
     public event CombatEndHandler OnCombatEnd;
 
     public bool isCombatEnded { get; set; } = false;
     private bool hasSpawnedUpgrade = false;
+
+    public delegate void AliveCountChangedHandler(int newAliveCount);
+    public event AliveCountChangedHandler OnAliveCountChanged;
 
     void Awake()
     {
@@ -58,7 +60,6 @@ public class Spawner : MonoBehaviour
             GameObject selectedMonster = waveMonsters[Random.Range(0, waveMonsters.Length)];
             GameObject monster = Instantiate(selectedMonster, randomPoint, Quaternion.identity);
 
-            // 몬스터죽으면 어라이브카운트 줄이는 함수를 몬스터쪽에서 불러오기 위한것
             var Monster = monster.GetComponent<Monster>();
             if (Monster != null)
             {
@@ -69,22 +70,25 @@ public class Spawner : MonoBehaviour
 
     public void CheckAliveCount()
     {
-        //aliveCount--;
         if (aliveCount <= 0)
         {
-            OnCombatEnd?.Invoke(); // 모든 몬스터가 죽었을 때 이벤트 호출
+            OnCombatEnd?.Invoke();
             Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
             Vector3 playerForward = GameObject.FindGameObjectWithTag("Player").transform.forward;
 
-            // 플레이어의 바로 앞 위치를 계산합니다.
-            Vector3 spawnOffset = new Vector3(3.0f, 0, 0); // y 값을 포함하지 않음
+            Vector3 spawnOffset = new Vector3(3.0f, 0, 0);
             Vector3 spawnPosition = playerPosition + playerForward * spawnOffset.x;
-            spawnPosition.y = 1.0f; // y 값을 1로 설정
+            spawnPosition.y = 1.0f;
 
             SpawnObject(spawnPosition);
             isCombatEnded = true;
             foreach (Magic0 magic in magicComponents) { magic.EnableComponents(); }
         }
+    }
+
+    public void NotifyAliveCountChanged()
+    {
+        OnAliveCountChanged?.Invoke(aliveCount);
     }
 
     int GetTotalNumOfMonsters()
@@ -124,11 +128,10 @@ public class Spawner : MonoBehaviour
 
     void SpawnObject(Vector3 spawnPosition)
     {
-        // Upgrade를 생성했는지 확인하고, 한 번 생성되었다면 더 이상 생성하지 않습니다.
         if (!hasSpawnedUpgrade)
         {
             Instantiate(Upgrade, spawnPosition, Quaternion.identity);
-            hasSpawnedUpgrade = true; // Upgrade를 생성했음을 표시
+            hasSpawnedUpgrade = true;
         }
     }
 }

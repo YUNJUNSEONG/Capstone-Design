@@ -1,36 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnerTrigger : MonoBehaviour
 {
     public Spawner spawner;
     public RandomTalk randomTalk;
-    void Start()
-    {   
-        if(spawner == null)
+    public Text aliveCountText;  // Reference to the UI Text element
+
+    void Awake()
+    {
+        if (spawner == null)
         {
-            Debug.LogError("스크립트 못찾");
+            Debug.LogError("Spawner script not found.");
             return;
         }
-         
+        aliveCountText.gameObject.SetActive(false);
+        spawner.OnAliveCountChanged += UpdateAliveCountText;  // Subscribe to the alive count change event
     }
+
     void OnTriggerEnter(Collider other)
     {
-        if (GetComponent<Collider>().enabled)//other.gameObject.CompareTag("Player") && 
+        if (other.gameObject.CompareTag("Player"))
         {
             GetComponent<Collider>().enabled = false;
-            Debug.Log("몬스터스폰");
-            // 랜덤 대화 출력
+            Debug.Log("Monster spawn triggered");
+
+            // Display random dialogue
             if (randomTalk != null)
             {
                 randomTalk.DisplayRandomDialogue();
             }
-            spawner.SpawnWaves();
-            spawner.waitTime -= Time.deltaTime;
 
+            aliveCountText.gameObject.SetActive(true);
+            spawner.SpawnWaves();  // Start spawning waves
         }
     }
 
+    void UpdateAliveCountText(int newAliveCount)
+    {
+        if (aliveCountText != null)
+        {
+            aliveCountText.text = "Alive Monsters: " + newAliveCount;
 
+            if (newAliveCount <= 0)
+            {
+                aliveCountText.gameObject.SetActive(false);
+            }
+        }
+    }
 }

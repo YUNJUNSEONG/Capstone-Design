@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
@@ -21,13 +22,14 @@ public class Player : PlayerStat
 
     bool leftDown;
     bool rightDown;
-    bool shiftDown;
+    bool spaceDown;
     bool isBorder;
     bool isDamage;
     public bool isDead = false;
     public bool isAttack = false;
     public bool isAttackReady = true;
     private float attackDelay = 0.0f;
+    private float attackThreshold = 1.5f; // someThreshold를 attackThreshold로 정의
     public bool isDash = false;
     private Coroutine CommandCoroutine = null;
     private Queue<string> inputBuffer = new Queue<string>();
@@ -54,11 +56,11 @@ public class Player : PlayerStat
     Rigidbody rigid;
     Sword sword;
     // 각 속성에 해당하는 BaseMesh
+    GameObject initialBaseMesh = null;
     public GameObject BaseMesh_Fire;
     public GameObject BaseMesh_Water;
     public GameObject BaseMesh_Air;
     public GameObject BaseMesh_Earth;
-    //public GameObject BaseMesh_Earth; => 나중에 추가하기
     // 현재 설정된 BaseMesh
     private GameObject currentBaseMesh;
 
@@ -102,8 +104,9 @@ public class Player : PlayerStat
         sword = GetComponentInChildren<Sword>();
         meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         renderers = new List<Renderer>(GetComponentsInChildren<Renderer>());
         Cur_HP = Max_HP;
         Cur_Stamina = Max_Stamina;
@@ -133,19 +136,17 @@ public class Player : PlayerStat
     void Update()
     {
         GetInput();
+        ChangeWeapon();
         if (!isAttack)
         {
             Move();
         }
-        ChangeWeapon();
-        //LeftAttack();
-        //RightAttack();
-        //Dash();
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interaction();
         }
-        ChangeWeapon();
+
         if (Cur_HP <= 0)
         {
             Die();
@@ -156,6 +157,17 @@ public class Player : PlayerStat
         {
             ProcessNextInput();
         }
+
+        if (isAttack)
+        {
+            attackDelay += Time.deltaTime;
+
+            if (attackDelay >= attackThreshold)
+            {
+                isAttack = false;
+                attackDelay = 0.0f;
+            }
+        }
     }
 
     void GetInput()
@@ -164,8 +176,9 @@ public class Player : PlayerStat
         vAxis = Input.GetAxisRaw("Vertical");
         leftDown = Input.GetButtonDown("Fire1");
         rightDown = Input.GetButtonDown("Fire2");
-        shiftDown = Input.GetButtonDown("Dash");
+        spaceDown = Input.GetButtonDown("Dash");
     }
+
 
     void Move()
     {
@@ -193,7 +206,6 @@ public class Player : PlayerStat
         }
     }
 
-
     void FixedUpdate()
     {
         FreezeRotation();
@@ -211,7 +223,7 @@ public class Player : PlayerStat
 
     void LeftAttack()
     {
-        if (isAttackReady && !isDash)
+        if (isAttackReady)// && !isDash)
         {
             UseSkill();
 
@@ -232,7 +244,7 @@ public class Player : PlayerStat
 
     void RightAttack()
     {
-        if (isAttackReady && !isDash)
+        if (isAttackReady)// && !isDash)
         {
             UseSkill();
 
@@ -253,23 +265,37 @@ public class Player : PlayerStat
     // 플레이어 대쉬
     void Dash()
     {
-        if (unlockedSkills.Count > 0 && isAttackReady && !isAttack && !isDash)
+        if (!isDash)
         {
-            if (Cur_Stamina >= unlockedSkills[0].useStamina)
+            UseSkill();
+            if (isAttackReady && !isAttack)
             {
-                UseSkill();
-
-                if (!isAttack)
-                {
-                    isAttack = true;
-                    var playerAttack = GetComponent<PlayerAttack>();
-                    if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
-                    anim.SetTrigger("Dash");
-                    attackDelay = 0;
-                    Cur_Stamina -= (unlockedSkills[0].useStamina);
-                    StartCoroutine(AttackEnd("Dash"));
-                }
+                isDash = true;
+                anim.SetTrigger("Dash");
+                StartCoroutine(DashEnd("Dash"));
             }
+        }
+    }
+
+    IEnumerator DashEnd(string animationTrigger)
+    {
+        AnimatorStateInfo stateInfo;
+        do
+        {
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+            yield return null;
+        } while (!stateInfo.IsName(animationTrigger));
+
+        // 애니메이션 속도를 고려한 실제 재생 시간 계산
+        float animationLength = stateInfo.length / anim.speed;
+        yield return new WaitForSeconds(animationLength / 2);
+
+        isDash = false;
+        isAttackReady = true;
+
+        if (inputBuffer.Count > 0)
+        {
+            ProcessNextInput();
         }
     }
 
@@ -283,6 +309,7 @@ public class Player : PlayerStat
                 if (unlockedSkills[i].Level > 0 && Cur_Stamina >= unlockedSkills[i].useStamina)
                 {
                     isAttack = true;
+                    isAttackReady = false;
                     Debug.Log(unlockedSkills[i].AnimationTrigger);
                     if (CommandCoroutine != null)
                     {
@@ -294,13 +321,15 @@ public class Player : PlayerStat
                     int intLevelDamage = Mathf.RoundToInt(floatLevelDamage);
                     int skillDamage = intSkillDamage + intLevelDamage;
 
-                    anim.SetTrigger(unlockedSkills[i].AnimationTrigger);  // 애니메이션 트리거 설정
-                    StartCoroutine(AttackEnd(unlockedSkills[i].AnimationTrigger));
+                    anim.SetTrigger(unlockedSkills[i].AnimationTrigger);
                     var playerAttack = GetComponent<PlayerAttack>();
                     if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
+                    StartCoroutine(AttackEnd(unlockedSkills[i].AnimationTrigger));
+                    StartCoroutine(ResetAttack());
 
                     Cur_Stamina -= unlockedSkills[i].useStamina;
                     skillCammand = "";
+                    inputBuffer.Clear();
                     break;
                 }
                 else
@@ -310,16 +339,6 @@ public class Player : PlayerStat
                 }
             }
         }
-    }
-
-    void attackend()
-    {
-        var playerAttack = GetComponent<PlayerAttack>();
-        if (playerAttack != null)
-        {
-            playerAttack.DisableSwordCollider();
-        }
-        isAttack = false;
     }
 
     IEnumerator AttackEnd(string animationTrigger)
@@ -349,7 +368,13 @@ public class Player : PlayerStat
             ProcessNextInput();
         }
     }
-
+    private IEnumerator ResetAttack()
+    {
+        yield return new WaitForSeconds(1.0f); // 또는 스킬 지속 시간
+        isAttack = false;
+        isAttackReady = true;
+        Debug.Log("Attack reset in Coroutine");
+    }
     //입력 처리 및 다음 버퍼 추가
     void HandleInput()
     {
@@ -364,7 +389,7 @@ public class Player : PlayerStat
         {
             AddInputToBuffer("R");
         }
-        if (shiftDown)
+        if (spaceDown)
         {
             AddInputToBuffer("S");
         }
@@ -393,20 +418,42 @@ public class Player : PlayerStat
     {
         if (inputBuffer.Count > 0 && !isAttack)
         {
-            string nextInput = inputBuffer.Dequeue();
+            string nextInput = inputBuffer.Peek(); // 큐의 맨 위 요소를 확인
+
             switch (nextInput)
             {
                 case "L":
-                    LeftAttack();
+                    HandleLeftClick();
                     break;
                 case "R":
-                    RightAttack();
+                    HandleRightClick();
                     break;
                 case "S":
                     Dash();
+                    inputBuffer.Dequeue(); // 대쉬 입력은 항상 하나만 처리
                     break;
             }
         }
+    }
+
+    void HandleLeftClick()
+    {
+        int leftClickCount = 0;
+        while (inputBuffer.Count > 0 && inputBuffer.Peek() == "L" && leftClickCount < 3)
+        {
+            inputBuffer.Dequeue();
+            leftClickCount++;
+        }
+        LeftAttack();
+    }
+
+    void HandleRightClick()
+    {
+        while (inputBuffer.Count > 0 && inputBuffer.Peek() == "R")
+        {
+            inputBuffer.Dequeue();
+        }
+        RightAttack();
     }
 
 
@@ -429,7 +476,7 @@ public class Player : PlayerStat
             return baseDamage;
         }
     }
-     
+
 
     // 피격 메서드
     public void GetHit()
@@ -444,8 +491,8 @@ public class Player : PlayerStat
     //몬스터의 공격에 의한 데미지를 방어력 계산을 통해 최종 데미지 산출
     public void TakeDamage(int damage)
     {
-        // 플레이어가 공격 중일 때는 데미지를 무시
-        if (isAttack) return;
+        // 플레이어가 공격 중이거나 대쉬중일 때는 데미지를 무시
+        if (isAttack || isDash) return;
 
         if (Time.time >= lastDamagedTime + invincibleDuration)
         {
@@ -507,15 +554,9 @@ public class Player : PlayerStat
             // 스테미나 회복
             if (cur_stamina < Max_Stamina)
             {
-                Debug.Log("현재 스테미나: " + cur_stamina);
-                Debug.Log("최대 스테미나: " + Max_Stamina);
-                Debug.Log("스테미나 회복률: " + Stamina_Recover);
-
                 int staminaToRecover = Mathf.RoundToInt(Stamina_Recover);
                 cur_stamina += staminaToRecover;
                 cur_stamina = Mathf.Clamp(cur_stamina, 0, Max_Stamina);
-
-                Debug.Log("회복된 스테미나: " + cur_stamina);
             }
         }
     }
@@ -542,7 +583,7 @@ public class Player : PlayerStat
                 healSpace.HealPlayer(gameObject); // 플레이어 게임 오브젝트를 전달
                 break;
             }
-            
+
             LevelUpSkill levelUpSkill = collider.GetComponent<LevelUpSkill>();
             if (levelUpSkill != null)
             {
@@ -551,37 +592,37 @@ public class Player : PlayerStat
             }
 
             UnlockSkill unlockSkill = collider.GetComponent<UnlockSkill>();
-            if(unlockSkill != null)
+            if (unlockSkill != null)
             {
                 unlockSkill.OpenUnlockUpUI(skillManager);
                 break;
             }
-            
+
         }
     }
 
     void ChangeWeapon()
     {
-        // UnlockSkills 리스트가 비어 있는지 확인
-        if (UnlockSkills != null && UnlockSkills.Count > 0)
+        // 처음에 랜덤 BaseMesh를 설정하고 저장
+        if (initialBaseMesh == null)
         {
-            // 리스트의 첫 번째 요소를 가져옴
-            SkillData firstSkill = UnlockSkills[0];
-
-            if (firstSkill != null)
-            {
-                ChangeBaseMesh(firstSkill.element);
-            }
-            else
-            {
-                // 만약 첫 번째 스킬 데이터가 null인 경우, 기본 BaseMesh로 설정
-                ApplyBaseMesh(BaseMesh_Water); // 기본 BaseMesh로 설정
-            }
+            initialBaseMesh = GetRandomBaseMesh();
+            ApplyBaseMesh(initialBaseMesh);
         }
         else
         {
-            // UnlockSkills 리스트가 비어 있거나 첫 번째 요소가 null인 경우, 기본 BaseMesh로 설정
-            ApplyBaseMesh(BaseMesh_Water); // 기본 BaseMesh로 설정
+            // UnlockSkills 리스트가 비어 있는지 확인
+            if (UnlockSkills != null && UnlockSkills.Count > 0)
+            {
+                // 리스트의 첫 번째 요소를 가져옴
+                SkillData firstSkill = UnlockSkills[0];
+
+                if (firstSkill != null)
+                {
+                    ChangeBaseMesh(firstSkill.element);
+                }
+            }
+            // UnlockSkills 리스트가 비어 있거나 첫 번째 요소가 null인 경우, 처음 설정된 랜덤 무기로 고정
         }
     }
 
@@ -607,8 +648,8 @@ public class Player : PlayerStat
         }
         else
         {
-            // 지정된 속성이 없는 경우, 기본 BaseMesh로 설정
-            newBaseMesh = BaseMesh_Water;
+            // 지정된 속성이 없는 경우, 랜덤 BaseMesh로 설정
+            newBaseMesh = GetRandomBaseMesh();
         }
 
         ApplyBaseMesh(newBaseMesh); // 새로운 BaseMesh 적용
@@ -651,6 +692,14 @@ public class Player : PlayerStat
         // 새로운 BaseMesh를 활성화
         newBaseMesh.SetActive(true);
     }
+
+    GameObject GetRandomBaseMesh()
+    {
+        GameObject[] baseMeshes = { BaseMesh_Fire, BaseMesh_Water, BaseMesh_Air, BaseMesh_Earth };
+        int randomIndex = UnityEngine.Random.Range(0, baseMeshes.Length);
+        return baseMeshes[randomIndex];
+    }
+
     public void Die()
     {
         isDead = true;
@@ -663,63 +712,4 @@ public class Player : PlayerStat
     {
         Time.timeScale = 0f;
     }
-
-
-    /*
-    private void OnTriggerEnter(Collider other)
-    {
-        if (isInvincible)
-        {
-            // 플레이어가 무적 상태인 경우에는 몬스터 레이어와의 충돌을 무시
-            if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
-            {
-                Physics.IgnoreCollision(other, GetComponent<Collider>());
-            }
-            return;
-        }
-
-        if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
-        {
-            // 플레이어가 몬스터와 충돌한 경우
-            PenetrateMonster(other);
-        }
-    }
-    private Collider currentMonsterCollider;
-
-    public void PenetrateMonster(Collider monsterCollider)
-    {
-        // 플레이어를 무적 상태로 전환
-        isInvincible = true;
-        currentMonsterCollider = monsterCollider;
-
-        // GetHit 메서드 호출
-        //GetHit();
-
-        StartCoroutine(BecomeInvincible());
-    }
-
-    private IEnumerator BecomeInvincible()
-    {
-        yield return new WaitForSeconds(invincibleDuration);
-
-        // 무적 상태가 끝나면 다시 몬스터와의 충돌을 감지하도록 설정
-        isInvincible = false;
-        if (currentMonsterCollider != null)
-        {
-            Physics.IgnoreCollision(currentMonsterCollider, GetComponent<Collider>(), false);
-        }
-    }
-
-
-    void AttackInvincible()
-    {
-        if(isAttack == true)
-        {
-            isInvincible = true;
-
-            StartCoroutine(BecomeInvincible());
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Monster"), true);
-        }
-    }*/
-
 }

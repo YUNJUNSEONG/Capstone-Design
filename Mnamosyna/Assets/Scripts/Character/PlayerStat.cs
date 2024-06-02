@@ -25,8 +25,8 @@ public class PlayerStat : MonoBehaviour
     public float Defense = 0.0f; // 방어력 n%
 
     [Header("속도 관련")]
-    public float ATK_Speed = 2.0f; // 공격 딜레이 속도
-    protected float Move_Speed = 1.0f; // 이동 속도
+    public float ATK_Speed = 0.8f; // 공격 딜레이 속도
+    protected float Move_Speed = 0.5f; // 이동 속도
 
     [Header("공격 애니메이션")]
     protected float Left_ATK_Speed;
@@ -75,14 +75,8 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
-        ApplySkills();
-    }
-
-    private void Update()
-    {
-        // Apply player's skills every frame (optional: remove if not needed every frame)
         ApplySkills();
     }
 
@@ -113,7 +107,7 @@ public class PlayerStat : MonoBehaviour
                 Crit_Chance += skill.addCritChanceBonus;
                 break;
             case SkillData.Element.Air:
-                ATK_Speed += skill.addAttackSpeedMultiplier;
+                ATK_Speed -= skill.addAttackSpeedMultiplier;
                 Move_Speed += skill.addMoveSpeedMultiplier;
                 break;
             case SkillData.Element.Water:

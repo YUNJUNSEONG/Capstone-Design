@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Monster : MobStat
 {
@@ -18,7 +19,13 @@ public class Monster : MobStat
     public float invincibleTime = 1f; // 공격받은 후 무적 시간
     private float lastDamagedTime;
     public Spawner spawner;
+    public delegate void DeathHandler();
+    public event DeathHandler OnDeath;
     public GameObject exclamationMark;
+
+    public Text damageText;
+    private Vector3 originalPosition;
+    private Color originalColor;
 
     // 첫 번째 공격 애니메이션의 길이 (초 단위)
     public float firstAttackAnimationLength;
@@ -69,6 +76,9 @@ public class Monster : MobStat
         exclamationMark.SetActive(false);
         anim = GetComponent<Animator>();
         renderers = new List<Renderer>(GetComponentsInChildren<Renderer>());
+        damageText.gameObject.SetActive(false);
+        originalPosition = damageText.transform.position;
+        originalColor = damageText.color;
     }
 
     // 몬스터의 상태 변경
@@ -76,7 +86,7 @@ public class Monster : MobStat
     {
         if (currentState == MonsterState.Patrol && state == MonsterState.Chase)
         {
-            StartCoroutine(ShowExclamationMarkForSeconds(3.0f));
+            StartCoroutine(ShowExclamationMarkForSeconds(0.5f));
         }
         currentState = state;
     }
@@ -264,12 +274,58 @@ public class Monster : MobStat
             lastDamagedTime = Time.time;
             anim.SetTrigger(GetHitHash);
             Flash();
+            ShowDamageText(finalDamage);
         }
 
         if (Cur_HP <= 0)
         {
             Die();
         }
+    }
+    void ShowDamageText(int damage)
+    {
+        // 기존에 활성화되어 있는 텍스트의 위치를 위로 이동시킵니다.
+        damageText.transform.localPosition += new Vector3(0, 30, 0);
+
+        // 데미지 텍스트를 갱신합니다.
+        damageText.text = damage.ToString();
+
+        // 텍스트 위치를 초기 위치로 설정합니다.
+        damageText.transform.localPosition = originalPosition;
+        // 텍스트 색상을 초기 색상으로 설정합니다.
+        damageText.color = originalColor;
+        // 텍스트를 활성화합니다.
+        damageText.gameObject.SetActive(true);
+
+        StartCoroutine(AnimateDamageText());
+    }
+
+    System.Collections.IEnumerator AnimateDamageText()
+    {
+        float duration = 1.5f;
+        float elapsed = 0f;
+        Vector3 startPosition = originalPosition;
+        Vector3 endPosition = startPosition + new Vector3(0, 30, 0); // 1 픽셀 위로 이동
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            // 텍스트 위치 이동
+            damageText.transform.localPosition = Vector3.Lerp(startPosition, endPosition, t);
+            // 텍스트 색상 변화 (투명해짐)
+            damageText.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1 - t);
+
+            yield return null;
+        }
+
+        damageText.gameObject.SetActive(false);
+    }
+
+    void ClearDamageText()
+    {
+        damageText.text = "";
     }
 
     // 피격 시 몬스터 점멸 효과 출력 함수
@@ -314,19 +370,13 @@ public class Monster : MobStat
         Collider collider = GetComponent<Collider>();
         if (collider != null) { collider.enabled = false; }
 
-        if (spawner != null)
-        {
-            spawner.aliveCount--; // 여기서는 1씩만 감소해야 합니다.
-            spawner.CheckAliveCount();
-            Debug.Log("남은 몬스터:" + spawner.aliveCount);
-        }
-        else
-        {
-            // Debug.LogError("몬스터 스크립트에서 몬스터 스포너 못 찾아옴");
-        }
+        spawner.aliveCount--;
+        spawner.CheckAliveCount();
+        spawner.NotifyAliveCountChanged();  // Notify subscribers of the alive count change
+        Debug.Log("남은 몬스터:" + spawner.aliveCount);
     }
 
-    // 몬스터 삭제
+    // Monster deletion
     void DestroyObject()
     {
         Destroy(gameObject);
