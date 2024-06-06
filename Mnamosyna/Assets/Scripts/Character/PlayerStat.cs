@@ -28,10 +28,6 @@ public class PlayerStat : MonoBehaviour
     public float ATK_Speed = 0.8f; // 공격 딜레이 속도
     protected float Move_Speed = 0.5f; // 이동 속도
 
-    [Header("공격 애니메이션")]
-    protected float Left_ATK_Speed;
-    protected float Right_ATK_Speed;
-
     public float Dash_speed = 2.5f;
 
     public int max_hp { get { return Max_HP; } set { Max_HP = value; } }
@@ -50,9 +46,6 @@ public class PlayerStat : MonoBehaviour
     public float defense { get { return Defense; } set { Defense = value; } }
     public float atk_speed { get { return ATK_Speed; } set { ATK_Speed = value; } }
     public float move_speed { get { return Move_Speed; } set { Move_Speed = value; } }
-
-    public float left_atk_speed { get { return Left_ATK_Speed; } set { Left_ATK_Speed = value; } }
-    public float right_atk_speed { get { return Right_ATK_Speed; } set { Right_ATK_Speed = value; } }
 
     [SerializeField]
     private List<SkillData> unlockSkills = new List<SkillData>();
@@ -75,28 +68,7 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
-    protected virtual void Start()
-    {
-        ApplySkills();
-    }
-
-    private void ApplySkills()
-    {
-
-        // Apply each unlocked skill's bonuses
-        foreach (SkillData skill in unlockSkills)
-        {
-            if (skill.isUnlock)
-            {
-                ApplySkill(skill);
-            }
-        }
-
-        // Clamp current HP and stamina to their new max values
-        Cur_HP = Mathf.Min(Cur_HP, Max_HP);
-        Cur_Stamina = Mathf.Min(Cur_Stamina, Max_Stamina);
-    }
-
+    /*
     private void ApplySkill(SkillData skill)
     {
         switch (skill.element)
@@ -146,4 +118,5 @@ public class PlayerStat : MonoBehaviour
             }
         }
     }
+    */
 }

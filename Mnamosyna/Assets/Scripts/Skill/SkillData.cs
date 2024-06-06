@@ -173,4 +173,13 @@ public class SkillData : ScriptableObject
     {
         throw new NotImplementedException();
     }
+
+    public void Apply(Player player)
+    {
+        /*
+        player.MAX_ATK = Mathf.RoundToInt(player.MAX_ATK * damageMultiplier);
+        player.Defense *= defenseMultiplier;
+        player.Move_Speed *= speedMultiplier;
+        */
+    }
 }

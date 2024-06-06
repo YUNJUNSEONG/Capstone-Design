@@ -7,8 +7,8 @@ public class CameraMove: MonoBehaviour
     public GameObject target;
     public Vector3 offset;
     public GameObject destination;
-    private bool _isCameraEventEnded = false;
-    private float _pos_v = 0f;
+    //private bool _isCameraEventEnded = false;
+    //private float _pos_v = 0f;
     // Update is called once per frame
     private Quaternion initialRotation; //초기 카메라 셋팅값 저장 하기 위해
 
