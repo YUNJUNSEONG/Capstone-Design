@@ -15,22 +15,7 @@ public class PlayerAttack : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         player = GetComponentInChildren<Player>();
     }
-    /*
-    void OnLeftAttack()
-    {
-        if (!isAttacking)
-        {
-            anim.SetTrigger("LeftAttack");
-        }
-    }
 
-    void OnRightAttack()
-    {
-        if (!isAttacking)
-        {
-            anim.SetTrigger("RightAttack");
-        }
-    }*/
 
     public void EnableSwordCollider() { isAttacking = true; }
     public void DisableSwordCollider() { isAttacking = false; }

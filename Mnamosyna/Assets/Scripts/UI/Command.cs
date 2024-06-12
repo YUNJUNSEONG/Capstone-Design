@@ -18,6 +18,6 @@ public class Command : MonoBehaviour
     void Update()
     {
         CommandText.text = "Command: ";
-        CommandText.text += playerCon.SkillCammand.Length > 5 ? playerCon.SkillCammand.Substring(playerCon.SkillCammand.Length - 5, 5) : playerCon.SkillCammand;
+        CommandText.text += playerCon.SkillCommand.Length > 10 ? playerCon.SkillCommand.Substring(playerCon.SkillCommand.Length - 10, 10) : playerCon.SkillCommand;
     }
 }

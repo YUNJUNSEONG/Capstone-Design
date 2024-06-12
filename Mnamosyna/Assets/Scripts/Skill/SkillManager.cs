@@ -5,6 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static SkillData;
 
 public class SkillManager : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class SkillManager : MonoBehaviour
     public GameObject UnlockBase;
     public List<int> UnlockSkill;
 
+    public Image[] ComboSkills = new Image[10];
+    public Image[] PassiveSkills = new Image[10];
 
     public List<SkillData> curSkills; // 현재 보유한 스킬
     //public Image DashUI;
@@ -163,7 +166,7 @@ public class SkillManager : MonoBehaviour
         SkillData skillData = playerCon.StanbySkills[selectedSkillIndex];
 
         EndUnlockSkillChoie = true;
-        //출력된 후 스킬들의 인덱스 재확인
+        // 선택된 스킬 정보 출력
         Debug.Log("========================================================");
         Debug.Log("Selected Skill Data: " + skillData);
         Debug.Log("Selected skill index: " + selectedSkillIndex);
@@ -192,9 +195,35 @@ public class SkillManager : MonoBehaviour
         playerCon.UnlockSkills = curSkills;
         ClearSameCommand();
 
+        int comboSkillIndex = 0;
+        int passiveSkillIndex = 0;
+        for (int i = 0; i < curSkills.Count; i++)
+        {
+            if (curSkills[i].skillType == SkillType.Combo)
+            {
+                if (comboSkillIndex < ComboSkills.Length)
+                {
+                    ComboSkills[comboSkillIndex].gameObject.SetActive(true);
+                    ComboSkills[comboSkillIndex].sprite = curSkills[i].Image;
+                    comboSkillIndex++;
+                }
+            }
+            else
+            {
+                if (passiveSkillIndex < PassiveSkills.Length)
+                {
+                    PassiveSkills[passiveSkillIndex].gameObject.SetActive(true);
+                    PassiveSkills[passiveSkillIndex].sprite = curSkills[i].Image;
+                    passiveSkillIndex++;
+                }
+            }
+        }
+
         // 시간 재개
         Time.timeScale = 1;
     }
+
+
 
     public void LevelUp()
     {

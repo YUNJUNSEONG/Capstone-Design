@@ -27,12 +27,14 @@ public class Player : PlayerStat
     bool isDamage;
     public bool isDead = false;
     public bool isAttack = false;
-    public bool isAttackReady = true;
+    public bool isDash = false;
+    public bool isSkillActive = false;
     private float attackDelay = 0.0f;
     private float attackThreshold = 1.5f; // someThreshold를 attackThreshold로 정의
-    public bool isDash = false;
+
     private Coroutine CommandCoroutine = null;
     private Queue<string> inputBuffer = new Queue<string>();
+    int hashAttackCount = Animator.StringToHash("AttackCount");
 
     public Camera followCamera;
 
@@ -45,7 +47,7 @@ public class Player : PlayerStat
 
     //공격받을때 깜빡이는 용도
     private float flashDuration = 0.1f;
-    private int flashCount = 5;
+    private int flashCount = 10;
     private SkillManager skillManager;
     private List<Renderer> renderers;
 
@@ -72,9 +74,7 @@ public class Player : PlayerStat
     // 전체 스킬
     [SerializeField]
     private List<SkillData> allSkills = new List<SkillData>();
-    // 플레이어가 보유한 스킬 ID를 저장하는 리스트
-    //private List<int> unlockSkillIds = new List<int>();
-    // 플레이어가 보유한 스킬 데이터를 저장하는 리스트
+
     [SerializeField]
     private List<SkillData> stanbySkills = new List<SkillData>();
     public List<SkillData> StanbySkills
@@ -89,11 +89,11 @@ public class Player : PlayerStat
     }
 
     [SerializeField]
-    private string skillCammand;
-    public string SkillCammand
+    private string skillCommand;
+    public string SkillCommand
     {
-        get { return skillCammand; }
-        set { skillCammand = value; }
+        get { return skillCommand; }
+        set { skillCommand = value; }
     }
 
 
@@ -104,9 +104,8 @@ public class Player : PlayerStat
         sword = GetComponentInChildren<Sword>();
         meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
-    protected override void Start()
+    void Start()
     {
-        base.Start();
         renderers = new List<Renderer>(GetComponentsInChildren<Renderer>());
         Cur_HP = Max_HP;
         Cur_Stamina = Max_Stamina;
@@ -137,6 +136,7 @@ public class Player : PlayerStat
     {
         GetInput();
         ChangeWeapon();
+        ApplySkills();
         if (!isAttack)
         {
             Move();
@@ -152,6 +152,7 @@ public class Player : PlayerStat
             Die();
         }
 
+        
         HandleInput();
         if (!isAttack && inputBuffer.Count > 0)
         {
@@ -174,12 +175,21 @@ public class Player : PlayerStat
     {
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
-        leftDown = Input.GetButtonDown("Fire1");
-        rightDown = Input.GetButtonDown("Fire2");
-        spaceDown = Input.GetButtonDown("Dash");
+        if (Input.GetButtonDown("Fire1"))
+        {
+            inputBuffer.Enqueue("L");
+        }
+        if (Input.GetButtonDown("Fire2"))
+        {
+            inputBuffer.Enqueue("R");
+        }
+        if (Input.GetButtonDown("Jump"))
+        {
+            inputBuffer.Enqueue("S");
+        }
     }
 
-
+    #region 플레이어 이동
     void Move()
     {
         // 플레이어 입력을 화면 공간으로 변환
@@ -199,10 +209,20 @@ public class Player : PlayerStat
         // 이동 여부에 따라 애니메이션 설정
         anim.SetBool("isRun", moveVec != Vector3.zero);
 
-        // 플레이어가 이동하는 방향을 바라보도록 함
+        // 이동 방향에 따른 회전
         if (moveVec != Vector3.zero)
         {
-            transform.rotation = Quaternion.LookRotation(moveVec);
+            // 마우스 위치를 고려하여 회전
+            Vector3 targetDirection = moveVec;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, LayerMask.GetMask("Ground")))
+            {
+                Vector3 mouseDirection = hitInfo.point - transform.position;
+                mouseDirection.y = 0; // y축은 무시
+                targetDirection = Vector3.Lerp(moveVec, mouseDirection.normalized, 0.5f); // 이동 방향과 마우스 방향을 혼합
+            }
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetDirection), Time.deltaTime * 10f);
         }
     }
 
@@ -220,63 +240,89 @@ public class Player : PlayerStat
         Debug.DrawRay(transform.position, transform.forward * 3, Color.white);
         isBorder = Physics.Raycast(transform.position, transform.forward, 3, LayerMask.GetMask("Wall"));
     }
+    #endregion
+    public int AttackCount
+    {
+        get => anim.GetInteger(hashAttackCount);
+        set => anim.SetInteger(hashAttackCount, value);
+    }
 
     void LeftAttack()
     {
-        if (isAttackReady)// && !isDash)
-        {
-            UseSkill();
+        UseSkill();
 
-            if (!isAttack)
+        if (!isAttack)
+        {
+            isAttack = true;
+            skillCommand += 'L';
+            var playerAttack = GetComponent<PlayerAttack>();
+            if (playerAttack != null)
             {
-                isAttack = true;
-                var playerAttack = GetComponent<PlayerAttack>();
-                if (playerAttack != null)
-                {
-                    playerAttack.EnableSwordCollider();
-                }
-                anim.SetTrigger("LeftAttack");
-                attackDelay = 0;
-                StartCoroutine(AttackEnd("LeftAttack"));
+                playerAttack.EnableSwordCollider();
             }
+
+            // 마우스 위치를 바라보도록 설정
+            FaceMouseDirection();
+
+            // LeftAttack 트리거 설정
+            anim.SetTrigger("LeftAttack");
+
+            attackDelay = 0;
+            StartCoroutine(AttackEnd("LeftAttack"));
         }
     }
 
     void RightAttack()
     {
-        if (isAttackReady)// && !isDash)
-        {
-            UseSkill();
+        UseSkill();
 
-            if (!isAttack)
+        if (!isAttack)
+        {
+            skillCommand += 'R';
+            isAttack = true;
+            var playerAttack = GetComponent<PlayerAttack>();
+            if (playerAttack != null)
             {
-                isAttack = true;
-                var playerAttack = GetComponent<PlayerAttack>();
-                if (playerAttack != null)
-                {
-                    playerAttack.EnableSwordCollider();
-                }
-                anim.SetTrigger("RightAttack");
-                attackDelay = 0;
-                StartCoroutine(AttackEnd("RightAttack"));
+                playerAttack.EnableSwordCollider();
             }
+
+            // 마우스 위치를 바라보도록 설정
+            FaceMouseDirection();
+
+            anim.SetTrigger("RightAttack");
+            attackDelay = 0;
+            StartCoroutine(AttackEnd("RightAttack"));
         }
     }
+
+    void FaceMouseDirection()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hitInfo))
+        {
+            Vector3 targetPosition = hitInfo.point;
+            Vector3 direction = (targetPosition - transform.position).normalized;
+            direction.y = 0; // Y축 회전 방지
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10); // 부드러운 회전
+        }
+    }
+
     // 플레이어 대쉬
     void Dash()
     {
         if (!isDash)
         {
             UseSkill();
-            if (isAttackReady && !isAttack)
-            {
-                isDash = true;
-                anim.SetTrigger("Dash");
-                StartCoroutine(DashEnd("Dash"));
-            }
+            skillCommand += 'S';
+            FaceMouseDirection();
+
+            isDash = true;
+            anim.SetTrigger("Dash");
+            StartCoroutine(DashEnd("Dash"));
         }
     }
-
+    
     IEnumerator DashEnd(string animationTrigger)
     {
         AnimatorStateInfo stateInfo;
@@ -291,7 +337,6 @@ public class Player : PlayerStat
         yield return new WaitForSeconds(animationLength / 2);
 
         isDash = false;
-        isAttackReady = true;
 
         if (inputBuffer.Count > 0)
         {
@@ -299,17 +344,18 @@ public class Player : PlayerStat
         }
     }
 
+
     // 스킬 사용 메서드
     void UseSkill()
     {
         for (int i = unlockedSkills.Count - 1; i >= 0; i--)
         {
-            if (!string.IsNullOrEmpty(unlockedSkills[i].Command) && skillCammand.EndsWith(unlockedSkills[i].Command))
+            if (!string.IsNullOrEmpty(unlockedSkills[i].Command) && skillCommand.EndsWith(unlockedSkills[i].Command))
             {
                 if (unlockedSkills[i].Level > 0 && Cur_Stamina >= unlockedSkills[i].useStamina)
                 {
                     isAttack = true;
-                    isAttackReady = false;
+                    //isAttackReady = false;
                     Debug.Log(unlockedSkills[i].AnimationTrigger);
                     if (CommandCoroutine != null)
                     {
@@ -325,10 +371,9 @@ public class Player : PlayerStat
                     var playerAttack = GetComponent<PlayerAttack>();
                     if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
                     StartCoroutine(AttackEnd(unlockedSkills[i].AnimationTrigger));
-                    StartCoroutine(ResetAttack());
 
                     Cur_Stamina -= unlockedSkills[i].useStamina;
-                    skillCammand = "";
+                    skillCommand = "";
                     inputBuffer.Clear();
                     break;
                 }
@@ -361,25 +406,19 @@ public class Player : PlayerStat
         }
 
         isAttack = false;
-        isAttackReady = true;
+        //isAttackReady = true;
 
         if (inputBuffer.Count > 0)
         {
             ProcessNextInput();
         }
     }
-    private IEnumerator ResetAttack()
-    {
-        yield return new WaitForSeconds(1.0f); // 또는 스킬 지속 시간
-        isAttack = false;
-        isAttackReady = true;
-        Debug.Log("Attack reset in Coroutine");
-    }
+
     //입력 처리 및 다음 버퍼 추가
     void HandleInput()
     {
         attackDelay += Time.deltaTime;
-        isAttackReady = ATK_Speed <= attackDelay;
+        //isAttackReady = ATK_Speed <= attackDelay;
 
         if (leftDown)
         {
@@ -399,7 +438,7 @@ public class Player : PlayerStat
     IEnumerator ClearCommand()
     {
         yield return new WaitForSeconds(3);
-        skillCammand = " ";
+        skillCommand = " ";
     }
 
     //커맨드 버퍼에 넣기
@@ -410,13 +449,14 @@ public class Player : PlayerStat
         {
             StopCoroutine(CommandCoroutine);
         }
-        skillCammand += input;
+        skillCommand += input;
         CommandCoroutine = StartCoroutine(ClearCommand());
     }
+
     //입력 버퍼에서 다음 입력을 꺼내어 처리
     void ProcessNextInput()
     {
-        if (inputBuffer.Count > 0 && !isAttack)
+        if (inputBuffer.Count > 0 )//&& !isAttack)
         {
             string nextInput = inputBuffer.Peek(); // 큐의 맨 위 요소를 확인
 
@@ -436,13 +476,14 @@ public class Player : PlayerStat
         }
     }
 
+    
     void HandleLeftClick()
     {
-        int leftClickCount = 0;
-        while (inputBuffer.Count > 0 && inputBuffer.Peek() == "L" && leftClickCount < 3)
+        //int leftClickCount = 0;
+        while (inputBuffer.Count > 0 && inputBuffer.Peek() == "L" )//&& leftClickCount < 3)
         {
             inputBuffer.Dequeue();
-            leftClickCount++;
+            //leftClickCount++;
         }
         LeftAttack();
     }
@@ -477,7 +518,7 @@ public class Player : PlayerStat
         }
     }
 
-
+    #region 플레이어 피격
     // 피격 메서드
     public void GetHit()
     {
@@ -508,8 +549,6 @@ public class Player : PlayerStat
             }
         }
     }
-
-
     // 피격시 점멸상태(무적 상태)
     public void Flash()
     {
@@ -535,7 +574,21 @@ public class Player : PlayerStat
             yield return new WaitForSeconds(flashDuration);
         }
     }
+    public void Die()
+    {
+        isDead = true;
+        anim.SetTrigger("Dead");
+        gameOverPanel.SetActive(true); // 게임오버 패널 활성화
+        Invoke("StopTime", 0.6f); // 2초 뒤에 StopTime 메서드 실행
+    }
 
+    private void StopTime()
+    {
+        Time.timeScale = 0f;
+    }
+    #endregion
+
+    #region 자동 회복 및 스킬 적용
     // 자동 회복 시스템
     IEnumerator RegenerateStats()
     {
@@ -560,8 +613,20 @@ public class Player : PlayerStat
             }
         }
     }
+    private void ApplySkills()
+    {
+        foreach (SkillData skill in StanbySkills)
+        {
+            if (skill.isUnlock)
+            {
+                // 스킬의 능력치를 플레이어에게 적용
+                skill.Apply(this);
+            }
+        }
+    }
+    #endregion
 
-
+    #region 플레이어 상호작용
     // 플레이어 상호작용 메서드
     void Interaction()
     {
@@ -600,7 +665,9 @@ public class Player : PlayerStat
 
         }
     }
+    #endregion
 
+    #region 플레이어 스킬 선택 시 무기 변경
     void ChangeWeapon()
     {
         // 처음에 랜덤 BaseMesh를 설정하고 저장
@@ -699,17 +766,6 @@ public class Player : PlayerStat
         int randomIndex = UnityEngine.Random.Range(0, baseMeshes.Length);
         return baseMeshes[randomIndex];
     }
+    #endregion
 
-    public void Die()
-    {
-        isDead = true;
-        anim.SetTrigger("Dead");
-        gameOverPanel.SetActive(true); // 게임오버 패널 활성화
-        Invoke("StopTime", 0.6f); // 2초 뒤에 StopTime 메서드 실행
-    }
-
-    private void StopTime()
-    {
-        Time.timeScale = 0f;
-    }
 }
