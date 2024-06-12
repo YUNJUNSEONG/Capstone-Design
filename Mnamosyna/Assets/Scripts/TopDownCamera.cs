@@ -17,10 +17,14 @@ public class TopDownCamera : MonoBehaviour
         var position = target.position;
         transform1.position = position + offset;
         _cameraPosition = transform1.position - position;
+        
+        Quaternion camTurnAngle = Quaternion.AngleAxis(45, Vector3.up);
+        _cameraPosition = camTurnAngle * _cameraPosition;
     }
 
     void LateUpdate()
     {
+        /*
         if (Input.GetMouseButtonDown(2))
         {
             _isMouseDown = true;
@@ -37,6 +41,7 @@ public class TopDownCamera : MonoBehaviour
             Quaternion camTurnAngle = Quaternion.AngleAxis(mouseX, Vector3.up);
             _cameraPosition = camTurnAngle * _cameraPosition;
         }
+        */
 
         var position = target.position;
         transform.position = position + _cameraPosition;
