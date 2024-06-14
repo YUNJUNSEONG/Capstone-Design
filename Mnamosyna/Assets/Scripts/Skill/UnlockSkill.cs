@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class UnlockSkill : MonoBehaviour
 {
-    public GameObject LevelupUI;
+    public GameObject UnlockUI;
     public StoryManager storyManager;
     private SkillManager skillManager; // 충돌한 오브젝트에서 스킬 매니저 컴포넌트 가져오기
     public GameObject Trigger;
 
     public bool UnlockSkillSelectEnd = false;
+    private static bool storyShown = false;
 
     private void Start()
     {
@@ -39,13 +40,13 @@ public class UnlockSkill : MonoBehaviour
         skillManager.Unlock();
 
         Invoke("selectEnd", 1.0f);
-        // 오브젝트 파괴
+
         Destroy(gameObject);
     }
 
     void selectEnd()
     {
-        if(skillManager.EndUnlockSkillChoie == true)
+        if(skillManager.EndUnlockSkillChoice == true)
         {
             UnlockSkillSelectEnd = true;
         }

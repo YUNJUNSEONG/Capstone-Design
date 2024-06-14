@@ -23,9 +23,10 @@ public class StoryManager : MonoBehaviour
         PostCombat,
         SkillUnlock,
         SkillLevelUp,
+        Potal,
         Healing,
-        Boss,
-        PostBoss,
+        FirstBoss,
+        FirstBossEnd,
         PlayerDeath
     }
 

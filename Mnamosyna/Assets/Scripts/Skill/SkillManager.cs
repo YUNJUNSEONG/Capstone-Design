@@ -27,8 +27,9 @@ public class SkillManager : MonoBehaviour
 
     public List<SkillData> curSkills; // 현재 보유한 스킬
     //public Image DashUI;
-    public bool EndUnlockSkillChoie = false;
-    public bool StartLevelUpSkillChoie = false;
+    public bool EndUnlockSkillChoice = false;
+    private bool skillUnlocked = false;
+    public bool StartLevelUpSkillChoice = false;
 
     private void Awake()
     {
@@ -49,6 +50,7 @@ public class SkillManager : MonoBehaviour
 
     public void Unlock(Action onUnlockComplete = null)
     {
+        EndUnlockSkillChoice = true;
         Time.timeScale = 0;
         UnlockSkill = new List<int>();
         HashSet<int> selectedIndexes = new HashSet<int>(); // 이미 선택된 스킬의 인덱스를 추적하기 위한 HashSet 생성
@@ -150,7 +152,15 @@ public class SkillManager : MonoBehaviour
 
         UnlockBase.SetActive(true);
     }
+    public bool IsSkillUnlocked()
+    {
+        return skillUnlocked;
+    }
 
+    public void ResetEndUnlockSkillChoice()
+    {
+        EndUnlockSkillChoice = false;
+    }
 
     public void choiceUnlockSkill(int num)
     {
@@ -165,7 +175,7 @@ public class SkillManager : MonoBehaviour
         int selectedSkillIndex = UnlockSkill[num];
         SkillData skillData = playerCon.StanbySkills[selectedSkillIndex];
 
-        EndUnlockSkillChoie = true;
+        EndUnlockSkillChoice = true;
         // 선택된 스킬 정보 출력
         Debug.Log("========================================================");
         Debug.Log("Selected Skill Data: " + skillData);
@@ -221,6 +231,7 @@ public class SkillManager : MonoBehaviour
 
         // 시간 재개
         Time.timeScale = 1;
+        skillUnlocked = true;
     }
 
 
