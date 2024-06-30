@@ -7,6 +7,7 @@ public class TopDownCamera : MonoBehaviour
     public Transform target;
     public Vector3 offset;
     public float rotationSpeed = 5f;
+    public int angle = 45;
 
     private Vector3 _cameraPosition;
     private bool _isMouseDown = false;
@@ -18,7 +19,7 @@ public class TopDownCamera : MonoBehaviour
         transform1.position = position + offset;
         _cameraPosition = transform1.position - position;
         
-        Quaternion camTurnAngle = Quaternion.AngleAxis(45, Vector3.up);
+        Quaternion camTurnAngle = Quaternion.AngleAxis(angle, Vector3.up);
         _cameraPosition = camTurnAngle * _cameraPosition;
     }
 
