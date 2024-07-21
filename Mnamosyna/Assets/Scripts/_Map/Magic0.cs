@@ -15,8 +15,8 @@ public class Magic0 : MonoBehaviour
     
     void Start()
     {
-        //if(myCollider) {myCollider.enabled = false;}
-        //if(myParticleSystem) {myParticleSystem.Stop();}
+        if(myCollider) {myCollider.enabled = false;}
+        if(myParticleSystem) {myParticleSystem.Stop();}
     }
     
     public void EnableComponents()
