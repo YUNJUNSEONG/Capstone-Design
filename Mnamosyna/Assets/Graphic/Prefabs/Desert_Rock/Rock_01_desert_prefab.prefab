@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 9117368646212757302}
   - component: {fileID: 5790138809590867166}
   - component: {fileID: 1854257029973300609}
-  - component: {fileID: 3287467110629378694}
   - component: {fileID: 8226073295651062155}
+  - component: {fileID: 7650247948962770347}
   m_Layer: 0
   m_Name: Rock_01_desert_prefab
   m_TagString: Untagged
@@ -85,28 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3287467110629378694
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8488360431306145164}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: 00e255607746a2a4690c0af6c2484b6b, type: 3}
 --- !u!205 &8226073295651062155
 LODGroup:
   m_ObjectHideFlags: 0
@@ -134,3 +112,26 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1854257029973300609}
   m_Enabled: 1
+--- !u!136 &7650247948962770347
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8488360431306145164}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.23
+  m_Height: 2.123503
+  m_Direction: 1
+  m_Center: {x: -0.1322375, y: -0.06992149, z: 0.09}
