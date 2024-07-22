@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: -3000478543212451889}
+  monster: {fileID: -1383051951485488533}
   Distance: {fileID: 6379716010448522285}
 --- !u!1 &1471096558090767949
 GameObject:
@@ -173,76 +173,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1 &1672654624211686514
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4077293782599017067}
-  - component: {fileID: 6962545433740544139}
-  - component: {fileID: 6751284530869873189}
-  m_Layer: 8
-  m_Name: MaxRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4077293782599017067
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672654624211686514}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1588473390716456100}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &6962545433740544139
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672654624211686514}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 20
-  m_Height: 40
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6751284530869873189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672654624211686514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: -3000478543212451889}
-  Distance: {fileID: 6962545433740544139}
 --- !u!1 &2061696538161408817
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,8 +353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c466bac5fba56104f9939eec349952e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Monster: {fileID: 0}
+  monster: {fileID: 2107883145010402846}
+  Monster: {fileID: -1383051951485488533}
 --- !u!114 &3965571515321810222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,7 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: -3000478543212451889}
+  monster: {fileID: -1383051951485488533}
   player: {fileID: 0}
   attackDistance: {fileID: 4685423724744072279}
   skillDistance: {fileID: 1060359152131996339}
@@ -774,23 +704,24 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 02169a29bc93499d91fdd5dd16ead51a, type: 2}
     - target: {fileID: 919132149155446097, guid: 9093df2273c64b849f19c00323856862, type: 3}
       propertyPath: m_Name
-      value: Fishman
+      value: 4.Fishman
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 9093df2273c64b849f19c00323856862, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0e1d471bf441cea4ca5c9230e79b0cbf, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9093df2273c64b849f19c00323856862, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4052539049437024922}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9093df2273c64b849f19c00323856862, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1319144353781103876}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9093df2273c64b849f19c00323856862, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4077293782599017067}
+      addedObject: {fileID: 4899070378721767827}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9093df2273c64b849f19c00323856862, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4899070378721767827}
+      addedObject: {fileID: 4052539049437024922}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9093df2273c64b849f19c00323856862, type: 3}
       insertIndex: 1
@@ -803,7 +734,7 @@ PrefabInstance:
       addedObject: {fileID: -2853148993375120342}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9093df2273c64b849f19c00323856862, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -3000478543212451889}
+      addedObject: {fileID: -1383051951485488533}
   m_SourcePrefab: {fileID: 100100000, guid: 9093df2273c64b849f19c00323856862, type: 3}
 --- !u!4 &1588473390716456100 stripped
 Transform:
@@ -873,7 +804,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-3000478543212451889
+--- !u!114 &-1383051951485488533
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -882,31 +813,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 2107883145010402846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a34d7dfc1db403e4db3299d15ace3c1e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d11cae4d2d89e34e8dcbb3fe4b9f95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Fishman
   Max_HP: 30
   Cur_HP: 30
-  ATK: 6
-  Skill_ATK1: 9
-  Skill_ATK2: 0
+  ATK1: 6
+  ATK2: 9
   NumberOfSkills: 2
   SkillCoolTime1: 4
   SkillCoolTime2: 7
-  SkillCoolTime3: 0
   Defense: 0
   Move_Speed: 3
-  Distance: 0
-  patrolRadius: 200
-  attack1Radius: 1.2
-  attack2Radius: 2
-  attack3Radius: 0
-  invincibleTime: 1
+  ApproachRadius: 2
+  DetectionRadius: 100
+  attack1Radius: 3
+  attack2Radius: 4
+  invincibleTime: 0.5
   spawner: {fileID: 0}
   exclamationMark: {fileID: 2061696538161408817}
   damageText: {fileID: 3659750914832365128}
-  firstAttackAnimationLength: 0
-  secondAttackAnimationLength: 0
-  isAttack: 0
-  isSkill: 0
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0

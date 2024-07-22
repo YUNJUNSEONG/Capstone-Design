@@ -283,8 +283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c466bac5fba56104f9939eec349952e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Monster: {fileID: 0}
+  monster: {fileID: 2306338860249110187}
+  Monster: {fileID: 6022948926896891610}
 --- !u!114 &7906831373319657912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,76 +298,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 0}
---- !u!1 &3820727159077170340
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7998795088139919301}
-  - component: {fileID: 5278134662422001741}
-  - component: {fileID: 6511621404264794003}
-  m_Layer: 8
-  m_Name: MaxRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7998795088139919301
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3820727159077170340}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2306338860249139851}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &5278134662422001741
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3820727159077170340}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 20
-  m_Height: 40
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6511621404264794003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3820727159077170340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Distance: {fileID: 5278134662422001741}
 --- !u!1 &6418798555347365108
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 6022948926896891610}
   player: {fileID: 0}
   attackDistance: {fileID: 4384257220223446570}
   skillDistance: {fileID: 2237639412108627113}
@@ -621,7 +551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 6022948926896891610}
   Distance: {fileID: 4054337456033387177}
 --- !u!1 &7255855660680608604
 GameObject:
@@ -772,6 +702,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: a87c7d244a3c4896a26261cc18acd499, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9e02ad5fe79de084b94b093080af1e38, type: 2}
     - target: {fileID: 13700000, guid: a87c7d244a3c4896a26261cc18acd499, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -781,16 +715,13 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 400030, guid: a87c7d244a3c4896a26261cc18acd499, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8411461913890585274}
-    - targetCorrespondingSourceObject: {fileID: 400030, guid: a87c7d244a3c4896a26261cc18acd499, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 838237725284181108}
     - targetCorrespondingSourceObject: {fileID: 400030, guid: a87c7d244a3c4896a26261cc18acd499, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7998795088139919301}
+      addedObject: {fileID: 600192696763260035}
     - targetCorrespondingSourceObject: {fileID: 400030, guid: a87c7d244a3c4896a26261cc18acd499, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 600192696763260035}
+      addedObject: {fileID: 8411461913890585274}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100030, guid: a87c7d244a3c4896a26261cc18acd499, type: 3}
       insertIndex: -1
@@ -801,6 +732,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100030, guid: a87c7d244a3c4896a26261cc18acd499, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1329802736303621368}
+    - targetCorrespondingSourceObject: {fileID: 100030, guid: a87c7d244a3c4896a26261cc18acd499, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6022948926896891610}
   m_SourcePrefab: {fileID: 100100000, guid: a87c7d244a3c4896a26261cc18acd499, type: 3}
 --- !u!1 &2306338860249110187 stripped
 GameObject:
@@ -865,6 +799,42 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6022948926896891610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2306338860249110187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160f8e961b6919a4a9a090da890e7444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: EvilMage
+  Max_HP: 30
+  Cur_HP: 30
+  ATK1: 7
+  ATK2: 8
+  NumberOfSkills: 2
+  SkillCoolTime1: 5
+  SkillCoolTime2: 6
+  Defense: 0
+  Move_Speed: 3
+  ApproachRadius: 8
+  DetectionRadius: 100
+  attack1Radius: 3
+  attack2Radius: 8
+  invincibleTime: 0.5
+  spawner: {fileID: 0}
+  exclamationMark: {fileID: 6872274468947634055}
+  damageText: {fileID: 4091869415523719006}
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
+  projectilePrefab: {fileID: 0}
+  projectileSpawnOffset: {x: 0, y: 1, z: 0}
 --- !u!4 &2306338860249139851 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400030, guid: a87c7d244a3c4896a26261cc18acd499, type: 3}

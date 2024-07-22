@@ -273,8 +273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c466bac5fba56104f9939eec349952e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Monster: {fileID: 0}
+  monster: {fileID: 3027720348572540393}
+  Monster: {fileID: -1816796936210615924}
 --- !u!114 &2256265476201594899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: -1816796936210615924}
   player: {fileID: 0}
   attackDistance: {fileID: 4675502626459831771}
   skillDistance: {fileID: 1786297676430782375}
@@ -555,78 +555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: -1816796936210615924}
   Distance: {fileID: 1432037237812549516}
---- !u!1 &7432682510463228857
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3987259366508279857}
-  - component: {fileID: 7992009990967224905}
-  - component: {fileID: 5984505061630169925}
-  m_Layer: 8
-  m_Name: MaxRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3987259366508279857
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7432682510463228857}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3027720348572631497}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &7992009990967224905
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7432682510463228857}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 20
-  m_Height: 40
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5984505061630169925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7432682510463228857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Distance: {fileID: 7992009990967224905}
 --- !u!1 &7777620151274116799
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,6 +706,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4c32cdf8e35f80f4fab34b8ecb593431, type: 2}
+    - target: {fileID: 9500000, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'Body'\n\tTransform 'Body'\n\tTransform 'Body'\n\tFrom
+        animation clip 'FlyFWD'\n\tFrom animation clip 'Attack01'\n\tFrom animation
+        clip 'Attack02'\n\tFrom animation clip 'IdleBattle'\n\tFrom animation clip
+        'GetHit'\n\tFrom animation clip 'Die'"
+      objectReference: {fileID: 0}
     - target: {fileID: 13700002, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -785,16 +728,13 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 400028, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7940426389273587408}
-    - targetCorrespondingSourceObject: {fileID: 400028, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5605287167501064918}
     - targetCorrespondingSourceObject: {fileID: 400028, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3987259366508279857}
+      addedObject: {fileID: 4379711665847941298}
     - targetCorrespondingSourceObject: {fileID: 400028, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4379711665847941298}
+      addedObject: {fileID: 7940426389273587408}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100028, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
       insertIndex: 1
@@ -805,6 +745,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100028, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4876126149002843256}
+    - targetCorrespondingSourceObject: {fileID: 100028, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1816796936210615924}
   m_SourcePrefab: {fileID: 100100000, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
 --- !u!1 &3027720348572540393 stripped
 GameObject:
@@ -869,6 +812,40 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-1816796936210615924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3027720348572540393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d11cae4d2d89e34e8dcbb3fe4b9f95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Skeleton
+  Max_HP: 30
+  Cur_HP: 30
+  ATK1: 5
+  ATK2: 9
+  NumberOfSkills: 2
+  SkillCoolTime1: 4
+  SkillCoolTime2: 5
+  Defense: 0.2
+  Move_Speed: 3
+  ApproachRadius: 2
+  DetectionRadius: 100
+  attack1Radius: 3
+  attack2Radius: 4
+  invincibleTime: 0.5
+  spawner: {fileID: 0}
+  exclamationMark: {fileID: 7777620151274116799}
+  damageText: {fileID: 1467153160954579564}
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
 --- !u!4 &3027720348572631497 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400028, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}

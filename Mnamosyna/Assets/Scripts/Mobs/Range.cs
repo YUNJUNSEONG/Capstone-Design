@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Bat : Monster
+public class Range : BaseMonster
 {
     // 투사체 프리팹
     public GameObject projectilePrefab;
@@ -8,37 +10,30 @@ public class Bat : Monster
     // 투사체 발사 위치 오프셋
     public Vector3 projectileSpawnOffset = new Vector3(0, 1.0f, 0);
 
-
-    void Start()
+    protected override void Awake()
     {
-        Skill2CanUse = 0f; // 초기 스킬2의 쿨타임을 0으로 설정
+        base.Awake();
+        ResetCoolTime();
+    }
+
+    void ResetCoolTime()
+    {
+        Attack01CanUse = 0;
+        Attack02CanUse = 0;
     }
 
     protected override void Attack()
     {
-        // 쿨타임이 0이하인 공격 중 랜덤하게 출력
-        int skillIndex = random.Next(0, NumberOfSkills);
+
+        int skillIndex = random.Next(0, 2); // NumberOfSkills는 2로 설정
 
         switch (skillIndex)
         {
             case 0:  // 기본 공격
-                if (Skill1CanUse <= 0 && Vector3.Distance(transform.position, player.transform.position) <= attack1Radius)
-                {
-                    MonsterAttackStart();
-                    Skill1();
-                    Skill1CanUse = SkillCoolTime1;
-                }
-                else { anim.SetTrigger(BattleIdleHash); }
+                TryAttack(ref Attack01CanUse, attack1Radius, SkillCoolTime1, Attack1);
                 break;
-            case 1: // 원거리 공격
-                if (Skill2CanUse <= 0 && Vector3.Distance(transform.position, player.transform.position) <= attack2Radius)
-                {
-                    MonsterAttackStart();
-                    isSkill = true;
-                    Skill2();
-                    Skill2CanUse = SkillCoolTime2;
-                }
-                else { anim.SetTrigger(BattleIdleHash); }
+            case 1: // 스킬 공격
+                TryAttack(ref Attack02CanUse, attack2Radius, SkillCoolTime2, Attack2, true);
                 break;
         }
     }
@@ -46,7 +41,7 @@ public class Bat : Monster
     // 이 메서드는 애니메이션 이벤트에서 호출됩니다.
     public void FireProjectile()
     {
-        if (currentState == MonsterState.Die || player == null)
+        if (currentState == State.Die || player == null)
         {
             return;
         }

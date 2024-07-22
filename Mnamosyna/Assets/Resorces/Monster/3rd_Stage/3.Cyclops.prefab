@@ -285,76 +285,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 0}
---- !u!1 &4822332809836205461
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4937754234069334965}
-  - component: {fileID: 2728979422130876992}
-  - component: {fileID: 2913046189253755192}
-  m_Layer: 8
-  m_Name: MaxRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4937754234069334965
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4822332809836205461}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8112568394640951080}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2728979422130876992
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4822332809836205461}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 20
-  m_Height: 40
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2913046189253755192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4822332809836205461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Distance: {fileID: 2728979422130876992}
 --- !u!1 &6549418494436747635
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 2082402936269328962}
   Distance: {fileID: 1706360142289181493}
 --- !u!1 &7095315111456850345
 GameObject:
@@ -516,8 +446,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c466bac5fba56104f9939eec349952e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Monster: {fileID: 0}
+  monster: {fileID: 8925696123932433810}
+  Monster: {fileID: 2082402936269328962}
 --- !u!114 &32087488676180211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,7 +642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 2082402936269328962}
   player: {fileID: 0}
   attackDistance: {fileID: 7683078986804487942}
   skillDistance: {fileID: 3182745049206447682}
@@ -768,6 +698,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 3.Cyclops
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9fb4bf7ce492fd74bb5c05f4d177bf2a, type: 2}
     - target: {fileID: 8255456311475685578, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -777,16 +711,13 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6000099999193513785}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8693125686381644311}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4937754234069334965}
+      addedObject: {fileID: 5948008127934147118}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5948008127934147118}
+      addedObject: {fileID: 6000099999193513785}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
       insertIndex: -1
@@ -797,6 +728,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
       insertIndex: -1
       addedObject: {fileID: -5772631680530115695}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2082402936269328962}
   m_SourcePrefab: {fileID: 100100000, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
 --- !u!4 &8112568394640951080 stripped
 Transform:
@@ -866,3 +800,39 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2082402936269328962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8925696123932433810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d361bcc5e7b36c447b1954c1408ca51a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Cyclops
+  Max_HP: 50
+  Cur_HP: 50
+  ATK1: 9
+  ATK2: 9
+  NumberOfSkills: 2
+  SkillCoolTime1: 5
+  SkillCoolTime2: 5
+  Defense: 0.3
+  Move_Speed: 3
+  ApproachRadius: 2
+  DetectionRadius: 70
+  attack1Radius: 4
+  attack2Radius: 10
+  invincibleTime: 0.5
+  spawner: {fileID: 0}
+  exclamationMark: {fileID: 7726723456831927094}
+  damageText: {fileID: 1960942678382087384}
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
+  knockbackForce: 10
+  knockbackDuration: 0.5

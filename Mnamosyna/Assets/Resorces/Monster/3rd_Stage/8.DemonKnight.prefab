@@ -1,75 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3576006417122855871
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6838548404717373813}
-  - component: {fileID: 1142884368980560112}
-  - component: {fileID: 2724726429788798062}
-  m_Layer: 8
-  m_Name: MaxRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6838548404717373813
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3576006417122855871}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 512091862663179429}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1142884368980560112
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3576006417122855871}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 20
-  m_Height: 40
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2724726429788798062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3576006417122855871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Distance: {fileID: 1142884368980560112}
 --- !u!1 &4115973490995749166
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c466bac5fba56104f9939eec349952e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Monster: {fileID: 0}
+  monster: {fileID: 887350385463293471}
+  Monster: {fileID: 4121560039601681786}
 --- !u!114 &3679770653700904418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 4121560039601681786}
   Distance: {fileID: 4129628093816173396}
 --- !u!1 &5230735007248196987
 GameObject:
@@ -530,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 4121560039601681786}
   player: {fileID: 0}
   attackDistance: {fileID: 8125171973994548959}
   skillDistance: {fileID: 7461352435142581246}
@@ -776,21 +706,22 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 02169a29bc93499d91fdd5dd16ead51a, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 1a879ca13a1e4dfa95cc8b046f320609, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a2720117811fe15449f1ad4b997a8cde, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1a879ca13a1e4dfa95cc8b046f320609, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2570145842062740880}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1a879ca13a1e4dfa95cc8b046f320609, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 634473850850091768}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1a879ca13a1e4dfa95cc8b046f320609, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6838548404717373813}
+      addedObject: {fileID: 1913258661744483766}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1a879ca13a1e4dfa95cc8b046f320609, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1913258661744483766}
+      addedObject: {fileID: 2570145842062740880}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a879ca13a1e4dfa95cc8b046f320609, type: 3}
       insertIndex: -1
@@ -801,6 +732,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a879ca13a1e4dfa95cc8b046f320609, type: 3}
       insertIndex: -1
       addedObject: {fileID: -8099762296272615300}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a879ca13a1e4dfa95cc8b046f320609, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4121560039601681786}
   m_SourcePrefab: {fileID: 100100000, guid: 1a879ca13a1e4dfa95cc8b046f320609, type: 3}
 --- !u!4 &512091862663179429 stripped
 Transform:
@@ -870,3 +804,39 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4121560039601681786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887350385463293471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d361bcc5e7b36c447b1954c1408ca51a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: DemonKnight
+  Max_HP: 60
+  Cur_HP: 60
+  ATK1: 12
+  ATK2: 16
+  NumberOfSkills: 2
+  SkillCoolTime1: 6
+  SkillCoolTime2: 10
+  Defense: 0.3
+  Move_Speed: 1
+  ApproachRadius: 2
+  DetectionRadius: 50
+  attack1Radius: 3
+  attack2Radius: 5
+  invincibleTime: 0.5
+  spawner: {fileID: 0}
+  exclamationMark: {fileID: 8911436508508319121}
+  damageText: {fileID: 3415613797536855779}
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
+  knockbackForce: 10
+  knockbackDuration: 0.5

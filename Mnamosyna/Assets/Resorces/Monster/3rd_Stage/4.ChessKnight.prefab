@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c466bac5fba56104f9939eec349952e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Monster: {fileID: 0}
+  monster: {fileID: 1758849646164779094}
+  Monster: {fileID: 8999582243923791475}
 --- !u!114 &1738251677500167998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 8999582243923791475}
   player: {fileID: 0}
   attackDistance: {fileID: 103346749100752605}
   skillDistance: {fileID: 1374343661803520041}
@@ -555,78 +555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 8999582243923791475}
   Distance: {fileID: 7587743605196508616}
---- !u!1 &8346847640560639123
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1268812224237436031}
-  - component: {fileID: 323215278176556685}
-  - component: {fileID: 948362917882457426}
-  m_Layer: 8
-  m_Name: MaxRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1268812224237436031
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8346847640560639123}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1379052304464444140}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &323215278176556685
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8346847640560639123}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 20
-  m_Height: 40
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &948362917882457426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8346847640560639123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Distance: {fileID: 323215278176556685}
 --- !u!1 &8780605041942875668
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,21 +726,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: 4.ChessKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 48bcb49c2c474bdd96c4b10b0eca9986, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2b6177f750444c441816c3b09efb55d9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 48bcb49c2c474bdd96c4b10b0eca9986, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2990643644718228003}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 48bcb49c2c474bdd96c4b10b0eca9986, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7718834440300645604}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 48bcb49c2c474bdd96c4b10b0eca9986, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1268812224237436031}
+      addedObject: {fileID: 3303875939942232656}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 48bcb49c2c474bdd96c4b10b0eca9986, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3303875939942232656}
+      addedObject: {fileID: 2990643644718228003}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 48bcb49c2c474bdd96c4b10b0eca9986, type: 3}
       insertIndex: -1
@@ -821,6 +752,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 48bcb49c2c474bdd96c4b10b0eca9986, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2412584143840991840}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 48bcb49c2c474bdd96c4b10b0eca9986, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8999582243923791475}
   m_SourcePrefab: {fileID: 100100000, guid: 48bcb49c2c474bdd96c4b10b0eca9986, type: 3}
 --- !u!4 &1379052304464444140 stripped
 Transform:
@@ -890,3 +824,37 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8999582243923791475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758849646164779094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d11cae4d2d89e34e8dcbb3fe4b9f95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ChesskNight
+  Max_HP: 42
+  Cur_HP: 42
+  ATK1: 8
+  ATK2: 12
+  NumberOfSkills: 2
+  SkillCoolTime1: 4
+  SkillCoolTime2: 7
+  Defense: 0.3
+  Move_Speed: 3
+  ApproachRadius: 2
+  DetectionRadius: 100
+  attack1Radius: 3
+  attack2Radius: 4
+  invincibleTime: 0.5
+  spawner: {fileID: 0}
+  exclamationMark: {fileID: 4118166913370129499}
+  damageText: {fileID: 856753348402696571}
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0

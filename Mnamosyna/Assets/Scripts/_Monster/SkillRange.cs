@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SkillRange : MonoBehaviour
 {
-    public Monster monster;
+    public BaseMonster monster;
     public Player player;
     public CapsuleCollider attackDistance;
     public CapsuleCollider skillDistance;
@@ -13,7 +13,7 @@ public class SkillRange : MonoBehaviour
     {
         if (other.CompareTag("Player")) // 충돌한 객체가 플레이어인지 확인
         {
-            monster.ChangeState(Monster.MonsterState.Attack);
+            monster.ChangeState(BaseMonster.State.Attack);
         }
     }
 
@@ -21,7 +21,7 @@ public class SkillRange : MonoBehaviour
     {
         if (other.CompareTag("Player")) // 충돌한 객체가 플레이어인지 확인
         {
-            monster.ChangeState(Monster.MonsterState.Chase);
+            monster.ChangeState(BaseMonster.State.Chase);
         }
     }
 

@@ -1,75 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1432313716450927315
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4166642531569729341}
-  - component: {fileID: 1658798007475994486}
-  - component: {fileID: 7772434623142846669}
-  m_Layer: 8
-  m_Name: MaxRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4166642531569729341
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432313716450927315}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5787717462349655519}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1658798007475994486
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432313716450927315}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 20
-  m_Height: 40
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7772434623142846669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432313716450927315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Distance: {fileID: 1658798007475994486}
 --- !u!1 &3858926328816427119
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,8 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c466bac5fba56104f9939eec349952e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Monster: {fileID: 0}
+  monster: {fileID: 5787717462349492735}
+  Monster: {fileID: 6726177441195175495}
 --- !u!114 &7251634324652904464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 6726177441195175495}
   Distance: {fileID: 1610999695187680080}
 --- !u!1 &7252750824645183788
 GameObject:
@@ -712,7 +642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 6726177441195175495}
   player: {fileID: 0}
   attackDistance: {fileID: 6525828498832644298}
   skillDistance: {fileID: 7595626171396057154}
@@ -776,6 +706,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 02169a29bc93499d91fdd5dd16ead51a, type: 2}
+    - target: {fileID: 9500000, guid: 39cf14e07d0a4d9283249bf44919acef, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d1bce336707d28a409049e7a4da7fa9e, type: 2}
     - target: {fileID: 13700000, guid: 39cf14e07d0a4d9283249bf44919acef, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -785,16 +719,13 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 400004, guid: 39cf14e07d0a4d9283249bf44919acef, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8769650499626980980}
-    - targetCorrespondingSourceObject: {fileID: 400004, guid: 39cf14e07d0a4d9283249bf44919acef, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2729563868913085469}
     - targetCorrespondingSourceObject: {fileID: 400004, guid: 39cf14e07d0a4d9283249bf44919acef, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4166642531569729341}
+      addedObject: {fileID: 3680340463010240334}
     - targetCorrespondingSourceObject: {fileID: 400004, guid: 39cf14e07d0a4d9283249bf44919acef, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3680340463010240334}
+      addedObject: {fileID: 8769650499626980980}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100004, guid: 39cf14e07d0a4d9283249bf44919acef, type: 3}
       insertIndex: -1
@@ -805,6 +736,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100004, guid: 39cf14e07d0a4d9283249bf44919acef, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8912409397466974510}
+    - targetCorrespondingSourceObject: {fileID: 100004, guid: 39cf14e07d0a4d9283249bf44919acef, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6726177441195175495}
   m_SourcePrefab: {fileID: 100100000, guid: 39cf14e07d0a4d9283249bf44919acef, type: 3}
 --- !u!1 &5787717462349492735 stripped
 GameObject:
@@ -869,6 +803,40 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6726177441195175495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5787717462349492735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d11cae4d2d89e34e8dcbb3fe4b9f95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: BlackKnight
+  Max_HP: 45
+  Cur_HP: 45
+  ATK1: 10
+  ATK2: 13
+  NumberOfSkills: 2
+  SkillCoolTime1: 4
+  SkillCoolTime2: 8
+  Defense: 0.4
+  Move_Speed: 3
+  ApproachRadius: 2
+  DetectionRadius: 100
+  attack1Radius: 3
+  attack2Radius: 4
+  invincibleTime: 0.5
+  spawner: {fileID: 0}
+  exclamationMark: {fileID: 8547278809609698328}
+  damageText: {fileID: 7215463226993796133}
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
 --- !u!4 &5787717462349655519 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400004, guid: 39cf14e07d0a4d9283249bf44919acef, type: 3}

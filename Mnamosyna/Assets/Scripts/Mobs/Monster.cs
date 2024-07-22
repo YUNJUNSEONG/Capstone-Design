@@ -21,9 +21,10 @@ public class Monster : MobStat
     public Spawner spawner;
     public delegate void DeathHandler();
     public event DeathHandler OnDeath;
-    public GameObject exclamationMark;
 
+    public GameObject exclamationMark;
     public Text damageText;
+
     private Vector3 originalPosition;
     private Color originalColor;
 
@@ -71,7 +72,7 @@ public class Monster : MobStat
         player = GameObject.FindWithTag("Player");
         rigid = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
-        nav.stoppingDistance = distance;
+        nav.stoppingDistance = approach;
         random = new System.Random();
         exclamationMark.SetActive(false);
         anim = GetComponent<Animator>();
@@ -98,11 +99,11 @@ public class Monster : MobStat
 
         if (switchTime <= 0)
         {
-            Vector3 randomDirection = Random.insideUnitSphere * patrolRadius;
+            Vector3 randomDirection = Random.insideUnitSphere * 1;
             randomDirection += transform.position;
             NavMeshHit hit;
 
-            if (NavMesh.SamplePosition(randomDirection, out hit, patrolRadius, 1))
+            if (NavMesh.SamplePosition(randomDirection, out hit, 1, 1))
             {
                 Vector3 finalPosition = hit.position;
                 nav.SetDestination(finalPosition);
@@ -207,10 +208,10 @@ public class Monster : MobStat
         switch (skillIndex)
         {
             case 0: // 기본 공격
-                damage = ATK;
+                damage = ATK1;
                 break;
             case 1: // 스킬 공격1
-                damage = Skill_ATK1;
+                damage = ATK2;
                 break;
             default:
                 // 지정되지 않은 스킬이면 damage 0

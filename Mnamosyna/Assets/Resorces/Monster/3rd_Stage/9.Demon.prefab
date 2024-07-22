@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: -4399512362265403798}
   Distance: {fileID: 1232812783043812640}
 --- !u!1 &3910308453480080131
 GameObject:
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: -4399512362265403798}
   player: {fileID: 0}
   attackDistance: {fileID: 2261646499916168960}
   skillDistance: {fileID: 5730241087324391839}
@@ -542,8 +542,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c466bac5fba56104f9939eec349952e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Monster: {fileID: 0}
+  monster: {fileID: 3632179310906476392}
+  Monster: {fileID: -4399512362265403798}
 --- !u!114 &6615240777775467246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,76 +557,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 0}
---- !u!1 &8545792093963817607
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4459613381596383056}
-  - component: {fileID: 2705766780430939281}
-  - component: {fileID: 3473694170881163296}
-  m_Layer: 8
-  m_Name: MaxRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4459613381596383056
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8545792093963817607}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3632179310906645320}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2705766780430939281
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8545792093963817607}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 20
-  m_Height: 40
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3473694170881163296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8545792093963817607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Distance: {fileID: 2705766780430939281}
 --- !u!1 &8553053102366279203
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,6 +698,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 30c53d8a150e4a59ab0ae0adfae3b04b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3bc44bdc4de8a0c4ab4e7712dcab0efd, type: 2}
     - target: {fileID: 13700000, guid: 30c53d8a150e4a59ab0ae0adfae3b04b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -777,16 +711,13 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 400012, guid: 30c53d8a150e4a59ab0ae0adfae3b04b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7866906672422911425}
-    - targetCorrespondingSourceObject: {fileID: 400012, guid: 30c53d8a150e4a59ab0ae0adfae3b04b, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 9059966814938239935}
     - targetCorrespondingSourceObject: {fileID: 400012, guid: 30c53d8a150e4a59ab0ae0adfae3b04b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4459613381596383056}
+      addedObject: {fileID: 425517161967782669}
     - targetCorrespondingSourceObject: {fileID: 400012, guid: 30c53d8a150e4a59ab0ae0adfae3b04b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 425517161967782669}
+      addedObject: {fileID: 7866906672422911425}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100012, guid: 30c53d8a150e4a59ab0ae0adfae3b04b, type: 3}
       insertIndex: -1
@@ -797,6 +728,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100012, guid: 30c53d8a150e4a59ab0ae0adfae3b04b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2177737859295970336}
+    - targetCorrespondingSourceObject: {fileID: 100012, guid: 30c53d8a150e4a59ab0ae0adfae3b04b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4399512362265403798}
   m_SourcePrefab: {fileID: 100100000, guid: 30c53d8a150e4a59ab0ae0adfae3b04b, type: 3}
 --- !u!1 &3632179310906476392 stripped
 GameObject:
@@ -861,6 +795,42 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-4399512362265403798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3632179310906476392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d361bcc5e7b36c447b1954c1408ca51a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Demon
+  Max_HP: 50
+  Cur_HP: 50
+  ATK1: 11
+  ATK2: 17
+  NumberOfSkills: 2
+  SkillCoolTime1: 5
+  SkillCoolTime2: 8
+  Defense: 0.2
+  Move_Speed: 2
+  ApproachRadius: 8
+  DetectionRadius: 70
+  attack1Radius: 8
+  attack2Radius: 3
+  invincibleTime: 0.5
+  spawner: {fileID: 0}
+  exclamationMark: {fileID: 1902603608258910859}
+  damageText: {fileID: 441810474098389655}
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
+  knockbackForce: 10
+  knockbackDuration: 0.5
 --- !u!4 &3632179310906645320 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400012, guid: 30c53d8a150e4a59ab0ae0adfae3b04b, type: 3}

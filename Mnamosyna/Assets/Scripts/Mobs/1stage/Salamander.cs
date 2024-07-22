@@ -89,7 +89,7 @@ public class Salamander : Monster
 
             // 투사체의 Projectile 컴포넌트 설정
             Projectile projectileComponent = projectile.GetComponent<Projectile>();
-            projectileComponent.damage = Skill_ATK1; // 몬스터의 공격력을 투사체 데미지로 설정
+            projectileComponent.damage = ATK2; // 몬스터의 공격력을 투사체 데미지로 설정
 
             // 지정된 간격 동안 대기 후 다음 투사체 발사
             yield return new WaitForSeconds(projectileSpawnInterval);

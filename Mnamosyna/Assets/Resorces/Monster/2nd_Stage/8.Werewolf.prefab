@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 1847535404052880891}
+  monster: {fileID: 2651392041537260463}
   player: {fileID: 0}
   attackDistance: {fileID: 7039139042423310774}
   skillDistance: {fileID: 6245317190170777817}
@@ -267,78 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 1847535404052880891}
+  monster: {fileID: 2651392041537260463}
   Distance: {fileID: 7636184302328444315}
---- !u!1 &4564953544194674717
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3701039995446595980}
-  - component: {fileID: 2628566719898797483}
-  - component: {fileID: 1230449772856085459}
-  m_Layer: 8
-  m_Name: MaxRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3701039995446595980
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4564953544194674717}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4916193338330345841}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2628566719898797483
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4564953544194674717}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 20
-  m_Height: 40
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1230449772856085459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4564953544194674717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 1847535404052880891}
-  Distance: {fileID: 2628566719898797483}
 --- !u!1 &5298506602436227825
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 4916193338330574161}
-  Monster: {fileID: 1847535404052880891}
+  Monster: {fileID: 2651392041537260463}
 --- !u!114 &5498905173483692637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,7 +656,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100148, guid: 69fa901acc50489d8c17af8c19ba32ae, type: 3}
       propertyPath: m_Name
-      value: Werewolf
+      value: 8.Werewolf
       objectReference: {fileID: 0}
     - target: {fileID: 400148, guid: 69fa901acc50489d8c17af8c19ba32ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -768,6 +698,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 69fa901acc50489d8c17af8c19ba32ae, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d6f927ade488d0048971b7f09b90d5dc, type: 2}
     - target: {fileID: 13700000, guid: 69fa901acc50489d8c17af8c19ba32ae, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -777,16 +711,13 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 400148, guid: 69fa901acc50489d8c17af8c19ba32ae, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1164373055148423788}
-    - targetCorrespondingSourceObject: {fileID: 400148, guid: 69fa901acc50489d8c17af8c19ba32ae, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8080415111597257822}
     - targetCorrespondingSourceObject: {fileID: 400148, guid: 69fa901acc50489d8c17af8c19ba32ae, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3701039995446595980}
+      addedObject: {fileID: 5098721837370192600}
     - targetCorrespondingSourceObject: {fileID: 400148, guid: 69fa901acc50489d8c17af8c19ba32ae, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5098721837370192600}
+      addedObject: {fileID: 1164373055148423788}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100148, guid: 69fa901acc50489d8c17af8c19ba32ae, type: 3}
       insertIndex: 1
@@ -799,7 +730,7 @@ PrefabInstance:
       addedObject: {fileID: -1738500662530074264}
     - targetCorrespondingSourceObject: {fileID: 100148, guid: 69fa901acc50489d8c17af8c19ba32ae, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1847535404052880891}
+      addedObject: {fileID: 2651392041537260463}
   m_SourcePrefab: {fileID: 100100000, guid: 69fa901acc50489d8c17af8c19ba32ae, type: 3}
 --- !u!4 &4916193338330345841 stripped
 Transform:
@@ -869,7 +800,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1847535404052880891
+--- !u!114 &2651392041537260463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -878,31 +809,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 4916193338330574161}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a34d7dfc1db403e4db3299d15ace3c1e, type: 3}
+  m_Script: {fileID: 11500000, guid: 68cbced9a4e9aab479227120b14887dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Werewolf
   Max_HP: 35
   Cur_HP: 35
-  ATK: 8
-  Skill_ATK1: 13
-  Skill_ATK2: 0
+  ATK1: 8
+  ATK2: 13
   NumberOfSkills: 2
   SkillCoolTime1: 4
   SkillCoolTime2: 8
-  SkillCoolTime3: 0
   Defense: 0.2
   Move_Speed: 5
-  Distance: 0
-  patrolRadius: 200
-  attack1Radius: 1.5
-  attack2Radius: 3
-  attack3Radius: 0
-  invincibleTime: 1
+  ApproachRadius: 2
+  DetectionRadius: 100
+  attack1Radius: 3.5
+  attack2Radius: 5
+  invincibleTime: 0.5
   spawner: {fileID: 0}
   exclamationMark: {fileID: 5734992240162029622}
   damageText: {fileID: 5793810929840357617}
-  firstAttackAnimationLength: 0
-  secondAttackAnimationLength: 0
-  isAttack: 0
-  isSkill: 0
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
+  knockbackForce: 5
+  knockbackDuration: 0.3
+  chargeDuration: 1
+  chargeSpeed: 10
+  chargeDistance: 10

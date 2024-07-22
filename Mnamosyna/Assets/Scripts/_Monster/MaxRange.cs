@@ -25,6 +25,6 @@ public class MaxRange : MonoBehaviour
 
     void SetMaxDistance()
     {
-        Distance.radius = monster.patrol_radius;
+        //Distance.radius = monster.patrol_radius;
     }
 }

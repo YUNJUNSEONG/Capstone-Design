@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class MonsterHPBar : MonoBehaviour
 {
     public GameObject monster;
-    public Monster Monster;
+    public BaseMonster Monster;
     private Image hpImage;  
 
     void Start()
     {
-        Monster = GetComponentInParent<Monster>();
+        Monster = GetComponentInParent<BaseMonster>();
         GameObject hpBarObject = GameObject.Find("HPbar"); 
         hpImage = GetComponent<Image>();
         

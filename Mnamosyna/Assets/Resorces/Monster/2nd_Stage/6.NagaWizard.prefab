@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 3275837660620154890}
+  monster: {fileID: 0}
   Distance: {fileID: 8755675221077020489}
 --- !u!1 &1006567692424951629
 GameObject:
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 3275837660620154890}
+  monster: {fileID: 0}
   player: {fileID: 0}
   attackDistance: {fileID: 3382229052792388154}
   skillDistance: {fileID: 2089259032640729864}
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 8078372049599088310}
-  Monster: {fileID: 3275837660620154890}
+  Monster: {fileID: 0}
 --- !u!114 &788587688218015222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,7 +714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 3275837660620154890}
+  monster: {fileID: 0}
   Distance: {fileID: 6523684517476182118}
 --- !u!1001 &8997432576952073191
 PrefabInstance:
@@ -766,12 +766,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3226a35df0214be2839875ed86c1ba96, type: 3}
       propertyPath: m_Name
-      value: NagaWizard
+      value: 6.NagaWizard
       objectReference: {fileID: 0}
     - target: {fileID: 3347011734577935979, guid: 3226a35df0214be2839875ed86c1ba96, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 02169a29bc93499d91fdd5dd16ead51a, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 3226a35df0214be2839875ed86c1ba96, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 60ead4e35f29e354ca6c0b4456b31304, type: 2}
     - target: {fileID: 6396213246248927997, guid: 3226a35df0214be2839875ed86c1ba96, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -803,7 +807,7 @@ PrefabInstance:
       addedObject: {fileID: 2303720174070127547}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3226a35df0214be2839875ed86c1ba96, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3275837660620154890}
+      addedObject: {fileID: -326328072612850798}
   m_SourcePrefab: {fileID: 100100000, guid: 3226a35df0214be2839875ed86c1ba96, type: 3}
 --- !u!1 &8078372049599088310 stripped
 GameObject:
@@ -868,7 +872,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3275837660620154890
+--- !u!114 &-326328072612850798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -877,34 +881,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 8078372049599088310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0299977dbf5b75489c79d0e6793bc87, type: 3}
+  m_Script: {fileID: 11500000, guid: 160f8e961b6919a4a9a090da890e7444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: NagaWizard
-  Max_HP: 25
-  Cur_HP: 25
-  ATK: 8
-  Skill_ATK1: 6
-  Skill_ATK2: 0
-  NumberOfSkills: 2
-  SkillCoolTime1: 5
-  SkillCoolTime2: 6
-  SkillCoolTime3: 0
-  Defense: 0.2
-  Move_Speed: 3
-  Distance: 0
-  patrolRadius: 200
-  attack1Radius: 1.2
-  attack2Radius: 10
-  attack3Radius: 0
-  invincibleTime: 1
+  Name: 
+  Max_HP: 0
+  Cur_HP: 0
+  ATK1: 0
+  ATK2: 0
+  NumberOfSkills: 0
+  SkillCoolTime1: 0
+  SkillCoolTime2: 0
+  Defense: 0
+  Move_Speed: 0
+  ApproachRadius: 0
+  DetectionRadius: 0
+  attack1Radius: 0
+  attack2Radius: 0
+  invincibleTime: 0.5
   spawner: {fileID: 0}
-  exclamationMark: {fileID: 1806068740138594206}
-  damageText: {fileID: 6379587327936598750}
-  firstAttackAnimationLength: 0
-  secondAttackAnimationLength: 0
-  isAttack: 0
-  isSkill: 0
+  exclamationMark: {fileID: 0}
+  damageText: {fileID: 0}
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
   projectilePrefab: {fileID: 0}
   projectileSpawnOffset: {x: 0, y: 1, z: 0}
 --- !u!4 &8887840942694603788 stripped

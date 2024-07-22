@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6454794307135569970
 RectTransform:
   m_ObjectHideFlags: 0
@@ -373,80 +373,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: -8050870198032847233}
+  monster: {fileID: 7377514970728851562}
   player: {fileID: 0}
   attackDistance: {fileID: 1625988612716617550}
   skillDistance: {fileID: 4298218293291890285}
---- !u!1 &4401352197836989758
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 729679812502967670}
-  - component: {fileID: 8141116427767106037}
-  - component: {fileID: 8696590701139996079}
-  m_Layer: 8
-  m_Name: MaxRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &729679812502967670
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4401352197836989758}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4496515188298222911}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &8141116427767106037
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4401352197836989758}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 20
-  m_Height: 40
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8696590701139996079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4401352197836989758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: -8050870198032847233}
-  Distance: {fileID: 8141116427767106037}
 --- !u!1 &5173021686973224505
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,7 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 3831723332900378501}
-  Monster: {fileID: -8050870198032847233}
+  Monster: {fileID: 7377514970728851562}
 --- !u!114 &1349904607763830683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,7 +644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: -8050870198032847233}
+  monster: {fileID: 7377514970728851562}
   Distance: {fileID: 1840786973547852658}
 --- !u!1001 &4173831626118621908
 PrefabInstance:
@@ -766,8 +696,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d5ed1021017f42af99ba1b39e3d99341, type: 3}
       propertyPath: m_Name
-      value: Hornet
+      value: 0.Hornet
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: d5ed1021017f42af99ba1b39e3d99341, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 08ddab08d5c157148b1e6b4532e222c0, type: 2}
     - target: {fileID: 7092516055279176667, guid: d5ed1021017f42af99ba1b39e3d99341, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -777,16 +711,13 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: d5ed1021017f42af99ba1b39e3d99341, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4662716234280812522}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: d5ed1021017f42af99ba1b39e3d99341, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4996732960974206596}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: d5ed1021017f42af99ba1b39e3d99341, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 729679812502967670}
+      addedObject: {fileID: 6102685691101400948}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: d5ed1021017f42af99ba1b39e3d99341, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6102685691101400948}
+      addedObject: {fileID: 4662716234280812522}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d5ed1021017f42af99ba1b39e3d99341, type: 3}
       insertIndex: 1
@@ -799,7 +730,7 @@ PrefabInstance:
       addedObject: {fileID: 7797078062777932422}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d5ed1021017f42af99ba1b39e3d99341, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -8050870198032847233}
+      addedObject: {fileID: 7377514970728851562}
   m_SourcePrefab: {fileID: 100100000, guid: d5ed1021017f42af99ba1b39e3d99341, type: 3}
 --- !u!1 &3831723332900378501 stripped
 GameObject:
@@ -864,7 +795,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-8050870198032847233
+--- !u!114 &7377514970728851562
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -873,34 +804,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 3831723332900378501}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a34d7dfc1db403e4db3299d15ace3c1e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d11cae4d2d89e34e8dcbb3fe4b9f95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Hornet
   Max_HP: 20
   Cur_HP: 20
-  ATK: 3
-  Skill_ATK1: 5
-  Skill_ATK2: 0
+  ATK1: 3
+  ATK2: 5
   NumberOfSkills: 2
   SkillCoolTime1: 2
   SkillCoolTime2: 4
-  SkillCoolTime3: 0
   Defense: 0
   Move_Speed: 3
-  Distance: 0
-  patrolRadius: 200
-  attack1Radius: 1.2
-  attack2Radius: 2
-  attack3Radius: 0
-  invincibleTime: 1
+  ApproachRadius: 2
+  DetectionRadius: 100
+  attack1Radius: 3
+  attack2Radius: 5
+  invincibleTime: 0.5
   spawner: {fileID: 0}
   exclamationMark: {fileID: 2779147607398718246}
   damageText: {fileID: 2735995876976320081}
-  firstAttackAnimationLength: 0
-  secondAttackAnimationLength: 0
-  isAttack: 0
-  isSkill: 0
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
 --- !u!4 &4496515188298222911 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d5ed1021017f42af99ba1b39e3d99341, type: 3}

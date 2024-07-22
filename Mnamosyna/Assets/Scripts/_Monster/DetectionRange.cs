@@ -19,7 +19,7 @@ public class DetectionRange : MonoBehaviour
 
 public class DetectionRange : MonoBehaviour
 {
-    public Monster monster; 
+    public BaseMonster monster; 
     public CapsuleCollider Distance;
 
     void OnTriggerEnter(Collider other)
@@ -27,7 +27,7 @@ public class DetectionRange : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             //Debug.Log("플레이어가 범위 안에 들어옴");
-            monster.ChangeState(Monster.MonsterState.Chase);
+            monster.ChangeState(BaseMonster.State.Chase);
         }
     }
 
@@ -39,6 +39,6 @@ public class DetectionRange : MonoBehaviour
 
     void SetDetectionDistance()
     {
-        Distance.radius = monster.patrol_radius;
+        Distance.radius = monster.detection;
     }
 }
