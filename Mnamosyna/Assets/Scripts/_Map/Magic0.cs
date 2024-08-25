@@ -73,6 +73,30 @@ public class Magic0 : MonoBehaviour
         if (this.name == "Magic2-5to6_3") {collision.transform.position = new Vector3(-344.75f, 4.7f, 82.66f);} //5->6-3
         
         if (this.name == "Magic2-6toB") {collision.transform.position = new Vector3(-201.89f, 4.7f, 190.98f);} //6->Boss
+        
+        //3스테이지 포탈 좌표
+        if (this.name == "Magic3-0to1") {collision.transform.position = new Vector3(16.77f, 1.2f, 65.24f);} //0->1
+        
+        if (this.name == "Magic3-1to2_1") {collision.transform.position = new Vector3(-44.42f, 1.2f, -9.28f);} //1->2-1
+        if (this.name == "Magic3-1to2_2") {collision.transform.position = new Vector3(-42.25f, 1.2f, 70.85f);} //1->2-2
+        
+        if (this.name == "Magic3-2to3_1") {collision.transform.position = new Vector3(-108.156f, 1.2f, -25.323f);} //2->3-1
+        if (this.name == "Magic3-2to3_2") {collision.transform.position = new Vector3(-105.42f, 1.2f, 41.15f);} //2->3-2
+        if (this.name == "Magic3-2to3_3") {collision.transform.position = new Vector3(-110.631f, 1.2f, 96.528f);} //2->3-1
+        
+        if (this.name == "Magic3-3toH") {collision.transform.position = new Vector3(-0.054f, 1.2f, 169.969f);} //3->Heal
+        
+        if (this.name == "Magic3-Hto4") {collision.transform.position = new Vector3(18.899f, 1.2f, 232.56f);} //H->4
+        
+        if (this.name == "Magic3-4to5_1") {collision.transform.position = new Vector3(-40.52f, 1.2f, 202.12f);} //4->5-1
+        if (this.name == "Magic3-4to5_2") {collision.transform.position = new Vector3(-46.018f, 1.2f, 286.514f);} //4->5-2
+        
+        if (this.name == "Magic3-5to6_1") {collision.transform.position = new Vector3(-110.159f, 1.2f, 173.915f);} //5->6-1
+        if (this.name == "Magic3-5to6_2") {collision.transform.position = new Vector3(-105.758f, 1.2f, 236.559f);} //5->6-2
+        if (this.name == "Magic3-5to6_3") {collision.transform.position = new Vector3(-108.121f, 1.2f, 294.936f);} //5->6-1
+        
+        if (this.name == "Magic3-6toB") {collision.transform.position = new Vector3(-196.52f, 1.2f, 127.51f);} //6->B
+        
 
         MonsterSpawnEffect monsterSpawnEffect = collision.gameObject.GetComponent<MonsterSpawnEffect>();
         if (monsterSpawnEffect != null) {monsterSpawnEffect.StartSpawnEffect();}
