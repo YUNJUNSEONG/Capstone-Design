@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2000656756579322060}
   - component: {fileID: 8937316031036374512}
   - component: {fileID: 3488627064594274191}
-  - component: {fileID: 5930749210732061838}
   - component: {fileID: 4408847764057461484}
+  - component: {fileID: 5930749210732061838}
   m_Layer: 8
   m_Name: Slime
   m_TagString: Monster
@@ -95,44 +95,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5930749210732061838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 154257601896337909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a651cc940d7898e46889f20c84e3ed51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: slime
-  Max_HP: 20
-  Cur_HP: 20
-  ATK: 5
-  Skill_ATK1: 7
-  Skill_ATK2: 0
-  NumberOfSkills: 2
-  SkillCoolTime1: 3
-  SkillCoolTime2: 7
-  SkillCoolTime3: 0
-  Defense: 0
-  Move_Speed: 3
-  Distance: 0
-  patrolRadius: 200
-  attack1Radius: 1.2
-  attack2Radius: 2
-  attack3Radius: 0
-  invincibleTime: 1
-  spawner: {fileID: 0}
-  exclamationMark: {fileID: 1508338185881107144}
-  damageText: {fileID: 8385838388816418732}
-  firstAttackAnimationLength: 0.8333333
-  secondAttackAnimationLength: 1.3333334
-  isAttack: 0
-  isSkill: 0
-  babySlime: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
 --- !u!135 &4408847764057461484
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -154,6 +116,41 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0.39, z: 0}
+--- !u!114 &5930749210732061838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154257601896337909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a651cc940d7898e46889f20c84e3ed51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: slime
+  Max_HP: 20
+  Cur_HP: 20
+  ATK1: 0
+  ATK2: 0
+  NumberOfSkills: 2
+  SkillCoolTime1: 3
+  SkillCoolTime2: 7
+  Defense: 0
+  Move_Speed: 3
+  ApproachRadius: 0
+  DetectionRadius: 0
+  attack1Radius: 1.2
+  attack2Radius: 2
+  invincibleTime: 1
+  spawner: {fileID: 0}
+  exclamationMark: {fileID: 1508338185881107144}
+  damageText: {fileID: 8385838388816418732}
+  firstAttackAnimationLength: 0.8333333
+  secondAttackAnimationLength: 1.3333334
+  isAttack: 0
+  isSkill: 0
+  babySlime: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
 --- !u!1 &1508338185881107144
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 5930749210732061838}
+  monster: {fileID: 0}
   Distance: {fileID: 5240668465668112923}
 --- !u!1 &2485894447446984730
 GameObject:
@@ -671,7 +668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 154257601896337909}
-  Monster: {fileID: 5930749210732061838}
+  Monster: {fileID: 0}
 --- !u!114 &3850092867964856760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,7 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 5930749210732061838}
+  monster: {fileID: 0}
   player: {fileID: 0}
   attackDistance: {fileID: 7132137756352699119}
   skillDistance: {fileID: 1131337606943071069}

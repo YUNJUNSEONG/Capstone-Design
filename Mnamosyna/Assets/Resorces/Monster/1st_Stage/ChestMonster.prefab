@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 8461617736356750194}
   - component: {fileID: 1413485841263608427}
   - component: {fileID: 3411835885524163523}
-  - component: {fileID: 107908662603297239}
+  - component: {fileID: 7376655802187016392}
   m_Layer: 8
   m_Name: ChestMonster
   m_TagString: Monster
@@ -387,7 +387,7 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.75, z: 0.24}
---- !u!114 &107908662603297239
+--- !u!114 &7376655802187016392
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -396,34 +396,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 2942183099666616633}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a34d7dfc1db403e4db3299d15ace3c1e, type: 3}
+  m_Script: {fileID: 11500000, guid: d361bcc5e7b36c447b1954c1408ca51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Mimic
+  Name: mimic
   Max_HP: 40
   Cur_HP: 40
-  ATK: 8
-  Skill_ATK1: 15
-  Skill_ATK2: 0
+  ATK1: 8
+  ATK2: 12
   NumberOfSkills: 2
   SkillCoolTime1: 5
   SkillCoolTime2: 8
-  SkillCoolTime3: 0
-  Defense: 0.2
-  Move_Speed: 2
-  Distance: 0
-  patrolRadius: 200
-  attack1Radius: 1.2
-  attack2Radius: 2
-  attack3Radius: 0
-  invincibleTime: 1
+  Defense: 0.1
+  Move_Speed: 1
+  ApproachRadius: 2
+  DetectionRadius: 100
+  attack1Radius: 3
+  attack2Radius: 4
+  invincibleTime: 0.5
   spawner: {fileID: 0}
   exclamationMark: {fileID: 1317033892894586279}
   damageText: {fileID: 3544593777632252804}
-  firstAttackAnimationLength: 0.73333335
-  secondAttackAnimationLength: 0.73333335
-  isAttack: 0
-  isSkill: 0
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
+  knockbackForce: 10
+  knockbackDuration: 0.5
 --- !u!1 &6490341142810646243
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 107908662603297239}
+  monster: {fileID: 0}
   player: {fileID: 0}
   attackDistance: {fileID: 7483196609024263805}
   skillDistance: {fileID: 3407104687029314617}
@@ -588,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 107908662603297239}
+  monster: {fileID: 0}
   Distance: {fileID: 8776180140896894354}
 --- !u!1 &7828686562257015740
 GameObject:
@@ -679,7 +678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 2942183099666616633}
-  Monster: {fileID: 107908662603297239}
+  Monster: {fileID: 0}
 --- !u!1 &8294281529625999520
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 2942183099666616633}
-  Monster: {fileID: 107908662603297239}
+  Monster: {fileID: 0}
 --- !u!114 &2190771380282692788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,7 +853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 107908662603297239}
+  monster: {fileID: 0}
   Distance: {fileID: 7109387495368838035}
 --- !u!1001 &2529288333518280604
 PrefabInstance:

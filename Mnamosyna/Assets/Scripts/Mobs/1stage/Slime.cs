@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime : Monster
+public class Slime : BaseMonster
 {
 
     public GameObject babySlime;
@@ -13,10 +13,13 @@ public class Slime : Monster
         if (isDead) return;
 
         isDead = true;
-        ChangeState(MonsterState.Die);
-        anim.SetTrigger(DieHash);
         nav.isStopped = true;
+        gameObject.layer = 11;
+        ChangeState(State.Die);
+        anim.SetTrigger(DieHash);
         anim.SetBool(RunHash, false);
+
+        nav.isStopped = true;
         //Knockback();
         Invoke("Spawn", 1.0f);
         Invoke("DestroyObject", 2.0f);

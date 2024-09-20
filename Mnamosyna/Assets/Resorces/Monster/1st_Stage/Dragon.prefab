@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 3364604686415033763}
-  Monster: {fileID: 5669242819679293841}
+  Monster: {fileID: 0}
 --- !u!114 &5381493643260073179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 3364604686415033763}
-  Monster: {fileID: 5669242819679293841}
+  Monster: {fileID: 0}
 --- !u!1 &2071264502599084310
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,7 +788,7 @@ GameObject:
   - component: {fileID: 8658146748006651090}
   - component: {fileID: 7001373236740677919}
   - component: {fileID: 7871616494739869662}
-  - component: {fileID: 5669242819679293841}
+  - component: {fileID: 1523194892205722113}
   m_Layer: 8
   m_Name: Dragon
   m_TagString: Monster
@@ -881,7 +881,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5669242819679293841
+--- !u!114 &1523194892205722113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -890,34 +890,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 3364604686415033763}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0299977dbf5b75489c79d0e6793bc87, type: 3}
+  m_Script: {fileID: 11500000, guid: 160f8e961b6919a4a9a090da890e7444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: BabyDragon
-  Max_HP: 25
-  Cur_HP: 25
-  ATK: 7
-  Skill_ATK1: 10
-  Skill_ATK2: 0
+  Name: Dragon
+  Max_HP: 22
+  Cur_HP: 22
+  ATK1: 7
+  ATK2: 10
   NumberOfSkills: 2
   SkillCoolTime1: 4
   SkillCoolTime2: 7
-  SkillCoolTime3: 0
   Defense: 0
   Move_Speed: 3
-  Distance: 0
-  patrolRadius: 200
-  attack1Radius: 1.2
-  attack2Radius: 10
-  attack3Radius: 0
-  invincibleTime: 1
+  ApproachRadius: 8
+  DetectionRadius: 100
+  attack1Radius: 3
+  attack2Radius: 8
+  invincibleTime: 0.5
   spawner: {fileID: 0}
   exclamationMark: {fileID: 8191677678517295172}
   damageText: {fileID: 7821745980870069796}
-  firstAttackAnimationLength: 0
-  secondAttackAnimationLength: 0
-  isAttack: 0
-  isSkill: 0
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
   projectilePrefab: {fileID: 3685667109570152068, guid: cfd801759a04eba438b23336dd5a0691, type: 3}
   projectileSpawnOffset: {x: 0, y: 1, z: 0}
 --- !u!1 &3589559439741644511
@@ -1786,7 +1783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 5669242819679293841}
+  monster: {fileID: 0}
   Distance: {fileID: 6195787985068764444}
 --- !u!1 &6760041120872770886
 GameObject:
@@ -2145,7 +2142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 5669242819679293841}
+  monster: {fileID: 0}
   Distance: {fileID: 5056773283091173916}
 --- !u!1 &8191677678517295172
 GameObject:
@@ -2328,7 +2325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 5669242819679293841}
+  monster: {fileID: 0}
   player: {fileID: 0}
   attackDistance: {fileID: 4599935227372910570}
   skillDistance: {fileID: 5448323859126604139}

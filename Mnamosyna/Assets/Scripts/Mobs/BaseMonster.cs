@@ -51,8 +51,8 @@ public class BaseMonster : MobStat
 
     public bool isAttack01 = false;
     public bool isAttack02 = false;
-    protected float Attack01CanUse = 0;
-    protected float Attack02CanUse = 0;
+    protected float Attack01CanUse;
+    protected float Attack02CanUse;
 
     // 애니메이션용
     protected static readonly int BattleIdleHash = Animator.StringToHash("BattleIdle");

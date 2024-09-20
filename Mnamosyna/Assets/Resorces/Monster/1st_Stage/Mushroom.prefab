@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 1537915643745528417}
+  monster: {fileID: 939524091497401197}
   player: {fileID: 0}
   attackDistance: {fileID: 7916325373356675248}
   skillDistance: {fileID: 6816400987205336131}
@@ -107,9 +107,9 @@ GameObject:
   - component: {fileID: 9049196728435991539}
   - component: {fileID: 8526550793094404415}
   - component: {fileID: 8564160130454983622}
-  - component: {fileID: 1537915643745528417}
   - component: {fileID: 3756913315902718688}
   - component: {fileID: 6359046888042998929}
+  - component: {fileID: 939524091497401197}
   m_Layer: 8
   m_Name: Mushroom
   m_TagString: Monster
@@ -169,43 +169,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1537915643745528417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920396717856191259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a34d7dfc1db403e4db3299d15ace3c1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: mushroom
-  Max_HP: 15
-  Cur_HP: 15
-  ATK: 3
-  Skill_ATK1: 5
-  Skill_ATK2: 0
-  NumberOfSkills: 2
-  SkillCoolTime1: 3
-  SkillCoolTime2: 6
-  SkillCoolTime3: 0
-  Defense: 0
-  Move_Speed: 3
-  Distance: 0
-  patrolRadius: 200
-  attack1Radius: 1.2
-  attack2Radius: 2
-  attack3Radius: 0
-  invincibleTime: 1
-  spawner: {fileID: 0}
-  exclamationMark: {fileID: 3969081904041936791}
-  damageText: {fileID: 1364353059637104704}
-  firstAttackAnimationLength: 0.8333333
-  secondAttackAnimationLength: 0.8333333
-  isAttack: 0
-  isSkill: 0
 --- !u!195 &3756913315902718688
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -249,6 +212,40 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0.61, z: -0.03}
+--- !u!114 &939524091497401197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920396717856191259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d11cae4d2d89e34e8dcbb3fe4b9f95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: mushroom
+  Max_HP: 15
+  Cur_HP: 15
+  ATK1: 3
+  ATK2: 5
+  NumberOfSkills: 2
+  SkillCoolTime1: 3
+  SkillCoolTime2: 5
+  Defense: 0
+  Move_Speed: 3
+  ApproachRadius: 2
+  DetectionRadius: 100
+  attack1Radius: 3
+  attack2Radius: 4
+  invincibleTime: 0.5
+  spawner: {fileID: 0}
+  exclamationMark: {fileID: 3969081904041936791}
+  damageText: {fileID: 1364353059637104704}
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
 --- !u!1 &1841349123776066259
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 1537915643745528417}
+  monster: {fileID: 939524091497401197}
   Distance: {fileID: 5477578850062518024}
 --- !u!1 &2524752428555062253
 GameObject:
@@ -408,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 920396717856191259}
-  Monster: {fileID: 1537915643745528417}
+  Monster: {fileID: 0}
 --- !u!1 &3969081904041936791
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 920396717856191259}
-  Monster: {fileID: 1537915643745528417}
+  Monster: {fileID: 0}
 --- !u!114 &7003044617281045691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -868,7 +865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 1537915643745528417}
+  monster: {fileID: 0}
   Distance: {fileID: 3008431711392296317}
 --- !u!1001 &2827593908581869337
 PrefabInstance:

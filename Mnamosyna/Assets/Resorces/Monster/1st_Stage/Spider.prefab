@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 6435794756727544494}
+  monster: {fileID: 0}
   Distance: {fileID: 1276587126335820479}
 --- !u!1 &2010712578902929038
 GameObject:
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 6435794756727544494}
+  monster: {fileID: 0}
   Distance: {fileID: 6448749385905138347}
 --- !u!1 &5111203060194892491
 GameObject:
@@ -520,7 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 6435794756727544494}
+  monster: {fileID: 0}
   player: {fileID: 0}
   attackDistance: {fileID: 8277221798393280929}
   skillDistance: {fileID: 1173212807834270058}
@@ -640,7 +640,7 @@ GameObject:
   - component: {fileID: 7778178886890047706}
   - component: {fileID: 3245108686248384118}
   - component: {fileID: 4893729329934521562}
-  - component: {fileID: 6435794756727544494}
+  - component: {fileID: 5542846137489536977}
   m_Layer: 8
   m_Name: Spider
   m_TagString: Monster
@@ -743,7 +743,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0.61, z: -0.03}
---- !u!114 &6435794756727544494
+--- !u!114 &5542846137489536977
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -752,34 +752,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 6188915633788669329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b84f649ba8d68c640a1407343bf340a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 68cbced9a4e9aab479227120b14887dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Spider
   Max_HP: 20
   Cur_HP: 20
-  ATK: 5
-  Skill_ATK1: 5
-  Skill_ATK2: 0
+  ATK1: 5
+  ATK2: 5
   NumberOfSkills: 2
-  SkillCoolTime1: 3
+  SkillCoolTime1: 4
   SkillCoolTime2: 8
-  SkillCoolTime3: 0
   Defense: 0
   Move_Speed: 5
-  Distance: 0
-  patrolRadius: 200
-  attack1Radius: 1.2
+  ApproachRadius: 8
+  DetectionRadius: 100
+  attack1Radius: 2
   attack2Radius: 8
-  attack3Radius: 0
-  invincibleTime: 1
+  invincibleTime: 0.5
   spawner: {fileID: 0}
   exclamationMark: {fileID: 1073488393345065777}
   damageText: {fileID: 3957663587688081969}
-  firstAttackAnimationLength: 0.8333333
-  secondAttackAnimationLength: 1.0666667
-  isAttack: 0
-  isSkill: 0
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
+  knockbackForce: 5
+  knockbackDuration: 0.3
   chargeDuration: 1
   chargeSpeed: 10
   chargeDistance: 10

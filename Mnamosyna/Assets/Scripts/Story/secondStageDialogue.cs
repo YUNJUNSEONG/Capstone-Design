@@ -15,9 +15,11 @@ public class secondStageDialogue : MonoBehaviour
     void InitializeDialogues()
     {
         // 각 스테이지에 맞는 대화를 추가합니다.
-        dialogues.Add("첫 번째 스테이지 대사 1");
-        dialogues.Add("첫 번째 스테이지 대사 2");
-        dialogues.Add("첫 번째 스테이지 대사 3");
+        dialogues.Add("냄새나고 역겨운 어인들....");
+        dialogues.Add("오크들은 추하고 둔하지만 강한 공격을 해요.");
+        dialogues.Add("웜들은 두려움이 많아 공격하고 바로 숨어버려요.");
+        dialogues.Add("더러운 반짐승 놈들...");
+        dialogues.Add("이곳은 너무 역겨운 냄새가 나요.");
         // 이하 스테이지에 따라 추가...
     }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpawnerTrigger : MonoBehaviour
+public class SpawnerTest : MonoBehaviour
 {
     public Spawner spawner;
     public RandomTalk randomTalk;
