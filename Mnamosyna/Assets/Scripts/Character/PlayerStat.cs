@@ -58,6 +58,7 @@ public class PlayerStat : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this);
         if (instance == null)
         {
             instance = this;

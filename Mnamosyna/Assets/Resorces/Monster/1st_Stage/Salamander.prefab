@@ -656,18 +656,19 @@ MonoBehaviour:
   ATK1: 6
   ATK2: 9
   NumberOfSkills: 2
-  SkillCoolTime1: 0
-  SkillCoolTime2: 0
+  SkillCoolTime1: 4
+  SkillCoolTime2: 8
   Defense: 0
-  Move_Speed: 0
-  ApproachRadius: 0
-  DetectionRadius: 0
-  attack1Radius: 0
-  attack2Radius: 0
+  Move_Speed: 3
+  ApproachRadius: 2
+  DetectionRadius: 100
+  attack1Radius: 1.5
+  attack2Radius: 3
   invincibleTime: 0.5
   spawner: {fileID: 0}
-  exclamationMark: {fileID: 0}
-  damageText: {fileID: 0}
+  bossSpawner: {fileID: 0}
+  exclamationMark: {fileID: 4162572557569085720}
+  damageText: {fileID: 6020489788439873421}
   isAttack01: 0
   isAttack02: 0
   attack01Hash: 0

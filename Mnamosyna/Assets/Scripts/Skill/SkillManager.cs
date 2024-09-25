@@ -33,6 +33,7 @@ public class SkillManager : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this);
         if (instance == null)
             instance = this;
 
