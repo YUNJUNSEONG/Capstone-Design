@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class BossSpawnerTest: MonoBehaviour
 {
     public BossSpawner spawner;
-    public RandomTalk randomTalk;
 
     void Awake()
     {
@@ -22,11 +21,6 @@ public class BossSpawnerTest: MonoBehaviour
             GetComponent<Collider>().enabled = false;
             Debug.Log("Monster spawn triggered");
 
-            // Display random dialogue
-            if (randomTalk != null)
-            {
-                randomTalk.DisplayRandomDialogue();
-            }
 
             spawner.SpawnWaves();  // Start spawning waves
         }

@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossTuto : MonoBehaviour
+public class firstBossTuto : MonoBehaviour
 {
     public StoryManager storyManager;
+    public BossSpawner spawner;
 
     void OnTriggerEnter(Collider other)
     {
@@ -18,10 +19,24 @@ public class BossTuto : MonoBehaviour
                 "지금까지 상대해왔던 해츨링과는 차원이 다른거예요.",
                 "그러니 조심해서 상대하죠."
             };
+
+            // 튜토리얼이 끝났을 때 BossSpawner를 실행하도록 이벤트 구독
+            storyManager.OnTutorialFinished += OnTutorialFinished;
+
+            // 튜토리얼 시작
             storyManager.StartTutorial(StoryManager.TutorialType.FirstBoss, FirstBossTutorialMessages);
 
             // 오브젝트를 비활성화합니다.
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnTutorialFinished()
+    {
+        // 튜토리얼이 끝나면 스포너를 활성화합니다.
+        spawner.SpawnWaves();
+
+        // 이벤트 구독 해제
+        storyManager.OnTutorialFinished -= OnTutorialFinished;
     }
 }

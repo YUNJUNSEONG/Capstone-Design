@@ -745,7 +745,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 1611838354}
   randomTalk: {fileID: 1216220263}
-  aliveCountText: {fileID: 280107549}
 --- !u!135 &41373187
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1325,7 +1324,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 1844808645}
   randomTalk: {fileID: 1216220263}
-  aliveCountText: {fileID: 280107549}
 --- !u!135 &91335047
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6829,7 +6827,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 678101635}
   randomTalk: {fileID: 1216220263}
-  aliveCountText: {fileID: 280107549}
 --- !u!135 &445300827
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7711,7 +7708,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 1380139766}
   randomTalk: {fileID: 1216220263}
-  aliveCountText: {fileID: 280107549}
 --- !u!135 &507323508
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9042,7 +9038,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 1318339331}
   randomTalk: {fileID: 1216220263}
-  aliveCountText: {fileID: 280107549}
 --- !u!135 &560226050
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9738,7 +9733,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 185416352}
   randomTalk: {fileID: 1216220263}
-  aliveCountText: {fileID: 280107549}
 --- !u!135 &587847841
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10409,7 +10403,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 827017933}
   randomTalk: {fileID: 1216220263}
-  aliveCountText: {fileID: 280107549}
 --- !u!1 &626493985
 GameObject:
   m_ObjectHideFlags: 0
@@ -10829,7 +10822,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 354420316}
   randomTalk: {fileID: 1216220263}
-  aliveCountText: {fileID: 280107549}
 --- !u!135 &635290460
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13375,6 +13367,10 @@ PrefabInstance:
     - target: {fileID: -2650797072895291358, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2650797072895291358, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
+      propertyPath: m_Center.y
+      value: 1.24
       objectReference: {fileID: 0}
     - target: {fileID: -2650797072895291358, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Material
@@ -17463,7 +17459,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &827017928
 Transform:
@@ -19039,7 +19035,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 1570773161}
   randomTalk: {fileID: 1216220263}
-  aliveCountText: {fileID: 280107549}
 --- !u!135 &920980808
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -19764,7 +19759,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 645163967}
   randomTalk: {fileID: 1216220263}
-  aliveCountText: {fileID: 280107549}
 --- !u!1 &1017942758
 GameObject:
   m_ObjectHideFlags: 0
@@ -22619,7 +22613,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
-  weight: 1
+  weight: 0.3
   sharedProfile: {fileID: 11400000, guid: 7b3e4200dd2017843868876259dba095, type: 2}
 --- !u!1001 &1252268713
 PrefabInstance:
@@ -23025,7 +23019,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 664379548}
   randomTalk: {fileID: 1216220263}
-  aliveCountText: {fileID: 280107549}
 --- !u!135 &1280205120
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -29929,7 +29922,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 1747510723}
   randomTalk: {fileID: 1216220263}
-  aliveCountText: {fileID: 280107549}
 --- !u!135 &1683419898
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -31401,7 +31393,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 1888083350}
   randomTalk: {fileID: 1216220263}
-  aliveCountText: {fileID: 280107549}
 --- !u!1 &1792931942
 GameObject:
   m_ObjectHideFlags: 0
@@ -33226,7 +33217,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &1888083345
 MonoBehaviour:
@@ -33257,7 +33248,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 2bbb168b1170f64459975c891d256b55, type: 2}
   m_BuildHeightMesh: 0
 --- !u!65 &1888083346
 BoxCollider:

@@ -19,6 +19,7 @@ public class Monster : MobStat
     public float invincibleTime = 1f; // 공격받은 후 무적 시간
     private float lastDamagedTime;
     public Spawner spawner;
+    public BossSpawner bossSpawner;
     public delegate void DeathHandler();
     public event DeathHandler OnDeath;
 

@@ -152,7 +152,7 @@ public class Player : PlayerStat
             Die();
         }
 
-        
+
         HandleInput();
         if (!isAttack && inputBuffer.Count > 0)
         {
@@ -322,7 +322,7 @@ public class Player : PlayerStat
             StartCoroutine(DashEnd("Dash"));
         }
     }
-    
+
     IEnumerator DashEnd(string animationTrigger)
     {
         AnimatorStateInfo stateInfo;
@@ -456,7 +456,7 @@ public class Player : PlayerStat
     //입력 버퍼에서 다음 입력을 꺼내어 처리
     void ProcessNextInput()
     {
-        if (inputBuffer.Count > 0 )//&& !isAttack)
+        if (inputBuffer.Count > 0)//&& !isAttack)
         {
             string nextInput = inputBuffer.Peek(); // 큐의 맨 위 요소를 확인
 
@@ -476,11 +476,11 @@ public class Player : PlayerStat
         }
     }
 
-    
+
     void HandleLeftClick()
     {
         //int leftClickCount = 0;
-        while (inputBuffer.Count > 0 && inputBuffer.Peek() == "L" )//&& leftClickCount < 3)
+        while (inputBuffer.Count > 0 && inputBuffer.Peek() == "L")//&& leftClickCount < 3)
         {
             inputBuffer.Dequeue();
             //leftClickCount++;

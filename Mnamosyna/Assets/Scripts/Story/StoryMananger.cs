@@ -15,6 +15,10 @@ public class StoryManager : MonoBehaviour
     private int currentMessageIndex = 0;
     private bool isTutorialActive = false;
 
+    // 이벤트를 추가하여 튜토리얼이 끝날 때 알림
+    public delegate void TutorialFinishedHandler();
+    public event TutorialFinishedHandler OnTutorialFinished;
+
     // Enumeration for tutorial types
     public enum TutorialType
     {
@@ -34,7 +38,6 @@ public class StoryManager : MonoBehaviour
 
     void Start()
     {
-        // Initialize the tutorial messages list
         tutorialMessages = new List<string>();
         tutorialUI.SetActive(false);
     }
@@ -76,6 +79,12 @@ public class StoryManager : MonoBehaviour
         isTutorialActive = false;
         tutorialUI.SetActive(false);
         ResumeGame();
+
+        // 튜토리얼 종료 시 이벤트 호출
+        if (OnTutorialFinished != null)
+        {
+            OnTutorialFinished.Invoke();
+        }
     }
 
     void PauseGame()

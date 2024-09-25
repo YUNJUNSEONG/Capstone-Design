@@ -6,11 +6,9 @@ using UnityEngine.UI;
 public class BossSpawner : MonoBehaviour
 {
     public List<GameObject[]> waveMonsters = new List<GameObject[]>();
-    public GameObject[] BossWaveMonsters;
     public GameObject[] firstWaveMonsters;
     public GameObject[] secondWaveMonsters;
-    public List<int> numOfMonsters = new List<int>();
-    public Canvas BossHp;
+    public GameObject[] thirdWaveMonsters;    public List<int> numOfMonsters = new List<int>();
 
     public GameObject Upgrade;
     public Magic0[] magicComponents;
@@ -18,17 +16,6 @@ public class BossSpawner : MonoBehaviour
 
     public float waitTime;
     public int aliveCount;
-
-    public GameObject bossMonsterPrefab;
-    public Transform bossSpawnPoint;
-    private GameObject bossMonsterInstance;
-
-    public Camera mainCamera;
-    public Transform bossCameraPosition;
-    private Vector3 initialCameraPosition;
-    private Quaternion initialCameraRotation;
-
-    public float cameraShowDuration = 2f; // 카메라가 보스를 보여주는 시간
 
     public delegate void CombatEndHandler();
     public event CombatEndHandler OnCombatEnd;
@@ -39,57 +26,16 @@ public class BossSpawner : MonoBehaviour
     public delegate void AliveCountChangedHandler(int newAliveCount);
     public event AliveCountChangedHandler OnAliveCountChanged;
 
+    // 새로 추가된 리스트로 각 웨이브의 살아있는 몬스터를 추적
+    private List<GameObject> aliveMonsters = new List<GameObject>();
+
     void Awake()
     {
         spawnAreaCollider = GetComponent<Collider>();
         aliveCount = GetTotalNumOfMonsters();
-        waveMonsters.Add(BossWaveMonsters);
         waveMonsters.Add(firstWaveMonsters);
         waveMonsters.Add(secondWaveMonsters);
-        BossHp = GetComponent<Canvas>();
-        BossHp.gameObject.SetActive(true);
-
-        initialCameraPosition = mainCamera.transform.position;
-        initialCameraRotation = mainCamera.transform.rotation;
-    }
-
-    public void SpawnBossAtStart()
-    {
-        bossMonsterInstance = Instantiate(bossMonsterPrefab, bossSpawnPoint.position, Quaternion.identity);
-        bossMonsterInstance.GetComponent<Monster>().OnDeath += HandleBossDeath;
-        StartCoroutine(ShowBossAndStartCombat());
-    }
-
-    IEnumerator ShowBossAndStartCombat()
-    {
-        yield return MoveCameraToBoss();
-        yield return new WaitForSeconds(cameraShowDuration);
-        ResetCamera();
-        SpawnWaves();
-    }
-
-    IEnumerator MoveCameraToBoss()
-    {
-        float elapsedTime = 0f;
-        Vector3 startPos = mainCamera.transform.position;
-        Quaternion startRot = mainCamera.transform.rotation;
-
-        while (elapsedTime < 1f)
-        {
-            mainCamera.transform.position = Vector3.Lerp(startPos, bossCameraPosition.position, elapsedTime);
-            mainCamera.transform.rotation = Quaternion.Lerp(startRot, bossCameraPosition.rotation, elapsedTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        mainCamera.transform.position = bossCameraPosition.position;
-        mainCamera.transform.rotation = bossCameraPosition.rotation;
-    }
-
-    void ResetCamera()
-    {
-        mainCamera.transform.position = initialCameraPosition;
-        mainCamera.transform.rotation = initialCameraRotation;
+        waveMonsters.Add(thirdWaveMonsters);
     }
 
     public void SpawnWaves()
@@ -103,6 +49,7 @@ public class BossSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             SpawnWave(waveMonsters[i], numOfMonsters[i]);
+
             yield return new WaitForSeconds(waitTime);
         }
     }
@@ -115,38 +62,23 @@ public class BossSpawner : MonoBehaviour
             GameObject selectedMonster = waveMonsters[Random.Range(0, waveMonsters.Length)];
             GameObject monster = Instantiate(selectedMonster, randomPoint, Quaternion.identity);
 
-            var Monster = monster.GetComponent<Monster>();
+            var Monster = monster.GetComponent<BaseMonster>();
             if (Monster != null)
             {
-                Monster.OnDeath += HandleMonsterDeath;
+                Monster.bossSpawner = this;
             }
+
+            // 생성된 몬스터를 리스트에 추가
+            aliveMonsters.Add(monster);
         }
     }
 
-    void HandleBossDeath()
-    {
-        DestroyAllRegularMonsters();
-    }
-
-    void DestroyAllRegularMonsters()
-    {
-        foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))
-        {
-            Destroy(monster);
-        }
-    }
-
-    void HandleMonsterDeath()
-    {
-        aliveCount--;
-        NotifyAliveCountChanged();
-        CheckAliveCount();
-    }
-
+    // 첫 번째 웨이브가 사망하면 다른 몬스터도 모두 사망 처리
     public void CheckAliveCount()
     {
         if (aliveCount <= 0)
         {
+            KillAllRemainingMonsters(); // 모든 남은 몬스터를 사망 처리
             OnCombatEnd?.Invoke();
             Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
             Vector3 playerForward = GameObject.FindGameObjectWithTag("Player").transform.forward;
@@ -157,8 +89,25 @@ public class BossSpawner : MonoBehaviour
 
             SpawnObject(spawnPosition);
             isCombatEnded = true;
-            foreach (Magic0 magic in magicComponents) { magic.EnableComponents(); }
+
+            foreach (Magic0 magic in magicComponents)
+            {
+                magic.EnableComponents();
+            }
         }
+    }
+
+    // 남아있는 모든 몬스터를 제거하는 메서드
+    void KillAllRemainingMonsters()
+    {
+        foreach (var monster in aliveMonsters)
+        {
+            if (monster != null)
+            {
+                Destroy(monster); // 모든 몬스터를 파괴
+            }
+        }
+        aliveMonsters.Clear(); // 리스트 비우기
     }
 
     public void NotifyAliveCountChanged()
@@ -197,7 +146,7 @@ public class BossSpawner : MonoBehaviour
             }
         }
 
-        Debug.LogError("Failed to find point within collider bounds");
+        Debug.LogError("Collider 위의 위치를 찾지 못함");
         return collider.bounds.center;
     }
 

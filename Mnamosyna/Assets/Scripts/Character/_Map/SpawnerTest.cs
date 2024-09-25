@@ -5,7 +5,7 @@ public class SpawnerTest : MonoBehaviour
 {
     public Spawner spawner;
     public RandomTalk randomTalk;
-    public Text aliveCountText;  // Reference to the UI Text element
+    //public Text aliveCountText;  // Reference to the UI Text element
 
     void Awake()
     {
@@ -14,8 +14,8 @@ public class SpawnerTest : MonoBehaviour
             Debug.LogError("Spawner script not found.");
             return;
         }
-        aliveCountText.gameObject.SetActive(false);
-        spawner.OnAliveCountChanged += UpdateAliveCountText;  // Subscribe to the alive count change event
+        //aliveCountText.gameObject.SetActive(false);
+        //spawner.OnAliveCountChanged += UpdateAliveCountText;  // Subscribe to the alive count change event
     }
 
     void OnTriggerEnter(Collider other)
@@ -31,11 +31,11 @@ public class SpawnerTest : MonoBehaviour
                 randomTalk.DisplayRandomDialogue();
             }
 
-            aliveCountText.gameObject.SetActive(true);
+            //aliveCountText.gameObject.SetActive(true);
             spawner.SpawnWaves();  // Start spawning waves
         }
     }
-
+    /*
     void UpdateAliveCountText(int newAliveCount)
     {
         if (aliveCountText != null)
@@ -47,5 +47,5 @@ public class SpawnerTest : MonoBehaviour
                 aliveCountText.gameObject.SetActive(false);
             }
         }
-    }
+    }*/
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Magic0 : MonoBehaviour
 {
@@ -49,8 +50,11 @@ public class Magic0 : MonoBehaviour
         if (this.name == "Magic-5to6_3") {collision.transform.position = new Vector3(62.23f, 1.27f, 582.38f);} //5-2->6-3
         
         if (this.name == "Magic-6toBoss") {collision.transform.position = new Vector3(18.56f, 1.27f, 793.5f);} //6-1~3->boss
-        
-        
+        if(this.name == "BosstoMagic2-0")
+        {
+            SceneManager.LoadScene("Stage-2");
+        }
+
         //2스테이지 포탈 좌표
         if (this.name == "Magic2-0to1") {collision.transform.position = new Vector3(11.91f, 4.7f, -46.59f);} //0->1
         
@@ -73,7 +77,11 @@ public class Magic0 : MonoBehaviour
         if (this.name == "Magic2-5to6_3") {collision.transform.position = new Vector3(-344.75f, 4.7f, 82.66f);} //5->6-3
         
         if (this.name == "Magic2-6toB") {collision.transform.position = new Vector3(-201.89f, 4.7f, 190.98f);} //6->Boss
-        
+
+        if (this.name == "BosstoMagic3-0")
+        {
+            SceneManager.LoadScene("Stage-3");
+        }
         //3스테이지 포탈 좌표
         if (this.name == "Magic3-0to1") {collision.transform.position = new Vector3(16.77f, 1.2f, 65.24f);} //0->1
         

@@ -60,7 +60,7 @@ public class Spawner : MonoBehaviour
             GameObject selectedMonster = waveMonsters[Random.Range(0, waveMonsters.Length)];
             GameObject monster = Instantiate(selectedMonster, randomPoint, Quaternion.identity);
 
-            var Monster = monster.GetComponent<Monster>();
+            var Monster = monster.GetComponent<BaseMonster>();
             if (Monster != null)
             {
                 Monster.spawner = this;

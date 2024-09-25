@@ -6,7 +6,7 @@ public class PlayerStart : MonoBehaviour
     public StoryManager storyManager;
     public Animator playerAnimator;
     public Rigidbody rb;
-    public GameObject supportObject;
+    //public GameObject supportObject;
 
     void Start()
     {
@@ -49,13 +49,14 @@ public class PlayerStart : MonoBehaviour
         {
             yield return null; // 한 프레임 대기
         }
-        */
+        
         // 지지 오브젝트 제거
         if (supportObject != null)
         {
             Destroy(supportObject);
         }
-        
+        */
+
         // 애니메이션이 끝난 후 튜토리얼 메시지 시작
         List<string> startTutorialMessages = new List<string>
         {
