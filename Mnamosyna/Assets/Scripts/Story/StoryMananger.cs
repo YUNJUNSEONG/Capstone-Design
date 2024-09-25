@@ -30,7 +30,11 @@ public class StoryManager : MonoBehaviour
         Potal,
         Healing,
         FirstBoss,
+        SecondBoss,
+        ThirdBoss,
         FirstBossEnd,
+        SecondBossEnd,
+        ThirdBossEnd,
         PlayerDeath
     }
 
@@ -38,6 +42,7 @@ public class StoryManager : MonoBehaviour
 
     void Start()
     {
+        DontDestroyOnLoad(this);
         tutorialMessages = new List<string>();
         tutorialUI.SetActive(false);
     }

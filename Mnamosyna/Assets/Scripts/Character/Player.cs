@@ -99,6 +99,7 @@ public class Player : PlayerStat
 
     void Awake()
     {
+        DontDestroyOnLoad(this);
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         sword = GetComponentInChildren<Sword>();
