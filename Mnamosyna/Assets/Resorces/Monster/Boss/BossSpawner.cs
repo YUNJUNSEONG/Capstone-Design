@@ -10,6 +10,7 @@ public class BossSpawner : MonoBehaviour
     public GameObject[] secondWaveMonsters;
     public GameObject[] thirdWaveMonsters;    public List<int> numOfMonsters = new List<int>();
 
+
     public GameObject Upgrade;
     public Magic0[] magicComponents;
     private Collider spawnAreaCollider;
