@@ -53,7 +53,7 @@ public class Player : PlayerStat
 
 
     Vector3 moveVec;
-    Animator anim;
+    public Animator anim;
     SkinnedMeshRenderer[] meshs;
     Rigidbody rigid;
     Sword sword;
@@ -65,6 +65,13 @@ public class Player : PlayerStat
     public GameObject BaseMesh_Earth;
     // 현재 설정된 BaseMesh
     private GameObject currentBaseMesh;
+
+    public Collider waterCollider; 
+    public Collider fireCollider;  
+    public Collider air1Collider;
+    public Collider air2Collider;
+    public Collider earth1Collider;
+    public Collider earth2Collider;
 
 
     // 스킬 관련 코드
@@ -128,6 +135,14 @@ public class Player : PlayerStat
         currentBaseMesh = BaseMesh_Water;
         gameOverPanel.SetActive(false);
         StartCoroutine(RegenerateStats());
+
+        if (waterCollider == null) waterCollider = transform.Find("Sword1").GetComponent<Collider>();
+        if (fireCollider == null) fireCollider = transform.Find("Sword2").GetComponent<Collider>();
+        if (air1Collider == null) air1Collider = transform.Find("Sword3-1").GetComponent<Collider>();
+        if (air2Collider == null) air2Collider = transform.Find("Sword3-2").GetComponent<Collider>();
+        if (earth1Collider == null) earth1Collider = transform.Find("Sword4").GetComponent<Collider>();
+        if (earth2Collider == null) earth2Collider = transform.Find("Shield").GetComponent<Collider>();
+
     }
 
 
