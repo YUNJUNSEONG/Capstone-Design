@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.6
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 820780795}
-  m_IndirectSpecularColor: {r: 0.13332263, g: 0.46020913, b: 0.5815255, a: 0.6}
+  m_IndirectSpecularColor: {r: 0.1333647, g: 0.460185, b: 0.58153355, a: 0.6}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -421,6 +421,10 @@ PrefabInstance:
       value: 1.7000002
       objectReference: {fileID: 0}
     - target: {fileID: 8903449741633459306, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8903449741633459306, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.7000002
       objectReference: {fileID: 0}
@@ -474,6 +478,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8903449741633459306, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
   m_PrefabInstance: {fileID: 12047944}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &12047946 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2195975296999880917, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
+  m_PrefabInstance: {fileID: 12047944}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &13388835
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -873,14 +888,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff1385a9e382e34b8553e5853a5ec30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstWaveMonsters: []
-  secondWaveMonsters: []
-  thirdWaveMonsters: []
-  forthWaveMonsters: []
-  numOfMonsters: 
-  Upgrade: {fileID: 0}
-  magicComponents: []
-  waitTime: 0
+  firstWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 2306338860249110187, guid: 1f41a0b7892cfe64082b90fe526ca828, type: 3}
+  - {fileID: 8925696123932433810, guid: b1e4ee6add1347e4292cc8b7f6e09c0e, type: 3}
+  secondWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 2306338860249110187, guid: 1f41a0b7892cfe64082b90fe526ca828, type: 3}
+  - {fileID: 8925696123932433810, guid: b1e4ee6add1347e4292cc8b7f6e09c0e, type: 3}
+  thirdWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 7096070735854467088, guid: 31b3c60bba3e9f34e82c7c362bbb43e3, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 1334910217339361080, guid: b5f63ea2bdd6bcb4bbcd660eab2d26f6, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  forthWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 7096070735854467088, guid: 31b3c60bba3e9f34e82c7c362bbb43e3, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 1334910217339361080, guid: b5f63ea2bdd6bcb4bbcd660eab2d26f6, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  numOfMonsters: 0a0000000a0000000a0000000a000000
+  Upgrade: {fileID: 794828816375683814, guid: 6e0e9377f59971141b8f4666c4e9bbf4, type: 3}
+  magicComponents:
+  - {fileID: 1667003591}
+  waitTime: 10
   aliveCount: 0
 --- !u!4 &44624178 stripped
 Transform:
@@ -1459,14 +1491,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff1385a9e382e34b8553e5853a5ec30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstWaveMonsters: []
-  secondWaveMonsters: []
-  thirdWaveMonsters: []
-  forthWaveMonsters: []
-  numOfMonsters: 
-  Upgrade: {fileID: 0}
-  magicComponents: []
-  waitTime: 0
+  firstWaveMonsters:
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 1334910217339361080, guid: b5f63ea2bdd6bcb4bbcd660eab2d26f6, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  secondWaveMonsters:
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 1334910217339361080, guid: b5f63ea2bdd6bcb4bbcd660eab2d26f6, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  thirdWaveMonsters:
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 557462274296368442, guid: 263e9fcd4e6a347498a67a0d3309a56b, type: 3}
+  - {fileID: 3632179310906476392, guid: 9f63b16240c108d469106e3b59ee9461, type: 3}
+  - {fileID: 2306338860249110187, guid: 1f41a0b7892cfe64082b90fe526ca828, type: 3}
+  forthWaveMonsters:
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 557462274296368442, guid: 263e9fcd4e6a347498a67a0d3309a56b, type: 3}
+  - {fileID: 3632179310906476392, guid: 9f63b16240c108d469106e3b59ee9461, type: 3}
+  - {fileID: 2306338860249110187, guid: 1f41a0b7892cfe64082b90fe526ca828, type: 3}
+  numOfMonsters: 0c0000000c0000000c0000000c000000
+  Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
+  magicComponents:
+  - {fileID: 1551254377}
+  - {fileID: 2128576308}
+  waitTime: 12
   aliveCount: 0
 --- !u!1001 &77695224
 PrefabInstance:
@@ -2156,14 +2204,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff1385a9e382e34b8553e5853a5ec30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstWaveMonsters: []
-  secondWaveMonsters: []
-  thirdWaveMonsters: []
-  forthWaveMonsters: []
-  numOfMonsters: 
-  Upgrade: {fileID: 0}
-  magicComponents: []
-  waitTime: 0
+  firstWaveMonsters:
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 1334910217339361080, guid: b5f63ea2bdd6bcb4bbcd660eab2d26f6, type: 3}
+  - {fileID: 3632179310906476392, guid: 9f63b16240c108d469106e3b59ee9461, type: 3}
+  secondWaveMonsters:
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 1334910217339361080, guid: b5f63ea2bdd6bcb4bbcd660eab2d26f6, type: 3}
+  - {fileID: 3632179310906476392, guid: 9f63b16240c108d469106e3b59ee9461, type: 3}
+  thirdWaveMonsters:
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 557462274296368442, guid: 263e9fcd4e6a347498a67a0d3309a56b, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  forthWaveMonsters:
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 557462274296368442, guid: 263e9fcd4e6a347498a67a0d3309a56b, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  numOfMonsters: 0f0000000f0000000f0000000f000000
+  Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
+  magicComponents:
+  - {fileID: 2007177057}
+  waitTime: 15
   aliveCount: 0
 --- !u!1 &109700236
 GameObject:
@@ -3293,6 +3354,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+--- !u!114 &189646498 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 408759321372814350, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+  m_PrefabInstance: {fileID: 189646497}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &194225761
 GameObject:
   m_ObjectHideFlags: 0
@@ -3886,6 +3958,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8903449741633459306, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
   m_PrefabInstance: {fileID: 230205072}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &230205074 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2195975296999880917, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
+  m_PrefabInstance: {fileID: 230205072}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &244060619
 GameObject:
   m_ObjectHideFlags: 0
@@ -5242,6 +5325,8 @@ Transform:
   m_Children:
   - {fileID: 410611668}
   - {fileID: 482703751}
+  - {fileID: 12047945}
+  - {fileID: 719391031}
   - {fileID: 444961324}
   - {fileID: 44624178}
   - {fileID: 1122781747}
@@ -5268,8 +5353,6 @@ Transform:
   - {fileID: 1258459414}
   - {fileID: 1969606019}
   - {fileID: 2139789248}
-  - {fileID: 12047945}
-  - {fileID: 719391031}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &334471369
@@ -7499,14 +7582,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff1385a9e382e34b8553e5853a5ec30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstWaveMonsters: []
-  secondWaveMonsters: []
-  thirdWaveMonsters: []
-  forthWaveMonsters: []
-  numOfMonsters: 
-  Upgrade: {fileID: 0}
-  magicComponents: []
-  waitTime: 0
+  firstWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 7096070735854467088, guid: 31b3c60bba3e9f34e82c7c362bbb43e3, type: 3}
+  - {fileID: 8925696123932433810, guid: b1e4ee6add1347e4292cc8b7f6e09c0e, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  secondWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 7096070735854467088, guid: 31b3c60bba3e9f34e82c7c362bbb43e3, type: 3}
+  - {fileID: 8925696123932433810, guid: b1e4ee6add1347e4292cc8b7f6e09c0e, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  thirdWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 2306338860249110187, guid: 1f41a0b7892cfe64082b90fe526ca828, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  forthWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 2306338860249110187, guid: 1f41a0b7892cfe64082b90fe526ca828, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  numOfMonsters: 07000000070000000700000007000000
+  Upgrade: {fileID: 794828816375683814, guid: 6e0e9377f59971141b8f4666c4e9bbf4, type: 3}
+  magicComponents:
+  - {fileID: 12047946}
+  - {fileID: 719391032}
+  waitTime: 7
   aliveCount: 0
 --- !u!1001 &419742764
 PrefabInstance:
@@ -8592,6 +8693,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
   m_PrefabInstance: {fileID: 481768242}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &481768244 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 408759321372814350, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+  m_PrefabInstance: {fileID: 481768242}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &482703750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8706,8 +8818,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bd512a31921a74d837194d6f5e0b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner: {fileID: 0}
-  randomTalk: {fileID: 0}
+  spawner: {fileID: 410611673}
+  randomTalk: {fileID: 1787087625}
 --- !u!1001 &489639253
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9173,14 +9285,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff1385a9e382e34b8553e5853a5ec30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstWaveMonsters: []
-  secondWaveMonsters: []
-  thirdWaveMonsters: []
-  forthWaveMonsters: []
-  numOfMonsters: 
-  Upgrade: {fileID: 0}
-  magicComponents: []
-  waitTime: 0
+  firstWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 2306338860249110187, guid: 1f41a0b7892cfe64082b90fe526ca828, type: 3}
+  - {fileID: 8925696123932433810, guid: b1e4ee6add1347e4292cc8b7f6e09c0e, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  secondWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 2306338860249110187, guid: 1f41a0b7892cfe64082b90fe526ca828, type: 3}
+  - {fileID: 8925696123932433810, guid: b1e4ee6add1347e4292cc8b7f6e09c0e, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  thirdWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 7096070735854467088, guid: 31b3c60bba3e9f34e82c7c362bbb43e3, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  forthWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 7096070735854467088, guid: 31b3c60bba3e9f34e82c7c362bbb43e3, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  numOfMonsters: 07000000070000000700000007000000
+  Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
+  magicComponents:
+  - {fileID: 230205074}
+  - {fileID: 791847675}
+  waitTime: 7
   aliveCount: 0
 --- !u!1001 &502685061
 PrefabInstance:
@@ -11346,14 +11476,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff1385a9e382e34b8553e5853a5ec30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstWaveMonsters: []
-  secondWaveMonsters: []
-  thirdWaveMonsters: []
-  forthWaveMonsters: []
-  numOfMonsters: 
-  Upgrade: {fileID: 0}
-  magicComponents: []
-  waitTime: 0
+  firstWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 8925696123932433810, guid: b1e4ee6add1347e4292cc8b7f6e09c0e, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  secondWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 8925696123932433810, guid: b1e4ee6add1347e4292cc8b7f6e09c0e, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  thirdWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  forthWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  numOfMonsters: 05000000050000000500000005000000
+  Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
+  magicComponents:
+  - {fileID: 1311744049}
+  - {fileID: 1859800130}
+  waitTime: 5
   aliveCount: 0
 --- !u!1001 &617121249
 PrefabInstance:
@@ -11937,8 +12079,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 832664508}
   - {fileID: 501429968}
+  - {fileID: 832664508}
+  - {fileID: 230205073}
+  - {fileID: 791847674}
   - {fileID: 1145259175}
   - {fileID: 710350856}
   - {fileID: 1450202246}
@@ -11959,8 +12103,6 @@ Transform:
   - {fileID: 2067761340}
   - {fileID: 1062542131}
   - {fileID: 554617579}
-  - {fileID: 230205073}
-  - {fileID: 791847674}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &651452017
@@ -12379,14 +12521,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff1385a9e382e34b8553e5853a5ec30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstWaveMonsters: []
-  secondWaveMonsters: []
-  thirdWaveMonsters: []
-  forthWaveMonsters: []
-  numOfMonsters: 
-  Upgrade: {fileID: 0}
-  magicComponents: []
-  waitTime: 0
+  firstWaveMonsters:
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 1334910217339361080, guid: b5f63ea2bdd6bcb4bbcd660eab2d26f6, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  secondWaveMonsters:
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 1334910217339361080, guid: b5f63ea2bdd6bcb4bbcd660eab2d26f6, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  thirdWaveMonsters:
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 557462274296368442, guid: 263e9fcd4e6a347498a67a0d3309a56b, type: 3}
+  - {fileID: 3632179310906476392, guid: 9f63b16240c108d469106e3b59ee9461, type: 3}
+  forthWaveMonsters:
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 557462274296368442, guid: 263e9fcd4e6a347498a67a0d3309a56b, type: 3}
+  - {fileID: 3632179310906476392, guid: 9f63b16240c108d469106e3b59ee9461, type: 3}
+  numOfMonsters: 0f0000000f0000000f0000000f000000
+  Upgrade: {fileID: 794828816375683814, guid: 6e0e9377f59971141b8f4666c4e9bbf4, type: 3}
+  magicComponents:
+  - {fileID: 189646498}
+  waitTime: 15
   aliveCount: 0
 --- !u!1001 &683786779
 PrefabInstance:
@@ -13256,6 +13411,18 @@ PrefabInstance:
       value: Portal_skilllevel_3
       objectReference: {fileID: 0}
     - target: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.68
       objectReference: {fileID: 0}
@@ -13305,6 +13472,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
   m_PrefabInstance: {fileID: 719391030}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &719391032 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 408759321372814350, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+  m_PrefabInstance: {fileID: 719391030}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &733139493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13783,6 +13961,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8903449741633459306, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
   m_PrefabInstance: {fileID: 759349087}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &759349089 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2195975296999880917, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
+  m_PrefabInstance: {fileID: 759349087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &771910599
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13992,6 +14181,18 @@ PrefabInstance:
       value: Portal_skilllevel_3 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.98
       objectReference: {fileID: 0}
@@ -14041,6 +14242,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
   m_PrefabInstance: {fileID: 791847673}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &791847675 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 408759321372814350, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+  m_PrefabInstance: {fileID: 791847673}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &792732179
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14928,8 +15140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bd512a31921a74d837194d6f5e0b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner: {fileID: 0}
-  randomTalk: {fileID: 0}
+  spawner: {fileID: 501429973}
+  randomTalk: {fileID: 1787087625}
 --- !u!1001 &836077508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18009,14 +18221,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff1385a9e382e34b8553e5853a5ec30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstWaveMonsters: []
-  secondWaveMonsters: []
-  thirdWaveMonsters: []
-  forthWaveMonsters: []
-  numOfMonsters: 
-  Upgrade: {fileID: 0}
-  magicComponents: []
-  waitTime: 0
+  firstWaveMonsters:
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 557462274296368442, guid: 263e9fcd4e6a347498a67a0d3309a56b, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  secondWaveMonsters:
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 557462274296368442, guid: 263e9fcd4e6a347498a67a0d3309a56b, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  thirdWaveMonsters:
+  - {fileID: 7096070735854467088, guid: 31b3c60bba3e9f34e82c7c362bbb43e3, type: 3}
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 1334910217339361080, guid: b5f63ea2bdd6bcb4bbcd660eab2d26f6, type: 3}
+  - {fileID: 3632179310906476392, guid: 9f63b16240c108d469106e3b59ee9461, type: 3}
+  forthWaveMonsters:
+  - {fileID: 7096070735854467088, guid: 31b3c60bba3e9f34e82c7c362bbb43e3, type: 3}
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 1334910217339361080, guid: b5f63ea2bdd6bcb4bbcd660eab2d26f6, type: 3}
+  - {fileID: 3632179310906476392, guid: 9f63b16240c108d469106e3b59ee9461, type: 3}
+  numOfMonsters: 0c0000000c0000000c0000000c000000
+  Upgrade: {fileID: 794828816375683814, guid: 6e0e9377f59971141b8f4666c4e9bbf4, type: 3}
+  magicComponents:
+  - {fileID: 759349089}
+  - {fileID: 1447987384}
+  waitTime: 12
   aliveCount: 0
 --- !u!1001 &1041300297
 PrefabInstance:
@@ -19884,7 +20112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1143962037
 Transform:
   m_ObjectHideFlags: 0
@@ -21478,14 +21706,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff1385a9e382e34b8553e5853a5ec30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstWaveMonsters: []
-  secondWaveMonsters: []
-  thirdWaveMonsters: []
-  forthWaveMonsters: []
-  numOfMonsters: 
-  Upgrade: {fileID: 0}
-  magicComponents: []
-  waitTime: 0
+  firstWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 2306338860249110187, guid: 1f41a0b7892cfe64082b90fe526ca828, type: 3}
+  - {fileID: 7096070735854467088, guid: 31b3c60bba3e9f34e82c7c362bbb43e3, type: 3}
+  secondWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 2306338860249110187, guid: 1f41a0b7892cfe64082b90fe526ca828, type: 3}
+  - {fileID: 7096070735854467088, guid: 31b3c60bba3e9f34e82c7c362bbb43e3, type: 3}
+  thirdWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 8925696123932433810, guid: b1e4ee6add1347e4292cc8b7f6e09c0e, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 1334910217339361080, guid: b5f63ea2bdd6bcb4bbcd660eab2d26f6, type: 3}
+  - {fileID: 557462274296368442, guid: 263e9fcd4e6a347498a67a0d3309a56b, type: 3}
+  forthWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 8925696123932433810, guid: b1e4ee6add1347e4292cc8b7f6e09c0e, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 1334910217339361080, guid: b5f63ea2bdd6bcb4bbcd660eab2d26f6, type: 3}
+  - {fileID: 557462274296368442, guid: 263e9fcd4e6a347498a67a0d3309a56b, type: 3}
+  numOfMonsters: 0a0000000a0000000a0000000a000000
+  Upgrade: {fileID: 794828816375683814, guid: 6e0e9377f59971141b8f4666c4e9bbf4, type: 3}
+  magicComponents:
+  - {fileID: 1945248339}
+  waitTime: 10
   aliveCount: 0
 --- !u!1001 &1213026851
 PrefabInstance:
@@ -23487,6 +23732,18 @@ PrefabInstance:
       value: Portal_newskill_3
       objectReference: {fileID: 0}
     - target: {fileID: 8903449741633459306, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8903449741633459306, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8903449741633459306, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8903449741633459306, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.5333793
       objectReference: {fileID: 0}
@@ -23536,6 +23793,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8903449741633459306, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
   m_PrefabInstance: {fileID: 1311744047}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1311744049 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2195975296999880917, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
+  m_PrefabInstance: {fileID: 1311744047}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1316466195
 GameObject:
   m_ObjectHideFlags: 0
@@ -25367,6 +25635,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+--- !u!114 &1401766162 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 408759321372814350, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+  m_PrefabInstance: {fileID: 1401766161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1403366115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25681,14 +25960,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff1385a9e382e34b8553e5853a5ec30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstWaveMonsters: []
-  secondWaveMonsters: []
-  thirdWaveMonsters: []
-  forthWaveMonsters: []
-  numOfMonsters: 
-  Upgrade: {fileID: 0}
-  magicComponents: []
-  waitTime: 0
+  firstWaveMonsters:
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  secondWaveMonsters:
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  thirdWaveMonsters:
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  - {fileID: 3632179310906476392, guid: 9f63b16240c108d469106e3b59ee9461, type: 3}
+  forthWaveMonsters:
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  - {fileID: 3632179310906476392, guid: 9f63b16240c108d469106e3b59ee9461, type: 3}
+  numOfMonsters: 0a0000000a0000000a0000000a000000
+  Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
+  magicComponents:
+  - {fileID: 1814368614}
+  - {fileID: 481768244}
+  waitTime: 10
   aliveCount: 0
 --- !u!1001 &1422640951
 PrefabInstance:
@@ -26243,6 +26536,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
   m_PrefabInstance: {fileID: 1447987382}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1447987384 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 408759321372814350, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+  m_PrefabInstance: {fileID: 1447987382}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1450202245
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26390,6 +26694,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a4b362779c847f42ab5c7af77a2de00, type: 3}
+--- !u!114 &1451014792 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 408759321372814350, guid: 5a4b362779c847f42ab5c7af77a2de00, type: 3}
+  m_PrefabInstance: {fileID: 1451014791}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1458259521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27711,6 +28026,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8903449741633459306, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
   m_PrefabInstance: {fileID: 1551254375}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1551254377 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2195975296999880917, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
+  m_PrefabInstance: {fileID: 1551254375}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1554273679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28382,14 +28708,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff1385a9e382e34b8553e5853a5ec30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstWaveMonsters: []
-  secondWaveMonsters: []
-  thirdWaveMonsters: []
-  forthWaveMonsters: []
-  numOfMonsters: 
-  Upgrade: {fileID: 0}
-  magicComponents: []
-  waitTime: 0
+  firstWaveMonsters:
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 557462274296368442, guid: 263e9fcd4e6a347498a67a0d3309a56b, type: 3}
+  - {fileID: 3632179310906476392, guid: 9f63b16240c108d469106e3b59ee9461, type: 3}
+  secondWaveMonsters:
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  - {fileID: 557462274296368442, guid: 263e9fcd4e6a347498a67a0d3309a56b, type: 3}
+  - {fileID: 3632179310906476392, guid: 9f63b16240c108d469106e3b59ee9461, type: 3}
+  thirdWaveMonsters:
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 1334910217339361080, guid: b5f63ea2bdd6bcb4bbcd660eab2d26f6, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  forthWaveMonsters:
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 1334910217339361080, guid: b5f63ea2bdd6bcb4bbcd660eab2d26f6, type: 3}
+  - {fileID: 887350385463293471, guid: 412dd1cf523bbdd478397d83cdf47338, type: 3}
+  numOfMonsters: 0f0000000f0000000f0000000f000000
+  Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
+  magicComponents:
+  - {fileID: 1401766162}
+  waitTime: 15
   aliveCount: 0
 --- !u!1001 &1591240418
 PrefabInstance:
@@ -29985,6 +30324,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a4b362779c847f42ab5c7af77a2de00, type: 3}
+--- !u!114 &1667003591 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 408759321372814350, guid: 5a4b362779c847f42ab5c7af77a2de00, type: 3}
+  m_PrefabInstance: {fileID: 1667003590}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1667389894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31294,14 +31644,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff1385a9e382e34b8553e5853a5ec30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstWaveMonsters: []
-  secondWaveMonsters: []
-  thirdWaveMonsters: []
-  forthWaveMonsters: []
-  numOfMonsters: 
-  Upgrade: {fileID: 0}
-  magicComponents: []
-  waitTime: 0
+  firstWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 7096070735854467088, guid: 31b3c60bba3e9f34e82c7c362bbb43e3, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  secondWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 7096070735854467088, guid: 31b3c60bba3e9f34e82c7c362bbb43e3, type: 3}
+  - {fileID: 1758849646164779094, guid: b27d8b057a78b8542bc40b507022266c, type: 3}
+  thirdWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 2306338860249110187, guid: 1f41a0b7892cfe64082b90fe526ca828, type: 3}
+  - {fileID: 8925696123932433810, guid: b1e4ee6add1347e4292cc8b7f6e09c0e, type: 3}
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 557462274296368442, guid: 263e9fcd4e6a347498a67a0d3309a56b, type: 3}
+  forthWaveMonsters:
+  - {fileID: 3027720348572540393, guid: db4fe5565b460cb4e952d16cd8c788ae, type: 3}
+  - {fileID: 2306338860249110187, guid: 1f41a0b7892cfe64082b90fe526ca828, type: 3}
+  - {fileID: 8925696123932433810, guid: b1e4ee6add1347e4292cc8b7f6e09c0e, type: 3}
+  - {fileID: 5787717462349492735, guid: e1c363c073c32414c886aacbe0c9a506, type: 3}
+  - {fileID: 557462274296368442, guid: 263e9fcd4e6a347498a67a0d3309a56b, type: 3}
+  numOfMonsters: 0a0000000a0000000a0000000a000000
+  Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
+  magicComponents:
+  - {fileID: 1451014792}
+  waitTime: 10
   aliveCount: 0
 --- !u!1 &1752975184
 GameObject:
@@ -32329,7 +32696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 41887485}
-  randomTalk: {fileID: 0}
+  randomTalk: {fileID: 1787087625}
 --- !u!1 &1787087622
 GameObject:
   m_ObjectHideFlags: 0
@@ -32799,6 +33166,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8903449741633459306, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
   m_PrefabInstance: {fileID: 1814368612}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1814368614 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2195975296999880917, guid: b88105b492b28a746b0f4cc139d45116, type: 3}
+  m_PrefabInstance: {fileID: 1814368612}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1819981930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33286,9 +33664,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1256478409}
   - {fileID: 612838700}
   - {fileID: 1771053625}
+  - {fileID: 1311744048}
+  - {fileID: 1790408203}
+  - {fileID: 1256478409}
   - {fileID: 6293044352057428958}
   - {fileID: 363201463}
   - {fileID: 1691249823}
@@ -33300,8 +33680,6 @@ Transform:
   - {fileID: 1371493789}
   - {fileID: 1255316835}
   - {fileID: 68372941}
-  - {fileID: 1311744048}
-  - {fileID: 1790408203}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1843542152
@@ -33674,6 +34052,18 @@ PrefabInstance:
       value: Portal_skilllevel_3
       objectReference: {fileID: 0}
     - target: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.35
       objectReference: {fileID: 0}
@@ -33718,6 +34108,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+--- !u!114 &1859800130 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 408759321372814350, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+  m_PrefabInstance: {fileID: 1859800129}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1864114677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34978,6 +35379,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a4b362779c847f42ab5c7af77a2de00, type: 3}
+--- !u!114 &1945248339 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 408759321372814350, guid: 5a4b362779c847f42ab5c7af77a2de00, type: 3}
+  m_PrefabInstance: {fileID: 1945248338}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1953563969
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36100,6 +36512,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+--- !u!114 &2007177057 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 408759321372814350, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+  m_PrefabInstance: {fileID: 2007177056}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2020217807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38282,6 +38705,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8903449741633459306, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
   m_PrefabInstance: {fileID: 2128576306}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2128576308 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 408759321372814350, guid: aa903d065b959e94f94b3a6bc16188b1, type: 3}
+  m_PrefabInstance: {fileID: 2128576306}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2129779465
 GameObject:
   m_ObjectHideFlags: 0
