@@ -8,7 +8,8 @@ public class PlayerAttack : MonoBehaviour
 {
     public Player player;
     public bool isAttacking = false;
-    public Collider currentSwordCollider;
+    public Collider waterCollider;
+    public Collider fireCollider;
     public Collider air1Collider;
     public Collider air2Collider;
     public Collider earth1Collider;
@@ -17,7 +18,6 @@ public class PlayerAttack : MonoBehaviour
     private void Start()
     {
         player = GetComponentInChildren<Player>();
-        currentSwordCollider = player.waterCollider;  // 기본적으로 waterCollider 선택
     }
 
     public void SetActiveSword(int swordNumber)
@@ -26,14 +26,14 @@ public class PlayerAttack : MonoBehaviour
         switch (swordNumber)
         {
             case 1:
-                currentSwordCollider = player.waterCollider;
+                waterCollider = player.waterCollider;
                 break;
             case 2:
-                currentSwordCollider = player.fireCollider;
+                fireCollider = player.fireCollider;
                 break;
             case 3:
-                currentSwordCollider = player.air1Collider;
-                currentSwordCollider = player.air2Collider;
+                air1Collider = player.air1Collider;
+                air2Collider = player.air2Collider;
                 break;
             case 4:
                 // 두 개의 충돌체를 처리
@@ -49,9 +49,13 @@ public class PlayerAttack : MonoBehaviour
     public void EnableSwordCollider()
     {
         isAttacking = true;
-        if (currentSwordCollider != null)
+        if (waterCollider != null)
         {
-            currentSwordCollider.enabled = true;  // 선택된 무기 충돌체 활성화
+            waterCollider.enabled = true;  // 선택된 무기 충돌체 활성화
+        }
+        if (fireCollider != null)
+        {
+            fireCollider.enabled = true;  // 선택된 무기 충돌체 활성화
         }
         // earth,air 무기의 경우 두 개의 충돌체 모두 활성화
         if (earth1Collider != null && earth2Collider != null)
@@ -69,9 +73,13 @@ public class PlayerAttack : MonoBehaviour
     public void DisableSwordCollider()
     {
         isAttacking = false;
-        if (currentSwordCollider != null)
+        if (waterCollider != null)
         {
-            currentSwordCollider.enabled = false;  // 선택된 무기 충돌체 비활성화
+            waterCollider.enabled = false;  // 선택된 무기 충돌체 활성화
+        }
+        if (fireCollider != null)
+        {
+            fireCollider.enabled = false;  // 선택된 무기 충돌체 활성화
         }
         // earth 무기의 경우 두 개의 충돌체 모두 비활성화
         if (earth1Collider != null && earth2Collider != null)
@@ -79,7 +87,7 @@ public class PlayerAttack : MonoBehaviour
             earth1Collider.enabled = false;
             earth2Collider.enabled = false;
         }
-        if (air1Collider != null && air2Collider != null)
+        if(air1Collider != null && air2Collider != null)
         {
             air1Collider.enabled = false;
             air2Collider.enabled = false;
