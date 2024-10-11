@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Range : BaseMonster
 {
@@ -13,6 +14,7 @@ public class Range : BaseMonster
     protected override void Awake()
     {
         base.Awake();
+        nav = GetComponent<NavMeshAgent>();
         ResetCoolTime();
     }
 
@@ -24,7 +26,6 @@ public class Range : BaseMonster
 
     protected override void Attack()
     {
-
         int skillIndex = random.Next(0, 2); // NumberOfSkills는 2로 설정
 
         switch (skillIndex)
@@ -46,11 +47,8 @@ public class Range : BaseMonster
             return;
         }
 
-        // 몬스터의 전방 방향 벡터를 얻어옴
-        Vector3 forwardDirection = transform.forward;
-
-        // 투사체 발사 위치 계산
-        Vector3 spawnPosition = transform.position + forwardDirection * projectileSpawnOffset.z + projectileSpawnOffset;
+        // 투사체 발사 위치 계산 (로컬 좌표 기준)
+        Vector3 spawnPosition = transform.TransformPoint(projectileSpawnOffset);
 
         // 플레이어 방향으로 투사체 발사
         Vector3 direction = (player.transform.position - spawnPosition).normalized;
@@ -59,5 +57,13 @@ public class Range : BaseMonster
         // 투사체의 Projectile 컴포넌트 설정
         Projectile projectileComponent = projectile.GetComponent<Projectile>();
         projectileComponent.damage = ATK2; // 몬스터의 공격력을 투사체 데미지로 설정
+
+        // 투사체에 속도 추가 (Rigidbody가 있는 경우)
+        Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
+        if (projectileRigidbody != null)
+        {
+            float projectileSpeed = 20.0f; // 예시로 설정한 투사체 속도
+            projectileRigidbody.velocity = direction * projectileSpeed;
+        }
     }
 }

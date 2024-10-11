@@ -7,9 +7,16 @@ public class Tank : BaseMonster
     public float knockbackForce = 10f; // 넉백 힘
     public float knockbackDuration = 0.5f; // 넉백 지속 시간
 
+    private GameObject playerObject; // 플레이어 객체 캐시
+
+    protected override void Awake()
+    {
+        base.Awake();
+        playerObject = GameObject.FindGameObjectWithTag("Player"); // 플레이어 객체 캐시
+    }
+
     protected override void Attack()
     {
-
         int skillIndex = random.Next(0, 2); // NumberOfSkills는 2로 설정
 
         switch (skillIndex)
@@ -19,15 +26,21 @@ public class Tank : BaseMonster
                 break;
             case 1: // 스킬 공격
                 TryAttack(ref Attack02CanUse, attack2Radius, SkillCoolTime2, Attack2, true);
-                PerformAttack();
+                StartCoroutine(PerformAttackAfterDelay()); // 공격 애니메이션 후 넉백 적용
                 break;
         }
     }
 
+    private IEnumerator PerformAttackAfterDelay()
+    {
+        float attackDuration = GetAnimationLength(attack02Hash); // 공격 애니메이션 길이 가져오기
+        yield return new WaitForSeconds(attackDuration); // 애니메이션 끝날 때까지 기다림
+        PerformAttack(); // 넉백 적용
+    }
+
     public void PerformAttack()
     {
-        // 플레이어를 넉백시키기 위해 플레이어 객체를 찾아옴
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        // 플레이어를 넉백시키기 위해 플레이어 객체를 사용
         if (playerObject != null)
         {
             Rigidbody playerRigidbody = playerObject.GetComponent<Rigidbody>();
@@ -50,7 +63,7 @@ public class Tank : BaseMonster
     {
         yield return new WaitForSeconds(knockbackDuration);
 
-        // 넉백 힘을 초기화하여 플레이어가 다시 움직일 수 있도록 함
-        playerRigidbody.velocity = Vector3.zero;
+        // 넉백 후에 물리적 속도를 자연스럽게 멈추도록 함
+        // playerRigidbody.velocity = Vector3.zero; // 강제 멈춤 대신 자연스럽게 처리할 수 있음
     }
 }

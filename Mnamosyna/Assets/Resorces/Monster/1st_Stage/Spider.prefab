@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 5542846137489536977}
   Distance: {fileID: 6448749385905138347}
 --- !u!1 &5111203060194892491
 GameObject:
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 5542846137489536977}
   player: {fileID: 0}
   attackDistance: {fileID: 8277221798393280929}
   skillDistance: {fileID: 1173212807834270058}
@@ -691,14 +691,14 @@ MonoBehaviour:
   ATK1: 5
   ATK2: 5
   NumberOfSkills: 2
-  SkillCoolTime1: 4
+  SkillCoolTime1: 2
   SkillCoolTime2: 8
   Defense: 0
   Move_Speed: 5
-  ApproachRadius: 8
+  ApproachRadius: 0
   DetectionRadius: 100
   attack1Radius: 2
-  attack2Radius: 8
+  attack2Radius: 5
   invincibleTime: 0.5
   spawner: {fileID: 0}
   bossSpawner: {fileID: 0}

@@ -1,75 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1339130052665103478
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8289807991868263403}
-  - component: {fileID: 4428824180692168476}
-  - component: {fileID: 4030849711025454770}
-  m_Layer: 8
-  m_Name: MaxRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8289807991868263403
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339130052665103478}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1772088202439521380}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &4428824180692168476
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339130052665103478}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 20
-  m_Height: 40
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4030849711025454770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339130052665103478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Distance: {fileID: 4428824180692168476}
 --- !u!1 &2435535744339868787
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c466bac5fba56104f9939eec349952e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Monster: {fileID: 0}
+  monster: {fileID: 1431133647605411550}
+  Monster: {fileID: -306547424900868031}
 --- !u!114 &857115174615978849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,7 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: -306547424900868031}
   Distance: {fileID: 341663422082911979}
 --- !u!1 &7690741101372715478
 GameObject:
@@ -586,7 +516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.58431375, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -595,11 +525,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 30
+    m_FontSize: 150
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 40
+    m_MinSize: 1
+    m_MaxSize: 150
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
@@ -712,7 +642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: -306547424900868031}
   player: {fileID: 0}
   attackDistance: {fileID: 6088171406465120166}
   skillDistance: {fileID: 7422779260905300206}
@@ -785,9 +715,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5fab215e18584731b9b61359399412aa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3759876072757273294}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5fab215e18584731b9b61359399412aa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8289807991868263403}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5fab215e18584731b9b61359399412aa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8697893087590860332}
@@ -880,24 +807,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160f8e961b6919a4a9a090da890e7444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  Max_HP: 0
-  Cur_HP: 0
-  ATK1: 0
-  ATK2: 0
-  NumberOfSkills: 0
-  SkillCoolTime1: 0
-  SkillCoolTime2: 0
+  Name: 5.StingRay
+  Max_HP: 20
+  Cur_HP: 2
+  ATK1: 8
+  ATK2: 8
+  NumberOfSkills: 2
+  SkillCoolTime1: 5
+  SkillCoolTime2: 5
   Defense: 0
-  Move_Speed: 0
+  Move_Speed: 3
   ApproachRadius: 0
-  DetectionRadius: 0
-  attack1Radius: 0
-  attack2Radius: 0
+  DetectionRadius: 100
+  attack1Radius: 5
+  attack2Radius: 5
   invincibleTime: 0.5
   spawner: {fileID: 0}
-  exclamationMark: {fileID: 0}
-  damageText: {fileID: 0}
+  bossSpawner: {fileID: 0}
+  exclamationMark: {fileID: 3057545438695264292}
+  damageText: {fileID: 2987645937366454592}
   isAttack01: 0
   isAttack02: 0
   attack01Hash: 0

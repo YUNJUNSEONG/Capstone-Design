@@ -299,76 +299,6 @@ Transform:
   - {fileID: 5167248193904956369}
   m_Father: {fileID: 6719450117016216735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &745455550918272058
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6457387456324136950}
-  - component: {fileID: 6499364477305688149}
-  - component: {fileID: 1781758520505060893}
-  m_Layer: 0
-  m_Name: MaxRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6457387456324136950
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745455550918272058}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.03688756, y: 0.706144, z: 0.03688756, w: 0.706144}
-  m_LocalPosition: {x: 0, y: 0.13463865, z: -0.5692238}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9024551120265677951}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &6499364477305688149
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745455550918272058}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1781758520505060893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745455550918272058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Distance: {fileID: 6499364477305688149}
 --- !u!1 &847308826957678069
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,7 +819,6 @@ Transform:
   m_Children:
   - {fileID: 2054335648373040402}
   - {fileID: 5220940093872646193}
-  - {fileID: 6457387456324136950}
   - {fileID: 5237770012487866063}
   - {fileID: 2265214362301270730}
   - {fileID: 1259991163290066356}
@@ -992,16 +921,17 @@ MonoBehaviour:
   ATK1: 6
   ATK2: 6
   NumberOfSkills: 2
-  SkillCoolTime1: 5
-  SkillCoolTime2: 10
+  SkillCoolTime1: 4
+  SkillCoolTime2: 8
   Defense: 0.2
   Move_Speed: 5
-  ApproachRadius: 8
+  ApproachRadius: 0
   DetectionRadius: 100
   attack1Radius: 2
-  attack2Radius: 8
+  attack2Radius: 5
   invincibleTime: 0.5
   spawner: {fileID: 0}
+  bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 8181907727707431818}
   damageText: {fileID: 3074639781034051619}
   isAttack01: 0
@@ -1343,7 +1273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 883823670538407370}
   Distance: {fileID: 8307730366420294339}
 --- !u!1 &6067870373570743683
 GameObject:
@@ -1638,7 +1568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 883823670538407370}
   player: {fileID: 0}
   attackDistance: {fileID: 1485494463718985940}
   skillDistance: {fileID: 5291702293510223626}

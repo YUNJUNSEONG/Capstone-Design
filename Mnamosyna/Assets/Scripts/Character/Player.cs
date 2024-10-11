@@ -35,6 +35,8 @@ public class Player : PlayerStat
     private Coroutine CommandCoroutine = null;
     private Queue<string> inputBuffer = new Queue<string>();
     int hashAttackCount = Animator.StringToHash("AttackCount");
+    public bool isGameOver = false;
+
 
     public Camera followCamera;
 
@@ -65,6 +67,7 @@ public class Player : PlayerStat
     public GameObject BaseMesh_Earth;
     // 현재 설정된 BaseMesh
     private GameObject currentBaseMesh;
+
 
     public Collider waterCollider; 
     public Collider fireCollider;  
@@ -136,6 +139,7 @@ public class Player : PlayerStat
         gameOverPanel.SetActive(false);
         StartCoroutine(RegenerateStats());
 
+        DisableAllColliders();  // 시작 시 모든 충돌체를 비활성화
         if (waterCollider == null) waterCollider = transform.Find("Sword1").GetComponent<Collider>();
         if (fireCollider == null) fireCollider = transform.Find("Sword2").GetComponent<Collider>();
         if (air1Collider == null) air1Collider = transform.Find("Sword3-1").GetComponent<Collider>();
@@ -143,6 +147,7 @@ public class Player : PlayerStat
         if (earth1Collider == null) earth1Collider = transform.Find("Sword4").GetComponent<Collider>();
         if (earth2Collider == null) earth2Collider = transform.Find("Shield").GetComponent<Collider>();
 
+        StartCoroutine(ClearCommand());
     }
 
 
@@ -185,6 +190,12 @@ public class Player : PlayerStat
                 attackDelay = 0.0f;
             }
         }
+
+        if (isGameOver)
+        {
+            Destroy(this.gameObject); // 게임 오버 시 오브젝트 파괴
+        }
+
     }
 
     void GetInput()
@@ -265,12 +276,17 @@ public class Player : PlayerStat
 
     void LeftAttack()
     {
-        UseSkill();
-
-        if (!isAttack)
+        skillCommand += 'L';
+        bool skillUsed = UseSkill();// Check if the skill is triggered
+        if (UseSkill())
         {
             isAttack = true;
-            skillCommand += 'L';
+            StartCoroutine(AttackEnd(skillCommand));
+        }
+
+        if (!skillUsed && !isAttack)
+        {
+            isAttack = true;
             var playerAttack = GetComponent<PlayerAttack>();
             if (playerAttack != null)
             {
@@ -282,19 +298,26 @@ public class Player : PlayerStat
 
             // LeftAttack 트리거 설정
             anim.SetTrigger("LeftAttack");
+            Debug.Log("LeftAttack Triggered");  // Debug log to check if trigger is set
 
             attackDelay = 0;
             StartCoroutine(AttackEnd("LeftAttack"));
         }
     }
 
+
     void RightAttack()
     {
-        UseSkill();
-
-        if (!isAttack)
+        skillCommand += 'R';
+        bool skillUsed = UseSkill(); // Check if the skill is triggered
+        if (UseSkill())
         {
-            skillCommand += 'R';
+            isAttack = true;
+            StartCoroutine(AttackEnd(skillCommand));
+        }
+
+        if (!skillUsed && !isAttack)
+        {
             isAttack = true;
             var playerAttack = GetComponent<PlayerAttack>();
             if (playerAttack != null)
@@ -310,6 +333,8 @@ public class Player : PlayerStat
             StartCoroutine(AttackEnd("RightAttack"));
         }
     }
+
+
 
     void FaceMouseDirection()
     {
@@ -327,11 +352,18 @@ public class Player : PlayerStat
     // 플레이어 대쉬
     void Dash()
     {
+        // 스킬이 발동되었는지 확인
+        if (CheckIfSkillUsed()) return;
+        if (UseSkill())
+        {
+            isAttack = true;
+
+        }
+
         if (!isDash)
         {
-            UseSkill();
-            skillCommand += 'S';
-            FaceMouseDirection();
+            skillCommand += 'S'; // 커맨드에 'S' 추가
+            FaceMouseDirection(); // 대쉬 방향 설정
 
             isDash = true;
             anim.SetTrigger("Dash");
@@ -360,9 +392,7 @@ public class Player : PlayerStat
         }
     }
 
-
-    // 스킬 사용 메서드
-    void UseSkill()
+    bool UseSkill()
     {
         for (int i = unlockedSkills.Count - 1; i >= 0; i--)
         {
@@ -371,12 +401,9 @@ public class Player : PlayerStat
                 if (unlockedSkills[i].Level > 0 && Cur_Stamina >= unlockedSkills[i].useStamina)
                 {
                     isAttack = true;
-                    //isAttackReady = false;
+
                     Debug.Log(unlockedSkills[i].AnimationTrigger);
-                    if (CommandCoroutine != null)
-                    {
-                        StopCoroutine(CommandCoroutine);
-                    }
+
                     float floatSkillDamage = unlockedSkills[i].damagePercent * Damage();
                     int intSkillDamage = Mathf.RoundToInt(floatSkillDamage);
                     float floatLevelDamage = unlockedSkills[i].Level * unlockedSkills[i].addDmg;
@@ -384,51 +411,59 @@ public class Player : PlayerStat
                     int skillDamage = intSkillDamage + intLevelDamage;
 
                     anim.SetTrigger(unlockedSkills[i].AnimationTrigger);
+
                     var playerAttack = GetComponent<PlayerAttack>();
                     if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
+
                     StartCoroutine(AttackEnd(unlockedSkills[i].AnimationTrigger));
 
                     Cur_Stamina -= unlockedSkills[i].useStamina;
-                    skillCommand = "";
-                    inputBuffer.Clear();
-                    break;
+                    skillCommand = "";  // Reset the command after skill use
+                    inputBuffer.Clear(); // Clear the input buffer to prevent additional input issues
+                    StartCoroutine(AttackEnd(skillCommand));
+
+                    return true;  // Skill used successfully
                 }
                 else
                 {
                     Debug.Log("스테미너가 부족합니다.");
-                    break;
+                    return false;
                 }
             }
         }
+        return false;  // No skill matched
     }
+
+
+    // 스킬이 발동되었는지 확인하는 메서드
+    bool CheckIfSkillUsed()
+    {
+        // 스킬이 발동되었다면 UseSkill()에서 true를 반환하게 함
+        return UseSkill();
+    }
+
 
     IEnumerator AttackEnd(string animationTrigger)
     {
-        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        while (!stateInfo.IsName(animationTrigger))
-        {
-            yield return null;
-            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        }
+        // 1초 대기
+        yield return new WaitForSeconds(2f);
 
-        // 애니메이션 길이의 절반만큼 대기
-        float animationLength = stateInfo.length / 2;
-        yield return new WaitForSeconds(animationLength);
-
-        var playerAttack = GetComponent<PlayerAttack>();
-        if (playerAttack != null)
-        {
-            playerAttack.DisableSwordCollider();
-        }
-
+        // 공격 상태 해제
         isAttack = false;
-        //isAttackReady = true;
 
+        // 현재 선택된 무기의 충돌체 비활성화
+        DisableSwordCollider();
+
+        // 입력 버퍼에 값이 있을 경우, 다음 입력 처리
         if (inputBuffer.Count > 0)
         {
             ProcessNextInput();
         }
+
+        Debug.Log("Attack ended and isAttack set to false");
     }
+
+
 
     //입력 처리 및 다음 버퍼 추가
     void HandleInput()
@@ -453,44 +488,53 @@ public class Player : PlayerStat
     // 플레이어의 스킬 커맨드 초기화 코루틴
     IEnumerator ClearCommand()
     {
-        yield return new WaitForSeconds(3);
-        skillCommand = " ";
+        while (true)
+        {
+            yield return new WaitForSeconds(7);
+            skillCommand = " ";
+        }
     }
 
-    //커맨드 버퍼에 넣기
     void AddInputToBuffer(string input)
     {
-        inputBuffer.Enqueue(input);
+        inputBuffer.Enqueue(input); // 큐에 추가하는 대신, 입력 즉시 처리
+        skillCommand += input;
+
+        // 스킬을 즉시 확인하고 발동
+        UseSkill();
+
         if (CommandCoroutine != null)
         {
             StopCoroutine(CommandCoroutine);
         }
-        skillCommand += input;
         CommandCoroutine = StartCoroutine(ClearCommand());
     }
 
-    //입력 버퍼에서 다음 입력을 꺼내어 처리
     void ProcessNextInput()
     {
-        if (inputBuffer.Count > 0)//&& !isAttack)
+        if (inputBuffer.Count > 0)
         {
             string nextInput = inputBuffer.Peek(); // 큐의 맨 위 요소를 확인
+            Debug.Log("Next input: " + nextInput);  // Log next input
 
             switch (nextInput)
             {
                 case "L":
                     HandleLeftClick();
+                    inputBuffer.Dequeue();
                     break;
                 case "R":
                     HandleRightClick();
+                    inputBuffer.Dequeue();
                     break;
                 case "S":
                     Dash();
-                    inputBuffer.Dequeue(); // 대쉬 입력은 항상 하나만 처리
+                    inputBuffer.Dequeue();
                     break;
             }
         }
     }
+
 
 
     void HandleLeftClick()
@@ -596,6 +640,7 @@ public class Player : PlayerStat
         anim.SetTrigger("Dead");
         gameOverPanel.SetActive(true); // 게임오버 패널 활성화
         Invoke("StopTime", 0.6f); // 2초 뒤에 StopTime 메서드 실행
+        isGameOver = true;
     }
 
     private void StopTime()
@@ -784,4 +829,105 @@ public class Player : PlayerStat
     }
     #endregion
 
+
+    private void DisableAllColliders()
+    {
+        if (waterCollider != null) waterCollider.enabled = false;
+        if (fireCollider != null) fireCollider.enabled = false;
+        if (air1Collider != null) air1Collider.enabled = false;
+        if (air2Collider != null) air2Collider.enabled = false;
+        if (earth1Collider != null) earth1Collider.enabled = false;
+        if (earth2Collider != null) earth2Collider.enabled = false;
+    }
+
+    public void SetActiveSword(int swordNumber)
+    {
+        // 모든 무기 충돌체 비활성화
+        DisableAllColliders();
+
+        // 현재 사용 중인 무기의 충돌체 선택 및 활성화
+        switch (swordNumber)
+        {
+            case 1:
+                waterCollider.enabled = true;
+                break;
+            case 2:
+                fireCollider.enabled = true;
+                break;
+            case 3:
+                air1Collider.enabled = true;
+                air2Collider.enabled = true;
+                break;
+            case 4:
+                earth1Collider.enabled = true;
+                earth2Collider.enabled = true;
+                break;
+            default:
+                Debug.LogWarning("Invalid sword number");
+                return;
+        }
+    }
+
+    public void EnableSwordCollider()
+    {
+        isAttack = true;
+
+        // 현재 선택된 무기의 충돌체 활성화 (이미 활성화된 상태일 경우 중복 활성화 방지)
+        if (waterCollider != null && !waterCollider.enabled)
+        {
+            waterCollider.enabled = true;
+        }
+        if (fireCollider != null && !fireCollider.enabled)
+        {
+            fireCollider.enabled = true;
+        }
+        if (earth1Collider != null && !earth1Collider.enabled)
+        {
+            earth1Collider.enabled = true;
+            earth2Collider.enabled = true;
+        }
+        if (air1Collider != null && !air1Collider.enabled)
+        {
+            air1Collider.enabled = true;
+            air2Collider.enabled = true;
+        }
+    }
+
+    public void DisableSwordCollider()
+    {
+        isAttack = false;
+
+        // 현재 선택된 무기의 충돌체 비활성화
+        if (waterCollider != null)
+        {
+            waterCollider.enabled = false;
+        }
+        if (fireCollider != null)
+        {
+            fireCollider.enabled = false;
+        }
+        if (earth1Collider != null && earth2Collider != null)
+        {
+            earth1Collider.enabled = false;
+            earth2Collider.enabled = false;
+        }
+        if (air1Collider != null && air2Collider != null)
+        {
+            air1Collider.enabled = false;
+            air2Collider.enabled = false;
+        }
+    }
+
+    // 몬스터와의 충돌을 감지하는 메서드
+    private void OnTriggerEnter(Collider other)
+    {
+        if (isAttack && other.CompareTag("Monster"))
+        {
+            BaseMonster monster = other.GetComponent<BaseMonster>();
+            if (monster != null)
+            {
+                monster.TakeDamage(Damage());  // 몬스터에게 데미지 적용
+            }
+        }
+    }
 }

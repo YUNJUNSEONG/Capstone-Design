@@ -275,6 +275,11 @@ public class BaseMonster : MobStat
         Attack02CanUse -= Time.deltaTime;
 
         RotateMonsterToCharacter();
+
+        if (player != null)
+        {
+            nav.SetDestination(player.transform.position);
+        }
     }
 
     // 몬스터의 피격 상황 처리 함수
@@ -435,23 +440,22 @@ public class BaseMonster : MobStat
 
     protected virtual void OnTriggerStay(Collider other)
     {
-        if (isAttack01)
+        if (other.gameObject.TryGetComponent(out Player player))
         {
-            if (isAttack02)
+            Debug.Log("플레이어 감지됨"); // 추가된 로그
+            if (isAttack01)
             {
-                if (other.gameObject.TryGetComponent(out Player player))
+                if (isAttack02)
                 {
-                    player.TakeDamage(Damage(1)); // monster의 데미지 1번 = 스킬 공격
+                    player.TakeDamage(Damage(1)); // 스킬 공격
                 }
-            }
-            else
-            {
-                if (other.gameObject.TryGetComponent(out Player player))
+                else
                 {
-                    player.TakeDamage(Damage(0)); // monster의 데미지 0번 = 기본 공격
+                    player.TakeDamage(Damage(0)); // 기본 공격
                 }
             }
         }
     }
-}
 
+
+}

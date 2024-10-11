@@ -18,6 +18,8 @@ public class Spawner : MonoBehaviour
     public float waitTime;
     public int aliveCount;
 
+    public GameObject babySlimePrefab; // babySlime 프리팹 추가
+
     public delegate void CombatEndHandler();
     public event CombatEndHandler OnCombatEnd;
 
@@ -64,6 +66,20 @@ public class Spawner : MonoBehaviour
             if (Monster != null)
             {
                 Monster.spawner = this;
+            }
+        }
+    }
+
+    public void SpawnBabySlime(Vector3 position)
+    {
+        if (babySlimePrefab != null)
+        {
+            GameObject babySlime = Instantiate(babySlimePrefab, position, Quaternion.identity);
+            var monster = babySlime.GetComponent<BaseMonster>();
+            if (monster != null)
+            {
+                monster.spawner = this;
+                aliveCount++; // babySlime 소환 시 aliveCount 증가
             }
         }
     }

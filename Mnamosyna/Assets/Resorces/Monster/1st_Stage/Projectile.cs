@@ -3,9 +3,8 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public int damage;
-    public float speed = 10.0f;
-    public float range = 10.0f;
-    public float dropSpeed = 2.0f; // 투사체가 내려가는 속도
+    public float speed = 10.0f;  // 투사체 속도
+    public float range = 10.0f;  // 사거리
 
     private Vector3 startPosition;
 
@@ -16,11 +15,8 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        // 이동 처리
+        // 투사체를 전방으로 이동 (일직선 이동)
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
-        // 수직으로 내려가는 처리
-        transform.Translate(Vector3.down * dropSpeed * Time.deltaTime);
 
         // 사거리 초과 시 투사체 삭제
         if (Vector3.Distance(startPosition, transform.position) >= range)
@@ -39,7 +35,13 @@ public class Projectile : MonoBehaviour
             {
                 player.TakeDamage(damage);
             }
+
             Destroy(gameObject); // 충돌 후 투사체 삭제
+        }
+        // 장애물과 충돌 시 투사체 삭제
+        else if (other.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject);
         }
     }
 }

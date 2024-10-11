@@ -165,7 +165,8 @@ public class RedDragon : BossStat
 
     protected virtual void UpdateAttackState()
     {
-        nav.SetDestination(transform.position); // 보스가 공격 중일 때는 멈춥니다.
+        //nav.SetDestination(transform.position); // 보스가 공격 중일 때는 멈춥니다.
+        nav.isStopped = true;
 
         if (Time.time - lastAttackTime >= attackCooldown)
         {
@@ -255,16 +256,24 @@ public class RedDragon : BossStat
         isDead = true;
         currentState = State.Die;
         anim.SetTrigger(DieHash);
+
         OnDeath?.Invoke();
 
         spawner.aliveCount--;
         spawner.CheckAliveCount();
         spawner.NotifyAliveCountChanged();
 
-        Invoke("DestroyObject", 2.0f);
-        Collider collider = GetComponent<Collider>();
-        if (collider != null) { collider.enabled = false; }
+        // 콜라이더 비활성화는 2초 뒤에 처리합니다.
+        Invoke("DisableCollider", 2.0f);
+        Invoke("DestroyObject", 4.0f); // 4초 후 객체를 삭제합니다.
     }
+
+    void DisableCollider()
+    {
+        Collider collider = GetComponent<Collider>();
+        if (collider != null) collider.enabled = false;
+    }
+
 
     protected virtual IEnumerator FlashOnHit()
     {

@@ -81,7 +81,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Combo01_2
+  m_Name: LeftAttack2
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -610,10 +610,10 @@ AnimatorStateMachine:
     m_Position: {x: 420, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7949510886244624988}
-    m_Position: {x: 430, y: 250, z: 0}
+    m_Position: {x: 730, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6476149448690639118}
-    m_Position: {x: 430, y: 360, z: 0}
+    m_Position: {x: 1030, y: 140, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions:
@@ -621,8 +621,8 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 100, y: 150, z: 0}
-  m_ExitPosition: {x: 820, y: 250, z: 0}
+  m_EntryPosition: {x: 130, y: 140, z: 0}
+  m_ExitPosition: {x: 680, y: 320, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 3583512794805994839}
 --- !u!1101 &-3970461838037988572
@@ -1189,7 +1189,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Combo01_1
+  m_Name: LeftAttack1
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -1466,7 +1466,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Combo01_3
+  m_Name: LeftAttack3
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:

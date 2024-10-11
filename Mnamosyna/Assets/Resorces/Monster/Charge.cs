@@ -15,8 +15,10 @@ public class Charge : BaseMonster
     protected override void Awake()
     {
         base.Awake();
+        nav = GetComponent<NavMeshAgent>();
         ResetCoolTime();
     }
+
 
     void ResetCoolTime()
     {
@@ -40,6 +42,7 @@ public class Charge : BaseMonster
         }
     }
 
+
     protected override void Attack2()
     {
         anim.SetTrigger(Attack02Hash);
@@ -59,15 +62,19 @@ public class Charge : BaseMonster
         Vector3 chargeTargetPosition = startPosition + chargeDirection * chargeDistance;
 
         float elapsedTime = 0f;
-        float delay = GetAnimationLength(attack02Hash);
+        nav.speed = chargeSpeed;
+        nav.isStopped = false; // 이동 시작
+
         while (elapsedTime < chargeDuration)
         {
-            nav.speed = chargeSpeed;
             nav.SetDestination(chargeTargetPosition);
 
-            // 목표 위치에 도달했는지 확인
-            if (Vector3.Distance(transform.position, chargeTargetPosition) < nav.stoppingDistance)
+            // 플레이어와의 거리 확인 및 정지 처리
+            if (Vector3.Distance(transform.position, player.transform.position) < nav.stoppingDistance + 0.5f)
             {
+                // 넉백 처리 및 돌진 중지
+                ApplyKnockback();
+                nav.isStopped = true; // 충돌 시 이동 멈춤
                 break;
             }
 
@@ -76,8 +83,25 @@ public class Charge : BaseMonster
         }
 
         nav.speed = Move_Speed; // 원래 속도로 복귀
-        StartCoroutine(DelayedAction(delay, OnSecondAttackAnimationEnd));
+        nav.isStopped = true; // 돌진이 끝난 후 이동 멈춤
+        StartCoroutine(DelayedAction(GetAnimationLength(attack02Hash), OnSecondAttackAnimationEnd)); // 쿨타임 관리
     }
+
+    private void ApplyKnockback()
+    {
+        Vector3 knockbackDir = (player.transform.position - transform.position).normalized;
+        player.GetComponent<Rigidbody>().AddForce(knockbackDir * knockbackForce, ForceMode.Impulse);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player")) // 플레이어와 충돌 시
+        {
+            ApplyKnockback(); // 넉백 처리
+            nav.isStopped = true; // 충돌 후 이동 멈춤
+        }
+    }
+
 
     public void OnChargeAnimationEnd()
     {

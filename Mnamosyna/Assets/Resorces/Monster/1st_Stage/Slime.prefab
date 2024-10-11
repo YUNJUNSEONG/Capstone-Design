@@ -131,18 +131,18 @@ MonoBehaviour:
   Name: slime
   Max_HP: 20
   Cur_HP: 20
-  ATK1: 0
-  ATK2: 0
+  ATK1: 3
+  ATK2: 5
   NumberOfSkills: 2
   SkillCoolTime1: 3
   SkillCoolTime2: 7
   Defense: 0
   Move_Speed: 3
   ApproachRadius: 0
-  DetectionRadius: 0
+  DetectionRadius: 100
   attack1Radius: 1.2
   attack2Radius: 2
-  invincibleTime: 1
+  invincibleTime: 0.5
   spawner: {fileID: 0}
   bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 1508338185881107144}

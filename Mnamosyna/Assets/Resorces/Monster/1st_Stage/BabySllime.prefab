@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2000656756579322060}
   - component: {fileID: 8937316031036374512}
   - component: {fileID: 3488627064594274191}
-  - component: {fileID: 7775862491378151232}
   - component: {fileID: -4044716916962435296}
+  - component: {fileID: 7707394707850443122}
   m_Layer: 8
   m_Name: BabySllime
   m_TagString: Monster
@@ -95,43 +95,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7775862491378151232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 154257601896337909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a34d7dfc1db403e4db3299d15ace3c1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: BabySlime
-  Max_HP: 15
-  Cur_HP: 15
-  ATK: 3
-  Skill_ATK1: 6
-  Skill_ATK2: 0
-  NumberOfSkills: 2
-  SkillCoolTime1: 3
-  SkillCoolTime2: 7
-  SkillCoolTime3: 0
-  Defense: 0
-  Move_Speed: 2
-  Distance: 0
-  patrolRadius: 200
-  attack1Radius: 1.2
-  attack2Radius: 2
-  attack3Radius: 0
-  invincibleTime: 1
-  spawner: {fileID: 0}
-  exclamationMark: {fileID: 1508338185881107144}
-  damageText: {fileID: 3064743197607090223}
-  firstAttackAnimationLength: 0.8333333
-  secondAttackAnimationLength: 1.3333334
-  isAttack: 0
-  isSkill: 0
 --- !u!135 &-4044716916962435296
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -153,6 +116,41 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0.53, z: 0}
+--- !u!114 &7707394707850443122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154257601896337909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d11cae4d2d89e34e8dcbb3fe4b9f95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: BabySllime
+  Max_HP: 15
+  Cur_HP: 15
+  ATK1: 3
+  ATK2: 5
+  NumberOfSkills: 2
+  SkillCoolTime1: 3
+  SkillCoolTime2: 7
+  Defense: 0
+  Move_Speed: 3
+  ApproachRadius: 0
+  DetectionRadius: 100
+  attack1Radius: 1
+  attack2Radius: 2
+  invincibleTime: 0.5
+  spawner: {fileID: 0}
+  bossSpawner: {fileID: 0}
+  exclamationMark: {fileID: 1508338185881107144}
+  damageText: {fileID: 3064743197607090223}
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
 --- !u!1 &1010329700019522727
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.58431375, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -403,7 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 7775862491378151232}
+  monster: {fileID: 7707394707850443122}
   Distance: {fileID: 5240668465668112923}
 --- !u!1 &2485894447446984730
 GameObject:
@@ -508,76 +506,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1 &4350943957366350052
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6566435461970499239}
-  - component: {fileID: 3374549950814660979}
-  - component: {fileID: 5274396179753549390}
-  m_Layer: 0
-  m_Name: MaxRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6566435461970499239
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4350943957366350052}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5736860781607514507}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &3374549950814660979
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4350943957366350052}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 20
-  m_Height: 40
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5274396179753549390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4350943957366350052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 7775862491378151232}
-  Distance: {fileID: 3374549950814660979}
 --- !u!1 &5328199820531558125
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,7 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 154257601896337909}
-  Monster: {fileID: 7775862491378151232}
+  Monster: {fileID: 0}
 --- !u!114 &3850092867964856760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,7 +704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85b7a9f58c6e54fa56186c39eaa134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 7775862491378151232}
+  monster: {fileID: 7707394707850443122}
   player: {fileID: 0}
   attackDistance: {fileID: 7132137756352699119}
   skillDistance: {fileID: 2232600664888858330}
@@ -869,90 +797,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 0}
---- !u!1001 &22998231260228729
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 5736860781607514507}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.059489965
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -7221792422556236181, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-      propertyPath: m_Name
-      value: DetectionRange
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 390661457030483162, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-    - {fileID: -6502647036632516265, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
---- !u!4 &566061268566739858 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b24f2bbbf114e8640a25529a0ac69858, type: 3}
-  m_PrefabInstance: {fileID: 22998231260228729}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5194854896190920288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1030,12 +874,6 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 390661457030483162, guid: 43122e5f3ccf3674e888b0d7bbca2bd0, type: 3}
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 43122e5f3ccf3674e888b0d7bbca2bd0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 566061268566739858}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 43122e5f3ccf3674e888b0d7bbca2bd0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6566435461970499239}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 43122e5f3ccf3674e888b0d7bbca2bd0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6503559524629290150}

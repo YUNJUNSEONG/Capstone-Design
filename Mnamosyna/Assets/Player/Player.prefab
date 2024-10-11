@@ -20350,9 +20350,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 79c3c97fcfd3f43449092387f58643b8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7195803203475931429}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 79c3c97fcfd3f43449092387f58643b8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4143652303848597791}
   m_SourcePrefab: {fileID: 100100000, guid: 79c3c97fcfd3f43449092387f58643b8, type: 3}
 --- !u!4 &2346695583065940561 stripped
 Transform:
@@ -20516,21 +20513,6 @@ MonoBehaviour:
   m_DefaultActionMap: Character
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4143652303848597791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3160105955097573611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 947bac3708be3684d8ca96f8455275ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  player: {fileID: 0}
-  isAttacking: 0
 --- !u!1001 &7190512446860061726
 PrefabInstance:
   m_ObjectHideFlags: 0
