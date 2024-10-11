@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class RedDragon : BossStat
+public class Boss : BossStat
 {
     public enum State
     {
@@ -141,6 +141,11 @@ public class RedDragon : BossStat
             StartCoroutine(UsePattern3());
             lastPattern3Time = Time.time;
         }
+    }
+
+    public void ChangeState(State state)
+    {
+        currentState = state;
     }
 
     protected virtual void UpdateIdleState()

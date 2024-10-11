@@ -50,9 +50,10 @@ public class BossStat : MonoBehaviour
     [Header("°Å¸®")]
     [SerializeField]
     protected float ApproachRadius;
-    //[SerializeField]
-    //protected float DetectionRadius;
-
+    [SerializeField]
+    protected float DetectionRadius;
+    [SerializeField]
+    protected float AttackRadius;
 
     public int max_hp { get { return Max_HP; } set { Max_HP = value; } }
     public int cur_hp { get { return Cur_HP; } set { Cur_HP = value; } }
@@ -73,6 +74,7 @@ public class BossStat : MonoBehaviour
 
 
     public float approach { get { return ApproachRadius; } set { ApproachRadius = value; } }
-    //public float detection { get { return DetectionRadius; } set { DetectionRadius = value; } }
+    public float detection { get { return DetectionRadius; } set { DetectionRadius = value; } }
+    public float attackRadius { get { return AttackRadius; } set { AttackRadius = value; } }
 
 }
