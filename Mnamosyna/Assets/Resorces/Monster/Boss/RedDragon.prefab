@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 5858261713154989522}
   - component: {fileID: 1702405861932483417}
   - component: {fileID: 2787273618087229656}
+  - component: {fileID: 7304452873338818736}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -169,10 +170,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 083ea5b96f6aee24caf55314444bde56, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -192,6 +193,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 7026824385615397721}
   Boss: {fileID: 3494323961616943001}
+--- !u!114 &7304452873338818736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2415095420252608871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e42cd0a296c3cf34283cfe3b6f1d5745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 0}
 --- !u!1 &2665669757397962191
 GameObject:
   m_ObjectHideFlags: 0

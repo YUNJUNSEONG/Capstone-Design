@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 7772569340449929021}
   - component: {fileID: 2199627089977857990}
   - component: {fileID: 3358028135432975357}
+  - component: {fileID: 3269184739210499068}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -244,10 +245,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 083ea5b96f6aee24caf55314444bde56, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -265,8 +266,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e29927d0b4dc341b5f3fafa49fdeea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  Monster: {fileID: 0}
+  boss: {fileID: 0}
+  Boss: {fileID: 0}
+--- !u!114 &3269184739210499068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563245915143331619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e42cd0a296c3cf34283cfe3b6f1d5745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 0}
 --- !u!1 &2792588228517903974
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,11 +547,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 30
+    m_FontSize: 150
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 40
+    m_MinSize: 1
+    m_MaxSize: 150
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
@@ -763,7 +777,7 @@ PrefabInstance:
     - target: {fileID: 9500000, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: bf02bde75e7c45e48b2be2fd6a20ba30, type: 2}
+      objectReference: {fileID: 9100000, guid: 21078ae12f9ba3f40996538f10f3c5b4, type: 2}
     - target: {fileID: 13700000, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -781,6 +795,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 10375268319829133}
+    - targetCorrespondingSourceObject: {fileID: 100004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2082618521706271704}
   m_SourcePrefab: {fileID: 100100000, guid: 312893f539145244eb941380e62dd9e8, type: 3}
 --- !u!1 &4535195767671446642 stripped
 GameObject:
@@ -832,6 +849,43 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &2082618521706271704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4535195767671446642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7816fc9b9863d9342900476be1c62a07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Tortoise
+  Max_HP: 300
+  Cur_HP: 300
+  ATK: 5
+  Skill01: 11
+  Skill02: 0
+  Skill03: 0
+  NumberOfSkills: 4
+  AttackCoolTime: 3
+  SkillCoolTime1: 7
+  SkillCoolTime2: 0
+  SkillCoolTime3: 0
+  Defense: 0.2
+  Move_Speed: 3
+  ApproachRadius: 5
+  DetectionRadius: 200
+  AttackRadius: 8
+  invincibleTime: 0.5
+  spawner: {fileID: 0}
+  bossSpawner: {fileID: 0}
+  damageText: {fileID: 9173367499992763238}
+  isAttack01: 0
+  isAttack02: 0
+  attack01Hash: 0
+  attack02Hash: 0
 --- !u!4 &4535195767671799890 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
