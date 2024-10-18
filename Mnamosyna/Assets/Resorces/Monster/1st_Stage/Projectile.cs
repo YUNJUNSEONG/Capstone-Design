@@ -39,9 +39,10 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject); // 충돌 후 투사체 삭제
         }
         // 장애물과 충돌 시 투사체 삭제
+        /*
         else if (other.CompareTag("Obstacle"))
         {
             Destroy(gameObject);
-        }
+        }*/
     }
 }

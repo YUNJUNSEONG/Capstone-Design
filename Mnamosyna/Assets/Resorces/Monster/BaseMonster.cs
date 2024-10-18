@@ -156,10 +156,10 @@ public class BaseMonster : MobStat
         switch (skillIndex)
         {
             case 0:  // 기본 공격
-                TryAttack(ref Attack01CanUse, attack1Radius, SkillCoolTime1, Attack1);
+                TryAttack(ref Attack01CanUse, attack1Radius, SkillCoolTime1, Attack01);
                 break;
             case 1: // 스킬 공격
-                TryAttack(ref Attack02CanUse, attack2Radius, SkillCoolTime2, Attack2, true);
+                TryAttack(ref Attack02CanUse, attack2Radius, SkillCoolTime2, Attack02, true);
                 break;
         }
     }
@@ -181,7 +181,7 @@ public class BaseMonster : MobStat
 
 
     // 공격 애니메이션
-    protected void Attack1()
+    protected void Attack01()
     {
         anim.SetTrigger(Attack01Hash);
         float delay = GetAnimationLength(attack01Hash); // 공격 애니메이션의 길이
@@ -190,7 +190,7 @@ public class BaseMonster : MobStat
         StartCoroutine(DelayedAction(delay, OnFirstAttackAnimationEnd));
     }
 
-    protected virtual void Attack2()
+    protected virtual void Attack02()
     {
         anim.SetTrigger(Attack02Hash);
         float delay = GetAnimationLength(attack02Hash); // 공격 애니메이션의 길이
@@ -205,6 +205,7 @@ public class BaseMonster : MobStat
         yield return new WaitForSeconds(delay);
         action.Invoke();
     }
+
     // 애니메이션의 길이를 가져오는 메서드
     protected float GetAnimationLength(int hash)
     {
@@ -215,7 +216,6 @@ public class BaseMonster : MobStat
         }
         else
         {
-            Debug.LogWarning("Animation with hash " + hash + " not found in the current state.");
             return 0f;
         }
     }
@@ -399,6 +399,7 @@ public class BaseMonster : MobStat
         spawner.aliveCount--;
         spawner.CheckAliveCount();
         spawner.NotifyAliveCountChanged();  // Notify subscribers of the alive count change
+
         Debug.Log("남은 몬스터:" + spawner.aliveCount);
     }
 

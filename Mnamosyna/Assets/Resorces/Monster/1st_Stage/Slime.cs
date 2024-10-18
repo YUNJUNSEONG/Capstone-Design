@@ -30,7 +30,9 @@ public class Slime : BaseMonster
 
             // 아기 슬라임 소환
             Vector3 spawnPosition = transform.position; // 현재 슬라임의 위치를 기준으로 소환
+            StartCoroutine(WaitTwoSeconds());
             spawner.SpawnBabySlime(spawnPosition); // 스포너의 SpawnBabySlime 메서드 호출
+            spawner.SpawnBabySlime(spawnPosition);
 
             Debug.Log("남은 몬스터:" + spawner.aliveCount);
         }
@@ -38,5 +40,13 @@ public class Slime : BaseMonster
         {
             //Debug.LogError("몬스터 스크립트에서 몬스터 스포너 못 찾아옴");
         }
+    }
+
+    IEnumerator WaitTwoSeconds()
+    {
+        // 2초 대기
+        yield return new WaitForSeconds(2.0f);
+        // 2초 후 실행할 동작
+        Debug.Log("2초 대기 후 실행");
     }
 }

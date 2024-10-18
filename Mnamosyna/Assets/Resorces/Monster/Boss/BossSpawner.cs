@@ -73,7 +73,7 @@ public class BossSpawner : MonoBehaviour
             aliveMonsters.Add(monster);
         }
     }
-
+    /*
     // 첫 번째 웨이브가 사망하면 다른 몬스터도 모두 사망 처리
     public void CheckAliveCount()
     {
@@ -95,6 +95,23 @@ public class BossSpawner : MonoBehaviour
             {
                 magic.EnableComponents();
             }
+        }
+    }*/
+    public void CheckAliveCount()
+    {
+        if (aliveCount <= 0)
+        {
+            OnCombatEnd?.Invoke();
+            Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+            Vector3 playerForward = GameObject.FindGameObjectWithTag("Player").transform.forward;
+
+            Vector3 spawnOffset = new Vector3(3.0f, 0, 0);
+            Vector3 spawnPosition = playerPosition + playerForward * spawnOffset.x;
+            spawnPosition.y = 1.0f;
+
+            SpawnObject(spawnPosition);
+            isCombatEnded = true;
+            foreach (Magic0 magic in magicComponents) { magic.EnableComponents(); }
         }
     }
 

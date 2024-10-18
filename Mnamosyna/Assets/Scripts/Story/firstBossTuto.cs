@@ -5,7 +5,7 @@ using UnityEngine;
 public class firstBossTuto : MonoBehaviour
 {
     public StoryManager storyManager;
-    public BossSpawner spawner;
+    public Spawner spawner;
 
     void OnTriggerEnter(Collider other)
     {

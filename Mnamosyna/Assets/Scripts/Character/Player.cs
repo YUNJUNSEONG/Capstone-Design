@@ -28,7 +28,6 @@ public class Player : PlayerStat
     public bool isDead = false;
     public bool isAttack = false;
     public bool isDash = false;
-    public bool isSkillActive = false;
     private float attackDelay = 0.0f;
     private float attackThreshold = 1.5f; // someThreshold를 attackThreshold로 정의
 
@@ -69,12 +68,14 @@ public class Player : PlayerStat
     private GameObject currentBaseMesh;
 
 
-    public Collider waterCollider; 
-    public Collider fireCollider;  
-    public Collider air1Collider;
-    public Collider air2Collider;
-    public Collider earth1Collider;
-    public Collider earth2Collider;
+    public Collider waterACollider;
+    public TrailRenderer waterAEffect;
+    public Collider fireACollider;
+    public TrailRenderer fireAEffect;
+    public Collider airACollider;
+    public TrailRenderer airAEffect1, airAEffect2;
+    public Collider earthACollider;
+    public TrailRenderer earthAEffect1, earthAEffect2;
 
 
     // 스킬 관련 코드
@@ -140,12 +141,22 @@ public class Player : PlayerStat
         StartCoroutine(RegenerateStats());
 
         DisableAllColliders();  // 시작 시 모든 충돌체를 비활성화
-        if (waterCollider == null) waterCollider = transform.Find("Sword1").GetComponent<Collider>();
-        if (fireCollider == null) fireCollider = transform.Find("Sword2").GetComponent<Collider>();
-        if (air1Collider == null) air1Collider = transform.Find("Sword3-1").GetComponent<Collider>();
-        if (air2Collider == null) air2Collider = transform.Find("Sword3-2").GetComponent<Collider>();
-        if (earth1Collider == null) earth1Collider = transform.Find("Sword4").GetComponent<Collider>();
-        if (earth2Collider == null) earth2Collider = transform.Find("Shield").GetComponent<Collider>();
+        if (waterACollider == null)
+        {
+            waterACollider = transform.Find("Sword1").GetComponent<Collider>();
+        }
+        if (fireACollider == null)
+        {
+            fireACollider = transform.Find("Sword2").GetComponent<Collider>();
+        }
+        if (airACollider == null)
+        {
+            airACollider = transform.Find("Sword3").GetComponent<Collider>();
+        }
+        if (earthACollider == null)
+        {
+            earthACollider = transform.Find("Sword4").GetComponent<Collider>();
+        }
 
         StartCoroutine(ClearCommand());
     }
@@ -277,31 +288,34 @@ public class Player : PlayerStat
     void LeftAttack()
     {
         skillCommand += 'L';
-        bool skillUsed = UseSkill();// Check if the skill is triggered
-        if (UseSkill())
+        bool skillUsed = UseSkill(); // 스킬이 사용되었는지 확인
+
+        // 스킬이 사용된 경우
+        if (skillUsed)
         {
-            isAttack = true;
-            StartCoroutine(AttackEnd(skillCommand));
+            isAttack = true; // 스킬 사용 중 공격 상태 설정
+            StartCoroutine(ActivateColliderForDuration(2f)); // 콜라이더 활성화 및 2초 후 비활성화
         }
 
-        if (!skillUsed && !isAttack)
+        else
         {
             isAttack = true;
-            var playerAttack = GetComponent<PlayerAttack>();
-            if (playerAttack != null)
-            {
-                playerAttack.EnableSwordCollider();
-            }
 
-            // 마우스 위치를 바라보도록 설정
+            // 동적으로 swordNumber 설정 (예: 플레이어의 현재 속성에 따라)
+            int swordNumber = GetCurrentSwordNumber(); // 이 메서드를 정의해서 적절한 검 번호 반환
+
+            SetActiveSword(swordNumber); // 올바른 검 콜라이더 활성화
             FaceMouseDirection();
-
-            // LeftAttack 트리거 설정
             anim.SetTrigger("LeftAttack");
-            Debug.Log("LeftAttack Triggered");  // Debug log to check if trigger is set
+            Debug.Log("LeftAttack Triggered");
 
             attackDelay = 0;
             StartCoroutine(AttackEnd("LeftAttack"));
+            if (skillCommand == "LLL")
+            {
+                skillCommand = "";        // 커맨드 초기화
+                inputBuffer.Clear();      // 입력 버퍼 초기화
+            }
         }
     }
 
@@ -309,31 +323,32 @@ public class Player : PlayerStat
     void RightAttack()
     {
         skillCommand += 'R';
-        bool skillUsed = UseSkill(); // Check if the skill is triggered
-        if (UseSkill())
+        bool skillUsed = UseSkill(); // 스킬이 사용되었는지 확인
+
+        // 스킬이 사용된 경우
+        if (skillUsed)
         {
-            isAttack = true;
-            StartCoroutine(AttackEnd(skillCommand));
+            isAttack = true; // 스킬 사용 중 공격 상태 설정
+            StartCoroutine(ActivateColliderForDuration(2f)); // 콜라이더 활성화 및 2초 후 비활성화
         }
-
-        if (!skillUsed && !isAttack)
+        else // 스킬이 사용되지 않은 경우
         {
+            // 공격 상태를 true로 설정
             isAttack = true;
-            var playerAttack = GetComponent<PlayerAttack>();
-            if (playerAttack != null)
-            {
-                playerAttack.EnableSwordCollider();
-            }
 
-            // 마우스 위치를 바라보도록 설정
-            FaceMouseDirection();
+            // 동적으로 swordNumber 설정 (예: 플레이어의 현재 속성에 따라)
+            int swordNumber = GetCurrentSwordNumber(); // 현재 속성에 따라 적절한 검 번호 반환
 
-            anim.SetTrigger("RightAttack");
-            attackDelay = 0;
-            StartCoroutine(AttackEnd("RightAttack"));
+            SetActiveSword(swordNumber); // 올바른 검 콜라이더 활성화
+            FaceMouseDirection(); // 마우스 방향으로 캐릭터 회전
+
+            anim.SetTrigger("RightAttack"); // 오른쪽 공격 애니메이션 트리거
+            Debug.Log("RightAttack Triggered"); // 디버그 로그로 트리거 확인
+
+            attackDelay = 0; // 공격 지연 초기화
+            StartCoroutine(AttackEnd("RightAttack")); // 공격 종료 대기
         }
     }
-
 
 
     void FaceMouseDirection()
@@ -353,11 +368,13 @@ public class Player : PlayerStat
     void Dash()
     {
         // 스킬이 발동되었는지 확인
-        if (CheckIfSkillUsed()) return;
-        if (UseSkill())
-        {
-            isAttack = true;
+        bool skillUsed = UseSkill(); // 스킬이 사용되었는지 확인
 
+        // 스킬이 사용된 경우
+        if (skillUsed)
+        {
+            isAttack = true; // 스킬 사용 중 공격 상태 설정
+            StartCoroutine(ActivateColliderForDuration(2f)); // 콜라이더 활성화 및 2초 후 비활성화
         }
 
         if (!isDash)
@@ -394,14 +411,17 @@ public class Player : PlayerStat
 
     bool UseSkill()
     {
+        return Skill(); // 스킬 사용 시도
+    }
+
+    bool Skill()
+    {
         for (int i = unlockedSkills.Count - 1; i >= 0; i--)
         {
             if (!string.IsNullOrEmpty(unlockedSkills[i].Command) && skillCommand.EndsWith(unlockedSkills[i].Command))
             {
                 if (unlockedSkills[i].Level > 0 && Cur_Stamina >= unlockedSkills[i].useStamina)
                 {
-                    isAttack = true;
-
                     Debug.Log(unlockedSkills[i].AnimationTrigger);
 
                     float floatSkillDamage = unlockedSkills[i].damagePercent * Damage();
@@ -412,44 +432,63 @@ public class Player : PlayerStat
 
                     anim.SetTrigger(unlockedSkills[i].AnimationTrigger);
 
-                    var playerAttack = GetComponent<PlayerAttack>();
-                    if (playerAttack != null) { playerAttack.EnableSwordCollider(); }
+                    Cur_Stamina -= unlockedSkills[i].useStamina; // 스태미나 소모
+                    skillCommand = "";  // 커맨드 리셋
+                    inputBuffer.Clear(); // 입력 버퍼 비우기
 
-                    StartCoroutine(AttackEnd(unlockedSkills[i].AnimationTrigger));
-
-                    Cur_Stamina -= unlockedSkills[i].useStamina;
-                    skillCommand = "";  // Reset the command after skill use
-                    inputBuffer.Clear(); // Clear the input buffer to prevent additional input issues
-                    StartCoroutine(AttackEnd(skillCommand));
-
-                    return true;  // Skill used successfully
+                    return true; // 스킬이 성공적으로 사용됨
                 }
                 else
                 {
-                    Debug.Log("스테미너가 부족합니다.");
-                    return false;
+                    Debug.Log("스태미너가 부족합니다.");
+                    return false; // 스태미너 부족
                 }
             }
         }
-        return false;  // No skill matched
+        return false; // 일치하는 스킬 없음
     }
 
+    IEnumerator ActivateColliderForDuration(float duration)
+    {
+        // 콜라이더 활성화
+        int swordNumber = GetCurrentSwordNumber(); // 현재 속성에 따라 적절한 검 번호 반환
+        SetActiveSword(swordNumber); // 올바른 검 콜라이더 활성화
+
+        // 지정된 시간 대기
+        yield return new WaitForSeconds(duration);
+
+        // 콜라이더 비활성화
+        SetActiveSword(-1); // -1 또는 적절한 값을 사용하여 모든 콜라이더 비활성화
+    }
+
+
+    void ActivateSkillCollider()
+    {
+        // 동적으로 swordNumber 설정 (예: 플레이어의 현재 속성에 따라)
+        int swordNumber = GetCurrentSwordNumber(); // 현재 속성에 따라 적절한 검 번호 반환
+        SetActiveSword(swordNumber); // 올바른 검 콜라이더 활성화
+    }
+
+    /*
 
     // 스킬이 발동되었는지 확인하는 메서드
     bool CheckIfSkillUsed()
     {
         // 스킬이 발동되었다면 UseSkill()에서 true를 반환하게 함
         return UseSkill();
-    }
+    }*/
 
 
     IEnumerator AttackEnd(string animationTrigger)
     {
-        // 1초 대기
-        yield return new WaitForSeconds(2f);
+        // 애니메이터의 현재 상태 정보 가져오기
+        AnimatorStateInfo animStateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
-        // 공격 상태 해제
-        isAttack = false;
+        // 애니메이션 길이와 속도를 반영하여 실제 재생 시간을 계산
+        float animationLength = animStateInfo.length / animStateInfo.speed;
+
+        // 애니메이션이 끝날 때까지 대기
+        yield return new WaitForSeconds(animationLength);
 
         // 현재 선택된 무기의 충돌체 비활성화
         DisableSwordCollider();
@@ -462,7 +501,6 @@ public class Player : PlayerStat
 
         Debug.Log("Attack ended and isAttack set to false");
     }
-
 
 
     //입력 처리 및 다음 버퍼 추가
@@ -492,6 +530,7 @@ public class Player : PlayerStat
         {
             yield return new WaitForSeconds(7);
             skillCommand = " ";
+            //CommandCoroutine = null;
         }
     }
 
@@ -508,6 +547,7 @@ public class Player : PlayerStat
             StopCoroutine(CommandCoroutine);
         }
         CommandCoroutine = StartCoroutine(ClearCommand());
+
     }
 
     void ProcessNextInput()
@@ -521,11 +561,11 @@ public class Player : PlayerStat
             {
                 case "L":
                     HandleLeftClick();
-                    inputBuffer.Dequeue();
+                    //inputBuffer.Dequeue();
                     break;
                 case "R":
                     HandleRightClick();
-                    inputBuffer.Dequeue();
+                    //inputBuffer.Dequeue();
                     break;
                 case "S":
                     Dash();
@@ -593,7 +633,7 @@ public class Player : PlayerStat
     public void TakeDamage(int damage)
     {
         // 플레이어가 공격 중이거나 대쉬중일 때는 데미지를 무시
-        if (isAttack || isDash) return;
+        if (isAttack || isDash || UseSkill()) return;
 
         if (Time.time >= lastDamagedTime + invincibleDuration)
         {
@@ -780,7 +820,11 @@ public class Player : PlayerStat
             newBaseMesh = GetRandomBaseMesh();
         }
 
-        ApplyBaseMesh(newBaseMesh); // 새로운 BaseMesh 적용
+        if (newBaseMesh != currentBaseMesh)
+        {
+            ApplyBaseMesh(newBaseMesh);  // BaseMesh 적용
+            currentBaseMesh = newBaseMesh; // 현재 무기 베이스 메쉬 업데이트
+        }
     }
 
     // 새로운 BaseMesh를 적용하는 함수
@@ -788,7 +832,6 @@ public class Player : PlayerStat
     {
         if (newBaseMesh == null)
         {
-            // 새로운 BaseMesh가 없으면 아무것도 하지 않음
             return;
         }
 
@@ -809,17 +852,19 @@ public class Player : PlayerStat
             Animator newMeshAnimator = newBaseMesh.GetComponent<Animator>();
             if (newMeshAnimator != null)
             {
-                // 애니메이션 컨트롤러를 교체
                 currentAnimator.runtimeAnimatorController = newMeshAnimator.runtimeAnimatorController;
-
-                // 아바타를 교체
                 currentAnimator.avatar = newMeshAnimator.avatar;
             }
         }
 
-        // 새로운 BaseMesh를 활성화
+        // 새로운 BaseMesh 활성화
         newBaseMesh.SetActive(true);
+        UpdateBasemesh(newBaseMesh);
+        Debug.Log("Activated new base mesh: " + newBaseMesh.name);
+        // **추가: 새 메쉬에 맞는 검을 활성화**
+        SetActiveSword(GetCurrentSwordNumber());  // GetCurrentSwordNumber 메소드가 적절한 검 번호 반환
     }
+
 
     GameObject GetRandomBaseMesh()
     {
@@ -830,14 +875,65 @@ public class Player : PlayerStat
     #endregion
 
 
+    int GetCurrentSwordNumber()
+    {
+        if (currentBaseMesh == null)
+        {
+            Debug.LogWarning("currentBaseMesh is null");
+            return 1; // 기본값
+        }
+
+        // currentBaseMesh의 이름을 기준으로 검 번호 반환
+        switch (currentBaseMesh.name)
+        {
+            case "BaseMesh_Water":
+                return 1;  // 물 속성일 경우 1번 검
+            case "BaseMesh_Fire":
+                return 2;  // 불 속성일 경우 2번 검
+            case "BaseMesh_Air":
+                return 3;  // 공기 속성일 경우 3번 검
+            case "BaseMesh_Earth":
+                return 4;  // 땅 속성일 경우 4번 검
+            default:
+                Debug.LogWarning("Unknown base mesh name: " + currentBaseMesh.name);
+                return 1;  // 기본값은 1번 검
+        }
+    }
+
+
+    void UpdateBasemesh(GameObject newBaseMesh)
+    {
+        currentBaseMesh = newBaseMesh;  // 속성 업데이트
+        SetActiveSword(GetCurrentSwordNumber());  // 속성에 맞는 검 활성화
+    }
+
+
+
+    // 충돌체와 이펙트(TrailRenderer) 활성화/비활성화를 처리하는 메서드 추가
+    private void SetColliderAndEffectEnabled(Collider collider, TrailRenderer[] trailRenderers, bool isEnabled)
+    {
+        if (collider != null)
+        {
+            collider.enabled = isEnabled;
+        }
+        if (trailRenderers != null)
+        {
+            foreach (var trailRenderer in trailRenderers)
+            {
+                if (trailRenderer != null)
+                {
+                    trailRenderer.enabled = isEnabled;
+                }
+            }
+        }
+    }
+
     private void DisableAllColliders()
     {
-        if (waterCollider != null) waterCollider.enabled = false;
-        if (fireCollider != null) fireCollider.enabled = false;
-        if (air1Collider != null) air1Collider.enabled = false;
-        if (air2Collider != null) air2Collider.enabled = false;
-        if (earth1Collider != null) earth1Collider.enabled = false;
-        if (earth2Collider != null) earth2Collider.enabled = false;
+        SetColliderAndEffectEnabled(waterACollider, new TrailRenderer[] { waterAEffect }, false);
+        SetColliderAndEffectEnabled(fireACollider, new TrailRenderer[] { fireAEffect }, false);
+        SetColliderAndEffectEnabled(airACollider, new TrailRenderer[] { airAEffect1, airAEffect2 }, false);
+        SetColliderAndEffectEnabled(earthACollider, new TrailRenderer[] { earthAEffect1, earthAEffect2 }, false);
     }
 
     public void SetActiveSword(int swordNumber)
@@ -849,22 +945,20 @@ public class Player : PlayerStat
         switch (swordNumber)
         {
             case 1:
-                waterCollider.enabled = true;
+                SetColliderAndEffectEnabled(waterACollider, new TrailRenderer[] { waterAEffect }, true);
                 break;
             case 2:
-                fireCollider.enabled = true;
+                SetColliderAndEffectEnabled(fireACollider, new TrailRenderer[] { fireAEffect }, true);
                 break;
             case 3:
-                air1Collider.enabled = true;
-                air2Collider.enabled = true;
+                SetColliderAndEffectEnabled(airACollider, new TrailRenderer[] { airAEffect1, airAEffect2 }, true);
                 break;
             case 4:
-                earth1Collider.enabled = true;
-                earth2Collider.enabled = true;
+                SetColliderAndEffectEnabled(earthACollider, new TrailRenderer[] { earthAEffect1, earthAEffect2 }, true);
                 break;
             default:
                 Debug.LogWarning("Invalid sword number");
-                return;
+                break;
         }
     }
 
@@ -872,25 +966,8 @@ public class Player : PlayerStat
     {
         isAttack = true;
 
-        // 현재 선택된 무기의 충돌체 활성화 (이미 활성화된 상태일 경우 중복 활성화 방지)
-        if (waterCollider != null && !waterCollider.enabled)
-        {
-            waterCollider.enabled = true;
-        }
-        if (fireCollider != null && !fireCollider.enabled)
-        {
-            fireCollider.enabled = true;
-        }
-        if (earth1Collider != null && !earth1Collider.enabled)
-        {
-            earth1Collider.enabled = true;
-            earth2Collider.enabled = true;
-        }
-        if (air1Collider != null && !air1Collider.enabled)
-        {
-            air1Collider.enabled = true;
-            air2Collider.enabled = true;
-        }
+        // 현재 선택된 무기의 충돌체 활성화
+        SetActiveSword(GetCurrentSwordNumber());
     }
 
     public void DisableSwordCollider()
@@ -898,36 +975,30 @@ public class Player : PlayerStat
         isAttack = false;
 
         // 현재 선택된 무기의 충돌체 비활성화
-        if (waterCollider != null)
-        {
-            waterCollider.enabled = false;
-        }
-        if (fireCollider != null)
-        {
-            fireCollider.enabled = false;
-        }
-        if (earth1Collider != null && earth2Collider != null)
-        {
-            earth1Collider.enabled = false;
-            earth2Collider.enabled = false;
-        }
-        if (air1Collider != null && air2Collider != null)
-        {
-            air1Collider.enabled = false;
-            air2Collider.enabled = false;
-        }
+        DisableAllColliders();
     }
+
 
     // 몬스터와의 충돌을 감지하는 메서드
     private void OnTriggerEnter(Collider other)
     {
         if (isAttack && other.CompareTag("Monster"))
         {
+            // Try to get the BaseMonster component first
             BaseMonster monster = other.GetComponent<BaseMonster>();
             if (monster != null)
             {
-                monster.TakeDamage(Damage());  // 몬스터에게 데미지 적용
+                monster.TakeDamage(Damage());  // Apply damage to BaseMonster
+                return; // Exit after dealing damage to the BaseMonster
+            }
+
+            // If BaseMonster is not found, try to get the Boss component
+            Boss boss = other.GetComponent<Boss>();
+            if (boss != null)
+            {
+                boss.TakeDamage(Damage());  // Apply damage to Boss
             }
         }
     }
+
 }

@@ -34,16 +34,16 @@ public class Charge : BaseMonster
         switch (skillIndex)
         {
             case 0:  // 기본 공격
-                TryAttack(ref Attack01CanUse, attack1Radius, SkillCoolTime1, Attack1);
+                TryAttack(ref Attack01CanUse, attack1Radius, SkillCoolTime1, Attack01);
                 break;
             case 1: // 스킬 공격
-                TryAttack(ref Attack02CanUse, attack2Radius, SkillCoolTime2, Attack2, true);
+                TryAttack(ref Attack02CanUse, attack2Radius, SkillCoolTime2, Attack02, true);
                 break;
         }
     }
 
 
-    protected override void Attack2()
+    protected override void Attack02()
     {
         anim.SetTrigger(Attack02Hash);
         float delay = GetAnimationLength(attack02Hash); // 공격 애니메이션의 길이

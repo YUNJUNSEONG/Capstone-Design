@@ -31,10 +31,10 @@ public class Range : BaseMonster
         switch (skillIndex)
         {
             case 0:  // 기본 공격
-                TryAttack(ref Attack01CanUse, attack1Radius, SkillCoolTime1, Attack1);
+                TryAttack(ref Attack01CanUse, attack1Radius, SkillCoolTime1, Attack01);
                 break;
             case 1: // 스킬 공격
-                TryAttack(ref Attack02CanUse, attack2Radius, SkillCoolTime2, Attack2, true);
+                TryAttack(ref Attack02CanUse, attack2Radius, SkillCoolTime2, Attack02, true);
                 break;
         }
     }

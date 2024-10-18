@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class BossHp : MonoBehaviour
 {
-    public GameObject monster;
-    public BossStat Monster;
+    public GameObject boss;
+    public BossStat Boss;
     private Image hpImage;
 
     void Start()
     {
-        Monster = GetComponentInParent<BossStat>();
+        Boss = GetComponentInParent<BossStat>();
         GameObject hpBarObject = GameObject.Find("HPbar");
         hpImage = GetComponent<Image>();
 
@@ -19,6 +19,6 @@ public class BossHp : MonoBehaviour
 
     void Update()
     {
-        hpImage.fillAmount = (float)Monster.Cur_HP / Monster.Max_HP;
+        hpImage.fillAmount = (float)Boss.Cur_HP / Boss.Max_HP;
     }
 }

@@ -867,7 +867,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3364604686415033763}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 3.5
   m_Acceleration: 30
   avoidancePriority: 50
@@ -1784,6 +1784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 1523194892205722113}
+  boss: {fileID: 0}
   Distance: {fileID: 6195787985068764444}
 --- !u!1 &6760041120872770886
 GameObject:
