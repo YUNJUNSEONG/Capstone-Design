@@ -354,6 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 2082402936269328962}
+  boss: {fileID: 0}
   Distance: {fileID: 1706360142289181493}
 --- !u!1 &7095315111456850345
 GameObject:
@@ -562,7 +563,7 @@ GameObject:
   - component: {fileID: 3182745049206447682}
   - component: {fileID: 7683078986804487942}
   - component: {fileID: 5363123061992490051}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,6 +655,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9125220610053598039, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -694,18 +699,162 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8089494988416656745, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -7822850380973159621, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -6546170152374576543, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -6382804127284665463, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -5038579727569694918, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -3261272970817716148, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -3131841789419291905, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2865741564419453205, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2399445802083571363, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -1790854425794719142, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -1677927435731022990, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -1293287866995478588, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -1131970886206219855, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -1022005544362912340, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -653637584187654017, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -644087403291164721, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -540739147536092568, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
       propertyPath: m_Name
       value: 3.Cyclops
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_TagString
+      value: Monster
+      objectReference: {fileID: 0}
+    - target: {fileID: 929177276387970567, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1119709365005847607, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1716151122807814830, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047777453086478443, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2061101244653416926, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846703303401476327, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2939584380562031094, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118662232479196386, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3697690624793255631, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120967336016909064, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474259860553156784, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780396898544791454, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5472621358885423638, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517204726308415816, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 9fb4bf7ce492fd74bb5c05f4d177bf2a, type: 2}
+    - target: {fileID: 7862102637045942337, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143637601831736433, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8255456311475685578, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 02169a29bc93499d91fdd5dd16ead51a, type: 2}
+    - target: {fileID: 9022414806280273084, guid: e880ff92e5b74743a0a9b56740d9b2d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -815,23 +964,24 @@ MonoBehaviour:
   Name: Cyclops
   Max_HP: 50
   Cur_HP: 50
-  ATK1: 9
-  ATK2: 9
+  ATK: 1
+  Skill01: 1
   NumberOfSkills: 2
+  AttackCoolTime: 1
   SkillCoolTime1: 5
-  SkillCoolTime2: 5
   Defense: 0.3
   Move_Speed: 3
   ApproachRadius: 2
   DetectionRadius: 70
-  attack1Radius: 4
-  attack2Radius: 10
+  AttackRadius: 3
+  Skill01Radius: 4
   invincibleTime: 0.5
   spawner: {fileID: 0}
+  bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 7726723456831927094}
   damageText: {fileID: 1960942678382087384}
-  isAttack01: 0
-  isAttack02: 0
+  isAttack: 0
+  isSkill01: 0
   attack01Hash: 0
   attack02Hash: 0
   knockbackForce: 10

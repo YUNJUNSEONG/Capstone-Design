@@ -66,10 +66,6 @@ public class BossSpawner : MonoBehaviour
             GameObject monster = Instantiate(selectedMonster, randomPoint, Quaternion.identity);
 
             var Monster = monster.GetComponent<BaseMonster>();
-            if (Monster != null)
-            {
-                Monster.bossSpawner = this;
-            }
 
             // 생성된 몬스터를 리스트에 추가
             aliveMonsters.Add(monster);

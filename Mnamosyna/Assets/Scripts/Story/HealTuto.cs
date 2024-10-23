@@ -5,7 +5,13 @@ using UnityEngine;
 public class HealTuto : MonoBehaviour
 {
     public StoryManager storyManager;
-
+    private void Start()
+    {
+        if (storyManager == null)
+        {
+            storyManager = FindObjectOfType<StoryManager>();
+        }
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

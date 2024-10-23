@@ -6,7 +6,13 @@ public class SpawnerTest : MonoBehaviour
     public Spawner spawner;
     public RandomTalk randomTalk;
     //public Text aliveCountText;  // Reference to the UI Text element
-
+    private void Start()
+    {
+        if (randomTalk == null)
+        {
+            randomTalk = FindObjectOfType<RandomTalk>();
+        }
+    }
     void Awake()
     {
         if (spawner == null)

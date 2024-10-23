@@ -227,8 +227,8 @@ MonoBehaviour:
   Name: mushroom
   Max_HP: 15
   Cur_HP: 15
-  ATK: 3
-  Skill01: 4
+  ATK: 30
+  Skill01: 40
   NumberOfSkills: 2
   AttackCoolTime: 2
   SkillCoolTime1: 3
@@ -240,7 +240,6 @@ MonoBehaviour:
   Skill01Radius: 4
   invincibleTime: 0.5
   spawner: {fileID: 0}
-  bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 3969081904041936791}
   damageText: {fileID: 1364353059637104704}
   isAttack: 0

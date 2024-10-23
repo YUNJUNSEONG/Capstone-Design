@@ -30,7 +30,6 @@ public class BaseMonster : MobStat
     public event DeathHandler OnDeath;
 
     public Spawner spawner;
-    public BossSpawner bossSpawner;
     public GameObject exclamationMark;
     public Text damageText;
     protected Vector3 originalPosition;

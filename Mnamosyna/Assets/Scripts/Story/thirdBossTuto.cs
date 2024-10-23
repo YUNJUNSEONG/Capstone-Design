@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class secondBossTuto : MonoBehaviour
+public class thirdBossTuto : MonoBehaviour
 {
     public StoryManager storyManager;
     public Spawner spawner;
@@ -20,9 +20,7 @@ public class secondBossTuto : MonoBehaviour
         {
             List<string> FirstBossTutorialMessages = new List<string>
             {
-                "저건 제 애완동물이였던 작은 거북이였어요.",
-                "사룡의 힘때문에 저렇게 흉측하고 기괴하게 변하다니...",
-                "더 이상 보기 힘드네요. 편하게 해주세요..."
+                "",
             };
 
             // 튜토리얼이 끝났을 때 BossSpawner를 실행하도록 이벤트 구독

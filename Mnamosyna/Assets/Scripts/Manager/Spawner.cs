@@ -146,7 +146,7 @@ public class Spawner : MonoBehaviour
             }
         }
 
-        Debug.LogError("Collider 위의 위치 못찾");
+        //Debug.LogError("Collider 위의 위치 못찾");
         return collider.bounds.center;
     }
 
