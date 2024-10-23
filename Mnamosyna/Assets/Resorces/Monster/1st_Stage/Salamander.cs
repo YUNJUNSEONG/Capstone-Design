@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Salamander : Monster
+public class Salamander : BaseMonster
 {
     // 투사체 프리팹
     public GameObject projectilePrefab;
@@ -14,44 +14,12 @@ public class Salamander : Monster
 
     private Coroutine fireAttackCoroutine;
 
-    void Start()
-    {
-        Skill2CanUse = 0f; // 초기 스킬2의 쿨타임을 0으로 설정
-    }
 
-    protected override void Attack()
-    {
-        // 쿨타임이 0이하인 공격 중 랜덤하게 출력
-        int skillIndex = Random.Range(0, NumberOfSkills);
-
-        switch (skillIndex)
-        {
-            case 0:  // 기본 공격
-                if (Skill1CanUse <= 0 && Vector3.Distance(transform.position, player.transform.position) <= attack1Radius)
-                {
-                    MonsterAttackStart();
-                    Skill1();
-                    Skill1CanUse = SkillCoolTime1;
-                }
-                else { anim.SetTrigger(BattleIdleHash); }
-                break;
-            case 1: // 화염 방사
-                if (Skill2CanUse <= 0 && Vector3.Distance(transform.position, player.transform.position) <= attack2Radius)
-                {
-                    MonsterAttackStart();
-                    isSkill = true;
-                    Skill2();
-                    Skill2CanUse = SkillCoolTime2;
-                }
-                else { anim.SetTrigger(BattleIdleHash); }
-                break;
-        }
-    }
 
     // 이 메서드는 애니메이션 이벤트에서 호출됩니다.
     public void FireAttack()
     {
-        if (currentState == MonsterState.Die || player == null)
+        if (currentState == State.Die || player == null)
         {
             return;
         }
@@ -89,7 +57,7 @@ public class Salamander : Monster
 
             // 투사체의 Projectile 컴포넌트 설정
             Projectile projectileComponent = projectile.GetComponent<Projectile>();
-            projectileComponent.damage = ATK2; // 몬스터의 공격력을 투사체 데미지로 설정
+            projectileComponent.damage = Skill01; // 몬스터의 공격력을 투사체 데미지로 설정
 
             // 지정된 간격 동안 대기 후 다음 투사체 발사
             yield return new WaitForSeconds(projectileSpawnInterval);

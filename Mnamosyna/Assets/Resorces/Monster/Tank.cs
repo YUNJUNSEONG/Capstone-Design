@@ -22,10 +22,10 @@ public class Tank : BaseMonster
         switch (skillIndex)
         {
             case 0:  // 기본 공격
-                TryAttack(ref Attack01CanUse, attack1Radius, SkillCoolTime1, Attack01);
+                TryAttack(ref AttackCanUse, AttackRadius, AttackCoolTime, Attack01);
                 break;
             case 1: // 스킬 공격
-                TryAttack(ref Attack02CanUse, attack2Radius, SkillCoolTime2, Attack02, true);
+                TryAttack(ref Skill01CanUse, Skill01Radius, SkillCoolTime1, Attack02, true);
                 StartCoroutine(PerformAttackAfterDelay()); // 공격 애니메이션 후 넉백 적용
                 break;
         }

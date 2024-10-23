@@ -689,24 +689,24 @@ MonoBehaviour:
   Name: Spider
   Max_HP: 20
   Cur_HP: 20
-  ATK1: 5
-  ATK2: 5
+  ATK: 5
+  Skill01: 5
   NumberOfSkills: 2
-  SkillCoolTime1: 2
-  SkillCoolTime2: 8
+  AttackCoolTime: 3
+  SkillCoolTime1: 7
   Defense: 0
   Move_Speed: 5
   ApproachRadius: 0
   DetectionRadius: 100
-  attack1Radius: 2
-  attack2Radius: 5
+  AttackRadius: 3
+  Skill01Radius: 5
   invincibleTime: 0.5
   spawner: {fileID: 0}
   bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 1073488393345065777}
   damageText: {fileID: 3957663587688081969}
-  isAttack01: 0
-  isAttack02: 0
+  isAttack: 0
+  isSkill01: 0
   attack01Hash: 0
   attack02Hash: 0
   knockbackForce: 5

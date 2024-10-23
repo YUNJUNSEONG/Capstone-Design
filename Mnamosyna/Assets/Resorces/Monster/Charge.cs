@@ -22,8 +22,8 @@ public class Charge : BaseMonster
 
     void ResetCoolTime()
     {
-        Attack01CanUse = 0;
-        Attack02CanUse = 0;
+        AttackCanUse = 0;
+        Skill01CanUse = 0;
     }
 
     protected override void Attack()
@@ -34,10 +34,10 @@ public class Charge : BaseMonster
         switch (skillIndex)
         {
             case 0:  // 기본 공격
-                TryAttack(ref Attack01CanUse, attack1Radius, SkillCoolTime1, Attack01);
+                TryAttack(ref AttackCanUse, AttackRadius, AttackCoolTime, Attack01);
                 break;
             case 1: // 스킬 공격
-                TryAttack(ref Attack02CanUse, attack2Radius, SkillCoolTime2, Attack02, true);
+                TryAttack(ref Skill01CanUse, Skill01Radius, SkillCoolTime1, Attack02, true);
                 break;
         }
     }
@@ -105,7 +105,7 @@ public class Charge : BaseMonster
 
     public void OnChargeAnimationEnd()
     {
-        isAttack01 = false;
-        isAttack02 = false;
+        isAttack = false;
+        isSkill01 = false;
     }
 }

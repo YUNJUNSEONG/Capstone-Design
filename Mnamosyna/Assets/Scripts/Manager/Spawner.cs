@@ -74,6 +74,7 @@ public class Spawner : MonoBehaviour
     {
         if (babySlimePrefab != null)
         {
+            StartCoroutine(WaitTwoSeconds());
             GameObject babySlime = Instantiate(babySlimePrefab, position, Quaternion.identity);
             var monster = babySlime.GetComponent<BaseMonster>();
             if (monster != null)
@@ -82,6 +83,13 @@ public class Spawner : MonoBehaviour
                 aliveCount++; // babySlime 소환 시 aliveCount 증가
             }
         }
+    }
+    IEnumerator WaitTwoSeconds()
+    {
+        // 2초 대기
+        yield return new WaitForSeconds(2.0f);
+        // 2초 후 실행할 동작
+        Debug.Log("2초 대기 후 실행");
     }
 
     public void CheckAliveCount()

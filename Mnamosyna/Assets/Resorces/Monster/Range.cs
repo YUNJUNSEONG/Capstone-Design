@@ -20,8 +20,8 @@ public class Range : BaseMonster
 
     void ResetCoolTime()
     {
-        Attack01CanUse = 0;
-        Attack02CanUse = 0;
+        AttackCanUse = 0;
+        Skill01CanUse = 0;
     }
 
     protected override void Attack()
@@ -31,10 +31,10 @@ public class Range : BaseMonster
         switch (skillIndex)
         {
             case 0:  // 기본 공격
-                TryAttack(ref Attack01CanUse, attack1Radius, SkillCoolTime1, Attack01);
+                TryAttack(ref AttackCanUse, AttackRadius, AttackCoolTime, Attack01);
                 break;
             case 1: // 스킬 공격
-                TryAttack(ref Attack02CanUse, attack2Radius, SkillCoolTime2, Attack02, true);
+                TryAttack(ref Skill01CanUse, Skill01Radius, SkillCoolTime1, Attack02, true);
                 break;
         }
     }
@@ -56,7 +56,7 @@ public class Range : BaseMonster
 
         // 투사체의 Projectile 컴포넌트 설정
         Projectile projectileComponent = projectile.GetComponent<Projectile>();
-        projectileComponent.damage = ATK2; // 몬스터의 공격력을 투사체 데미지로 설정
+        projectileComponent.damage = Skill01; // 몬스터의 공격력을 투사체 데미지로 설정
 
         // 투사체에 속도 추가 (Rigidbody가 있는 경우)
         Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();

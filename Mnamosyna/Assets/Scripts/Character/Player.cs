@@ -57,7 +57,7 @@ public class Player : PlayerStat
     public Animator anim;
     SkinnedMeshRenderer[] meshs;
     Rigidbody rigid;
-    Sword sword;
+
     // 각 속성에 해당하는 BaseMesh
     GameObject initialBaseMesh = null;
     public GameObject BaseMesh_Fire;
@@ -113,7 +113,6 @@ public class Player : PlayerStat
         DontDestroyOnLoad(this);
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
-        sword = GetComponentInChildren<Sword>();
         meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
     void Start()
@@ -411,7 +410,12 @@ public class Player : PlayerStat
 
     bool UseSkill()
     {
-        return Skill(); // 스킬 사용 시도
+        bool skillActivated = Skill();
+        if (skillActivated)
+        {
+            isAttack = true; // 스킬 사용 시 공격 상태 설정
+        }
+        return skillActivated;
     }
 
     bool Skill()
@@ -574,8 +578,6 @@ public class Player : PlayerStat
             }
         }
     }
-
-
 
     void HandleLeftClick()
     {
@@ -761,6 +763,13 @@ public class Player : PlayerStat
             if (unlockSkill != null)
             {
                 unlockSkill.OpenUnlockUpUI(skillManager);
+                break;
+            }
+
+            BossSkill bossSkill = collider.GetComponent<BossSkill>();
+            if (bossSkill != null)
+            {
+                bossSkill.BossMemory(gameObject);
                 break;
             }
 
@@ -991,13 +1000,13 @@ public class Player : PlayerStat
                 monster.TakeDamage(Damage());  // Apply damage to BaseMonster
                 return; // Exit after dealing damage to the BaseMonster
             }
-
+            /*
             // If BaseMonster is not found, try to get the Boss component
             Boss boss = other.GetComponent<Boss>();
             if (boss != null)
             {
                 boss.TakeDamage(Damage());  // Apply damage to Boss
-            }
+            }*/
         }
     }
 

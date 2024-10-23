@@ -31,7 +31,7 @@ public class BossSkillRange : MonoBehaviour
 
     void SetAttackDistance()
     {
-        attackDistance.radius = boss.attackRadius;
+        attackDistance.radius = boss.attack_radius;
     }
 
 }

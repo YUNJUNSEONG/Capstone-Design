@@ -10,8 +10,8 @@ public class BossSkill : MonoBehaviour
     public GameObject LevelupUI;
     public StoryManager storyManager;
     private SkillManager skillManager; // 충돌한 오브젝트에서 스킬 매니저 컴포넌트 가져오기
-
-    //public Magic0[] magicComponents;
+    public int healPlayer = 100;
+    public Magic0[] magicComponents;
 
     public bool UnlockSkillSelectEnd = false;
     private static bool storyShown = false;
@@ -29,19 +29,29 @@ public class BossSkill : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Player player = other.GetComponent<Player>(); // 충돌한 오브젝트에서 플레이어 컴포넌트 가져오기
-            if (player != null)
+            BossMemory(other.gameObject);
+        }
+    }
+
+    public void BossMemory(GameObject playerObject)
+    {
+        PlayerStat player = playerObject.GetComponent<PlayerStat>();
+
+        if (player != null)
+        {
+            Debug.Log("Player Heal!");
+            player.cur_hp += healPlayer;
+            player.cur_stamina += healPlayer;
+
+            OpenUnlockUpUI(skillManager, () =>
             {
-                OpenUnlockUpUI(skillManager, () =>
-                {
-                    // Unlock이 완료되면 LevelUp 호출
-                    OpenLevelUpUI(skillManager);
-                });
+                // Unlock이 완료되면 LevelUp 호출
+                OpenLevelUpUI(skillManager);
+            });
 
-                Destroy(gameObject);
+            Destroy(gameObject);
 
-                //foreach (Magic0 magic in magicComponents) { magic.EnableComponents(); }
-            }
+            foreach (Magic0 magic in magicComponents) { magic.EnableComponents(); }
         }
     }
 

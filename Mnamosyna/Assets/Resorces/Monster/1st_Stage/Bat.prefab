@@ -983,24 +983,24 @@ MonoBehaviour:
   Name: Bat
   Max_HP: 15
   Cur_HP: 15
-  ATK1: 5
-  ATK2: 8
+  ATK: 5
+  Skill01: 8
   NumberOfSkills: 2
+  AttackCoolTime: 4
   SkillCoolTime1: 4
-  SkillCoolTime2: 6
   Defense: 0
   Move_Speed: 3
-  ApproachRadius: 2
+  ApproachRadius: 8
   DetectionRadius: 100
-  attack1Radius: 2
-  attack2Radius: 10
+  AttackRadius: 3
+  Skill01Radius: 8
   invincibleTime: 0.5
   spawner: {fileID: 0}
   bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 447449637993846935}
   damageText: {fileID: 3958218135192408978}
-  isAttack01: 0
-  isAttack02: 0
+  isAttack: 0
+  isSkill01: 0
   attack01Hash: 0
   attack02Hash: 0
   projectilePrefab: {fileID: 3685667109570152068, guid: 04bdc72b39f80ff498c301c98d80315d, type: 3}

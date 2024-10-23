@@ -22,6 +22,8 @@ public class BossSpawner : MonoBehaviour
     public event CombatEndHandler OnCombatEnd;
 
     public bool isCombatEnded { get; set; } = false;
+
+
     private bool hasSpawnedUpgrade = false;
 
     public delegate void AliveCountChangedHandler(int newAliveCount);

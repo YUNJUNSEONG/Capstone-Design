@@ -32,6 +32,7 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1220585547809306744}
+  - {fileID: 8142352950985571218}
   m_Father: {fileID: 7026824385615743549}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -114,7 +115,6 @@ GameObject:
   - component: {fileID: 5858261713154989522}
   - component: {fileID: 1702405861932483417}
   - component: {fileID: 2787273618087229656}
-  - component: {fileID: 7304452873338818736}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -193,19 +193,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 7026824385615397721}
   Boss: {fileID: 3494323961616943001}
---- !u!114 &7304452873338818736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2415095420252608871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e42cd0a296c3cf34283cfe3b6f1d5745, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 0}
 --- !u!1 &2665669757397962191
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,6 +473,95 @@ MonoBehaviour:
   monster: {fileID: 0}
   boss: {fileID: 3494323961616943001}
   Distance: {fileID: 3004856503695947160}
+--- !u!1 &5444616699307937704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8142352950985571218}
+  - component: {fileID: 6752183410739577496}
+  - component: {fileID: 2056450861515331201}
+  - component: {fileID: 4863665524343538483}
+  m_Layer: 8
+  m_Name: '!'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8142352950985571218
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444616699307937704}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.138889, y: 1.138889, z: 1.138889}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 2602330251635451106}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.13888167, y: -147.36111}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6752183410739577496
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444616699307937704}
+  m_CullTransparentMesh: 1
+--- !u!114 &2056450861515331201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444616699307937704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: eb0e38a5f58792644a4090ee07f5d6b1, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4863665524343538483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444616699307937704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e42cd0a296c3cf34283cfe3b6f1d5745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 0}
 --- !u!1 &6079256295529762727
 GameObject:
   m_ObjectHideFlags: 0
@@ -2198,30 +2274,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Reddragon
-  Max_HP: 200
-  Cur_HP: 200
+  Max_HP: 250
+  Cur_HP: 250
   ATK: 5
   Skill01: 11
-  Skill02: 15
-  Skill03: 17
   NumberOfSkills: 4
   AttackCoolTime: 3
   SkillCoolTime1: 5
-  SkillCoolTime2: 11
-  SkillCoolTime3: 11
   Defense: 0
   Move_Speed: 5
   ApproachRadius: 5
   DetectionRadius: 200
   AttackRadius: 8
+  Skill01Radius: 0
   invincibleTime: 0.5
   spawner: {fileID: 0}
   bossSpawner: {fileID: 0}
+  exclamationMark: {fileID: 5444616699307937704}
   damageText: {fileID: 8491638190195038410}
-  isAttack01: 0
-  isAttack02: 0
+  isAttack: 0
+  isSkill01: 0
   attack01Hash: 0
   attack02Hash: 0
+  Skill02: 15
+  Skill03: 17
+  SkillCoolTime2: 11
+  SkillCoolTime3: 11
+  attack03Hash: 0
+  attack04Hash: 0
 --- !u!1 &7026824385615399043
 GameObject:
   m_ObjectHideFlags: 0

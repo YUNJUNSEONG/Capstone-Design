@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-
+/*
 public class MaxRange : MonoBehaviour
 {
     public Monster monster;
@@ -27,4 +27,4 @@ public class MaxRange : MonoBehaviour
     {
         //Distance.radius = monster.patrol_radius;
     }
-}
+}*/

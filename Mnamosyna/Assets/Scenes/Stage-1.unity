@@ -964,17 +964,17 @@ MonoBehaviour:
   Name: 
   Max_HP: 0
   Cur_HP: 0
-  ATK1: 0
-  ATK2: 0
+  ATK: 0
+  Skill01: 0
   NumberOfSkills: 0
+  AttackCoolTime: 0
   SkillCoolTime1: 0
-  SkillCoolTime2: 0
   Defense: 0
   Move_Speed: 0
   ApproachRadius: 0
   DetectionRadius: 0
-  attack1Radius: 0
-  attack2Radius: 0
+  AttackRadius: 0
+  Skill01Radius: 0
 --- !u!1 &55769254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,7 +1937,7 @@ MonoBehaviour:
   Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
   magicComponents:
   - {fileID: 468314350}
-  waitTime: 12
+  waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
 --- !u!1001 &185180659
@@ -2759,7 +2759,7 @@ MonoBehaviour:
   Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
   magicComponents:
   - {fileID: 664241295}
-  waitTime: 5
+  waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
 --- !u!114 &232589938
@@ -3588,8 +3588,8 @@ MonoBehaviour:
   Max_Stamina: 200
   Cur_Stamina: 200
   Stamina_Recover: 3
-  MIN_ATK: 15
-  MAX_ATK: 20
+  MIN_ATK: 50
+  MAX_ATK: 60
   Crit_Chance: 0
   Defense: 0
   ATK_Speed: 0.8
@@ -4996,7 +4996,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 1106905613}
   - {fileID: 1361178164}
-  waitTime: 10
+  waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
 --- !u!4 &374763120 stripped
@@ -6095,11 +6095,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &479097270 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1514838442195789469, guid: 6c5a99a2d80875d4f9087a3fd64bcea1, type: 3}
-  m_PrefabInstance: {fileID: 1206084407}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &479815597
 GameObject:
   m_ObjectHideFlags: 0
@@ -7598,7 +7593,7 @@ Transform:
   m_GameObject: {fileID: 661296719}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.396, y: -0.184, z: -0.061}
+  m_LocalPosition: {x: -0.488, y: -0.164, z: 0.024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7625,7 +7620,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0da953de0af3742839f95cba722507b6, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7646,7 +7641,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.3
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -7740,16 +7735,16 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.6134755, g: 0.0039215684, b: 1, a: 1}
-      key1: {r: 0.7169812, g: 0.02976145, b: 0.59615856, a: 0.49019608}
-      key2: {r: 0, g: 0.7218666, b: 1, a: 0}
+      key0: {r: 0.4056604, g: 0.001913497, b: 0.3341394, a: 1}
+      key1: {r: 0.6134755, g: 0.0039215684, b: 1, a: 0.49019608}
+      key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0.7218666, b: 1, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
+      ctime1: 42405
       ctime2: 65535
       ctime3: 65535
       ctime4: 0
@@ -7766,7 +7761,7 @@ TrailRenderer:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 2
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
@@ -7979,7 +7974,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 2029951024}
   - {fileID: 2101161358}
-  waitTime: 10
+  waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
 --- !u!1001 &669381978
@@ -8702,6 +8697,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1135293578}
   - {fileID: 1206084408}
   - {fileID: 1809400088}
   - {fileID: 1775410865}
@@ -9086,7 +9082,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 2
+  m_Time: 0.5
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -9192,13 +9188,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753111662}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40732837, y: -0.06287313, z: -0.2629229, w: 0.8723543}
-  m_LocalPosition: {x: -0.269, y: -0.384, z: -0.385}
+  m_LocalRotation: {x: -0.016625494, y: 0.07774977, z: -0.6733703, w: 0.7350178}
+  m_LocalPosition: {x: -0.656, y: -0.229, z: 0.108}
   m_LocalScale: {x: 1.6666662, y: 1.6666663, z: 1.6666667}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1192069005}
-  m_LocalEulerAnglesHint: {x: 42.657, y: -26.13, z: -43.9}
+  m_LocalEulerAnglesHint: {x: 4.604, y: 7.882, z: -84.67}
 --- !u!1001 &766855559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10002,7 +9998,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 1842518524}
   - {fileID: 1381230725}
-  waitTime: 12
+  waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
 --- !u!1001 &865421406
@@ -11546,13 +11542,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04529f9f7e50b1043b66a249d8b7adab, type: 3}
+  m_Script: {fileID: 11500000, guid: ce9f4119dd726e44ca80dae3c9c60b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 267657083}
-  offset: {x: 5, y: 8.9, z: -5.55}
-  rotationSpeed: 5
-  angle: 0
+  offset: {x: 5, y: 10, z: -5}
 --- !u!1 &972170830
 GameObject:
   m_ObjectHideFlags: 0
@@ -12325,7 +12319,7 @@ MonoBehaviour:
   Upgrade: {fileID: 794828816375683814, guid: 6e0e9377f59971141b8f4666c4e9bbf4, type: 3}
   magicComponents:
   - {fileID: 407744237}
-  waitTime: 12
+  waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
 --- !u!1 &1029778746
@@ -12967,7 +12961,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 114340515}
   - {fileID: 379113304}
-  waitTime: 12
+  waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
 --- !u!1001 &1079918551
@@ -13641,6 +13635,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130196201}
   m_CullTransparentMesh: 1
+--- !u!1001 &1135293577
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 717477943}
+    m_Modifications:
+    - target: {fileID: 2275882024672787534, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_Name
+      value: BosstoMagic2-0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155673606254428082, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155673606254428082, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155673606254428082, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 27.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155673606254428082, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155673606254428082, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155673606254428082, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155673606254428082, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155673606254428082, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155673606254428082, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155673606254428082, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5759381839465164018, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+      propertyPath: m_Name
+      value: Portal_skill_Boss
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+--- !u!4 &1135293578 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3155673606254428082, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+  m_PrefabInstance: {fileID: 1135293577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1135293579 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7159245815104683423, guid: ccd9ed577ba67fa4589a04a4e279e70d, type: 3}
+  m_PrefabInstance: {fileID: 1135293577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1138309206
 GameObject:
   m_ObjectHideFlags: 0
@@ -17425,7 +17496,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1514838442195789469, guid: 6c5a99a2d80875d4f9087a3fd64bcea1, type: 3}
       propertyPath: m_Name
-      value: Obelisk_zodiac_low
+      value: zodiak
       objectReference: {fileID: 0}
     - target: {fileID: 2183710516522777639, guid: 6c5a99a2d80875d4f9087a3fd64bcea1, type: 3}
       propertyPath: m_LocalScale.x
@@ -17453,7 +17524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2183710516522777639, guid: 6c5a99a2d80875d4f9087a3fd64bcea1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6953486
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2183710516522777639, guid: 6c5a99a2d80875d4f9087a3fd64bcea1, type: 3}
       propertyPath: m_LocalRotation.x
@@ -17461,7 +17532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2183710516522777639, guid: 6c5a99a2d80875d4f9087a3fd64bcea1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.71867263
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2183710516522777639, guid: 6c5a99a2d80875d4f9087a3fd64bcea1, type: 3}
       propertyPath: m_LocalRotation.z
@@ -17473,7 +17544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2183710516522777639, guid: 6c5a99a2d80875d4f9087a3fd64bcea1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 91.89
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2183710516522777639, guid: 6c5a99a2d80875d4f9087a3fd64bcea1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -17482,52 +17553,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1514838442195789469, guid: 6c5a99a2d80875d4f9087a3fd64bcea1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1206084409}
-    - targetCorrespondingSourceObject: {fileID: 1514838442195789469, guid: 6c5a99a2d80875d4f9087a3fd64bcea1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1206084410}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c5a99a2d80875d4f9087a3fd64bcea1, type: 3}
 --- !u!4 &1206084408 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2183710516522777639, guid: 6c5a99a2d80875d4f9087a3fd64bcea1, type: 3}
   m_PrefabInstance: {fileID: 1206084407}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1206084409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479097270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10a7e0fe10711fd42b394b79df49471f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &1206084410
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479097270}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1207404611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18569,7 +18601,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 2
+  m_Time: 0.7
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -19047,7 +19079,7 @@ Transform:
   m_GameObject: {fileID: 1287237087}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.411, y: 0.156, z: -0.061}
+  m_LocalPosition: {x: -0.576, y: 0.186, z: 0.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19095,7 +19127,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.3
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -19189,16 +19221,16 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.6134755, g: 0.0039215684, b: 1, a: 1}
-      key1: {r: 0.7169812, g: 0.02976145, b: 0.59615856, a: 0.49019608}
-      key2: {r: 0, g: 0.7218666, b: 1, a: 0}
+      key0: {r: 0.5566038, g: 0.03938234, b: 0.4649816, a: 1}
+      key1: {r: 0.6134755, g: 0.0039215684, b: 1, a: 0.49019608}
+      key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0.7218666, b: 1, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
+      ctime1: 42212
       ctime2: 65535
       ctime3: 65535
       ctime4: 0
@@ -19215,7 +19247,7 @@ TrailRenderer:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 2
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
@@ -19751,7 +19783,7 @@ MonoBehaviour:
   Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
   magicComponents:
   - {fileID: 1350814779}
-  waitTime: 12
+  waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
 --- !u!114 &1361178164 stripped
@@ -22335,13 +22367,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1638094078}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0746975, y: 0.31211868, z: -0.77694386, w: 0.54162765}
-  m_LocalPosition: {x: -1.3840044, y: 0.0169985, z: 0.73000133}
+  m_LocalRotation: {x: 0.078292325, y: 0.2625722, z: -0.6026447, w: 0.7494969}
+  m_LocalPosition: {x: -1.359, y: -0.109, z: 0.765}
   m_LocalScale: {x: 1.6666662, y: 1.6666667, z: 1.6666662}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 242758119}
-  m_LocalEulerAnglesHint: {x: 34.466, y: 15.623, z: -105.364}
+  m_LocalEulerAnglesHint: {x: 25.711, y: 19.397, z: -73.136}
 --- !u!96 &1638094080
 TrailRenderer:
   serializedVersion: 3
@@ -22384,7 +22416,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 2
+  m_Time: 1
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -22444,14 +22476,14 @@ TrailRenderer:
       serializedVersion: 2
       key0: {r: 1, g: 0.03648228, b: 0.0039215684, a: 1}
       key1: {r: 0.8490566, g: 0.4926697, b: 0.027233835, a: 0.5882353}
-      key2: {r: 0, g: 0.7218666, b: 1, a: 0}
+      key2: {r: 0.9245283, g: 0.8735048, b: 0.80678177, a: 0}
       key3: {r: 0, g: 0.7218666, b: 1, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
+      ctime1: 42020
       ctime2: 65535
       ctime3: 65535
       ctime4: 0
@@ -22468,7 +22500,7 @@ TrailRenderer:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 2
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
@@ -23550,7 +23582,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 77813498}
   - {fileID: 415702596}
-  waitTime: 10
+  waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
 --- !u!1 &1747149239
@@ -24299,19 +24331,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstWaveMonsters:
-  - {fileID: 7026824385615397721, guid: fe36ad20929d0704d824325dddcd646c, type: 3}
-  secondWaveMonsters:
   - {fileID: 3364604686415033763, guid: 2c9b61f7c236f454296dbaa124d234b3, type: 3}
+  secondWaveMonsters:
+  - {fileID: 5130816394197404534, guid: 573dd2e694ba8ea4fa589dd81f7b5449, type: 3}
   thirdWaveMonsters:
+  - {fileID: 3364604686415033763, guid: 2c9b61f7c236f454296dbaa124d234b3, type: 3}
   - {fileID: 5130816394197404534, guid: 573dd2e694ba8ea4fa589dd81f7b5449, type: 3}
   forthWaveMonsters:
-  - {fileID: 3364604686415033763, guid: 2c9b61f7c236f454296dbaa124d234b3, type: 3}
-  - {fileID: 5130816394197404534, guid: 573dd2e694ba8ea4fa589dd81f7b5449, type: 3}
-  numOfMonsters: 0100000005000000050000000a000000
+  - {fileID: 7026824385615397721, guid: fe36ad20929d0704d824325dddcd646c, type: 3}
+  numOfMonsters: 05000000050000000a00000001000000
   Upgrade: {fileID: 1085693016786123864, guid: c24a996fd5b6ff248ad37316e2f48b4f, type: 3}
   magicComponents:
-  - {fileID: 1206084409}
-  waitTime: 0
+  - {fileID: 1135293579}
+  waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
 --- !u!1 &1787454974
@@ -26204,7 +26236,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 357516323}
   - {fileID: 1769261767}
-  waitTime: 10
+  waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
 --- !u!1001 &1892807044
@@ -26661,13 +26693,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937309044}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.59869576, y: -0.15708764, z: -0.2754292, w: 0.7355445}
-  m_LocalPosition: {x: 0.204, y: 0.071, z: -0.223}
+  m_LocalRotation: {x: -0.67174286, y: -0.34599093, z: -0.08621644, w: 0.6493216}
+  m_LocalPosition: {x: 0.186, y: 0.086, z: -0.237}
   m_LocalScale: {x: 1.6666665, y: 1.6666667, z: 1.6666669}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1284307293}
-  m_LocalEulerAnglesHint: {x: -75.3, y: 22.891, z: -58.813}
+  m_LocalEulerAnglesHint: {x: -68.751, y: -113.049, z: 76.817}
 --- !u!96 &1937309046
 TrailRenderer:
   serializedVersion: 3
@@ -27488,7 +27520,7 @@ MonoBehaviour:
   Upgrade: {fileID: 794828816375683814, guid: 6e0e9377f59971141b8f4666c4e9bbf4, type: 3}
   magicComponents:
   - {fileID: 130998563}
-  waitTime: 12
+  waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
 --- !u!1001 &1976291890
@@ -28537,7 +28569,7 @@ MonoBehaviour:
   Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
   magicComponents:
   - {fileID: 1367462712}
-  waitTime: 12
+  waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
 --- !u!1 &2080712349

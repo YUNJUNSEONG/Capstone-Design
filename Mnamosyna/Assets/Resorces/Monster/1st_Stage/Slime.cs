@@ -30,7 +30,6 @@ public class Slime : BaseMonster
 
             // 아기 슬라임 소환
             Vector3 spawnPosition = transform.position; // 현재 슬라임의 위치를 기준으로 소환
-            StartCoroutine(WaitTwoSeconds());
             spawner.SpawnBabySlime(spawnPosition); // 스포너의 SpawnBabySlime 메서드 호출
             spawner.SpawnBabySlime(spawnPosition);
 
@@ -42,11 +41,4 @@ public class Slime : BaseMonster
         }
     }
 
-    IEnumerator WaitTwoSeconds()
-    {
-        // 2초 대기
-        yield return new WaitForSeconds(2.0f);
-        // 2초 후 실행할 동작
-        Debug.Log("2초 대기 후 실행");
-    }
 }

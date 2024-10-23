@@ -688,24 +688,24 @@ MonoBehaviour:
   Name: Mplant
   Max_HP: 25
   Cur_HP: 25
-  ATK1: 7
-  ATK2: 10
+  ATK: 6
+  Skill01: 10
   NumberOfSkills: 2
-  SkillCoolTime1: 5
-  SkillCoolTime2: 8
+  AttackCoolTime: 5
+  SkillCoolTime1: 7
   Defense: 0
   Move_Speed: 1
   ApproachRadius: 2
   DetectionRadius: 100
-  attack1Radius: 3
-  attack2Radius: 4
+  AttackRadius: 3
+  Skill01Radius: 4
   invincibleTime: 0.5
   spawner: {fileID: 0}
   bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 455944455902947362}
   damageText: {fileID: 3404384710641286638}
-  isAttack01: 0
-  isAttack02: 0
+  isAttack: 0
+  isSkill01: 0
   attack01Hash: 0
   attack02Hash: 0
   knockbackForce: 10

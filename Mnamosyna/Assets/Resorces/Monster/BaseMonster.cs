@@ -23,7 +23,7 @@ public class BaseMonster : MobStat
 
     protected float rotationSpeed = 5.0f;
 
-    private float lastDamagedTime;
+    protected float lastDamagedTime;
 
     public delegate void DeathHandler();
     public delegate void Action();
@@ -33,8 +33,8 @@ public class BaseMonster : MobStat
     public BossSpawner bossSpawner;
     public GameObject exclamationMark;
     public Text damageText;
-    private Vector3 originalPosition;
-    private Color originalColor;
+    protected Vector3 originalPosition;
+    protected Color originalColor;
 
     protected GameObject player;
 
@@ -42,7 +42,7 @@ public class BaseMonster : MobStat
     protected NavMeshAgent nav; // 내브메쉬
     protected System.Random random; 
     protected Animator anim;
-    private List<Renderer> renderers;
+    protected List<Renderer> renderers;
 
     protected const float WAIT_TIME = 0.2f;
     protected bool isChase;
@@ -50,10 +50,10 @@ public class BaseMonster : MobStat
     protected bool isDamage = false;
     protected bool isDead = false;
 
-    public bool isAttack01 = false;
-    public bool isAttack02 = false;
-    protected float Attack01CanUse;
-    protected float Attack02CanUse;
+    public bool isAttack = false;
+    public bool isSkill01 = false;
+    protected float AttackCanUse;
+    protected float Skill01CanUse;
 
     // 애니메이션용
     protected static readonly int BattleIdleHash = Animator.StringToHash("BattleIdle");
@@ -61,7 +61,6 @@ public class BaseMonster : MobStat
     public int attack01Hash;
     protected static readonly int Attack02Hash = Animator.StringToHash("Attack02");
     public int attack02Hash;
-    //protected static readonly int Attack03Hash = Animator.StringToHash("Attack03");
     protected static readonly int RunHash = Animator.StringToHash("Run");
     protected static readonly int GetHitHash = Animator.StringToHash("GetHit");
     protected static readonly int DieHash = Animator.StringToHash("Die");
@@ -83,8 +82,8 @@ public class BaseMonster : MobStat
 
         currentState = State.Idle;
 
-        Attack01CanUse = SkillCoolTime1;
-        Attack02CanUse = SkillCoolTime2;
+        AttackCanUse = AttackCoolTime;
+        Skill01CanUse = SkillCoolTime1;
     }
     void Start()
     {
@@ -93,7 +92,7 @@ public class BaseMonster : MobStat
 
 
     // 몬스터의 상태 변경
-    public void ChangeState(State state)
+    public virtual void ChangeState(State state)
     {
         if (currentState == State.Idle && state == State.Chase)
         {
@@ -129,7 +128,7 @@ public class BaseMonster : MobStat
     // 몬스터의 플레이어 추적 상태 출력 함수
     void Chase()
     {
-        if (currentState == State.Die || isAttack01 || isAttack02)
+        if (currentState == State.Die || isAttack || isSkill01)
         {
             return;
         }
@@ -156,10 +155,10 @@ public class BaseMonster : MobStat
         switch (skillIndex)
         {
             case 0:  // 기본 공격
-                TryAttack(ref Attack01CanUse, attack1Radius, SkillCoolTime1, Attack01);
+                TryAttack(ref AttackCanUse, AttackRadius, AttackCoolTime, Attack01);
                 break;
             case 1: // 스킬 공격
-                TryAttack(ref Attack02CanUse, attack2Radius, SkillCoolTime2, Attack02, true);
+                TryAttack(ref Skill01CanUse, Skill01Radius, SkillCoolTime1, Attack02, true);
                 break;
         }
     }
@@ -169,7 +168,7 @@ public class BaseMonster : MobStat
         if (attackCooldown <= 0 && (transform.position - player.transform.position).sqrMagnitude <= attackRadius * attackRadius)
         {
             MonsterAttackStart();
-            if (setIsAttack02) isAttack02 = true;
+            if (setIsAttack02) isSkill01 = true;
             attackAction();
             attackCooldown = skillCoolTime;
         }
@@ -228,12 +227,10 @@ public class BaseMonster : MobStat
         switch (skillIndex)
         {
             case 0: // 기본 공격
-                damage = ATK1;
-                Debug.Log("일반 공격 데미지 : "+ATK1);
+                damage = ATK;
                 break;
             case 1: // 스킬 공격
-                damage = ATK2;
-                Debug.Log("스킬 공격 데미지 : "+ATK2);
+                damage = Skill01;
                 break;
             default:
                 // 지정되지 않은 스킬이면 damage 0
@@ -271,8 +268,8 @@ public class BaseMonster : MobStat
         }
 
         // 1초마다 스킬 쿨 감소
-        Attack01CanUse -= Time.deltaTime;
-        Attack02CanUse -= Time.deltaTime;
+        AttackCanUse -= Time.deltaTime;
+        Skill01CanUse -= Time.deltaTime;
 
         RotateMonsterToCharacter();
 
@@ -411,14 +408,14 @@ public class BaseMonster : MobStat
 
     protected void MonsterAttackStart()
     {
-        isAttack01 = true;
+        isAttack = true;
         anim.SetBool(RunHash, false); // 공격 중일 때 이동 애니메이션 비활성화
         //nav.isStopped = true; // 공격 중일 때 NavMeshAgent 정지
     }
 
     void MonsterAttackEnd()
     {
-        isAttack01 = false;
+        isAttack = false;
         anim.SetBool(RunHash, true); // 공격이 끝나면 이동 애니메이션 활성화
         //nav.isStopped = false; // 공격이 끝나면 NavMeshAgent 다시 활성화
     }
@@ -426,7 +423,7 @@ public class BaseMonster : MobStat
     // 첫 번째 공격 애니메이션이 끝날 때 호출될 함수
     public void OnFirstAttackAnimationEnd()
     {
-        isAttack01 = false;
+        isAttack = false;
         anim.SetBool(RunHash, true); // 공격이 끝나면 이동 애니메이션 활성화
         //nav.isStopped = false; // 공격이 끝나면 NavMeshAgent 다시 활성화
     }
@@ -434,7 +431,7 @@ public class BaseMonster : MobStat
     // 두 번째 공격 애니메이션이 끝날 때 호출될 함수
     public void OnSecondAttackAnimationEnd()
     {
-        isAttack02 = false;
+        isSkill01 = false;
         anim.SetBool(RunHash, true); // 공격이 끝나면 이동 애니메이션 활성화
         //nav.isStopped = false; // 공격이 끝나면 NavMeshAgent 다시 활성화
     }
@@ -444,9 +441,9 @@ public class BaseMonster : MobStat
         if (other.gameObject.TryGetComponent(out Player player))
         {
             Debug.Log("플레이어 감지됨"); // 추가된 로그
-            if (isAttack01)
+            if (isAttack)
             {
-                if (isAttack02)
+                if (isSkill01)
                 {
                     player.TakeDamage(Damage(1)); // 스킬 공격
                 }

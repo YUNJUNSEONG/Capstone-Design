@@ -914,6 +914,7 @@ MonoBehaviour:
   - {fileID: 1667003591}
   waitTime: 10
   aliveCount: 0
+  babySlimePrefab: {fileID: 0}
 --- !u!4 &44624178 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 03ae70f06b39aad4ca8ac9cda7e63ab4, type: 3}
@@ -1516,6 +1517,7 @@ MonoBehaviour:
   - {fileID: 2128576308}
   waitTime: 12
   aliveCount: 0
+  babySlimePrefab: {fileID: 0}
 --- !u!1001 &77695224
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2226,6 +2228,7 @@ MonoBehaviour:
   - {fileID: 2007177057}
   waitTime: 15
   aliveCount: 0
+  babySlimePrefab: {fileID: 0}
 --- !u!1 &109700236
 GameObject:
   m_ObjectHideFlags: 0
@@ -6415,7 +6418,7 @@ PrefabInstance:
     - target: {fileID: 3765029672565552709, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: playerAttack
       value: 
-      objectReference: {fileID: 364041807}
+      objectReference: {fileID: 0}
     - target: {fileID: 3834199076007279110, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -6870,22 +6873,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3160105955097573611, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
   m_PrefabInstance: {fileID: 364041805}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &364041807 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4143652303848597791, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
-  m_PrefabInstance: {fileID: 364041805}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 364041806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 947bac3708be3684d8ca96f8455275ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &364041808 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2346695583065940561, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
-  m_PrefabInstance: {fileID: 364041805}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &364041809 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7057496332036221359, guid: 06f850e8cd8c52c48b15dfb9c79cbf01, type: 3}
@@ -6974,14 +6961,25 @@ MonoBehaviour:
   isDead: 0
   isAttack: 0
   isDash: 0
-  isSkillActive: 0
+  isGameOver: 0
   followCamera: {fileID: 0}
   invincibleTime: 1
   invincibleDuration: 2
+  anim: {fileID: 0}
   BaseMesh_Fire: {fileID: 0}
   BaseMesh_Water: {fileID: 0}
   BaseMesh_Air: {fileID: 0}
   BaseMesh_Earth: {fileID: 0}
+  waterACollider: {fileID: 0}
+  waterAEffect: {fileID: 0}
+  fireACollider: {fileID: 0}
+  fireAEffect: {fileID: 0}
+  airACollider: {fileID: 0}
+  airAEffect1: {fileID: 0}
+  airAEffect2: {fileID: 0}
+  earthACollider: {fileID: 0}
+  earthAEffect1: {fileID: 0}
+  earthAEffect2: {fileID: 0}
   allSkills: []
   stanbySkills: []
   skillCommand: 
@@ -7609,6 +7607,7 @@ MonoBehaviour:
   - {fileID: 719391032}
   waitTime: 7
   aliveCount: 0
+  babySlimePrefab: {fileID: 0}
 --- !u!1001 &419742764
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9312,6 +9311,7 @@ MonoBehaviour:
   - {fileID: 791847675}
   waitTime: 7
   aliveCount: 0
+  babySlimePrefab: {fileID: 0}
 --- !u!1001 &502685061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11497,6 +11497,7 @@ MonoBehaviour:
   - {fileID: 1859800130}
   waitTime: 5
   aliveCount: 0
+  babySlimePrefab: {fileID: 0}
 --- !u!1001 &617121249
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12543,6 +12544,7 @@ MonoBehaviour:
   - {fileID: 189646498}
   waitTime: 15
   aliveCount: 0
+  babySlimePrefab: {fileID: 0}
 --- !u!1001 &683786779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18246,6 +18248,7 @@ MonoBehaviour:
   - {fileID: 1447987384}
   waitTime: 12
   aliveCount: 0
+  babySlimePrefab: {fileID: 0}
 --- !u!1001 &1041300297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21732,6 +21735,7 @@ MonoBehaviour:
   - {fileID: 1945248339}
   waitTime: 10
   aliveCount: 0
+  babySlimePrefab: {fileID: 0}
 --- !u!1001 &1213026851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23850,7 +23854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SwordCollider: {fileID: 1316466198}
-  playerAttack: {fileID: 364041807}
+  playerAttack: {fileID: 0}
   player: {fileID: 0}
 --- !u!65 &1316466198
 BoxCollider:
@@ -25983,6 +25987,7 @@ MonoBehaviour:
   - {fileID: 481768244}
   waitTime: 10
   aliveCount: 0
+  babySlimePrefab: {fileID: 0}
 --- !u!1001 &1422640951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27744,7 +27749,7 @@ GameObject:
   - component: {fileID: 1544984441}
   - component: {fileID: 1544984440}
   - component: {fileID: 1544984439}
-  - component: {fileID: 1544984438}
+  - component: {fileID: 1544984443}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -27752,22 +27757,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1544984438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1544984437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04529f9f7e50b1043b66a249d8b7adab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 364041808}
-  offset: {x: 0, y: 8.9, z: -5.55}
-  rotationSpeed: 5
-  angle: -135
 --- !u!114 &1544984439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27879,13 +27868,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544984437}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.46143892, y: 0, z: 0, w: 0.887172}
-  m_LocalPosition: {x: 2.3200006, y: 8.9, z: -11.1}
+  m_LocalRotation: {x: 0.17658503, y: -0.81964004, z: 0.426314, w: 0.339506}
+  m_LocalPosition: {x: 19.5, y: 45, z: -96.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 54.96, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 54.96, y: -135, z: 0}
+--- !u!114 &1544984443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544984437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9f4119dd726e44ca80dae3c9c60b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  offset: {x: 5, y: 15, z: -10}
 --- !u!1001 &1546221371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28730,6 +28733,7 @@ MonoBehaviour:
   - {fileID: 1401766162}
   waitTime: 15
   aliveCount: 0
+  babySlimePrefab: {fileID: 0}
 --- !u!1001 &1591240418
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31670,6 +31674,7 @@ MonoBehaviour:
   - {fileID: 1451014792}
   waitTime: 10
   aliveCount: 0
+  babySlimePrefab: {fileID: 0}
 --- !u!1 &1752975184
 GameObject:
   m_ObjectHideFlags: 0

@@ -131,24 +131,24 @@ MonoBehaviour:
   Name: BabySllime
   Max_HP: 15
   Cur_HP: 15
-  ATK1: 3
-  ATK2: 5
+  ATK: 3
+  Skill01: 3
   NumberOfSkills: 2
-  SkillCoolTime1: 3
-  SkillCoolTime2: 7
+  AttackCoolTime: 3
+  SkillCoolTime1: 5
   Defense: 0
   Move_Speed: 3
   ApproachRadius: 0
   DetectionRadius: 100
-  attack1Radius: 1
-  attack2Radius: 2
+  AttackRadius: 2
+  Skill01Radius: 3
   invincibleTime: 0.5
   spawner: {fileID: 0}
   bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 1508338185881107144}
   damageText: {fileID: 3064743197607090223}
-  isAttack01: 0
-  isAttack02: 0
+  isAttack: 0
+  isSkill01: 0
   attack01Hash: 0
   attack02Hash: 0
 --- !u!1 &1010329700019522727

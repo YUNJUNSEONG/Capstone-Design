@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-
+/*
 public class Sword : MonoBehaviour
 {
     public Player player;
@@ -29,7 +29,7 @@ public class Sword : MonoBehaviour
         attackArea.enabled = false;
         //trailEffect.enabled = false;
     }
-    */
+
 
     private void OnTriggerStay(Collider other)
     {
@@ -50,8 +50,8 @@ public class Sword : MonoBehaviour
             {
                 monster.TakeDamage(player.Damage());
             }
-        }*/
+        }
     }
     public void EnableSwordCollider() { player.isAttack = true; }
     public void DisableSwordCollider() { player.isAttack = false; }
-}
+}    */

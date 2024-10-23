@@ -583,24 +583,24 @@ MonoBehaviour:
   Name: Salamander
   Max_HP: 30
   Cur_HP: 30
-  ATK1: 6
-  ATK2: 9
+  ATK: 6
+  Skill01: 9
   NumberOfSkills: 2
-  SkillCoolTime1: 4
-  SkillCoolTime2: 8
+  AttackCoolTime: 4
+  SkillCoolTime1: 6
   Defense: 0
   Move_Speed: 3
   ApproachRadius: 2
   DetectionRadius: 100
-  attack1Radius: 1.5
-  attack2Radius: 3
+  AttackRadius: 4
+  Skill01Radius: 5
   invincibleTime: 0.5
   spawner: {fileID: 0}
   bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 4162572557569085720}
   damageText: {fileID: 6020489788439873421}
-  isAttack01: 0
-  isAttack02: 0
+  isAttack: 0
+  isSkill01: 0
   attack01Hash: 0
   attack02Hash: 0
   projectilePrefab: {fileID: 3685667109570152068, guid: 4af10aaf06366f4468c8ff5385709a8f, type: 3}

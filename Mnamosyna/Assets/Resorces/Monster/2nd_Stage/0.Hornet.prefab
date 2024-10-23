@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6454794307135569970
 RectTransform:
   m_ObjectHideFlags: 0
@@ -645,6 +645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 7377514970728851562}
+  boss: {fileID: 0}
   Distance: {fileID: 1840786973547852658}
 --- !u!1001 &4173831626118621908
 PrefabInstance:
@@ -810,23 +811,24 @@ MonoBehaviour:
   Name: Hornet
   Max_HP: 20
   Cur_HP: 20
-  ATK1: 3
-  ATK2: 5
+  ATK: 0
+  Skill01: 0
   NumberOfSkills: 2
+  AttackCoolTime: 0
   SkillCoolTime1: 2
-  SkillCoolTime2: 4
   Defense: 0
   Move_Speed: 3
   ApproachRadius: 2
   DetectionRadius: 100
-  attack1Radius: 3
-  attack2Radius: 5
+  AttackRadius: 0
+  Skill01Radius: 0
   invincibleTime: 0.5
   spawner: {fileID: 0}
+  bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 2779147607398718246}
   damageText: {fileID: 2735995876976320081}
-  isAttack01: 0
-  isAttack02: 0
+  isAttack: 0
+  isSkill01: 0
   attack01Hash: 0
   attack02Hash: 0
 --- !u!4 &4496515188298222911 stripped

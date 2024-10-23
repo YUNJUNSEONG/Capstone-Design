@@ -12,4 +12,16 @@ public class CameraFollow : MonoBehaviour
     {
         transform.position = target.position + offset;
     }
+    void Start()
+    {
+        if (target == null)
+        {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+    }
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+
+    }
 }

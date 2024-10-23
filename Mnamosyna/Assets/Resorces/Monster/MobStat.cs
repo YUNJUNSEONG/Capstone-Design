@@ -17,17 +17,17 @@ public class MobStat : MonoBehaviour
     [Header("공격 관련")]
     // 공격 관련 속성
     [SerializeField]
-    protected int ATK1;
+    protected int ATK;
     [SerializeField]
-    protected int ATK2;
+    protected int Skill01;
     [SerializeField]
     protected int NumberOfSkills;
 
     [Header("공격 쿨타임")]
     [SerializeField]
-    protected float SkillCoolTime1;
+    protected float AttackCoolTime;
     [SerializeField]
-    protected float SkillCoolTime2;
+    protected float SkillCoolTime1;
 
 
     [Header("방어력")]
@@ -44,26 +44,26 @@ public class MobStat : MonoBehaviour
     [SerializeField]
     protected float DetectionRadius;
     [SerializeField]
-    protected float attack1Radius;
+    protected float AttackRadius;
     [SerializeField]
-    protected float attack2Radius;
+    protected float Skill01Radius;
 
 
     public int max_hp { get { return Max_HP; } set { Max_HP = value; } }
     public int cur_hp { get { return Cur_HP; } set { Cur_HP = value; } }
 
-    public int skill_attack1 { get { return ATK1; } set { ATK1 = value; } }
-    public int skill_attack2 { get { return ATK2; } set { ATK2 = value; } }
-    public float skill_colltime1 { get { return SkillCoolTime1; } set { SkillCoolTime1 = value; } }
-    public float skill_colltime2 { get { return SkillCoolTime2; } set { SkillCoolTime2 = value; } }
+    public int skill_attack1 { get { return ATK; } set { ATK = value; } }
+    public int skill_attack2 { get { return Skill01; } set { Skill01 = value; } }
+    public float skill_colltime1 { get { return AttackCoolTime; } set { AttackCoolTime = value; } }
+    public float skill_colltime2 { get { return SkillCoolTime1; } set { SkillCoolTime1 = value; } }
 
     public float defense { get { return Defense; } set { Defense = value; } }
     public float move_speed { get { return Move_Speed; } set { Move_Speed = value; } }
 
     public float approach { get { return ApproachRadius; } set { ApproachRadius = value; } }
     public float detection { get { return DetectionRadius; } set { DetectionRadius = value; } }
-    public float attack1_radius { get { return attack1Radius; } set { attack1Radius = value; } }
-    public float attack2_radius { get { return attack2Radius; } set { attack2Radius = value; } }
+    public float attack_radius { get { return AttackRadius; } set { AttackRadius = value; } }
+    public float skill01_radius { get { return Skill01Radius; } set { Skill01Radius = value; } }
 }
 
     

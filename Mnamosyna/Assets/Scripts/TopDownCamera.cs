@@ -11,9 +11,18 @@ public class TopDownCamera : MonoBehaviour
 
     private Vector3 _cameraPosition;
     private bool _isMouseDown = false;
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
 
+    }
     void Start()
     {
+        if (target == null)
+        {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+
         var transform1 = transform;
         var position = target.position;
         transform1.position = position + offset;

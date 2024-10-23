@@ -44,11 +44,11 @@ public class SkillRange : MonoBehaviour
 
     void SetAttackDistance()
     {
-        attackDistance.radius = monster.attack1_radius;
+        attackDistance.radius = monster.attack_radius;
     }
 
     void SetSkillDistance()
     {
-        skillDistance.radius = monster.attack2_radius;
+        skillDistance.radius = monster.skill01_radius;
     }
 }
