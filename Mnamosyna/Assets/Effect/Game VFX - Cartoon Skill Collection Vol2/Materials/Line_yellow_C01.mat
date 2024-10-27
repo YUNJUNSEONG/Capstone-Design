@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Line_yellow_C01
+  m_Shader: {fileID: 4800000, guid: e9b84af98fd76fe4dbd18ab4432e9ad4, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 5000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 37f08e2d42111ba418a19802ba084f06, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: -0.25}
+    - _mask:
+        m_Texture: {fileID: 2800000, guid: 6c5814df02e6603459e76f196f60c656, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex:
+        m_Texture: {fileID: 2800000, guid: 9d028faf88071fb47a3c561c06c80d12, type: 3}
+        m_Scale: {x: 1, y: 0.3}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _InvFade: 1
+    - _U: 0
+    - _UVrotator: 0
+    - _UVrotator_mask: 0
+    - _U_mask: 0
+    - _duibi: 0.8
+    - _jiaodujiaodu: 0
+    - _jiaodujiaodu_mask: 0
+    - _liangdu: 10
+    - _v: -4
+    - _v_mask: -4.6
+    m_Colors:
+    - _TintColor: {r: 0.8301887, g: 0.38364244, b: 0.3485226, a: 0.4392157}
+    - _glowcolor: {r: 0.7058823, g: 0.6924234, b: 0.21799307, a: 0.238}

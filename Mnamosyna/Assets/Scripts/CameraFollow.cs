@@ -19,9 +19,10 @@ public class CameraFollow : MonoBehaviour
             target = GameObject.FindGameObjectWithTag("Player").transform;
         }
     }
+    /*
     private void Awake()
     {
         DontDestroyOnLoad(this);
 
-    }
+    }*/
 }
