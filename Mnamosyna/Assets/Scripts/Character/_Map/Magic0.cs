@@ -53,36 +53,36 @@ public class Magic0 : MonoBehaviour
         if(this.name == "BosstoMagic2-0")
         {
             SceneManager.LoadScene("Stage-2");
-            { collision.transform.position = new Vector3(0.85f, 4.7f, -15.19f); }
+            { collision.transform.position = new Vector3(0.63f, 4.7f, -15.5f); }
         }
 
         //2스테이지 포탈 좌표
         if (this.name == "Magic2-0to1") {collision.transform.position = new Vector3(-2.4f, 4.7f, -77.7f);} //0->1
         
-        if (this.name == "Magic2-1to2_1") {collision.transform.position = new Vector3(-54.3f, 4.7f, -49.3f);} //1->2-1
+        if (this.name == "Magic2-1to2_1") {collision.transform.position = new Vector3(-67.92f, 4.7f, -45.93f);} //1->2-1
         if (this.name == "Magic2-1to2_2") {collision.transform.position = new Vector3(-56.1f, 4.7f, 22.77f);} //1->2-2
         
         if (this.name == "Magic2-2to3_1") {collision.transform.position = new Vector3(-115f, 4.7f, -80.9f);} //2->3-1
         if (this.name == "Magic2-2to3_2") {collision.transform.position = new Vector3(-113.5f, 4.7f, -10.5f);} //2->3-2
-        if (this.name == "Magic2-2to3_3") {collision.transform.position = new Vector3(-113.9f, 4.7f, 49.7f);} //2->3-3
+        if (this.name == "Magic2-2to3_3") {collision.transform.position = new Vector3(-122.41f, 4.7f, 49.74f);} //2->3-3
         
         if (this.name == "Magic2-3toH") {collision.transform.position = new Vector3(-125f, 4.7f, 159.6f);} //3->Heal
         
         if (this.name == "Magic2-Hto4") {collision.transform.position = new Vector3(-214.7f, 4.7f, -14.1f);} //Heal->4
         
-        if (this.name == "Magic2-4to5_1") {collision.transform.position = new Vector3(-259.1f, 4.7f, -50.0f);} //4->5-1
+        if (this.name == "Magic2-4to5_1") {collision.transform.position = new Vector3(-259.03f, 4.7f, -45.43f);} //4->5-1
         if (this.name == "Magic2-4to5_2") {collision.transform.position = new Vector3(-270.7f, 4.7f, 23.5f);} //4->5-2
         
         if (this.name == "Magic2-5to6_1") {collision.transform.position = new Vector3(-343.4f, 4.7f, -79f);} //5->6-1
         if (this.name == "Magic2-5to6_2") {collision.transform.position = new Vector3(-327.9f, 4.7f, -12.8f);} //5->6-2
         if (this.name == "Magic2-5to6_3") {collision.transform.position = new Vector3(-320.9f, 4.7f, 57.6f);} //5->6-3
         
-        if (this.name == "Magic2-6toB") {collision.transform.position = new Vector3(-223f, 4.7f, 150.0f);} //6->Boss
+        if (this.name == "Magic2-6toB") {collision.transform.position = new Vector3(-223f, 4.7f, 153.7f);} //6->Boss
 
         if (this.name == "BosstoMagic3-0")
         {
             SceneManager.LoadScene("Stage-3");
-            { collision.transform.position = new Vector3(10.1f, 30f, -100.6f); }
+            { collision.transform.position = new Vector3(83.87f, 24.37f, -134.79f); }
         }
         //3스테이지 포탈 좌표
         if (this.name == "Magic3-0to1") {collision.transform.position = new Vector3(-3.4f, 1.2f, 55.3f);} //0->1

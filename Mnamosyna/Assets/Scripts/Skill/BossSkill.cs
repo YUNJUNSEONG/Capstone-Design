@@ -14,7 +14,7 @@ public class BossSkill : MonoBehaviour
     public Magic0[] magicComponents;
 
     public bool UnlockSkillSelectEnd = false;
-    private static bool storyShown = false;
+    //private static bool storyShown = false;
 
     private void Start()
     {
@@ -40,8 +40,10 @@ public class BossSkill : MonoBehaviour
         if (player != null)
         {
             Debug.Log("Player Heal!");
-            player.cur_hp += healPlayer;
-            player.cur_stamina += healPlayer;
+
+            // 체력과 스태미나가 최대치를 넘지 않도록 제한
+            player.cur_hp = Mathf.Min(player.cur_hp + healPlayer, player.max_hp);
+            player.cur_stamina = Mathf.Min(player.cur_stamina + healPlayer, player.max_stamina);
 
             OpenUnlockUpUI(skillManager, () =>
             {
@@ -54,6 +56,7 @@ public class BossSkill : MonoBehaviour
             foreach (Magic0 magic in magicComponents) { magic.EnableComponents(); }
         }
     }
+
 
     public void OpenUnlockUpUI(SkillManager skillManager, Action onUnlockComplete)
     {

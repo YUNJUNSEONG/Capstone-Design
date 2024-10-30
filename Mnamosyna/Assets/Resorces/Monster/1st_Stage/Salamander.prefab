@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 6171750412539946701}
   - component: {fileID: 4454092350067234181}
   - component: {fileID: 2628069767924689867}
-  - component: {fileID: 2278322033641972058}
+  - component: {fileID: 5887256602611881360}
   m_Layer: 8
   m_Name: HPbar_Back
   m_TagString: Untagged
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2278322033641972058
+--- !u!114 &5887256602611881360
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,11 +156,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3324434224805896753}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c466bac5fba56104f9939eec349952e3, type: 3}
+  m_Script: {fileID: 11500000, guid: e42cd0a296c3cf34283cfe3b6f1d5745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 5130816394197404534}
-  Monster: {fileID: 0}
+  cameraTransform: {fileID: 0}
 --- !u!1 &3610590710435190938
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,7 +545,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!135 &6225425385652290039
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -596,7 +595,6 @@ MonoBehaviour:
   Skill01Radius: 5
   invincibleTime: 0.5
   spawner: {fileID: 0}
-  bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 4162572557569085720}
   damageText: {fileID: 6020489788439873421}
   isAttack: 0
@@ -790,7 +788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 5130816394197404534}
-  Monster: {fileID: 0}
+  Monster: {fileID: 4476559927043901348}
 --- !u!114 &1359336804496273969
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class Spawner : MonoBehaviour
 
     public GameObject Upgrade;
     public Magic0[] magicComponents;
-    private Collider spawnAreaCollider;
+    public Collider spawnAreaCollider;
 
     public float waitTime;
     public int aliveCount;
@@ -74,7 +74,6 @@ public class Spawner : MonoBehaviour
     {
         if (babySlimePrefab != null)
         {
-            StartCoroutine(WaitTwoSeconds());
             GameObject babySlime = Instantiate(babySlimePrefab, position, Quaternion.identity);
             var monster = babySlime.GetComponent<BaseMonster>();
             if (monster != null)
@@ -83,13 +82,6 @@ public class Spawner : MonoBehaviour
                 aliveCount++; // babySlime 소환 시 aliveCount 증가
             }
         }
-    }
-    IEnumerator WaitTwoSeconds()
-    {
-        // 2초 대기
-        yield return new WaitForSeconds(2.0f);
-        // 2초 후 실행할 동작
-        Debug.Log("2초 대기 후 실행");
     }
 
     public void CheckAliveCount()
@@ -102,7 +94,7 @@ public class Spawner : MonoBehaviour
 
             Vector3 spawnOffset = new Vector3(3.0f, 0, 0);
             Vector3 spawnPosition = playerPosition + playerForward * spawnOffset.x;
-            spawnPosition.y = 1.0f;
+            spawnPosition.y = playerPosition.y+0.8f;
 
             SpawnObject(spawnPosition);
             isCombatEnded = true;
@@ -132,7 +124,7 @@ public class Spawner : MonoBehaviour
         {
             Vector3 randomPoint = new Vector3(
                 Random.Range(collider.bounds.min.x, collider.bounds.max.x),
-                1f,
+                5f,
                 Random.Range(collider.bounds.min.z, collider.bounds.max.z)
             );
 
@@ -146,7 +138,7 @@ public class Spawner : MonoBehaviour
             }
         }
 
-        //Debug.LogError("Collider 위의 위치 못찾");
+        Debug.LogError("Collider 위의 위치 못찾");
         return collider.bounds.center;
     }
 

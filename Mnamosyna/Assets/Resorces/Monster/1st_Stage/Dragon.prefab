@@ -406,6 +406,7 @@ GameObject:
   - component: {fileID: 515194888676178229}
   - component: {fileID: 5779517168523499483}
   - component: {fileID: 7977772435020352368}
+  - component: {fileID: 7029073841441391626}
   m_Layer: 5
   m_Name: HPbar_Back
   m_TagString: Untagged
@@ -484,6 +485,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monster: {fileID: 3364604686415033763}
   Monster: {fileID: 1523194892205722113}
+--- !u!114 &7029073841441391626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038924142931094897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e42cd0a296c3cf34283cfe3b6f1d5745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 0}
 --- !u!1 &2071264502599084310
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,7 +893,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &1523194892205722113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -908,7 +922,6 @@ MonoBehaviour:
   Skill01Radius: 8
   invincibleTime: 0.5
   spawner: {fileID: 0}
-  bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 8191677678517295172}
   damageText: {fileID: 7821745980870069796}
   isAttack: 0
@@ -1238,7 +1251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 3}
+  m_AnchoredPosition: {x: 0, y: 2.446}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7352855862187264445
@@ -1473,7 +1486,7 @@ GameObject:
   - component: {fileID: 9136850919591823133}
   - component: {fileID: 4501032922546364236}
   - component: {fileID: 7821745980870069796}
-  - component: {fileID: 6752910713735531152}
+  - component: {fileID: 5753987058404162772}
   m_Layer: 8
   m_Name: damageText
   m_TagString: Untagged
@@ -1521,7 +1534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.58431375, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1542,7 +1555,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
---- !u!114 &6752910713735531152
+--- !u!114 &5753987058404162772
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

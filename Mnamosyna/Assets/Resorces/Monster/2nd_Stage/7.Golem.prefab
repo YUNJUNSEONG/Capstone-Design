@@ -1036,7 +1036,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &-8606476521264493290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1065,7 +1065,6 @@ MonoBehaviour:
   Skill01Radius: 5
   invincibleTime: 0.5
   spawner: {fileID: 0}
-  bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 6103479316046354173}
   damageText: {fileID: 8024450588082436696}
   isAttack: 0

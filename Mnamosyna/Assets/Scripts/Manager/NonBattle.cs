@@ -6,7 +6,6 @@ public class NonBattle : MonoBehaviour
 {
     public Magic0[] magicComponents;
     private Collider nonAreaCollider;
-    private bool hasSpawnedUpgrade = false;
 
     void Awake()
     {

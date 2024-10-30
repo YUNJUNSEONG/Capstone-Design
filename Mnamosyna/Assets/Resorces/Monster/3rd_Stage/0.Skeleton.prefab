@@ -952,11 +952,16 @@ PrefabInstance:
         clip 'Attack02'\n\tFrom animation clip 'IdleBattle'\n\tFrom animation clip
         'GetHit'\n\tFrom animation clip 'Die'"
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 13700002, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 02169a29bc93499d91fdd5dd16ead51a, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 400028, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
@@ -970,8 +975,11 @@ PrefabInstance:
       addedObject: {fileID: 7940426389273587408}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100028, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
-      insertIndex: 1
+      insertIndex: -1
       addedObject: {fileID: -4411720639205372177}
+    - targetCorrespondingSourceObject: {fileID: 100028, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3596048471083356251}
     - targetCorrespondingSourceObject: {fileID: 100028, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1866699682465683207}
@@ -1002,6 +1010,27 @@ MonoBehaviour:
   spawnEffectPrefab: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
   yVector: -1
   zVector: 0
+--- !u!95 &3596048471083356251
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3027720348572540393}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 69fa5848e64449b29028b2d2debbaea2, type: 3}
+  m_Controller: {fileID: 9100000, guid: 4c32cdf8e35f80f4fab34b8ecb593431, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!135 &1866699682465683207
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1044,7 +1073,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &-1816796936210615924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1073,7 +1102,6 @@ MonoBehaviour:
   Skill01Radius: 4
   invincibleTime: 0.5
   spawner: {fileID: 0}
-  bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 7777620151274116799}
   damageText: {fileID: 1467153160954579564}
   isAttack: 0

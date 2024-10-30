@@ -34,8 +34,10 @@ public class HealSpace : MonoBehaviour
         if (player != null)
         {
             Debug.Log("Player Heal!");
-            player.cur_hp += healPlayer;
-            player.cur_stamina += healPlayer;   
+
+            // 체력과 스태미나가 최대치를 넘지 않도록 제한
+            player.cur_hp = Mathf.Min(player.cur_hp + healPlayer, player.max_hp);
+            player.cur_stamina = Mathf.Min(player.cur_stamina + healPlayer, player.max_stamina);
 
             OpenUnlockUpUI(skillManager, () =>
             {

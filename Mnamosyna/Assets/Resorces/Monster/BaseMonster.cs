@@ -16,8 +16,7 @@ public class BaseMonster : MobStat
     protected State currentState;
 
     public float invincibleTime = 0.5f; // 공격받은 후 무적 시간
-    protected float switchTime = 1.0f;
-    // 공격받을 때 깜빡이는 용도
+    private bool isInvincible = false;
     protected float flashDuration = 0.1f;
     protected int flashCount = 5;
 
@@ -27,7 +26,7 @@ public class BaseMonster : MobStat
 
     public delegate void DeathHandler();
     public delegate void Action();
-    public event DeathHandler OnDeath;
+    //public event DeathHandler OnDeath;
 
     public Spawner spawner;
     public GameObject exclamationMark;
@@ -277,28 +276,41 @@ public class BaseMonster : MobStat
             nav.SetDestination(player.transform.position);
         }
     }
+    // 몬스터가 공격을 받을 때 호출되는 함수
+    public void GetHit()
+    {
+        anim.SetTrigger("GetHit");
+        Flash();
+
+        // 무적 상태 활성화
+        isInvincible = true;
+        Invoke("DisableInvincibility", invincibleTime);
+    }
+
+    private void DisableInvincibility()
+    {
+        isInvincible = false;
+    }
 
     // 몬스터의 피격 상황 처리 함수
     public void TakeDamage(int damage)
     {
-        if (isDead) return; // 이미 죽은 몬스터인 경우 데미지를 받지 않음
+        if (isDead || isInvincible) return; // 이미 죽었거나 무적 상태인 경우 데미지 무시
 
         if (currentState != State.Idle)
         {
             ChangeState(State.Chase);
         }
 
-        if (Time.time >= lastDamagedTime + invincibleTime)
-        {
-            // 최종 데미지 = 플레이어의 공격데미지 * (1 - 방어력%)
-            int finalDamage = Mathf.RoundToInt(damage * (1 - Defense));
-            Cur_HP -= finalDamage;
-            lastDamagedTime = Time.time;
-            anim.SetTrigger(GetHitHash);
-            Flash();
-            ShowDamageText(finalDamage);
-        }
+        // 데미지를 받음
+        int finalDamage = Mathf.RoundToInt(damage * (1 - Defense));
+        Cur_HP -= finalDamage;
+        lastDamagedTime = Time.time;
+        GetHit();
 
+        ShowDamageText(finalDamage);
+
+        // 체력이 0 이하일 때 사망 처리
         if (Cur_HP <= 0)
         {
             Die();
@@ -307,7 +319,7 @@ public class BaseMonster : MobStat
     void ShowDamageText(int damage)
     {
         // 기존에 활성화되어 있는 텍스트의 위치를 위로 이동시킵니다.
-        damageText.transform.localPosition += new Vector3(0, 30, 0);
+        damageText.transform.localPosition += new Vector3(0, 15, 0);
 
         // 데미지 텍스트를 갱신합니다.
         damageText.text = damage.ToString();

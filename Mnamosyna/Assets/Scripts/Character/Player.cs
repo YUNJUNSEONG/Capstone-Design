@@ -39,16 +39,16 @@ public class Player : PlayerStat
 
     public Camera followCamera;
 
-    public float invincibleTime = 1.0f; // 무적 지속 시간
+    public float invincibleTime = 0.5f; // 무적 지속 시간
     private bool isInvincible = false;
 
     // 무적 상태의 지속 시간 (초)
-    public float invincibleDuration = 2.0f;
+    public float invincibleDuration = 0.5f;
     private float lastDamagedTime;
 
-    //공격받을때 깜빡이는 용도
+    // 공격받을 때 깜빡이는 용도
     private float flashDuration = 0.1f;
-    private int flashCount = 10;
+    private int flashCount = 5;
     private SkillManager skillManager;
     private List<Renderer> renderers;
 
@@ -626,16 +626,20 @@ public class Player : PlayerStat
     {
         anim.SetTrigger("GetHit");
         Flash();
-        //var playerAttack = GetComponent<PlayerAttack>();
-        //if (playerAttack != null) { playerAttack.DisableSwordCollider(); }
-        //else { Debug.Log("isattacking변경실패"); }
-    }
 
+        // 무적 상태 활성화
+        isInvincible = true;
+        Invoke("DisableInvincibility", invincibleTime);
+    }
+    private void DisableInvincibility()
+    {
+        isInvincible = false;
+    }
     //몬스터의 공격에 의한 데미지를 방어력 계산을 통해 최종 데미지 산출
     public void TakeDamage(int damage)
     {
-        // 플레이어가 공격 중이거나 대쉬중일 때는 데미지를 무시
-        if (isAttack || isDash || UseSkill()) return;
+        // 무적 상태거나 플레이어가 공격 중이거나 대쉬 중일 때는 데미지를 무시
+        if (isInvincible || isAttack || isDash || UseSkill()) return;
 
         if (Time.time >= lastDamagedTime + invincibleDuration)
         {

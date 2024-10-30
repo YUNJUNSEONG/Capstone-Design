@@ -977,7 +977,7 @@ PrefabInstance:
       addedObject: {fileID: 8411461913890585274}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100030, guid: a87c7d244a3c4896a26261cc18acd499, type: 3}
-      insertIndex: -1
+      insertIndex: 1
       addedObject: {fileID: 8720517322281878527}
     - targetCorrespondingSourceObject: {fileID: 100030, guid: a87c7d244a3c4896a26261cc18acd499, type: 3}
       insertIndex: -1
@@ -1051,7 +1051,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &6022948926896891610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1080,7 +1080,6 @@ MonoBehaviour:
   Skill01Radius: 5
   invincibleTime: 0.5
   spawner: {fileID: 0}
-  bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 6872274468947634055}
   damageText: {fileID: 4091869415523719006}
   isAttack: 0

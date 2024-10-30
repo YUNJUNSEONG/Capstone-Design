@@ -10,7 +10,7 @@ public class TopDownCamera : MonoBehaviour
     public int angle = 45;
 
     private Vector3 _cameraPosition;
-    private bool _isMouseDown = false;
+    //private bool _isMouseDown = false;
     private void Awake()
     {
         DontDestroyOnLoad(this);

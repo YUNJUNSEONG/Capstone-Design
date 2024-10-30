@@ -124,7 +124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4974940705899091282
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1044,7 +1044,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &-2256298836567885912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1073,7 +1073,6 @@ MonoBehaviour:
   Skill01Radius: 4
   invincibleTime: 0.5
   spawner: {fileID: 0}
-  bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 5209417498746891197}
   damageText: {fileID: 3201485677265088342}
   isAttack: 0

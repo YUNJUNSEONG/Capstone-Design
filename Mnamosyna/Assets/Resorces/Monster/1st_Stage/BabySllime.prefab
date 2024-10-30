@@ -94,7 +94,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!135 &-4044716916962435296
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -144,7 +144,6 @@ MonoBehaviour:
   Skill01Radius: 3
   invincibleTime: 0.5
   spawner: {fileID: 0}
-  bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 1508338185881107144}
   damageText: {fileID: 3064743197607090223}
   isAttack: 0
@@ -162,7 +161,7 @@ GameObject:
   - component: {fileID: 8568550945869457402}
   - component: {fileID: 5588626347221508847}
   - component: {fileID: 3064743197607090223}
-  - component: {fileID: 7800231603233590430}
+  - component: {fileID: 8417480549693604190}
   m_Layer: 8
   m_Name: damageText
   m_TagString: Untagged
@@ -219,11 +218,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 30
+    m_FontSize: 45
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 40
+    m_MaxSize: 45
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
@@ -231,7 +230,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
---- !u!114 &7800231603233590430
+--- !u!114 &8417480549693604190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -599,7 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 154257601896337909}
-  Monster: {fileID: 0}
+  Monster: {fileID: 7707394707850443122}
 --- !u!114 &3850092867964856760
 MonoBehaviour:
   m_ObjectHideFlags: 0

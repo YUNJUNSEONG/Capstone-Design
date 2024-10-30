@@ -9,7 +9,6 @@ using static SkillData;
 
 public class SkillManager : MonoBehaviour
 {
-    public static SkillManager instance;
     public GameObject player;
     private Player playerCon;
 
@@ -30,12 +29,19 @@ public class SkillManager : MonoBehaviour
     public bool EndUnlockSkillChoice = false;
     private bool skillUnlocked = false;
     public bool StartLevelUpSkillChoice = false;
-
+    public static SkillManager instance { get; private set; }
     private void Awake()
     {
-        DontDestroyOnLoad(this);
         if (instance == null)
+        {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject); // 중복 인스턴스 삭제
+            return;
+        }
 
         curSkills.Clear();
 

@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 4135020856604245524}
+  Monster: {fileID: 0}
 --- !u!114 &2224346463704258797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +115,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6641385867473134505}
   - component: {fileID: 5538590971289680637}
-  - component: {fileID: 222870552143867823}
   m_Layer: 0
   m_Name: AttackRange
   m_TagString: Untagged
@@ -160,20 +160,6 @@ CapsuleCollider:
   m_Height: 2.6654642
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &222870552143867823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3965290964027497048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f14c00cc73edc444c9e12c7b7ed3b7c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 3118556872210959825}
-  player: {fileID: 0}
 --- !u!1 &4135020856604245524
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +170,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5682153054012821860}
   - component: {fileID: 3020422574451660465}
-  - component: {fileID: 3118556872210959825}
   - component: {fileID: 3609588929746901358}
   - component: {fileID: 8478435011095593750}
   - component: {fileID: 7241052631755666200}
@@ -226,35 +211,6 @@ MonoBehaviour:
   spawnEffectPrefab: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
   yVector: -1
   zVector: 0
---- !u!114 &3118556872210959825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4135020856604245524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc12d4d56e7000d4fbc9cefafa1d7867, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 30
-  CurrentHP: 30
-  ATK: 7
-  SkillATK: 12
-  DEF: 0
-  ATKSpeed: 1
-  MoveSpeed: 1
-  NumberOfSkills: 2
-  SkillCoolTime1: 3
-  SkillCoolTime2: 10
-  SkillCoolTime3: 0
-  distance: 1.5
-  patrolRadius: 30
-  invincibleTime: 1
-  spawner: {fileID: 0}
-  exclamationMark: {fileID: 7617654358460557758}
-  isAttacking: 0
 --- !u!95 &3609588929746901358
 Animator:
   serializedVersion: 5
@@ -523,7 +479,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1568984609677879886}
   - component: {fileID: 7402568616295263491}
-  - component: {fileID: 270125244109666530}
   m_Layer: 0
   m_Name: MaxRange
   m_TagString: Untagged
@@ -569,19 +524,6 @@ CapsuleCollider:
   m_Height: 40
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &270125244109666530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5950071058523048827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f38b0f7e7e404b4fb328dadc961bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 3118556872210959825}
 --- !u!1 &6157081096189437449
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,7 +534,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5363631718907177453}
   - component: {fileID: 5968877622940455014}
-  - component: {fileID: 1764376759934992142}
   m_Layer: 0
   m_Name: DetectionRange
   m_TagString: Untagged
@@ -638,19 +579,6 @@ CapsuleCollider:
   m_Height: 15.012398
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 7.3447657}
---- !u!114 &1764376759934992142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6157081096189437449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 3118556872210959825}
 --- !u!1 &7617654358460557758
 GameObject:
   m_ObjectHideFlags: 0

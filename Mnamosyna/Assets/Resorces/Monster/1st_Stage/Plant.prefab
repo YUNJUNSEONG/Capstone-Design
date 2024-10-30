@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 4148780562021836405}
   - component: {fileID: 7178328704044131918}
   - component: {fileID: 2834004289612273075}
-  - component: {fileID: 5265803613229105926}
+  - component: {fileID: 4239746570330927353}
   m_Layer: 8
   m_Name: HPbar_Back
   m_TagString: Untagged
@@ -367,7 +367,7 @@ MonoBehaviour:
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5265803613229105926
+--- !u!114 &4239746570330927353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -376,11 +376,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3255404544832308162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c466bac5fba56104f9939eec349952e3, type: 3}
+  m_Script: {fileID: 11500000, guid: e42cd0a296c3cf34283cfe3b6f1d5745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 7451204239203880121}
-  Monster: {fileID: 4030522931009669002}
+  cameraTransform: {fileID: 0}
 --- !u!1 &5470302780523336650
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +648,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!136 &7927610473219805021
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -701,7 +700,6 @@ MonoBehaviour:
   Skill01Radius: 4
   invincibleTime: 0.5
   spawner: {fileID: 0}
-  bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 455944455902947362}
   damageText: {fileID: 3404384710641286638}
   isAttack: 0

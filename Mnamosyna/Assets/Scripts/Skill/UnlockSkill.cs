@@ -10,7 +10,7 @@ public class UnlockSkill : MonoBehaviour
     public GameObject Trigger;
 
     public bool UnlockSkillSelectEnd = false;
-    private static bool storyShown = false;
+    //private static bool storyShown = false;
 
 
     private void Start()
@@ -21,11 +21,6 @@ public class UnlockSkill : MonoBehaviour
             Debug.LogError("SkillManager를 찾을 수 없습니다.");
         }
 
-        /* 스킬 선택 UI가 할당되지 않았다면 찾음
-        if (skillSelectionUI == null)
-        {
-            skillSelectionUI = FindObjectOfType<SkillSelectionUI>();
-        }*/
     }
 
     private void OnTriggerEnter(Collider other)

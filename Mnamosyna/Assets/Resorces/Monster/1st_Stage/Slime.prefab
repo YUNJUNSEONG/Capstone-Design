@@ -94,7 +94,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!135 &4408847764057461484
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -144,7 +144,6 @@ MonoBehaviour:
   Skill01Radius: 3
   invincibleTime: 0.5
   spawner: {fileID: 0}
-  bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 1508338185881107144}
   damageText: {fileID: 8385838388816418732}
   isAttack: 0
@@ -401,7 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e4b4f6f2b4814b962ec84db4bfd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 5930749210732061838}
   boss: {fileID: 0}
   Distance: {fileID: 5240668465668112923}
 --- !u!1 &2485894447446984730
@@ -599,7 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 154257601896337909}
-  Monster: {fileID: 0}
+  Monster: {fileID: 5930749210732061838}
 --- !u!114 &3850092867964856760
 MonoBehaviour:
   m_ObjectHideFlags: 0

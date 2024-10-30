@@ -1938,6 +1938,7 @@ MonoBehaviour:
   Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
   magicComponents:
   - {fileID: 468314350}
+  spawnAreaCollider: {fileID: 0}
   waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
@@ -2697,6 +2698,7 @@ MonoBehaviour:
   Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
   magicComponents:
   - {fileID: 986490013}
+  spawnAreaCollider: {fileID: 0}
   waitTime: 12
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
@@ -2760,6 +2762,7 @@ MonoBehaviour:
   Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
   magicComponents:
   - {fileID: 664241295}
+  spawnAreaCollider: {fileID: 232589939}
   waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
@@ -4839,8 +4842,8 @@ GameObject:
   - component: {fileID: 360240139}
   - component: {fileID: 360240138}
   - component: {fileID: 360240137}
-  - component: {fileID: 360240136}
   - component: {fileID: 360240140}
+  - component: {fileID: 360240136}
   - component: {fileID: 360240141}
   m_Layer: 0
   m_Name: base
@@ -4997,6 +5000,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 1106905613}
   - {fileID: 1361178164}
+  spawnAreaCollider: {fileID: 360240136}
   waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
@@ -7975,6 +7979,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 2029951024}
   - {fileID: 2101161358}
+  spawnAreaCollider: {fileID: 0}
   waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
@@ -9999,6 +10004,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 1842518524}
   - {fileID: 1381230725}
+  spawnAreaCollider: {fileID: 0}
   waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
@@ -11877,6 +11883,7 @@ GameObject:
   - component: {fileID: 1002423848}
   - component: {fileID: 1002423847}
   - component: {fileID: 1002423846}
+  - component: {fileID: 1002423849}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -11934,6 +11941,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1002423849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002423845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93afd745c1cb15b418f4113505a881b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1012459830
 GameObject:
   m_ObjectHideFlags: 0
@@ -12320,6 +12339,7 @@ MonoBehaviour:
   Upgrade: {fileID: 794828816375683814, guid: 6e0e9377f59971141b8f4666c4e9bbf4, type: 3}
   magicComponents:
   - {fileID: 407744237}
+  spawnAreaCollider: {fileID: 0}
   waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
@@ -12962,6 +12982,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 114340515}
   - {fileID: 379113304}
+  spawnAreaCollider: {fileID: 0}
   waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
@@ -19784,6 +19805,7 @@ MonoBehaviour:
   Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
   magicComponents:
   - {fileID: 1350814779}
+  spawnAreaCollider: {fileID: 0}
   waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
@@ -23583,6 +23605,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 77813498}
   - {fileID: 415702596}
+  spawnAreaCollider: {fileID: 1718145975}
   waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
@@ -24344,6 +24367,7 @@ MonoBehaviour:
   Upgrade: {fileID: 1085693016786123864, guid: c24a996fd5b6ff248ad37316e2f48b4f, type: 3}
   magicComponents:
   - {fileID: 1135293579}
+  spawnAreaCollider: {fileID: 0}
   waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
@@ -26237,6 +26261,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 357516323}
   - {fileID: 1769261767}
+  spawnAreaCollider: {fileID: 0}
   waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
@@ -27521,6 +27546,7 @@ MonoBehaviour:
   Upgrade: {fileID: 794828816375683814, guid: 6e0e9377f59971141b8f4666c4e9bbf4, type: 3}
   magicComponents:
   - {fileID: 130998563}
+  spawnAreaCollider: {fileID: 0}
   waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}
@@ -28570,6 +28596,7 @@ MonoBehaviour:
   Upgrade: {fileID: 1085693016786123864, guid: d3f36827ae805ce49a1c8659a0ebc9c7, type: 3}
   magicComponents:
   - {fileID: 1367462712}
+  spawnAreaCollider: {fileID: 0}
   waitTime: 1
   aliveCount: 0
   babySlimePrefab: {fileID: 154257601896337909, guid: b39ab505d9c75664bac75aab4ad42ba4, type: 3}

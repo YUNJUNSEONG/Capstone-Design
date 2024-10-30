@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 4173779282710068318}
   - component: {fileID: 6381454925671417627}
   - component: {fileID: 1336123750255325435}
+  - component: {fileID: 5039802102131797947}
   m_Layer: 8
   m_Name: HPbar_Back
   m_TagString: Untagged
@@ -275,6 +276,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monster: {fileID: 6067499684410550453}
   Monster: {fileID: -5659601774541354408}
+--- !u!114 &5039802102131797947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908596876978310618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e42cd0a296c3cf34283cfe3b6f1d5745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 0}
 --- !u!1 &2093477303893704745
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +300,6 @@ GameObject:
   - component: {fileID: 6456042160042029968}
   - component: {fileID: 7316306751721920170}
   - component: {fileID: 3958218135192408978}
-  - component: {fileID: 2347449988792628778}
   m_Layer: 8
   m_Name: damageText
   m_TagString: Untagged
@@ -334,7 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.58431375, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -355,19 +368,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
---- !u!114 &2347449988792628778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2093477303893704745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e42cd0a296c3cf34283cfe3b6f1d5745, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 0}
 --- !u!1 &6465704883902229952
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,7 +539,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7393168705415953171}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e42cd0a296c3cf34283cfe3b6f1d5745, type: 3}
   m_Name: 
@@ -967,7 +967,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &-5659601774541354408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,7 +996,6 @@ MonoBehaviour:
   Skill01Radius: 8
   invincibleTime: 0.5
   spawner: {fileID: 0}
-  bossSpawner: {fileID: 0}
   exclamationMark: {fileID: 447449637993846935}
   damageText: {fileID: 3958218135192408978}
   isAttack: 0
