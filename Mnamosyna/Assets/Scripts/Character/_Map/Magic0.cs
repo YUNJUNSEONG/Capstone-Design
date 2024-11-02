@@ -49,7 +49,7 @@ public class Magic0 : MonoBehaviour
         if (this.name == "Magic-5to6_2") {collision.transform.position = new Vector3(-26.1f, 1.27f, 699.6f);} //5-1~2->6-2
         if (this.name == "Magic-5to6_3") {collision.transform.position = new Vector3(62.6f, 1.27f, 582.2f);} //5-2->6-3
         
-        if (this.name == "Magic-6toBoss") {collision.transform.position = new Vector3(18.4f, 1.27f, 801.7f);} //6-1~3->boss
+        if (this.name == "Magic-6toBoss") {collision.transform.position = new Vector3(21.71f, 1.27f, 795.78f);} //6-1~3->boss
         if(this.name == "BosstoMagic2-0")
         {
             SceneManager.LoadScene("Stage-2");
