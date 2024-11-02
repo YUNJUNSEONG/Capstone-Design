@@ -97,6 +97,7 @@ public class BaseMonster : MobStat
             StartCoroutine(ShowExclamationMarkForSeconds(0.5f));
         }
         currentState = state;
+        if (state == State.Die) Die();
     }
 
     private IEnumerator ChangeToChaseAfterDelay(float delay)
@@ -297,17 +298,19 @@ public class BaseMonster : MobStat
     {
         if (isDead || isInvincible) return; // 이미 죽었거나 무적 상태인 경우 데미지 무시
 
-        if (currentState != State.Idle)
+        // 데미지 계산 및 체력 감소
+        int finalDamage = Mathf.RoundToInt(damage * (1 - Mathf.Clamp01(Defense)));
+        Cur_HP -= finalDamage;
+        lastDamagedTime = Time.time;
+
+        // 상태 변경
+        if (currentState != State.Idle && currentState != State.Die)
         {
             ChangeState(State.Chase);
         }
 
-        // 데미지를 받음
-        int finalDamage = Mathf.RoundToInt(damage * (1 - Defense));
-        Cur_HP -= finalDamage;
-        lastDamagedTime = Time.time;
+        // 피격 효과 및 데미지 텍스트 표시
         GetHit();
-
         ShowDamageText(finalDamage);
 
         // 체력이 0 이하일 때 사망 처리
@@ -316,6 +319,7 @@ public class BaseMonster : MobStat
             Die();
         }
     }
+
     void ShowDamageText(int damage)
     {
         // 기존에 활성화되어 있는 텍스트의 위치를 위로 이동시킵니다.

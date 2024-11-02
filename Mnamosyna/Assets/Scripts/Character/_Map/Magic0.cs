@@ -34,7 +34,7 @@ public class Magic0 : MonoBehaviour
         if (this.name == "Magic-1_2") {collision.transform.position = new Vector3(114.8f, 1.27f, 125.3f);}//1->2-2
         
         if (this.name == "Magic-2to3_1") {collision.transform.position = new Vector3(-101.1f, 1.27f, 261.7f);}//2->3-1
-        if (this.name == "Magic-2to3_2") {collision.transform.position = new Vector3(24.6f, 1.27f, 2387.7f);}//2->3-2
+        if (this.name == "Magic-2to3_2") {collision.transform.position = new Vector3(24.32f, 1.27f, 239.7f);}//2->3-2
         if (this.name == "Magic-2to3_3") {collision.transform.position = new Vector3(82.1f, 1.27f, 353.3f);}//2->3-3
         
         if (this.name == "Magic-3") {collision.transform.position = new Vector3(-41.2f, 1.27f, 333.9f);}//3-1~3->heal

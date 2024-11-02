@@ -294,6 +294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3313177747415337913}
+  - component: {fileID: 4804125230081737407}
   - component: {fileID: 8461617736356750194}
   - component: {fileID: 1413485841263608427}
   - component: {fileID: 3411835885524163523}
@@ -321,6 +322,21 @@ Transform:
   - {fileID: 5224315370701739435}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4804125230081737407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942183099666616633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17708a1dea9033242b878ce1a4c12c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnEffectPrefab: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
+  yVector: -5
+  zVector: 0
 --- !u!95 &8461617736356750194
 Animator:
   serializedVersion: 5

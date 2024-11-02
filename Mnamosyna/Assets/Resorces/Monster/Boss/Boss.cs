@@ -1,31 +1,35 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 
 public class Boss : BaseMonster
 {
     [Header("공격 관련")]
-    [SerializeField]
-    protected int Skill02;
-    [SerializeField]
-    protected int Skill03;
+    [SerializeField] protected int Skill02;
+    [SerializeField] protected int Skill03;
 
     [Header("공격 쿨타임")]
-    [SerializeField]
-    protected float SkillCoolTime2;
-    [SerializeField]
-    protected float SkillCoolTime3;
+    [SerializeField] protected float SkillCoolTime2;
+    [SerializeField] protected float SkillCoolTime3;
 
+    [Header("공격 이펙트")]
+    [SerializeField] private GameObject skill01EffectPrefab;
+    [SerializeField] private GameObject skill02EffectPrefab;
+    [SerializeField] private GameObject skill03EffectPrefab;
+
+    // 이펙트 위치를 위한 참조
+    [SerializeField] private Transform skill01EffectSpawnPoint;
+    [SerializeField] private Transform skill02EffectSpawnPoint;
+    [SerializeField] private Transform skill03EffectSpawnPoint;
+
+
+    protected float Skill02CanUse;
+    protected float Skill03CanUse;
 
     private bool canBasicAttack = true;
     private bool canUsePattern1 = true;
     private bool canUsePattern2 = true;
     private bool canUsePattern3 = true;
-
-    protected float Skill02CanUse;
-    protected float Skill03CanUse;
 
     protected float pattern1Cooldown;
     protected float pattern2Cooldown;
@@ -35,14 +39,6 @@ public class Boss : BaseMonster
     private float lastPattern2Time;
     private float lastPattern3Time;
 
-    // 애니메이션용
-    protected static readonly int ScreamHash = Animator.StringToHash("Scream");
-    protected static readonly int Attack03Hash = Animator.StringToHash("Attack03");
-    public int attack03Hash;
-    protected static readonly int Attack04Hash = Animator.StringToHash("Attack04");
-    public int attack04Hash;
-
-    // 공격 관련 필드
     private float attackRange;
     private float attackCooldown;
     private float lastAttackTime;
@@ -50,115 +46,55 @@ public class Boss : BaseMonster
     protected override void Awake()
     {
         base.Awake();
-
         attackRange = ApproachRadius;
         attackCooldown = AttackCoolTime;
         pattern1Cooldown = SkillCoolTime1;
         pattern2Cooldown = SkillCoolTime2;
         pattern3Cooldown = SkillCoolTime3;
-    }
-    void Start()
-    {
-        StartCoroutine(ChangeToChaseAfterDelay(0.5f));
-    }
 
+        InitializeEffect(skill01EffectPrefab, skill01EffectSpawnPoint);
+        InitializeEffect(skill02EffectPrefab, skill02EffectSpawnPoint);
+        InitializeEffect(skill03EffectPrefab, skill03EffectSpawnPoint);
+    }
+    private void InitializeEffect(GameObject effectPrefab, Transform spawnPoint)
+    {
+        if (effectPrefab != null && spawnPoint != null)
+        {
+            effectPrefab = Instantiate(effectPrefab, spawnPoint.position, Quaternion.identity);
+            effectPrefab.SetActive(false);
+        }
+    }
     protected override void Update()
     {
         base.Update();
-
         RotateMonsterToCharacter();
 
-        if (canBasicAttack)
+        // 기본 공격 실행
+        if (canBasicAttack && Time.time - lastAttackTime >= attackCooldown)
         {
             StartCoroutine(BasicAttack());
         }
 
+        // 패턴 사용
+        HandlePatternUsage();
+    }
+
+    private void HandlePatternUsage()
+    {
         if (Cur_HP <= Max_HP * 0.8f && Cur_HP > Max_HP * 0.5f && canUsePattern1 && Time.time >= lastPattern1Time + pattern1Cooldown)
         {
             StartCoroutine(UsePattern1());
             lastPattern1Time = Time.time;
         }
-
-        if (Cur_HP <= Max_HP * 0.5f && Cur_HP > Max_HP * 0.3f && canUsePattern2 && Time.time >= lastPattern2Time + pattern2Cooldown)
+        else if (Cur_HP <= Max_HP * 0.5f && Cur_HP > Max_HP * 0.3f && canUsePattern2 && Time.time >= lastPattern2Time + pattern2Cooldown)
         {
             StartCoroutine(UsePattern2());
             lastPattern2Time = Time.time;
         }
-
-        if (Cur_HP <= Max_HP * 0.3f && canUsePattern3 && Time.time >= lastPattern3Time + pattern3Cooldown)
+        else if (Cur_HP <= Max_HP * 0.3f && canUsePattern3 && Time.time >= lastPattern3Time + pattern3Cooldown)
         {
             StartCoroutine(UsePattern3());
             lastPattern3Time = Time.time;
-        }
-
-        // 1초마다 스킬 쿨 감소
-        AttackCoolTime -= Time.deltaTime;
-        SkillCoolTime1 -= Time.deltaTime;
-        SkillCoolTime2 -= Time.deltaTime;
-        SkillCoolTime3 -= Time.deltaTime;
-
-    }
-
-    public override void ChangeState(State state)
-    {
-        currentState = state;
-    }
-
-    protected virtual void UpdateIdleState()
-    {
-        if (Vector3.Distance(player.transform.position, transform.position) < 5f)
-        {
-            currentState = State.Chase;
-            anim.SetBool(RunHash, true);
-        }
-    }
-
-    protected virtual void UpdateChaseState()
-    {
-        nav.SetDestination(player.transform.position);
-        SetNavSpeed(Move_Speed);
-
-        if (Vector3.Distance(player.transform.position, transform.position) < attackRange)
-        {
-            currentState = State.Attack;
-            anim.SetBool(RunHash, false);
-        }
-    }
-
-    private IEnumerator ChangeToChaseAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        ChangeState(State.Chase);
-    }
-    
-
-    // NavMeshAgent의 속도를 몬스터의 이동 속도로 설정
-    void SetNavSpeed(float speed)
-    {
-        if (nav != null)
-        {
-            nav.speed = speed;
-        }
-    }
-
-    protected virtual void UpdateAttackState()
-    {
-        //nav.SetDestination(transform.position); // 보스가 공격 중일 때는 멈춥니다.
-        nav.isStopped = true;
-
-        if (Time.time - lastAttackTime >= attackCooldown)
-        {
-            if (canBasicAttack)
-            {
-                StartCoroutine(BasicAttack());
-            }
-            lastAttackTime = Time.time;
-        }
-
-        if (Vector3.Distance(player.transform.position, transform.position) > attackRange)
-        {
-            currentState = State.Chase;
-            anim.SetBool(RunHash, true);
         }
     }
 
@@ -171,47 +107,13 @@ public class Boss : BaseMonster
         anim.SetTrigger(DieHash);
         anim.SetBool(RunHash, false);
 
-
-        // 콜라이더 비활성화는 2초 뒤에 처리합니다.
         Invoke("DisableCollider", 2.0f);
-        Invoke("DestroyObject", 3.0f); // 4초 후 객체를 삭제합니다.
+        Invoke("DestroyObject", 3.0f);
 
         spawner.aliveCount--;
         spawner.CheckAliveCount();
         spawner.NotifyAliveCountChanged();
     }
-
-    void DisableCollider()
-    {
-        Collider collider = GetComponent<Collider>();
-        if (collider != null) collider.enabled = false;
-    }
-
-
-    protected virtual IEnumerator FlashOnHit()
-    {
-        isDamage = true;
-        for (int i = 0; i < flashCount; i++)
-        {
-            foreach (var renderer in renderers)
-            {
-                renderer.material.color = Color.red;
-            }
-            yield return new WaitForSeconds(flashDuration);
-            foreach (var renderer in renderers)
-            {
-                renderer.material.color = originalColor;
-            }
-            yield return new WaitForSeconds(flashDuration);
-        }
-        isDamage = false;
-    }
-
-    void DestroyObject()
-    {
-        Destroy(gameObject);
-    }
-
 
     protected IEnumerator BasicAttack()
     {
@@ -231,12 +133,38 @@ public class Boss : BaseMonster
         canBasicAttack = true;
     }
 
+    private void ShowEffect(GameObject effectPrefab, Transform spawnPoint)
+    {
+        if (effectPrefab != null)
+        {
+            effectPrefab.transform.position = spawnPoint.position;
+            effectPrefab.SetActive(true);
+            StartCoroutine(HideEffectAfterDelay(effectPrefab, 2.0f)); // 이펙트를 2초 후에 비활성화
+        }
+    }
+
+    private IEnumerator HideEffectAfterDelay(GameObject effectPrefab, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        HideEffect(effectPrefab);
+    }
+
+
+    private void HideEffect(GameObject effectPrefab)
+    {
+        if (effectPrefab != null)
+        {
+            effectPrefab.SetActive(false);
+        }
+    }
+
     IEnumerator UsePattern1()
     {
         canUsePattern1 = false;
-        // 패턴 1 애니메이션 재생
         anim.SetTrigger("Attack02");
-        // 패턴 1의 공격 로직
+
+        ShowEffect(skill01EffectPrefab, skill01EffectSpawnPoint);
+
         player.GetComponent<Player>().TakeDamage(Skill01);
         yield return new WaitForSeconds(Skill01CanUse);
         canUsePattern1 = true;
@@ -245,9 +173,10 @@ public class Boss : BaseMonster
     IEnumerator UsePattern2()
     {
         canUsePattern2 = false;
-        // 패턴 2 애니메이션 재생
         anim.SetTrigger("Attack03");
-        // 패턴 2의 공격 로직
+
+        ShowEffect(skill02EffectPrefab, skill02EffectSpawnPoint);
+
         player.GetComponent<Player>().TakeDamage(Skill02);
         yield return new WaitForSeconds(Skill02CanUse);
         canUsePattern2 = true;
@@ -256,13 +185,12 @@ public class Boss : BaseMonster
     IEnumerator UsePattern3()
     {
         canUsePattern3 = false;
-        // 패턴 3 애니메이션 재생
         anim.SetTrigger("Attack04");
-        // 패턴 3의 공격 로직
+
+        ShowEffect(skill03EffectPrefab, skill03EffectSpawnPoint);
+
         player.GetComponent<Player>().TakeDamage(Skill03);
         yield return new WaitForSeconds(Skill03CanUse);
         canUsePattern3 = true;
     }
-
-
 }

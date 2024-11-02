@@ -185,9 +185,13 @@ public class Player : PlayerStat
 
 
         HandleInput();
-        if (!isAttack && inputBuffer.Count > 0)
+        if (!isAttack && inputBuffer.Count > 0 )
         {
-            ProcessNextInput();
+            bool skillUsed = UseSkill();
+            if (skillUsed)
+            {
+                ProcessNextInput();
+            }
         }
 
         if (isAttack)
@@ -565,11 +569,11 @@ public class Player : PlayerStat
             {
                 case "L":
                     HandleLeftClick();
-                    //inputBuffer.Dequeue();
+                    inputBuffer.Dequeue();
                     break;
                 case "R":
                     HandleRightClick();
-                    //inputBuffer.Dequeue();
+                    inputBuffer.Dequeue();
                     break;
                 case "S":
                     Dash();

@@ -888,6 +888,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d394930783f5fe34d84f52fc2998e8fa, type: 3}
       insertIndex: -1
+      addedObject: {fileID: -9080121311243899082}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d394930783f5fe34d84f52fc2998e8fa, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 2740811746155629156}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d394930783f5fe34d84f52fc2998e8fa, type: 3}
       insertIndex: -1
@@ -904,6 +907,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d394930783f5fe34d84f52fc2998e8fa, type: 3}
   m_PrefabInstance: {fileID: 6410169286905091556}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &-9080121311243899082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6067499684410550453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17708a1dea9033242b878ce1a4c12c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnEffectPrefab: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
+  yVector: -5
+  zVector: 0
 --- !u!95 &2740811746155629156
 Animator:
   serializedVersion: 5
