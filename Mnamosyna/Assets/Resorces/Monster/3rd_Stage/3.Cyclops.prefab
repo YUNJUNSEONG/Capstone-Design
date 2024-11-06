@@ -904,7 +904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnEffectPrefab: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
-  yVector: -1
+  yVector: -5
   zVector: 0
 --- !u!135 &1894061620300202998
 SphereCollider:
@@ -964,10 +964,10 @@ MonoBehaviour:
   Name: Cyclops
   Max_HP: 50
   Cur_HP: 50
-  ATK: 1
-  Skill01: 1
+  ATK: 9
+  Skill01: 9
   NumberOfSkills: 2
-  AttackCoolTime: 1
+  AttackCoolTime: 5
   SkillCoolTime1: 5
   Defense: 0.3
   Move_Speed: 3

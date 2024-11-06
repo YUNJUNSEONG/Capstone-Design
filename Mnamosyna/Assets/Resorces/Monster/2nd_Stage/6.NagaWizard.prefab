@@ -1093,13 +1093,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: NagaWizard
-  Max_HP: 1
-  Cur_HP: 1
-  ATK: 1
-  Skill01: 1
-  NumberOfSkills: 1
-  AttackCoolTime: 1
-  SkillCoolTime1: 1
+  Max_HP: 25
+  Cur_HP: 25
+  ATK: 8
+  Skill01: 6
+  NumberOfSkills: 2
+  AttackCoolTime: 5
+  SkillCoolTime1: 6
   Defense: 0
   Move_Speed: 3
   ApproachRadius: 5
@@ -1108,8 +1108,8 @@ MonoBehaviour:
   Skill01Radius: 5
   invincibleTime: 0.5
   spawner: {fileID: 0}
-  exclamationMark: {fileID: 0}
-  damageText: {fileID: 0}
+  exclamationMark: {fileID: 1806068740138594206}
+  damageText: {fileID: 6379587327936598750}
   isAttack: 0
   isSkill01: 0
   attack01Hash: 0

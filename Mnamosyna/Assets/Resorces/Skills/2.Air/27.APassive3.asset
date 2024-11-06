@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 134e76c84ceed754fb281d10bb001351, type: 3}
+  m_Script: {fileID: 11500000, guid: f8ecb5d07baeeb64a9bfedd6214235ad, type: 3}
   m_Name: 27.APassive3
   m_EditorClassIdentifier: 
   skillType: 1
@@ -17,13 +17,15 @@ MonoBehaviour:
   linkElement: 0
   tier: 1
   Id: 27
-  Name: A Passive3
-  Image: {fileID: 21300000, guid: d22efddd656d9ad47835201bcb91d868, type: 3}
-  Description: "\uC774\uB3D9 \uC18D\uB3C4\uC640 \uACF5\uACA9 \uC18D\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  Name: "\uACF5\uAE30\uD0C4"
+  Image: {fileID: 21300000, guid: a67d90cca8ca79c4daa3759f25e2c8a2, type: 3}
+  Description: "\uACF5\uACA9 \uC18D\uB3C4\uC640 \uC774\uB3D9 \uC18D\uB3C4\uAC00 \uC99D\uAC00\uD558\uBA70,
+    4\uCD08 \uB9C8\uB2E4 \uC2ED\uC790 \uBC29\uD5A5\uC73C\uB85C \uACF5\uAE30\uD0C4\uC744
+    \uB0A0\uB9BD\uB2C8\uB2E4.\n\uC99D\uAC00\uB7C9 : N% , N%"
   isUnlock: 0
   childSkill:
-  - {fileID: 11400000, guid: d044373852ca5d04b9c286e391039d52, type: 2}
-  - {fileID: 11400000, guid: a0707a796e81f5540ae95db6b6e7371d, type: 2}
+  - {fileID: 11400000, guid: a1ddb47e4b8195f4fa8d56919bf61303, type: 2}
+  - {fileID: 11400000, guid: 78bb4a2b86b34ca43aac09d8488136a4, type: 2}
   Level: 0
   maxLevel: 3
   Command: 
@@ -32,6 +34,10 @@ MonoBehaviour:
   damagePercent: 0
   addDmg: 0
   useStamina: 0
+  passiveSkillType: 3
+  effectPrefab: {fileID: 2268428576765071778, guid: e839e2ad5d7bf8147894cddb7903c7b3, type: 3}
+  effectInterval: 4
+  effectDamage: 4
   MaxHPBonus: 0
   addMaxHPBonus: 0
   HealthRecoverBonus: 0
@@ -43,27 +49,28 @@ MonoBehaviour:
   CritChanceBonus: 0
   addCritChanceBonus: 0
   CriticalBonus: 0
+  addCriticalBonus: 0
   DefenseBonus: 0
   addDefenseBonus: 0
-  AttackSpeedMultiplier: 0
-  addAttackSpeedMultiplier: 0
-  MoveSpeedMultiplier: 0
-  addMoveSpeedMultiplier: 0
-  DimeritMaxHP: 0
-  DimeritHealthRecover: 0
-  DimeritStaminaRecover: 0
-  DimeritATK: 0
-  DimeritCritChance: 0
-  DimeritCritical: 0
-  DimeritDefense: 0
-  DimeritAttackSpeedMultiplier: 0
-  DimeritMoveSpeedMultiplier: 0
+  AttackSpeedMultiplier: 0.05
+  addAttackSpeedMultiplier: 0.05
+  MoveSpeedMultiplier: 0.05
+  addMoveSpeedMultiplier: 0.05
   LinkMaxHPBonus: 0
+  addLinkMaxHPBonus: 0
   LinkHealthRecoverBonus: 0
+  addLinkHealthRecoverBonus: 0
   LinkStaminaRecoverBonus: 0
+  addLinkStaminaRecoverBonus: 0
   LinkATKBonus: 0
+  addLinkATKBonus: 0
   LinkCritChanceBonus: 0
+  addLinkCritChanceBonus: 0
   LinkCriticalBonus: 0
+  addLinkCriticalBonus: 0
   LinkDefenseBonus: 0
+  addLinkDefenseBonus: 0
   LinkAttackSpeedMultiplier: 0
+  addLinkAttackSpeedMultiplier: 0
   LinkMoveSpeedMultiplier: 0
+  addLinkMoveSpeedMultiplier: 0

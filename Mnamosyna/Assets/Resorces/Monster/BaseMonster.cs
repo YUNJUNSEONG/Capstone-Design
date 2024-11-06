@@ -294,7 +294,7 @@ public class BaseMonster : MobStat
     }
 
     // 몬스터의 피격 상황 처리 함수
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (isDead || isInvincible) return; // 이미 죽었거나 무적 상태인 경우 데미지 무시
 

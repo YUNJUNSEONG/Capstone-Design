@@ -84,8 +84,20 @@ public class Charge : BaseMonster
 
         nav.speed = Move_Speed; // 원래 속도로 복귀
         nav.isStopped = true; // 돌진이 끝난 후 이동 멈춤
+
+        // 돌진 후 다시 플레이어를 추적하게 함
+        StartCoroutine(ResumeChasingPlayer());
+
         StartCoroutine(DelayedAction(GetAnimationLength(attack02Hash), OnSecondAttackAnimationEnd)); // 쿨타임 관리
     }
+
+    private IEnumerator ResumeChasingPlayer()
+    {
+        yield return new WaitForSeconds(0.5f); // 잠시 대기 후 추적 시작 (원하는 시간으로 조정 가능)
+        nav.isStopped = false; // 다시 이동 시작
+        nav.SetDestination(player.transform.position); // 플레이어를 추적
+    }
+
 
     private void ApplyKnockback()
     {

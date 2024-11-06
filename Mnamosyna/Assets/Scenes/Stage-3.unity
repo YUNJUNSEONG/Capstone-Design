@@ -914,7 +914,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 1667003591}
   spawnAreaCollider: {fileID: 0}
-  waitTime: 10
+  waitTime: 7
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
 --- !u!4 &44624178 stripped
@@ -1518,7 +1518,7 @@ MonoBehaviour:
   - {fileID: 1551254377}
   - {fileID: 2128576308}
   spawnAreaCollider: {fileID: 0}
-  waitTime: 1
+  waitTime: 9
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
 --- !u!1001 &77695224
@@ -2230,7 +2230,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 2007177057}
   spawnAreaCollider: {fileID: 0}
-  waitTime: 1
+  waitTime: 9
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
 --- !u!1001 &116251948
@@ -2997,7 +2997,7 @@ MonoBehaviour:
   Upgrade: {fileID: 1085693016786123864, guid: c24a996fd5b6ff248ad37316e2f48b4f, type: 3}
   magicComponents: []
   spawnAreaCollider: {fileID: 0}
-  waitTime: 1
+  waitTime: 9
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
 --- !u!1001 &186138264
@@ -10563,7 +10563,7 @@ MonoBehaviour:
   - {fileID: 1311744049}
   - {fileID: 1859800130}
   spawnAreaCollider: {fileID: 0}
-  waitTime: 1
+  waitTime: 7
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
 --- !u!1001 &617121249
@@ -11611,7 +11611,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 189646498}
   spawnAreaCollider: {fileID: 0}
-  waitTime: 1
+  waitTime: 9
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
 --- !u!1001 &683786779
@@ -17406,7 +17406,7 @@ MonoBehaviour:
   - {fileID: 759349089}
   - {fileID: 1447987384}
   spawnAreaCollider: {fileID: 0}
-  waitTime: 1
+  waitTime: 9
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
 --- !u!1001 &1041300297
@@ -20580,6 +20580,149 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 682b678000472db47b4e842fceb11b86, type: 3}
   m_PrefabInstance: {fileID: 1185148935}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1189876034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1189876036}
+  - component: {fileID: 1189876035}
+  - component: {fileID: 1189876037}
+  m_Layer: 0
+  m_Name: BGMManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1189876035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189876034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ea3a3619830f2479ecd4455b743d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalBGM: {fileID: 8300000, guid: f113962b168bf2148829c637bacaadb0, type: 3}
+  lowHealthBGM: {fileID: 8300000, guid: b6e783277a501f342a77ba7781c8af47, type: 3}
+--- !u!4 &1189876036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189876034}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.9214593, y: 1.0176519, z: 0.3922934}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1189876037
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189876034}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1192183654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21016,7 +21159,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 1945248339}
   spawnAreaCollider: {fileID: 0}
-  waitTime: 1
+  waitTime: 7
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
 --- !u!1001 &1213026851
@@ -25199,7 +25342,7 @@ MonoBehaviour:
   - {fileID: 1814368614}
   - {fileID: 481768244}
   spawnAreaCollider: {fileID: 0}
-  waitTime: 1
+  waitTime: 9
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
 --- !u!1001 &1422640951
@@ -28165,7 +28308,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 1401766162}
   spawnAreaCollider: {fileID: 0}
-  waitTime: 1
+  waitTime: 9
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
 --- !u!1001 &1591240418
@@ -31107,7 +31250,7 @@ MonoBehaviour:
   magicComponents:
   - {fileID: 1451014792}
   spawnAreaCollider: {fileID: 0}
-  waitTime: 10
+  waitTime: 7
   aliveCount: 0
   babySlimePrefab: {fileID: 0}
 --- !u!1 &1752975184
@@ -38649,6 +38792,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 2074916339}
   - {fileID: 1544984442}
+  - {fileID: 1189876036}
   - {fileID: 789530722}
   - {fileID: 537630453}
   - {fileID: 20826921}

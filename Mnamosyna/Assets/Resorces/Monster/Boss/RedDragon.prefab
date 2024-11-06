@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1765777847688742652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1784636018352512927}
+  m_Layer: 0
+  m_Name: skill02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1784636018352512927
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765777847688742652}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0.011869199, y: 0.54942554, z: 8.86}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7026824385615743549}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1861584718417722153
 GameObject:
   m_ObjectHideFlags: 0
@@ -2193,6 +2224,7 @@ Transform:
   - {fileID: 7026824385615700741}
   - {fileID: 6139992118672475691}
   - {fileID: 2602330251635451106}
+  - {fileID: 1784636018352512927}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!95 &7026824385608083389
@@ -2295,15 +2327,15 @@ MonoBehaviour:
   isSkill01: 0
   attack01Hash: 0
   attack02Hash: 0
-  Skill02: 15
-  Skill03: 17
+  Skill02: 13
+  Skill03: 15
   SkillCoolTime2: 7
   SkillCoolTime3: 7
   skill01EffectPrefab: {fileID: 6996776890022488118}
   skill02EffectPrefab: {fileID: 246438484758188946}
   skill03EffectPrefab: {fileID: 5319423485578395638}
-  skill01EffectSpawnPoint: {fileID: 0}
-  skill02EffectSpawnPoint: {fileID: 7026824385615752469}
+  skill01EffectSpawnPoint: {fileID: 2655521446516310803}
+  skill02EffectSpawnPoint: {fileID: 1784636018352512927}
   skill03EffectSpawnPoint: {fileID: 7026824385615738261}
 --- !u!1 &7026824385615399043
 GameObject:

@@ -100,6 +100,8 @@ public class Boss : BaseMonster
 
     protected override void Die()
     {
+        if (isDead) return;
+
         isDead = true;
         nav.isStopped = true;
         gameObject.layer = 11;

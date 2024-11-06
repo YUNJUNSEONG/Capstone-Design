@@ -2223,10 +2223,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Skull Dragon
-  Max_HP: 250
-  Cur_HP: 250
-  ATK: 5
-  Skill01: 11
+  Max_HP: 300
+  Cur_HP: 300
+  ATK: 8
+  Skill01: 13
   NumberOfSkills: 4
   AttackCoolTime: 3
   SkillCoolTime1: 5
@@ -2245,15 +2245,15 @@ MonoBehaviour:
   attack01Hash: 0
   attack02Hash: 0
   Skill02: 15
-  Skill03: 17
+  Skill03: 20
   SkillCoolTime2: 7
   SkillCoolTime3: 7
   skill01EffectPrefab: {fileID: 698299975719585678}
   skill02EffectPrefab: {fileID: 5154530711591547104}
   skill03EffectPrefab: {fileID: 6498941215583367507}
-  skill01EffectSpawnPoint: {fileID: 0}
-  skill02EffectSpawnPoint: {fileID: 0}
-  skill03EffectSpawnPoint: {fileID: 0}
+  skill01EffectSpawnPoint: {fileID: 1005646916831485967}
+  skill02EffectSpawnPoint: {fileID: 3185947551188939888}
+  skill03EffectSpawnPoint: {fileID: 5946365562770002766}
 --- !u!1 &3054803298865187832
 GameObject:
   m_ObjectHideFlags: 0

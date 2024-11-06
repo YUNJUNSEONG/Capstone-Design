@@ -988,7 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnEffectPrefab: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
-  yVector: -1
+  yVector: -5
   zVector: 0
 --- !u!135 &378911904717970556
 SphereCollider:
@@ -1048,11 +1048,11 @@ MonoBehaviour:
   Name: DemonKnight
   Max_HP: 60
   Cur_HP: 60
-  ATK: 1
-  Skill01: 1
+  ATK: 12
+  Skill01: 16
   NumberOfSkills: 2
-  AttackCoolTime: 1
-  SkillCoolTime1: 6
+  AttackCoolTime: 6
+  SkillCoolTime1: 10
   Defense: 0.3
   Move_Speed: 1
   ApproachRadius: 2

@@ -52,7 +52,7 @@ public class Magic0 : MonoBehaviour
         if (this.name == "Magic-6toBoss") {collision.transform.position = new Vector3(21.71f, 1.27f, 795.78f);} //6-1~3->boss
         if(this.name == "BosstoMagic2-0")
         {
-            SceneManager.LoadScene("Stage-2");
+            LoadingManager.LoadScene("Stage-2");
             { collision.transform.position = new Vector3(0.63f, 4.7f, -15.5f); }
         }
 
@@ -81,7 +81,7 @@ public class Magic0 : MonoBehaviour
 
         if (this.name == "BosstoMagic3-0")
         {
-            SceneManager.LoadScene("Stage-3");
+            LoadingManager.LoadScene("Stage-3");
             { collision.transform.position = new Vector3(83.87f, 24.37f, -134.79f); }
         }
         //3스테이지 포탈 좌표

@@ -1721,12 +1721,12 @@ MonoBehaviour:
   Name: DarkKnight
   Max_HP: 250
   Cur_HP: 250
-  ATK: 5
-  Skill01: 11
+  ATK: 10
+  Skill01: 15
   NumberOfSkills: 4
   AttackCoolTime: 3
   SkillCoolTime1: 5
-  Defense: 0
+  Defense: 0.2
   Move_Speed: 5
   ApproachRadius: 5
   DetectionRadius: 200
@@ -1740,16 +1740,16 @@ MonoBehaviour:
   isSkill01: 0
   attack01Hash: 0
   attack02Hash: 0
-  Skill02: 15
-  Skill03: 17
-  SkillCoolTime2: 11
-  SkillCoolTime3: 11
+  Skill02: 20
+  Skill03: 25
+  SkillCoolTime2: 7
+  SkillCoolTime3: 9
   skill01EffectPrefab: {fileID: 192736468036353366}
   skill02EffectPrefab: {fileID: 6215084803405163833}
   skill03EffectPrefab: {fileID: 3218852041029014776}
-  skill01EffectSpawnPoint: {fileID: 0}
-  skill02EffectSpawnPoint: {fileID: 0}
-  skill03EffectSpawnPoint: {fileID: 0}
+  skill01EffectSpawnPoint: {fileID: 308439257045138082}
+  skill02EffectSpawnPoint: {fileID: 2274376935189441101}
+  skill03EffectSpawnPoint: {fileID: 5623928573848625593}
 --- !u!1 &3243889512616480611
 GameObject:
   m_ObjectHideFlags: 0

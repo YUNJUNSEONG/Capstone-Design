@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnEffectPrefab: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
-  yVector: -1
+  yVector: -5
   zVector: 0
 --- !u!135 &1172370876105092371
 SphereCollider:
@@ -1067,11 +1067,11 @@ MonoBehaviour:
   Name: EvilMage
   Max_HP: 30
   Cur_HP: 30
-  ATK: 1
-  Skill01: 2
+  ATK: 7
+  Skill01: 8
   NumberOfSkills: 2
-  AttackCoolTime: 1
-  SkillCoolTime1: 5
+  AttackCoolTime: 5
+  SkillCoolTime1: 6
   Defense: 0
   Move_Speed: 3
   ApproachRadius: 5

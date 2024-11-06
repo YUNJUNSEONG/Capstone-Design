@@ -1643,11 +1643,11 @@ MonoBehaviour:
   Max_HP: 300
   Cur_HP: 300
   ATK: 5
-  Skill01: 11
+  Skill01: 8
   NumberOfSkills: 4
   AttackCoolTime: 3
   SkillCoolTime1: 7
-  Defense: 0.2
+  Defense: 0.3
   Move_Speed: 3
   ApproachRadius: 5
   DetectionRadius: 200
@@ -1661,16 +1661,16 @@ MonoBehaviour:
   isSkill01: 0
   attack01Hash: 0
   attack02Hash: 0
-  Skill02: 15
-  Skill03: 17
-  SkillCoolTime2: 11
-  SkillCoolTime3: 12
+  Skill02: 10
+  Skill03: 12
+  SkillCoolTime2: 8
+  SkillCoolTime3: 10
   skill01EffectPrefab: {fileID: 6138404355122247804}
   skill02EffectPrefab: {fileID: 2596573528842955472}
   skill03EffectPrefab: {fileID: 8570014795873046249}
-  skill01EffectSpawnPoint: {fileID: 0}
-  skill02EffectSpawnPoint: {fileID: 0}
-  skill03EffectSpawnPoint: {fileID: 0}
+  skill01EffectSpawnPoint: {fileID: 3842203034036988692}
+  skill02EffectSpawnPoint: {fileID: 1860082401238015935}
+  skill03EffectSpawnPoint: {fileID: 5985999839545620784}
 --- !u!4 &4535195767671799890 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400004, guid: 312893f539145244eb941380e62dd9e8, type: 3}

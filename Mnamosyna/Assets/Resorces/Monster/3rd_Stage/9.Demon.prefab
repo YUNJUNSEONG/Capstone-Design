@@ -1055,7 +1055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnEffectPrefab: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
-  yVector: -1
+  yVector: -5
   zVector: 0
 --- !u!135 &859271822912321958
 SphereCollider:
@@ -1115,11 +1115,11 @@ MonoBehaviour:
   Name: Demon
   Max_HP: 50
   Cur_HP: 50
-  ATK: 1
-  Skill01: 1
+  ATK: 11
+  Skill01: 17
   NumberOfSkills: 2
-  AttackCoolTime: 1
-  SkillCoolTime1: 5
+  AttackCoolTime: 5
+  SkillCoolTime1: 8
   Defense: 0.2
   Move_Speed: 2
   ApproachRadius: 5

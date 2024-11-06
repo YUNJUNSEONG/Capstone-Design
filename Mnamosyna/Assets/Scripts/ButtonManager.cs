@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class ButtonManager : MonoBehaviour
 {
     public void SceneChange(){
-        SceneManager.LoadScene("Stage-1");
+        LoadingManager.LoadScene("Stage-1");
     }
 
     public void ExitGame()

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 134e76c84ceed754fb281d10bb001351, type: 3}
+  m_Script: {fileID: 11500000, guid: f8ecb5d07baeeb64a9bfedd6214235ad, type: 3}
   m_Name: 55.EPassive1
   m_EditorClassIdentifier: 
   skillType: 1
@@ -17,13 +17,14 @@ MonoBehaviour:
   linkElement: 0
   tier: 0
   Id: 55
-  Name: E Passive1
+  Name: "\uC99D\uC9C4"
   Image: {fileID: 21300000, guid: 30993b6c4c0681b4c9a63296f17404df, type: 3}
-  Description: "\uCD5C\uB300 \uCCB4\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4"
+  Description: "\uCD5C\uB300 \uCCB4\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4.\n\uC99D\uAC00\uB7C9
+    : N"
   isUnlock: 0
   childSkill:
-  - {fileID: 11400000, guid: dc1d7c8b447d87e4d977a3e0cbde25e7, type: 2}
-  - {fileID: 11400000, guid: c549946e62ecdb8468f44ed0caaeee7e, type: 2}
+  - {fileID: 11400000, guid: 27e910105ae897a4c87b726669d5be12, type: 2}
+  - {fileID: 11400000, guid: 8269fcb615378d146a7936e21974d900, type: 2}
   Level: 0
   maxLevel: 3
   Command: 
@@ -32,8 +33,12 @@ MonoBehaviour:
   damagePercent: 0
   addDmg: 0
   useStamina: 0
-  MaxHPBonus: 15
-  addMaxHPBonus: 15
+  passiveSkillType: 0
+  effectPrefab: {fileID: 0}
+  effectInterval: 0
+  effectDamage: 0
+  MaxHPBonus: 10
+  addMaxHPBonus: 10
   HealthRecoverBonus: 0
   addHealthRecoverBonus: 0
   StaminaRecoverBonus: 0
@@ -43,27 +48,28 @@ MonoBehaviour:
   CritChanceBonus: 0
   addCritChanceBonus: 0
   CriticalBonus: 0
+  addCriticalBonus: 0
   DefenseBonus: 0
   addDefenseBonus: 0
   AttackSpeedMultiplier: 0
   addAttackSpeedMultiplier: 0
   MoveSpeedMultiplier: 0
   addMoveSpeedMultiplier: 0
-  DimeritMaxHP: 0
-  DimeritHealthRecover: 0
-  DimeritStaminaRecover: 0
-  DimeritATK: 0
-  DimeritCritChance: 0
-  DimeritCritical: 0
-  DimeritDefense: 0
-  DimeritAttackSpeedMultiplier: 0
-  DimeritMoveSpeedMultiplier: 0
   LinkMaxHPBonus: 0
+  addLinkMaxHPBonus: 0
   LinkHealthRecoverBonus: 0
+  addLinkHealthRecoverBonus: 0
   LinkStaminaRecoverBonus: 0
+  addLinkStaminaRecoverBonus: 0
   LinkATKBonus: 0
+  addLinkATKBonus: 0
   LinkCritChanceBonus: 0
+  addLinkCritChanceBonus: 0
   LinkCriticalBonus: 0
+  addLinkCriticalBonus: 0
   LinkDefenseBonus: 0
+  addLinkDefenseBonus: 0
   LinkAttackSpeedMultiplier: 0
+  addLinkAttackSpeedMultiplier: 0
   LinkMoveSpeedMultiplier: 0
+  addLinkMoveSpeedMultiplier: 0
