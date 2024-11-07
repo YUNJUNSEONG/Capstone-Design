@@ -47,14 +47,6 @@ public class PlayerStat : MonoBehaviour
     public float atk_speed { get { return ATK_Speed; } set { ATK_Speed = value; } }
     public float move_speed { get { return Move_Speed; } set { Move_Speed = value; } }
 
-    [SerializeField]
-    private List<SkillData> unlockSkills = new List<SkillData>();
-
-    public List<SkillData> UnlockSkills
-    {
-        get { return unlockSkills; }
-        set { unlockSkills = value; }
-    }
 
     private void Awake()
     {

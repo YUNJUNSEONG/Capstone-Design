@@ -59,7 +59,7 @@ public class GameControl : MonoBehaviour
     void GoToMainMenu()
     {
         Time.timeScale = 1f;  // 게임 시간 재개
-        SceneManager.LoadScene("MainMenu");  // 타이틀 화면으로 이동
+        LoadingManager.LoadScene("Start");  // 타이틀 화면으로 이동
     }
 
     // 게임 종료
@@ -68,3 +68,4 @@ public class GameControl : MonoBehaviour
         Application.Quit();  // 게임 종료
     }
 }
+

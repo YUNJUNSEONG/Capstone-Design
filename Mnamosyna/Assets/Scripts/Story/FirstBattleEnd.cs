@@ -9,9 +9,9 @@ public class FirstBattleEnd : MonoBehaviour
 
     void Update()
     {
-        if (spawner.isCombatEnded)
+        if (spawner.IsCombatEnded)
         {
-            List<string> potalExplanTutorialMessages = new List<string>
+            List<string> potalExplanTutorialMessages = new()
             {
                 "여기서 부터는 갈림길이예요.",
                 "푸른 포탈 너머에서는 당신이 잃어버린 기억들을 찾을 수 있을거예요.",
@@ -21,7 +21,7 @@ public class FirstBattleEnd : MonoBehaviour
             storyManager.StartTutorial(StoryManager.TutorialType.Potal, potalExplanTutorialMessages);
 
             // 전투 종료 처리 후 isCombatEnded를 다시 false로 설정하여 중복 실행 방지
-            spawner.isCombatEnded = false;
+            spawner.IsCombatEnded = false;
 
             // 오브젝트를 비활성화합니다.
             gameObject.SetActive(false);

@@ -9865,7 +9865,6 @@ MonoBehaviour:
   storyManager: {fileID: 0}
   Trigger: {fileID: 1566845256708494940, guid: 7c270ff5d067ed94f8795f8ca57498d8, type: 3}
   UnlockSkillSelectEnd: 0
-  skillSelectionUI: {fileID: 0}
 --- !u!135 &8652189374129799482
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9885,7 +9884,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1539743421864721062
 GameObject:

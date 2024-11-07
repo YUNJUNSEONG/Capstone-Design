@@ -8,9 +8,9 @@ public class BattleEndTuto : MonoBehaviour
 
     void Update()
     {
-        if (spawner.isCombatEnded)
+        if (spawner.IsCombatEnded)
         {
-            List<string> postCombatTutorialMessages = new List<string>
+            List<string> postCombatTutorialMessages = new()
             {
                 "모든 몬스터를 처치했어요.\r\n이제 이곳에서는 몬스터가 나오지 않을거예요.",
                 "저길 보세요!",
@@ -20,7 +20,7 @@ public class BattleEndTuto : MonoBehaviour
             storyManager.StartTutorial(StoryManager.TutorialType.PostCombat, postCombatTutorialMessages);
 
             // 전투 종료 처리 후 isCombatEnded를 다시 false로 설정하여 중복 실행 방지
-            spawner.isCombatEnded = false;
+            spawner.IsCombatEnded = false;
 
             // 오브젝트를 비활성화합니다.
             gameObject.SetActive(false);

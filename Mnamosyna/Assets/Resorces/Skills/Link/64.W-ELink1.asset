@@ -27,7 +27,7 @@ MonoBehaviour:
   childSkill:
   - {fileID: 11400000, guid: 51d245b4c8654924bab46e02e91f2ee7, type: 2}
   - {fileID: 11400000, guid: 035e7d73a6e049041b46e9b5f2eaa60d, type: 2}
-  Level: 0
+  Level: 1
   maxLevel: 3
   Command: 
   AnimationTrigger: 
@@ -37,8 +37,8 @@ MonoBehaviour:
   useStamina: 0
   passiveSkillType: 2
   effectPrefab: {fileID: 6426699771996326788, guid: e9e2c43baa7907e4cabcde0e77e62fa2, type: 3}
-  effectInterval: 0
-  effectDamage: 0
+  effectInterval: 5
+  effectDamage: 8
   MaxHPBonus: 0
   addMaxHPBonus: 0
   HealthRecoverBonus: 0

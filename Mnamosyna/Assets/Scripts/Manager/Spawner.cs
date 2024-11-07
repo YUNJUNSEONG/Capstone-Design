@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public List<GameObject[]> waveMonsters = new List<GameObject[]>();
+    public List<GameObject[]> waveMonsters = new();
     public GameObject[] firstWaveMonsters;
     public GameObject[] secondWaveMonsters;
     public GameObject[] thirdWaveMonsters;
     public GameObject[] forthWaveMonsters;
-    public List<int> numOfMonsters = new List<int>();
+    public List<int> numOfMonsters = new();
 
     public GameObject Upgrade;
     public Magic0[] magicComponents;
@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
     public delegate void CombatEndHandler();
     public event CombatEndHandler OnCombatEnd;
 
-    public bool isCombatEnded { get; set; } = false;
+    public bool IsCombatEnded { get; set; } = false;
     private bool hasSpawnedUpgrade = false;
 
     public delegate void AliveCountChangedHandler(int newAliveCount);
@@ -92,12 +92,12 @@ public class Spawner : MonoBehaviour
             Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
             Vector3 playerForward = GameObject.FindGameObjectWithTag("Player").transform.forward;
 
-            Vector3 spawnOffset = new Vector3(3.0f, 0, 0);
+            Vector3 spawnOffset = new(3.0f, 0, 0);
             Vector3 spawnPosition = playerPosition + playerForward * spawnOffset.x;
-            spawnPosition.y = playerPosition.y+0.8f;
+            spawnPosition.y = playerPosition.y + 0.8f;
 
             SpawnObject(spawnPosition);
-            isCombatEnded = true;
+            IsCombatEnded = true;
             foreach (Magic0 magic in magicComponents) { magic.EnableComponents(); }
         }
     }
@@ -122,7 +122,7 @@ public class Spawner : MonoBehaviour
         int maximumAttempts = 30;
         for (int attempts = 0; attempts < maximumAttempts; attempts++)
         {
-            Vector3 randomPoint = new Vector3(
+            Vector3 randomPoint = new(
                 Random.Range(collider.bounds.min.x, collider.bounds.max.x),
                 5f,
                 Random.Range(collider.bounds.min.z, collider.bounds.max.z)

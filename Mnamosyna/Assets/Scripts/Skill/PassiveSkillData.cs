@@ -15,7 +15,9 @@ public class PassiveSkillData : SkillData
     public PassiveSkillType passiveSkillType;
     public GameObject effectPrefab;
     public float effectInterval; // 공격 주기
+    private float currentEffectInterval;
     public int effectDamage;
+    private bool isEffectAttack = false;
 
     private Coroutine effectCoroutine;
 
@@ -104,73 +106,134 @@ public class PassiveSkillData : SkillData
 
     public void SpawnAOEEffect(GameObject player)
     {
-        // 플레이어 주변에 원형 범위 이펙트 생성
-        GameObject effect = Instantiate(effectPrefab, player.transform.position, Quaternion.identity);
-        effect.transform.localScale = new Vector3(5f, 5f, 5f); // 원하는 범위 크기 조정
-        Destroy(effect, 2f); // 이펙트를 2초 후에 자동 삭제
-
-        // 범위 내 적들에게 데미지 적용
-        Collider[] hitColliders = Physics.OverlapSphere(player.transform.position, 5f); // 범위 반경 5
-        foreach (var hitCollider in hitColliders)
+        // 이펙트 간격 타이머 감소
+        currentEffectInterval -= Time.deltaTime;
+        if (!isEffectAttack)
         {
-            BaseMonster enemy = hitCollider.GetComponent<BaseMonster>();
-            if (enemy != null)
+            float yOffset = 0.5f; // y축으로 올리고 싶은 높이
+
+            // 플레이어 주변에 원형 범위 이펙트 생성 위치 설정
+            Vector3 effectPosition = player.transform.position + Vector3.up * yOffset;
+            GameObject effect = Instantiate(effectPrefab, effectPosition, Quaternion.identity);
+
+            effect.transform.localScale = new Vector3(5f, 5f, 5f); // 원하는 범위 크기 조정
+            Destroy(effect, 1f); // 이펙트를 1초 후에 자동 삭제
+
+            // 범위 내 적들에게 데미지 적용 (y축 1만큼 올린 위치 사용)
+            Collider[] hitColliders = Physics.OverlapSphere(effectPosition, 5f); // 범위 반경 5
+            foreach (var hitCollider in hitColliders)
             {
-                enemy.TakeDamage(effectDamage); // 적에게 데미지 전달
+                BaseMonster enemy = hitCollider.GetComponent<BaseMonster>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(effectDamage); // 적에게 데미지 전달
+                }
             }
+            currentEffectInterval = effectInterval;
+            isEffectAttack = true;
+        }
+
+        currentEffectInterval -= Time.deltaTime;
+        if (currentEffectInterval <= 0)
+        {
+            isEffectAttack = false;
         }
     }
+
 
 
     public void SpawnBlastEffect(GameObject player)
     {
-        // 플레이어 앞쪽으로 나타나는 이펙트
-        Vector3 blastPosition = player.transform.position + player.transform.forward * 2.0f; // 앞쪽 위치 설정
-        GameObject effect = Instantiate(effectPrefab, blastPosition, player.transform.rotation);
-        Destroy(effect, 2f); // 이펙트를 2초 후에 자동 삭제
+        // 이펙트 간격 타이머 감소
+        currentEffectInterval -= Time.deltaTime;
 
-        // 범위 내 적들에게 데미지 적용 (앞쪽으로 3 단위 반경 설정)
-        Collider[] hitColliders = Physics.OverlapSphere(blastPosition, 3f); // 범위 반경 3
-        foreach (var hitCollider in hitColliders)
+        // 타이머가 0 이하가 되면 이펙트가 실행되고 타이머를 리셋
+        if (currentEffectInterval <= 0 && !isEffectAttack)
         {
-            BaseMonster enemy = hitCollider.GetComponent<BaseMonster>();
-            if (enemy != null)
+            float yOffset = 1.5f; // y축으로 올리고 싶은 높이
+
+            // 플레이어 앞쪽으로 나타나는 이펙트 위치 설정
+            Vector3 blastPosition = player.transform.position + player.transform.forward * 2.0f + Vector3.up * yOffset;
+            GameObject effect = Instantiate(effectPrefab, blastPosition, player.transform.rotation);
+
+            Destroy(effect, 1.5f); // 이펙트를 1.5초 후에 자동 삭제
+
+            // 범위 내 적들에게 데미지 적용 (앞쪽으로 3 단위 반경 설정)
+            Collider[] hitColliders = Physics.OverlapSphere(blastPosition, 3f); // 범위 반경 3
+            foreach (var hitCollider in hitColliders)
             {
-                enemy.TakeDamage(effectDamage); // 적에게 데미지 전달
+                BaseMonster enemy = hitCollider.GetComponent<BaseMonster>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(effectDamage); // 적에게 데미지 전달
+                }
             }
+
+            // 이펙트 발동 상태 설정
+            isEffectAttack = true;
+            currentEffectInterval = effectInterval; // 타이머 리셋
+        }
+
+        // 이펙트 발동 상태를 해제
+        if (isEffectAttack && currentEffectInterval <= 0)
+        {
+            isEffectAttack = false;
         }
     }
+
+
 
     public void SpawnMissileEffect(GameObject player)
     {
-        // Choose the direction you want the missile to go (e.g., forward)
-        Vector3 direction = player.transform.forward;
+        // 빔이 나갈 네 가지 방향 정의 (앞, 뒤, 오른쪽, 왼쪽)
+        Vector3[] directions = {
+        player.transform.forward,         // 앞
+        -player.transform.forward,        // 뒤
+        player.transform.right,           // 오른쪽
+        -player.transform.right           // 왼쪽
+    };
+        // 이펙트 간격 타이머 감소
+        currentEffectInterval -= Time.deltaTime;
 
-        // Instantiate a single missile at the player's position
-        GameObject missile = Instantiate(effectPrefab, player.transform.position, Quaternion.identity);
-        Rigidbody rb = missile.GetComponent<Rigidbody>();
-        if (rb == null)
+        if (!isEffectAttack)
         {
-            rb = missile.AddComponent<Rigidbody>();
-        }
-        rb.useGravity = false; // Disable gravity if you don't want gravity to affect the missile
-        rb.velocity = direction * 10f; // Set missile speed in the chosen direction
+            float yOffset = 1.0f; // y축으로 올리고 싶은 높이
+            Vector3 spawnPosition = player.transform.position + Vector3.up * yOffset; // y축 보정된 위치
 
-        // If the missile doesn't have a Collider, add one and set it as a trigger
-        Collider col = missile.GetComponent<Collider>();
-        if (col == null)
+            // Instantiate a single missile at the player's position
+            GameObject missile = Instantiate(effectPrefab, spawnPosition, Quaternion.identity);
+            Rigidbody rb = missile.GetComponent<Rigidbody>();
+            if (rb == null)
+            {
+                rb = missile.AddComponent<Rigidbody>();
+            }
+            rb.useGravity = false; // Disable gravity if you don't want gravity to affect the missile
+            rb.velocity = player.transform.forward * 10f; // Set missile speed in the chosen direction
+
+            // If the missile doesn't have a Collider, add one and set it as a trigger
+            Collider col = missile.GetComponent<Collider>();
+            if (col == null)
+            {
+                col = missile.AddComponent<SphereCollider>();
+            }
+            col.isTrigger = true;
+
+            // Add the MissileTriggerHandler to handle trigger events
+            MissileTriggerHandler triggerHandler = missile.AddComponent<MissileTriggerHandler>();
+            triggerHandler.SetSkillData(this); // Set reference to PassiveSkillData
+
+            // Destroy the missile after 4 seconds
+            Destroy(missile, 4f);
+            currentEffectInterval = effectInterval;
+            isEffectAttack = true;
+        }
+
+        if (currentEffectInterval <= 0)
         {
-            col = missile.AddComponent<SphereCollider>();
+            isEffectAttack = false;
         }
-        col.isTrigger = true;
-
-        // Add the MissileTriggerHandler to handle trigger events
-        MissileTriggerHandler triggerHandler = missile.AddComponent<MissileTriggerHandler>();
-        triggerHandler.SetSkillData(this); // Set reference to PassiveSkillData
-
-        // Destroy the missile after 4 seconds
-        Destroy(missile, 4f);
     }
+
 
 
     // MissileTriggerHandler 클래스 정의
@@ -204,32 +267,48 @@ public class PassiveSkillData : SkillData
         player.transform.right,           // 오른쪽
         -player.transform.right           // 왼쪽
     };
-
-        // 각 방향으로 Beam 효과 생성 및 데미지 적용
-        foreach (var direction in directions)
+        // 이펙트 간격 타이머 감소
+        currentEffectInterval -= Time.deltaTime;
+        if (!isEffectAttack)
         {
-            // Beam 효과를 플레이어 위치에서 생성
-            GameObject beamEffect = Instantiate(effectPrefab, player.transform.position, Quaternion.LookRotation(direction));
-
-            // Beam을 2초 후에 자동 삭제
-            Destroy(beamEffect, 2f);
-
-            // Beam 효과의 Collider를 통해 범위 내 적들에게 데미지 적용
-            Collider[] hitColliders = Physics.OverlapBox(
-                player.transform.position + direction * 2.5f, // 범위 중앙 위치
-                new Vector3(1f, 1f, 5f),                       // 범위 크기 (폭과 높이)
-                Quaternion.LookRotation(direction)             // 범위 방향
-            );
-
-            foreach (var hitCollider in hitColliders)
+            foreach (var direction in directions)
             {
-                BaseMonster enemy = hitCollider.GetComponent<BaseMonster>();
-                if (enemy != null)
+                float yOffset = 1.0f; // y축으로 올리고 싶은 높이
+                // Beam 효과를 플레이어 위치에서 생성
+                GameObject beamEffect = Instantiate(effectPrefab, player.transform.position, Quaternion.LookRotation(direction));
+
+                // Beam을 2초 후에 자동 삭제
+                Destroy(beamEffect, 1.5f);
+
+                // yOffset을 적용하여 범위 중앙 위치를 위로 올림
+                Vector3 boxCenter = player.transform.position + direction * 2.5f + Vector3.up * yOffset;
+
+                // Beam 효과의 Collider를 통해 범위 내 적들에게 데미지 적용
+                Collider[] hitColliders = Physics.OverlapBox(
+                    boxCenter,                               // 범위 중앙 위치
+                    new Vector3(1f, 1f, 5f),                 // 범위 크기 (폭과 높이)
+                    Quaternion.LookRotation(direction)       // 범위 방향
+                );
+
+                foreach (var hitCollider in hitColliders)
                 {
-                    enemy.TakeDamage(effectDamage); // 적에게 데미지 전달
+                    BaseMonster enemy = hitCollider.GetComponent<BaseMonster>();
+                    if (enemy != null)
+                    {
+                        enemy.TakeDamage(effectDamage); // 적에게 데미지 전달
+                    }
                 }
+                currentEffectInterval = effectInterval;
+                isEffectAttack = true;
             }
         }
+
+        if (currentEffectInterval <= 0)
+        {
+            isEffectAttack = false;
+        }
+
+
     }
 
 

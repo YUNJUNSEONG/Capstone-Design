@@ -70,12 +70,12 @@ public class Magic0 : MonoBehaviour
         
         if (this.name == "Magic2-Hto4") {collision.transform.position = new Vector3(-214.7f, 4.7f, -14.1f);} //Heal->4
         
-        if (this.name == "Magic2-4to5_1") {collision.transform.position = new Vector3(-259.03f, 4.7f, -45.43f);} //4->5-1
-        if (this.name == "Magic2-4to5_2") {collision.transform.position = new Vector3(-270.7f, 4.7f, 23.5f);} //4->5-2
+        if (this.name == "Magic2-4to5_1") {collision.transform.position = new Vector3(-259.03f, 5.0f, -45.43f);} //4->5-1
+        if (this.name == "Magic2-4to5_2") {collision.transform.position = new Vector3(-270.7f, 5.0f, 23.5f);} //4->5-2
         
-        if (this.name == "Magic2-5to6_1") {collision.transform.position = new Vector3(-343.4f, 4.7f, -79f);} //5->6-1
-        if (this.name == "Magic2-5to6_2") {collision.transform.position = new Vector3(-327.9f, 4.7f, -12.8f);} //5->6-2
-        if (this.name == "Magic2-5to6_3") {collision.transform.position = new Vector3(-320.9f, 4.7f, 57.6f);} //5->6-3
+        if (this.name == "Magic2-5to6_1") {collision.transform.position = new Vector3(-343.4f, 5.0f, -79f);} //5->6-1
+        if (this.name == "Magic2-5to6_2") {collision.transform.position = new Vector3(-327.9f, 5.0f, -12.8f);} //5->6-2
+        if (this.name == "Magic2-5to6_3") {collision.transform.position = new Vector3(-320.9f, 5.0f, 57.6f);} //5->6-3
         
         if (this.name == "Magic2-6toB") {collision.transform.position = new Vector3(-223f, 4.7f, 153.7f);} //6->Boss
 

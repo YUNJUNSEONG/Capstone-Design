@@ -15,9 +15,9 @@ public class LevelUpExplan : MonoBehaviour
 
         foreach (Spawner spawner in spawners)
         {
-            if (spawner.isCombatEnded)
+            if (spawner.IsCombatEnded)
             {
-                List<string> LevelUpTutorialMessages = new List<string>
+                List<string> LevelUpTutorialMessages = new()
                 {
                     "저길 보세요!",
                     "저건 노란 기억의 조각이에요.\r\n당신이 되찾은 기술들을 더 강하게 해줄거예요.",
@@ -31,7 +31,7 @@ public class LevelUpExplan : MonoBehaviour
                 // 모든 스포너의 isCombatEnded를 다시 false로 설정하여 중복 실행 방지
                 foreach (Spawner sp in spawners)
                 {
-                    sp.isCombatEnded = false;
+                    sp.IsCombatEnded = false;
                 }
 
                 // 오브젝트를 비활성화합니다.
