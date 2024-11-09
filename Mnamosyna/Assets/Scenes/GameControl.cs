@@ -41,6 +41,19 @@ public class GameControl : MonoBehaviour
         }
     }
 
+    // 모든 DontDestroyOnLoad 오브젝트를 파괴
+    void DestroyDontDestroyOnLoadObjects()
+    {
+        GameObject[] dontDestroyObjects = GameObject.FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in dontDestroyObjects)
+        {
+            if (obj.scene.name == "DontDestroyOnLoad")
+            {
+                Destroy(obj);
+            }
+        }
+    }
+
     // 게임 일시 정지
     void PauseGame()
     {
@@ -59,6 +72,7 @@ public class GameControl : MonoBehaviour
     void GoToMainMenu()
     {
         Time.timeScale = 1f;  // 게임 시간 재개
+        DestroyDontDestroyOnLoadObjects();
         LoadingManager.LoadScene("Start");  // 타이틀 화면으로 이동
     }
 

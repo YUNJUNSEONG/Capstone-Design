@@ -102,8 +102,6 @@ public class PassiveSkillData : SkillData
         }
     }
 
-
-
     public void SpawnAOEEffect(GameObject player)
     {
         // 이펙트 간격 타이머 감소
@@ -116,11 +114,11 @@ public class PassiveSkillData : SkillData
             Vector3 effectPosition = player.transform.position + Vector3.up * yOffset;
             GameObject effect = Instantiate(effectPrefab, effectPosition, Quaternion.identity);
 
-            effect.transform.localScale = new Vector3(5f, 5f, 5f); // 원하는 범위 크기 조정
+            effect.transform.localScale = new Vector3(4f, 4f, 4f); // 원하는 범위 크기 조정
             Destroy(effect, 1f); // 이펙트를 1초 후에 자동 삭제
 
             // 범위 내 적들에게 데미지 적용 (y축 1만큼 올린 위치 사용)
-            Collider[] hitColliders = Physics.OverlapSphere(effectPosition, 5f); // 범위 반경 5
+            Collider[] hitColliders = Physics.OverlapSphere(effectPosition, 4f); // 범위 반경 5
             foreach (var hitCollider in hitColliders)
             {
                 BaseMonster enemy = hitCollider.GetComponent<BaseMonster>();
@@ -159,7 +157,7 @@ public class PassiveSkillData : SkillData
             Destroy(effect, 1.5f); // 이펙트를 1.5초 후에 자동 삭제
 
             // 범위 내 적들에게 데미지 적용 (앞쪽으로 3 단위 반경 설정)
-            Collider[] hitColliders = Physics.OverlapSphere(blastPosition, 3f); // 범위 반경 3
+            Collider[] hitColliders = Physics.OverlapSphere(blastPosition, 5f); // 범위 반경 3
             foreach (var hitCollider in hitColliders)
             {
                 BaseMonster enemy = hitCollider.GetComponent<BaseMonster>();
